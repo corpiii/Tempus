@@ -15,8 +15,6 @@
 		ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EC29C70CDF004D0A70 /* Assets.xcassets */; };
 		ACD138F029C70CDF004D0A70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EE29C70CDF004D0A70 /* LaunchScreen.storyboard */; };
 		ACD138FB29C70CDF004D0A70 /* TempusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138FA29C70CDF004D0A70 /* TempusTests.swift */; };
-		ACD1390529C70CDF004D0A70 /* TempusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1390429C70CDF004D0A70 /* TempusUITests.swift */; };
-		ACD1390729C70CDF004D0A70 /* TempusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1390629C70CDF004D0A70 /* TempusUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +47,6 @@
 		ACD138F629C70CDF004D0A70 /* TempusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD138FA29C70CDF004D0A70 /* TempusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempusTests.swift; sourceTree = "<group>"; };
 		ACD1390029C70CDF004D0A70 /* TempusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ACD1390429C70CDF004D0A70 /* TempusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempusUITests.swift; sourceTree = "<group>"; };
-		ACD1390629C70CDF004D0A70 /* TempusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +79,6 @@
 			children = (
 				ACD138DF29C70CDE004D0A70 /* Tempus */,
 				ACD138F929C70CDF004D0A70 /* TempusTests */,
-				ACD1390329C70CDF004D0A70 /* TempusUITests */,
 				ACD138DE29C70CDE004D0A70 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,15 +111,6 @@
 				ACD138FA29C70CDF004D0A70 /* TempusTests.swift */,
 			);
 			path = TempusTests;
-			sourceTree = "<group>";
-		};
-		ACD1390329C70CDF004D0A70 /* TempusUITests */ = {
-			isa = PBXGroup;
-			children = (
-				ACD1390429C70CDF004D0A70 /* TempusUITests.swift */,
-				ACD1390629C70CDF004D0A70 /* TempusUITestsLaunchTests.swift */,
-			);
-			path = TempusUITests;
 			sourceTree = "<group>";
 		};
 		ACD1391329C70D95004D0A70 /* Presentation */ = {
@@ -320,8 +306,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACD1390729C70CDF004D0A70 /* TempusUITestsLaunchTests.swift in Sources */,
-				ACD1390529C70CDF004D0A70 /* TempusUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
