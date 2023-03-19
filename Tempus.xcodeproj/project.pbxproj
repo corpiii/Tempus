@@ -101,14 +101,11 @@
 		ACD138DF29C70CDE004D0A70 /* Tempus */ = {
 			isa = PBXGroup;
 			children = (
-				ACD138E029C70CDE004D0A70 /* AppDelegate.swift */,
-				ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */,
-				ACD138E429C70CDE004D0A70 /* ViewController.swift */,
-				ACD138E629C70CDE004D0A70 /* Main.storyboard */,
-				ACD138EC29C70CDF004D0A70 /* Assets.xcassets */,
-				ACD138EE29C70CDF004D0A70 /* LaunchScreen.storyboard */,
-				ACD138F129C70CDF004D0A70 /* Info.plist */,
-				ACD138E929C70CDE004D0A70 /* Tempus.xcdatamodeld */,
+				ACD1391629C70E59004D0A70 /* Application */,
+				ACD1391329C70D95004D0A70 /* Presentation */,
+				ACD1391429C70D9D004D0A70 /* Domain */,
+				ACD1391529C70DA6004D0A70 /* Data */,
+				ACD1391729C70EC0004D0A70 /* Resource */,
 			);
 			path = Tempus;
 			sourceTree = "<group>";
@@ -128,6 +125,49 @@
 				ACD1390629C70CDF004D0A70 /* TempusUITestsLaunchTests.swift */,
 			);
 			path = TempusUITests;
+			sourceTree = "<group>";
+		};
+		ACD1391329C70D95004D0A70 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				ACD138E429C70CDE004D0A70 /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		ACD1391429C70D9D004D0A70 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		ACD1391529C70DA6004D0A70 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				ACD138E929C70CDE004D0A70 /* Tempus.xcdatamodeld */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		ACD1391629C70E59004D0A70 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				ACD138E029C70CDE004D0A70 /* AppDelegate.swift */,
+				ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		ACD1391729C70EC0004D0A70 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				ACD138E629C70CDE004D0A70 /* Main.storyboard */,
+				ACD138EC29C70CDF004D0A70 /* Assets.xcassets */,
+				ACD138EE29C70CDF004D0A70 /* LaunchScreen.storyboard */,
+				ACD138F129C70CDF004D0A70 /* Info.plist */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,7 +483,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S63496UWBR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Tempus/Info.plist;
+				INFOPLIST_FILE = Tempus/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -471,7 +511,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S63496UWBR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Tempus/Info.plist;
+				INFOPLIST_FILE = Tempus/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
