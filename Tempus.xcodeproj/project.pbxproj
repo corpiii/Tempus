@@ -15,6 +15,18 @@
 		ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EC29C70CDF004D0A70 /* Assets.xcassets */; };
 		ACD138F029C70CDF004D0A70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EE29C70CDF004D0A70 /* LaunchScreen.storyboard */; };
 		ACD138FB29C70CDF004D0A70 /* TempusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138FA29C70CDF004D0A70 /* TempusTests.swift */; };
+		ACD1396F29D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396929D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift */; };
+		ACD1397029D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396929D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift */; };
+		ACD1397129D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396A29D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift */; };
+		ACD1397229D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396A29D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift */; };
+		ACD1397329D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396B29D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift */; };
+		ACD1397429D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396B29D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift */; };
+		ACD1397529D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396C29D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift */; };
+		ACD1397629D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396C29D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift */; };
+		ACD1397729D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */; };
+		ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */; };
+		ACD1397929D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */; };
+		ACD1397A29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +59,12 @@
 		ACD138F629C70CDF004D0A70 /* TempusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD138FA29C70CDF004D0A70 /* TempusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempusTests.swift; sourceTree = "<group>"; };
 		ACD1390029C70CDF004D0A70 /* TempusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACD1396929D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ACD1396A29D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ACD1396B29D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ACD1396C29D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +142,7 @@
 		ACD1391429C70D9D004D0A70 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				ACD1397B29D1BBBA004D0A70 /* Entity */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -131,7 +150,6 @@
 		ACD1391529C70DA6004D0A70 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				ACD138E929C70CDE004D0A70 /* Tempus.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -154,6 +172,44 @@
 				ACD138F129C70CDF004D0A70 /* Info.plist */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		ACD1397B29D1BBBA004D0A70 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				ACD138E929C70CDE004D0A70 /* Tempus.xcdatamodeld */,
+				ACD1397E29D1BBD3004D0A70 /* Timer */,
+				ACD1397D29D1BBCC004D0A70 /* Block */,
+				ACD1397C29D1BBC3004D0A70 /* Daily */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		ACD1397C29D1BBC3004D0A70 /* Daily */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1396929D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift */,
+				ACD1396A29D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift */,
+			);
+			path = Daily;
+			sourceTree = "<group>";
+		};
+		ACD1397D29D1BBCC004D0A70 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1396B29D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift */,
+				ACD1396C29D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
+		ACD1397E29D1BBD3004D0A70 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */,
+				ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,9 +344,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACD138E529C70CDE004D0A70 /* ViewController.swift in Sources */,
+				ACD1396F29D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */,
+				ACD1397529D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */,
 				ACD138EB29C70CDE004D0A70 /* Tempus.xcdatamodeld in Sources */,
+				ACD1397929D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */,
 				ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */,
+				ACD1397129D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
+				ACD1397329D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
 				ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */,
+				ACD1397729D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +360,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACD1397029D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */,
+				ACD1397229D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
+				ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
+				ACD1397429D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
 				ACD138FB29C70CDF004D0A70 /* TempusTests.swift in Sources */,
+				ACD1397629D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */,
+				ACD1397A29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
