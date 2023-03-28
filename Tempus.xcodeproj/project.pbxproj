@@ -27,6 +27,10 @@
 		ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */; };
 		ACD1397929D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */; };
 		ACD1397A29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */; };
+		ACD1398329D29BA1004D0A70 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398229D29BA1004D0A70 /* Mode.swift */; };
+		ACD1398429D29BA1004D0A70 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398229D29BA1004D0A70 /* Mode.swift */; };
+		ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
+		ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,8 @@
 		ACD1396C29D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ACD1398229D29BA1004D0A70 /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		ACD1398629D29C12004D0A70 /* ModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +148,9 @@
 		ACD1391429C70D9D004D0A70 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				ACD1398129D29B91004D0A70 /* Protocol */,
 				ACD1397B29D1BBBA004D0A70 /* Entity */,
+				ACD1398529D29BE6004D0A70 /* Common */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -210,6 +218,22 @@
 			children = (
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		ACD1398129D29B91004D0A70 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1398229D29BA1004D0A70 /* Mode.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		ACD1398529D29BE6004D0A70 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1398629D29C12004D0A70 /* ModeType.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,11 +371,13 @@
 				ACD1396F29D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */,
 				ACD1397529D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */,
 				ACD138EB29C70CDE004D0A70 /* Tempus.xcdatamodeld in Sources */,
+				ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */,
 				ACD1397929D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */,
 				ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */,
 				ACD1397129D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
 				ACD1397329D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
 				ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */,
+				ACD1398329D29BA1004D0A70 /* Mode.swift in Sources */,
 				ACD1397729D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,10 +388,12 @@
 			files = (
 				ACD1397029D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */,
 				ACD1397229D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
+				ACD1398429D29BA1004D0A70 /* Mode.swift in Sources */,
 				ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
 				ACD1397429D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
 				ACD138FB29C70CDF004D0A70 /* TempusTests.swift in Sources */,
 				ACD1397629D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */,
+				ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */,
 				ACD1397A29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
