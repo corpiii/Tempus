@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension TimerEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TimerEntity> {
@@ -21,6 +20,6 @@ extension TimerEntity {
 
 }
 
-extension TimerEntity : Identifiable {
+extension TimerEntity: Identifiable {
 
 }

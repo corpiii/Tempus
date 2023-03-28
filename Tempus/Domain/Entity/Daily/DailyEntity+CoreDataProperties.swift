@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension DailyEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<DailyEntity> {
@@ -21,6 +20,6 @@ extension DailyEntity {
 
 }
 
-extension DailyEntity : Identifiable {
+extension DailyEntity: Identifiable {
 
 }
