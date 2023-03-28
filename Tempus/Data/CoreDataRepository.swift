@@ -18,7 +18,7 @@ class CoreDataRepository: DataManagerRepository {
 
 // MARK: - Create Method
 extension CoreDataRepository {
-    func create(mode: TimerModel) throws {
+    func create(model: TimerModel) throws {
         let context = container.viewContext
         
         guard let entity = NSEntityDescription.entity(forEntityName: "TimerEntity",
@@ -28,8 +28,8 @@ extension CoreDataRepository {
         
         let newObject = NSManagedObject(entity: entity, insertInto: context)
         
-        newObject.setValue(mode.id, forKey: "uuid")
-        newObject.setValue(mode.wasteTime, forKey: "wasteTime")
+        newObject.setValue(model.id, forKey: "uuid")
+        newObject.setValue(model.wasteTime, forKey: "wasteTime")
         newObject.setValue(Date(), forKey: "createdAt")
         
         do {
@@ -43,7 +43,7 @@ extension CoreDataRepository {
         }
     }
     
-    func create(mode: BlockModel) throws {
+    func create(model: BlockModel) throws {
         let context = container.viewContext
         
         guard let entity = NSEntityDescription.entity(forEntityName: "BlockEntity",
@@ -53,8 +53,8 @@ extension CoreDataRepository {
         
         let newObject = NSManagedObject(entity: entity, insertInto: context)
         
-        newObject.setValue(mode.id, forKey: "uuid")
-        newObject.setValue(mode.divideCount, forKey: "divideCount")
+        newObject.setValue(model.id, forKey: "uuid")
+        newObject.setValue(model.divideCount, forKey: "divideCount")
         newObject.setValue(Date(), forKey: "createdAt")
         
         do {
@@ -68,7 +68,7 @@ extension CoreDataRepository {
         }
     }
     
-    func create(mode: DailyModel) throws {
+    func create(model: DailyModel) throws {
         let context = container.viewContext
         
         guard let entity = NSEntityDescription.entity(forEntityName: "DailyEntity",
@@ -78,11 +78,11 @@ extension CoreDataRepository {
         
         let newObject = NSManagedObject(entity: entity, insertInto: context)
         
-        newObject.setValue(mode.id, forKey: "uuid")
-        newObject.setValue(mode.startTime, forKey: "startTime")
-        newObject.setValue(mode.repeatCount, forKey: "repeatCount")
-        newObject.setValue(mode.focusTime, forKey: "focusTime")
-        newObject.setValue(mode.breakTime, forKey: "breakTime")
+        newObject.setValue(model.id, forKey: "uuid")
+        newObject.setValue(model.startTime, forKey: "startTime")
+        newObject.setValue(model.repeatCount, forKey: "repeatCount")
+        newObject.setValue(model.focusTime, forKey: "focusTime")
+        newObject.setValue(model.breakTime, forKey: "breakTime")
         newObject.setValue(Date(), forKey: "createdAt")
         
         do {
@@ -156,19 +156,19 @@ extension CoreDataRepository {
 
 // MARK: - Update Method
 extension CoreDataRepository {
-    func update(_ mode: TimerModel) throws {
+    func update(_ model: TimerModel) throws {
         let context = container.viewContext
         let fetchRequest = TimerEntity.fetchRequest()
         
-        fetchRequest.predicate = NSPredicate(format: "uuid = %@", mode.id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "uuid = %@", model.id as CVarArg)
         
         do {
-            guard let result = try context.fetch(fetchRequest) as [TimerEntity],
-                  let foundedObject = result[0] else {
+            let result = try context.fetch(fetchRequest)
+            guard let foundedObject = result.first else {
                 throw DataManageError.updateFailure
             }
             
-            foundedObject.setValue(mode.wasteTime, forKey: "wasteTime")
+            foundedObject.setValue(model.wasteTime, forKey: "wasteTime")
             
             try context.save()
         } catch {
@@ -180,19 +180,19 @@ extension CoreDataRepository {
         }
     }
     
-    func update(_ mode: BlockModel) throws {
+    func update(_ model: BlockModel) throws {
         let context = container.viewContext
         let fetchRequest = BlockEntity.fetchRequest()
         
-        fetchRequest.predicate = NSPredicate(format: "uuid = %@", mode.id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "uuid = %@", model.id as CVarArg)
         
         do {
-            guard let result = try context.fetch(fetchRequest) as [BlockEntity],
-                  let foundedObject = result[0] else {
+            let result = try context.fetch(fetchRequest)
+            guard let foundedObject = result.first else {
                 throw DataManageError.updateFailure
             }
             
-            foundedObject.setValue(mode.divideCount, forKey: "divideCount")
+            foundedObject.setValue(model.divideCount, forKey: "divideCount")
             
             try context.save()
         } catch {
@@ -204,22 +204,22 @@ extension CoreDataRepository {
         }
     }
     
-    func update(_ mode: DailyModel) throws {
+    func update(_ model: DailyModel) throws {
         let context = container.viewContext
         let fetchRequest = DailyEntity.fetchRequest()
         
-        fetchRequest.predicate = NSPredicate(format: "uuid = %@", mode.id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "uuid = %@", model.id as CVarArg)
         
         do {
-            guard let result = try context.fetch(fetchRequest) as [TimerEntity],
-                  let foundedObject = result[0] else {
+            let result = try context.fetch(fetchRequest)
+            guard let foundedObject = result.first else {
                 throw DataManageError.updateFailure
             }
             
-            foundedObject.setValue(mode.startTime, forKey: "startTime")
-            foundedObject.setValue(mode.repeatCount, forKey: "repeatCount")
-            foundedObject.setValue(mode.focusTime, forKey: "focusTime")
-            foundedObject.setValue(mode.breakTime, forKey: "breakTime")
+            foundedObject.setValue(model.startTime, forKey: "startTime")
+            foundedObject.setValue(model.repeatCount, forKey: "repeatCount")
+            foundedObject.setValue(model.focusTime, forKey: "focusTime")
+            foundedObject.setValue(model.breakTime, forKey: "breakTime")
             
             try context.save()
         } catch {
