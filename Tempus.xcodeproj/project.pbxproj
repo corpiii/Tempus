@@ -39,6 +39,8 @@
 		ACD1399629D37B58004D0A70 /* DataManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399429D37B58004D0A70 /* DataManagerRepository.swift */; };
 		ACD1399C29D382E3004D0A70 /* DataManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399B29D382E3004D0A70 /* DataManageError.swift */; };
 		ACD1399D29D382E3004D0A70 /* DataManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399B29D382E3004D0A70 /* DataManageError.swift */; };
+		ACD1399F29D38EEB004D0A70 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */; };
+		ACD139A029D38EEB004D0A70 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,7 @@
 		ACD1399029D2C272004D0A70 /* DailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyModel.swift; sourceTree = "<group>"; };
 		ACD1399429D37B58004D0A70 /* DataManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerRepository.swift; sourceTree = "<group>"; };
 		ACD1399B29D382E3004D0A70 /* DataManageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManageError.swift; sourceTree = "<group>"; };
+		ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoreDataRepository.swift; path = Tempus/Data/CoreDataRepository.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +138,9 @@
 				ACD1391629C70E59004D0A70 /* Application */,
 				ACD1391329C70D95004D0A70 /* Presentation */,
 				ACD1391429C70D9D004D0A70 /* Domain */,
-				ACD1398029D1BF03004D0A70 /* Data */,
+				ACD139A129D38F00004D0A70 /* Data */,
 				ACD1391729C70EC0004D0A70 /* Resource */,
+				ACD139A229D39070004D0A70 /* Common */,
 			);
 			path = Tempus;
 			sourceTree = "<group>";
@@ -226,18 +230,10 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
-		ACD1398029D1BF03004D0A70 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		ACD1398529D29BE6004D0A70 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				ACD1398629D29C12004D0A70 /* ModeType.swift */,
-				ACD1399B29D382E3004D0A70 /* DataManageError.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -258,6 +254,22 @@
 				ACD1399429D37B58004D0A70 /* DataManagerRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		ACD139A129D38F00004D0A70 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		ACD139A229D39070004D0A70 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1399B29D382E3004D0A70 /* DataManageError.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,6 +415,7 @@
 				ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */,
 				ACD1397129D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
 				ACD1397329D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
+				ACD1399F29D38EEB004D0A70 /* CoreDataRepository.swift in Sources */,
 				ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */,
 				ACD1399C29D382E3004D0A70 /* DataManageError.swift in Sources */,
 				ACD1397729D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
@@ -420,6 +433,7 @@
 				ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
 				ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */,
 				ACD1399D29D382E3004D0A70 /* DataManageError.swift in Sources */,
+				ACD139A029D38EEB004D0A70 /* CoreDataRepository.swift in Sources */,
 				ACD1397429D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
 				ACD1399229D2C272004D0A70 /* DailyModel.swift in Sources */,
 				ACD138FB29C70CDF004D0A70 /* TempusTests.swift in Sources */,
