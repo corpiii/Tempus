@@ -99,45 +99,87 @@ extension CoreDataRepository {
 
 // MARK: - Fetch Method
 extension CoreDataRepository {
-    func fetch() throws -> [TimerModel] {
-        <#code#>
+    func fetch() throws -> [TimerEntity] {
+        let context = container.viewContext
+        
+        let fetchRequest = TimerEntity.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
+        
+        do {
+            let result = try context.fetch(fetchRequest) as [TimerEntity]
+            return result
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.fetchFailure
+        }
     }
     
-    func fetch() throws -> [BlockModel] {
-        <#code#>
+    func fetch() throws -> [BlockEntity] {
+        let context = container.viewContext
+        
+        let fetchRequest = BlockEntity.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
+        
+        do {
+            let result = try context.fetch(fetchRequest) as [BlockEntity]
+            return result
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.fetchFailure
+        }
     }
     
-    func fetch() throws -> [DailyModel] {
-        <#code#>
+    func fetch() throws -> [DailyEntity] {
+        let context = container.viewContext
+        
+        let fetchRequest = DailyEntity.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
+        
+        do {
+            let result = try context.fetch(fetchRequest) as [DailyEntity]
+            return result
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.fetchFailure
+        }
     }
 }
 
 // MARK: - Update Method
 extension CoreDataRepository {
     func update(_ mode: TimerModel) throws {
-        <#code#>
+        
     }
     
     func update(_ mode: BlockModel) throws {
-        <#code#>
+        
     }
     
     func update(_ mode: DailyModel) throws {
-        <#code#>
+        
     }
 }
 
 // MARK: - Delete Method
 extension CoreDataRepository {
     func delete(_ model: TimerModel) throws {
-        <#code#>
+        
     }
     
     func delete(_ model: BlockModel) throws {
-        <#code#>
+        
     }
     
     func delete(_ model: DailyModel) throws {
-        <#code#>
+        
     }
 }
