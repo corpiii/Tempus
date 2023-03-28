@@ -9,17 +9,17 @@
 import Foundation
 import CoreData
 
-
 extension TimerEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TimerEntity> {
         return NSFetchRequest<TimerEntity>(entityName: "TimerEntity")
     }
 
+    @NSManaged public var uuid: UUID
     @NSManaged public var wasteTime: Double
 
 }
 
-extension TimerEntity : Identifiable {
+extension TimerEntity: Identifiable {
 
 }

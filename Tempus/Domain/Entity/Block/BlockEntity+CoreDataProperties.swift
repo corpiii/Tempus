@@ -9,13 +9,13 @@
 import Foundation
 import CoreData
 
-
 extension BlockEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<BlockEntity> {
         return NSFetchRequest<BlockEntity>(entityName: "BlockEntity")
     }
 
+    @NSManaged public var uuid: UUID
     @NSManaged public var startTime: Double
     @NSManaged public var repeatCount: Int16
     @NSManaged public var focusTime: Double
@@ -23,6 +23,6 @@ extension BlockEntity {
 
 }
 
-extension BlockEntity : Identifiable {
+extension BlockEntity: Identifiable {
 
 }

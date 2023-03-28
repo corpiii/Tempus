@@ -9,17 +9,17 @@
 import Foundation
 import CoreData
 
-
 extension DailyEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<DailyEntity> {
         return NSFetchRequest<DailyEntity>(entityName: "DailyEntity")
     }
 
+    @NSManaged public var uuid: UUID
     @NSManaged public var divideCount: Int16
 
 }
 
-extension DailyEntity : Identifiable {
+extension DailyEntity: Identifiable {
 
 }
