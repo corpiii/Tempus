@@ -20,6 +20,7 @@ extension DailyEntity {
     @NSManaged public var repeatCount: Int16
     @NSManaged public var focusTime: Double
     @NSManaged public var breakTime: Double
+    @NSManaged public var createdAt: Date
 
 }
 

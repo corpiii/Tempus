@@ -30,8 +30,17 @@ extension CoreDataRepository {
         
         newObject.setValue(mode.id, forKey: "uuid")
         newObject.setValue(mode.wasteTime, forKey: "wasteTime")
+        newObject.setValue(Date(), forKey: "createdAt")
         
-        try context.save()
+        do {
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+            
+            throw DataManageError.createFailure
+        }
     }
     
     func create(mode: BlockModel) throws {
@@ -46,8 +55,17 @@ extension CoreDataRepository {
         
         newObject.setValue(mode.id, forKey: "uuid")
         newObject.setValue(mode.divideCount, forKey: "divideCount")
+        newObject.setValue(Date(), forKey: "createdAt")
         
-        try context.save()
+        do {
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+            
+            throw DataManageError.createFailure
+        }
     }
     
     func create(mode: DailyModel) throws {
@@ -65,8 +83,17 @@ extension CoreDataRepository {
         newObject.setValue(mode.repeatCount, forKey: "repeatCount")
         newObject.setValue(mode.focusTime, forKey: "focusTime")
         newObject.setValue(mode.breakTime, forKey: "breakTime")
+        newObject.setValue(Date(), forKey: "createdAt")
         
-        try context.save()
+        do {
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+            
+            throw DataManageError.createFailure
+        }
     }
 }
 
