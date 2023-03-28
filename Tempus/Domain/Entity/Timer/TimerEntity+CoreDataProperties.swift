@@ -16,6 +16,7 @@ extension TimerEntity {
         return NSFetchRequest<TimerEntity>(entityName: "TimerEntity")
     }
 
+    @NSManaged public var uuid: UUID
     @NSManaged public var wasteTime: Double
 
 }

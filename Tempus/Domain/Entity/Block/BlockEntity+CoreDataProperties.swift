@@ -16,6 +16,7 @@ extension BlockEntity {
         return NSFetchRequest<BlockEntity>(entityName: "BlockEntity")
     }
 
+    @NSManaged public var uuid: UUID
     @NSManaged public var startTime: Double
     @NSManaged public var repeatCount: Int16
     @NSManaged public var focusTime: Double

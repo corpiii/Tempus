@@ -16,6 +16,7 @@ extension DailyEntity {
         return NSFetchRequest<DailyEntity>(entityName: "DailyEntity")
     }
 
+    @NSManaged public var uuid: UUID
     @NSManaged public var divideCount: Int16
 
 }

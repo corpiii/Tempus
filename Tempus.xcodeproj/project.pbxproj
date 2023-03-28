@@ -31,6 +31,8 @@
 		ACD1398429D29BA1004D0A70 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398229D29BA1004D0A70 /* Mode.swift */; };
 		ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
 		ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
+		ACD1398B29D2ABF3004D0A70 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */; };
+		ACD1398C29D2ABF3004D0A70 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,7 @@
 		ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		ACD1398229D29BA1004D0A70 /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		ACD1398629D29C12004D0A70 /* ModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
+		ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				ACD1398129D29B91004D0A70 /* Protocol */,
+				ACD1398929D2ABDA004D0A70 /* Model */,
 				ACD1397B29D1BBBA004D0A70 /* Entity */,
 				ACD1398529D29BE6004D0A70 /* Common */,
 			);
@@ -234,6 +238,14 @@
 				ACD1398629D29C12004D0A70 /* ModeType.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		ACD1398929D2ABDA004D0A70 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +382,7 @@
 				ACD138E529C70CDE004D0A70 /* ViewController.swift in Sources */,
 				ACD1396F29D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */,
 				ACD1397529D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */,
+				ACD1398B29D2ABF3004D0A70 /* TimerModel.swift in Sources */,
 				ACD138EB29C70CDE004D0A70 /* Tempus.xcdatamodeld in Sources */,
 				ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */,
 				ACD1397929D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */,
@@ -388,6 +401,7 @@
 			files = (
 				ACD1397029D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */,
 				ACD1397229D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
+				ACD1398C29D2ABF3004D0A70 /* TimerModel.swift in Sources */,
 				ACD1398429D29BA1004D0A70 /* Mode.swift in Sources */,
 				ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
 				ACD1397429D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
