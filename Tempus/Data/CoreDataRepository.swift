@@ -101,8 +101,8 @@ extension CoreDataRepository {
 extension CoreDataRepository {
     func fetch() throws -> [TimerEntity] {
         let context = container.viewContext
-        
         let fetchRequest = TimerEntity.fetchRequest()
+        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         
         do {
@@ -119,8 +119,8 @@ extension CoreDataRepository {
     
     func fetch() throws -> [BlockEntity] {
         let context = container.viewContext
-        
         let fetchRequest = BlockEntity.fetchRequest()
+        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         
         do {
@@ -137,8 +137,8 @@ extension CoreDataRepository {
     
     func fetch() throws -> [DailyEntity] {
         let context = container.viewContext
-        
         let fetchRequest = DailyEntity.fetchRequest()
+        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         
         do {
@@ -157,15 +157,78 @@ extension CoreDataRepository {
 // MARK: - Update Method
 extension CoreDataRepository {
     func update(_ mode: TimerModel) throws {
+        let context = container.viewContext
+        let fetchRequest = TimerEntity.fetchRequest()
         
+        fetchRequest.predicate = NSPredicate(format: "uuid = %@", mode.id as CVarArg)
+        
+        do {
+            guard let result = try context.fetch(fetchRequest) as [TimerEntity],
+                  let foundedObject = result[0] else {
+                throw DataManageError.updateFailure
+            }
+            
+            foundedObject.setValue(mode.wasteTime, forKey: "wasteTime")
+            
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.updateFailure
+        }
     }
     
     func update(_ mode: BlockModel) throws {
+        let context = container.viewContext
+        let fetchRequest = BlockEntity.fetchRequest()
         
+        fetchRequest.predicate = NSPredicate(format: "uuid = %@", mode.id as CVarArg)
+        
+        do {
+            guard let result = try context.fetch(fetchRequest) as [BlockEntity],
+                  let foundedObject = result[0] else {
+                throw DataManageError.updateFailure
+            }
+            
+            foundedObject.setValue(mode.divideCount, forKey: "divideCount")
+            
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.updateFailure
+        }
     }
     
     func update(_ mode: DailyModel) throws {
+        let context = container.viewContext
+        let fetchRequest = DailyEntity.fetchRequest()
         
+        fetchRequest.predicate = NSPredicate(format: "uuid = %@", mode.id as CVarArg)
+        
+        do {
+            guard let result = try context.fetch(fetchRequest) as [TimerEntity],
+                  let foundedObject = result[0] else {
+                throw DataManageError.updateFailure
+            }
+            
+            foundedObject.setValue(mode.startTime, forKey: "startTime")
+            foundedObject.setValue(mode.repeatCount, forKey: "repeatCount")
+            foundedObject.setValue(mode.focusTime, forKey: "focusTime")
+            foundedObject.setValue(mode.breakTime, forKey: "breakTime")
+            
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.updateFailure
+        }
     }
 }
 
