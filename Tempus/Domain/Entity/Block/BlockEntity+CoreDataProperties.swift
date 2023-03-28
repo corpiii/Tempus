@@ -16,7 +16,11 @@ extension BlockEntity {
     }
 
     @NSManaged public var uuid: UUID
-    @NSManaged public var divideCount: Int16
+    @NSManaged public var startTime: Double
+    @NSManaged public var repeatCount: Int16
+    @NSManaged public var focusTime: Double
+    @NSManaged public var breakTime: Double
+
 }
 
 extension BlockEntity: Identifiable {
