@@ -9,12 +9,6 @@ import CoreData
 import Foundation
 
 class CoreDataRepository: DataManagerRepository {
-    enum Constant {
-        static let TimerEntityName = "TimerEntity"
-        static let BlockEntityName = "BlockEntity"
-        static let DailyEntityName = "DailyEntity"
-    }
-    
     let container: NSPersistentContainer
     
     init(container: NSPersistentContainer) {
@@ -27,7 +21,8 @@ extension CoreDataRepository {
     func create(mode: TimerModel) throws {
         let context = container.viewContext
         
-        guard let entity = NSEntityDescription.entity(forEntityName: Constant.TimerEntityName, in: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "TimerEntity",
+                                                      in: context) else {
             throw DataManageError.createFailure
         }
         
@@ -42,7 +37,8 @@ extension CoreDataRepository {
     func create(mode: BlockModel) throws {
         let context = container.viewContext
         
-        guard let entity = NSEntityDescription.entity(forEntityName: Constant.BlockEntityName, in: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "BlockEntity",
+                                                      in: context) else {
             throw DataManageError.createFailure
         }
         
@@ -57,7 +53,8 @@ extension CoreDataRepository {
     func create(mode: DailyModel) throws {
         let context = container.viewContext
         
-        guard let entity = NSEntityDescription.entity(forEntityName: Constant.BlockEntityName, in: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "DailyEntity",
+                                                      in: context) else {
             throw DataManageError.createFailure
         }
         
