@@ -1,5 +1,5 @@
 //
-//  DataRepository.swift
+//  DataManagerRepository.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/03/29.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DataRepository {
+protocol DataManagerRepository {
     func create(mode: TimerModel) throws
     func create(mode: BlockModel) throws
     func create(mode: DailyModel) throws
