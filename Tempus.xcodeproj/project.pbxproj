@@ -27,8 +27,6 @@
 		ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */; };
 		ACD1397929D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */; };
 		ACD1397A29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */; };
-		ACD1398329D29BA1004D0A70 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398229D29BA1004D0A70 /* Mode.swift */; };
-		ACD1398429D29BA1004D0A70 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398229D29BA1004D0A70 /* Mode.swift */; };
 		ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
 		ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
 		ACD1398B29D2ABF3004D0A70 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */; };
@@ -37,6 +35,8 @@
 		ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398D29D2C269004D0A70 /* BlockModel.swift */; };
 		ACD1399129D2C272004D0A70 /* DailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399029D2C272004D0A70 /* DailyModel.swift */; };
 		ACD1399229D2C272004D0A70 /* DailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399029D2C272004D0A70 /* DailyModel.swift */; };
+		ACD1399529D37B58004D0A70 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399429D37B58004D0A70 /* DataRepository.swift */; };
+		ACD1399629D37B58004D0A70 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399429D37B58004D0A70 /* DataRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,11 +75,11 @@
 		ACD1396C29D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		ACD1396D29D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		ACD1396E29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		ACD1398229D29BA1004D0A70 /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		ACD1398629D29C12004D0A70 /* ModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
 		ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		ACD1398D29D2C269004D0A70 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
 		ACD1399029D2C272004D0A70 /* DailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyModel.swift; sourceTree = "<group>"; };
+		ACD1399429D37B58004D0A70 /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +157,7 @@
 		ACD1391429C70D9D004D0A70 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				ACD1398129D29B91004D0A70 /* Protocol */,
+				ACD1399329D37B26004D0A70 /* Repository */,
 				ACD1398929D2ABDA004D0A70 /* Model */,
 				ACD1397B29D1BBBA004D0A70 /* Entity */,
 				ACD1398529D29BE6004D0A70 /* Common */,
@@ -230,14 +230,6 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		ACD1398129D29B91004D0A70 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				ACD1398229D29BA1004D0A70 /* Mode.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		ACD1398529D29BE6004D0A70 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +246,14 @@
 				ACD1399029D2C272004D0A70 /* DailyModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		ACD1399329D37B26004D0A70 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1399429D37B58004D0A70 /* DataRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,13 +393,13 @@
 				ACD1397529D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */,
 				ACD1398B29D2ABF3004D0A70 /* TimerModel.swift in Sources */,
 				ACD138EB29C70CDE004D0A70 /* Tempus.xcdatamodeld in Sources */,
+				ACD1399529D37B58004D0A70 /* DataRepository.swift in Sources */,
 				ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */,
 				ACD1397929D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */,
 				ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */,
 				ACD1397129D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
 				ACD1397329D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
 				ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */,
-				ACD1398329D29BA1004D0A70 /* Mode.swift in Sources */,
 				ACD1397729D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
 				ACD1398E29D2C269004D0A70 /* BlockModel.swift in Sources */,
 			);
@@ -412,13 +412,13 @@
 				ACD1397029D1BBA5004D0A70 /* DailyEntity+CoreDataClass.swift in Sources */,
 				ACD1397229D1BBA5004D0A70 /* DailyEntity+CoreDataProperties.swift in Sources */,
 				ACD1398C29D2ABF3004D0A70 /* TimerModel.swift in Sources */,
-				ACD1398429D29BA1004D0A70 /* Mode.swift in Sources */,
 				ACD1397829D1BBA5004D0A70 /* TimerEntity+CoreDataClass.swift in Sources */,
 				ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */,
 				ACD1397429D1BBA5004D0A70 /* BlockEntity+CoreDataClass.swift in Sources */,
 				ACD1399229D2C272004D0A70 /* DailyModel.swift in Sources */,
 				ACD138FB29C70CDF004D0A70 /* TempusTests.swift in Sources */,
 				ACD1397629D1BBA5004D0A70 /* BlockEntity+CoreDataProperties.swift in Sources */,
+				ACD1399629D37B58004D0A70 /* DataRepository.swift in Sources */,
 				ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */,
 				ACD1397A29D1BBA5004D0A70 /* TimerEntity+CoreDataProperties.swift in Sources */,
 			);
