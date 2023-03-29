@@ -160,7 +160,7 @@ extension CoreDataRepository {
         let context = container.viewContext
         let fetchRequest = TimerEntity.fetchRequest()
         
-        fetchRequest.predicate = NSPredicate(format: "uuid = %@", model.id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", model.id as CVarArg)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -184,7 +184,7 @@ extension CoreDataRepository {
         let context = container.viewContext
         let fetchRequest = BlockEntity.fetchRequest()
         
-        fetchRequest.predicate = NSPredicate(format: "uuid = %@", model.id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", model.id as CVarArg)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -208,7 +208,7 @@ extension CoreDataRepository {
         let context = container.viewContext
         let fetchRequest = DailyEntity.fetchRequest()
         
-        fetchRequest.predicate = NSPredicate(format: "uuid = %@", model.id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", model.id as CVarArg)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -235,14 +235,74 @@ extension CoreDataRepository {
 // MARK: - Delete Method
 extension CoreDataRepository {
     func delete(_ model: TimerModel) throws {
+        let context = container.viewContext
+        let fetchRequest = TimerEntity.fetchRequest()
         
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", model.id as CVarArg)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            guard let foundedObject = result.first else {
+                throw DataManageError.deleteFailure
+            }
+            
+            context.delete(foundedObject)
+            
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.deleteFailure
+        }
     }
     
     func delete(_ model: BlockModel) throws {
+        let context = container.viewContext
+        let fetchRequest = BlockEntity.fetchRequest()
         
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", model.id as CVarArg)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            guard let foundedObject = result.first else {
+                throw DataManageError.deleteFailure
+            }
+            
+            context.delete(foundedObject)
+            
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.deleteFailure
+        }
     }
     
     func delete(_ model: DailyModel) throws {
+        let context = container.viewContext
+        let fetchRequest = DailyEntity.fetchRequest()
         
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", model.id as CVarArg)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            guard let foundedObject = result.first else {
+                throw DataManageError.deleteFailure
+            }
+            
+            context.delete(foundedObject)
+            
+            try context.save()
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+
+            throw DataManageError.deleteFailure
+        }
     }
 }
