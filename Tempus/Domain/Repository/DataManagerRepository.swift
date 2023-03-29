@@ -8,17 +8,17 @@
 import Foundation
 
 protocol DataManagerRepository {
-    func create(mode: TimerModel) throws
-    func create(mode: BlockModel) throws
-    func create(mode: DailyModel) throws
+    func create(model: TimerModel) throws
+    func create(model: BlockModel) throws
+    func create(model: DailyModel) throws
     
-    func fetch() throws -> [TimerModel]
-    func fetch() throws -> [BlockModel]
-    func fetch() throws -> [DailyModel]
+    func fetch() throws -> [TimerEntity]
+    func fetch() throws -> [BlockEntity]
+    func fetch() throws -> [DailyEntity]
     
-    func update(_ mode: TimerModel) throws
-    func update(_ mode: BlockModel) throws
-    func update(_ mode: DailyModel) throws
+    func update(_ model: TimerModel) throws
+    func update(_ model: BlockModel) throws
+    func update(_ model: DailyModel) throws
     
     func delete(_ model: TimerModel) throws
     func delete(_ model: BlockModel) throws
