@@ -12,9 +12,9 @@ protocol DataManagerRepository {
     func create(model: BlockModel) throws
     func create(model: DailyModel) throws
     
-    func fetch() throws -> [TimerEntity]
-    func fetch() throws -> [BlockEntity]
-    func fetch() throws -> [DailyEntity]
+    func fetchAllTimerEntity() throws -> [TimerEntity]
+    func fetchAllBlockEntity() throws -> [BlockEntity]
+    func fetchAllDailyEntity() throws -> [DailyEntity]
     
     func update(_ model: TimerModel) throws
     func update(_ model: BlockModel) throws

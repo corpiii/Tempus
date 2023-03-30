@@ -2,12 +2,13 @@
 //  DailyEntity+CoreDataProperties.swift
 //  Tempus
 //
-//  Created by 이정민 on 2023/03/27.
+//  Created by 이정민 on 2023/03/29.
 //
 //
 
 import Foundation
 import CoreData
+
 
 extension DailyEntity {
 
@@ -15,15 +16,15 @@ extension DailyEntity {
         return NSFetchRequest<DailyEntity>(entityName: "DailyEntity")
     }
 
-    @NSManaged public var uuid: UUID
+    @NSManaged public var uuid: UUID?
     @NSManaged public var startTime: Double
     @NSManaged public var repeatCount: Int16
     @NSManaged public var focusTime: Double
     @NSManaged public var breakTime: Double
-    @NSManaged public var createdAt: Date
+    @NSManaged public var createdAt: Double
 
 }
 
-extension DailyEntity: Identifiable {
+extension DailyEntity : Identifiable {
 
 }

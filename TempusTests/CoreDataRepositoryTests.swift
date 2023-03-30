@@ -27,16 +27,34 @@ final class CoreDataRepositoryTests: XCTestCase {
     override func tearDownWithError() throws {
         persistentContainer.viewContext.reset()
     }
+}
 
+// MARK: - Create Test
+extension CoreDataRepositoryTests {
     func test_TimerModel_create_is_success() {
         // Arrange
         let uuid = UUID()
         let time = 10
         let model = TimerModel(id: uuid, wasteTime: Double(time))
-        
+        let context = persistentContainer.viewContext
         // Act, Assert
         do {
-            try repository.create(model: model)
+            let entity = NSEntityDescription.entity(forEntityName: "TimerEntity", in: context)
+            let object = NSManagedObject(entity: entity!, insertInto: context)
+            
+            object.setValue(time, forKey: "wasteTime")
+            object.setValue(uuid, forKey: "uuid")
+            object.setValue(Date().timeIntervalSince1970, forKey: "createdAt")
+            
+            try context.save()
+            
+            let request = TimerEntity.fetchRequest()
+            let result = try context.fetch(request)
+            
+            for i in result {
+                print(i.uuid)
+            }
+            print(uuid)
         } catch {
             XCTFail()
         }
@@ -76,4 +94,44 @@ final class CoreDataRepositoryTests: XCTestCase {
             XCTFail()
         }
     }
+}
+
+// MARK: - Fetch Test
+extension CoreDataRepositoryTests {
+    func test_TimerModel_fetch_is_success() {
+        // Arrange
+        let uuid = UUID()
+        let time = 10
+        let model = TimerModel(id: uuid, wasteTime: Double(time))
+        
+        try! repository.create(model: model)
+        
+        // Act, Assert
+        do {
+            let result = try repository.fetchAllTimerEntity()
+            let object = result.first!
+            
+            XCTAssertEqual(uuid, object.uuid)
+        } catch {
+            XCTFail()
+        }
+    }
+    
+    func test_DailyModel_fetch_is_success() {
+        
+    }
+    
+    func test_BlockModel_fetch_is_success() {
+        
+    }
+}
+
+// MARK: - Update Test
+extension CoreDataRepositoryTests {
+    
+}
+
+// MARK: - Delete Test
+extension CoreDataRepositoryTests {
+    
 }
