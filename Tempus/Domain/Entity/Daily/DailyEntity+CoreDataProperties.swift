@@ -16,6 +16,7 @@ extension DailyEntity {
         return NSFetchRequest<DailyEntity>(entityName: "DailyEntity")
     }
 
+    @NSManaged public var title: String
     @NSManaged public var uuid: UUID?
     @NSManaged public var startTime: Double
     @NSManaged public var repeatCount: Int16

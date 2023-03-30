@@ -9,13 +9,16 @@ import Foundation
 
 struct DailyModel {
     let id: UUID
+    var title: String
     var startTime: Double
     var repeatCount: Int
     var focusTime: Double
     var breakTime: Double
     var toEntity: DailyEntity {
         let entity = DailyEntity()
+        
         entity.uuid = id
+        entity.title = title
         entity.startTime = startTime
         entity.repeatCount = Int16(repeatCount)
         entity.focusTime = focusTime

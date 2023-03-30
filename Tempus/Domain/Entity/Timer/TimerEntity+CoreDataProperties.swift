@@ -18,6 +18,7 @@ extension TimerEntity {
 
     @NSManaged public var wasteTime: Double
     @NSManaged public var uuid: UUID?
+    @NSManaged public var title: String
     @NSManaged public var createdAt: Double
 
 }

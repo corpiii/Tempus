@@ -1,5 +1,5 @@
 //
-//  BlockCreateUseCase.swift
+//  BlockEditUseCase.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/03/31.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BlockCreateUseCase {
+class BlockEditUseCase {
     let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {
@@ -15,7 +15,7 @@ class BlockCreateUseCase {
     }
     
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
-        try repository.create(model: model)
+        try repository.update(model)
         completion()
     }
 }
