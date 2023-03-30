@@ -30,7 +30,7 @@ extension CoreDataRepository {
         
         newObject.setValue(model.id, forKey: "uuid")
         newObject.setValue(model.wasteTime, forKey: "wasteTime")
-        newObject.setValue(Date(), forKey: "createdAt")
+        newObject.setValue(Date().timeIntervalSince1970, forKey: "createdAt")
         
         do {
             try context.save()
@@ -55,7 +55,7 @@ extension CoreDataRepository {
         
         newObject.setValue(model.id, forKey: "uuid")
         newObject.setValue(model.divideCount, forKey: "divideCount")
-        newObject.setValue(Date(), forKey: "createdAt")
+        newObject.setValue(Date().timeIntervalSince1970, forKey: "createdAt")
         
         do {
             try context.save()
@@ -83,7 +83,7 @@ extension CoreDataRepository {
         newObject.setValue(model.repeatCount, forKey: "repeatCount")
         newObject.setValue(model.focusTime, forKey: "focusTime")
         newObject.setValue(model.breakTime, forKey: "breakTime")
-        newObject.setValue(Date(), forKey: "createdAt")
+        newObject.setValue(Date().timeIntervalSince1970, forKey: "createdAt")
         
         do {
             try context.save()
@@ -99,14 +99,14 @@ extension CoreDataRepository {
 
 // MARK: - Fetch Method
 extension CoreDataRepository {
-    func fetch() throws -> [TimerEntity] {
+    func fetchAllTimerEntity() throws -> [TimerEntity] {
         let context = container.viewContext
         let fetchRequest = TimerEntity.fetchRequest()
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         
         do {
-            let result = try context.fetch(fetchRequest) as [TimerEntity]
+            let result = try context.fetch(fetchRequest)
             return result
         } catch {
             #if DEBUG
@@ -117,7 +117,7 @@ extension CoreDataRepository {
         }
     }
     
-    func fetch() throws -> [BlockEntity] {
+    func fetchAllBlockEntity() throws -> [BlockEntity] {
         let context = container.viewContext
         let fetchRequest = BlockEntity.fetchRequest()
         
@@ -135,7 +135,7 @@ extension CoreDataRepository {
         }
     }
     
-    func fetch() throws -> [DailyEntity] {
+    func fetchAllDailyEntity() throws -> [DailyEntity] {
         let context = container.viewContext
         let fetchRequest = DailyEntity.fetchRequest()
         
