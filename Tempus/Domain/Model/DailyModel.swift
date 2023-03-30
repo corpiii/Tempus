@@ -13,4 +13,14 @@ struct DailyModel {
     var repeatCount: Int
     var focusTime: Double
     var breakTime: Double
+    var toEntity: DailyEntity {
+        let entity = DailyEntity()
+        entity.uuid = id
+        entity.startTime = startTime
+        entity.repeatCount = Int16(repeatCount)
+        entity.focusTime = focusTime
+        entity.breakTime = breakTime
+        
+        return entity
+    }
 }

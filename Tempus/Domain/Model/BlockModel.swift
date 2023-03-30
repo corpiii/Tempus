@@ -10,4 +10,11 @@ import Foundation
 struct BlockModel {
     let id: UUID
     var divideCount: Double
+    var toEntity: BlockEntity {
+        let entity = BlockEntity()
+        entity.uuid = id
+        entity.divideCount = Int16(divideCount)
+        
+        return entity
+    }
 }
