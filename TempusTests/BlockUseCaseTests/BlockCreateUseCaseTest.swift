@@ -26,6 +26,7 @@ final class BlockCreateUseCaseTest: XCTestCase {
         // Act, Assert
         do {
             try blockCreateUseCase.execute(model: model) {}
+            XCTAssertEqual(coreDataRepositoryMock.blockModel!.id, id)
         } catch {
             XCTFail()
         }
