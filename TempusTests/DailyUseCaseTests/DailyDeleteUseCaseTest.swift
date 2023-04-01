@@ -34,15 +34,13 @@ final class DailyDeleteUseCaseTest: XCTestCase {
                                breakTime: breakTime)
         try! createUseCase.execute(model: model) {}
         
-        // Act
+        // Act, Assert
         do {
             try deleteUseCase.execute(model: model) {}
             XCTAssertNil(repository.dailyModel)
         } catch {
             XCTFail()
         }
-        
-        // Assert
     }
     
 }
