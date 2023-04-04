@@ -18,4 +18,24 @@ final class TimeTests: XCTestCase {
         XCTAssertEqual(time.minute, 4)
         XCTAssertEqual(time.second, 10)
     }
+    
+    func test_Time_flow_is_success() {
+        // Arrange
+        let second = 3640 // 1hour 0minutes 40seconds
+        var time = Time(second: Double(second))
+        
+        XCTAssertEqual(time.hour, 1)
+        XCTAssertEqual(time.minute, 0)
+        XCTAssertEqual(time.second, 40)
+        
+        // Act
+        (1...50).forEach { _ in
+            time.secondForward()
+        }
+        
+        // Assert
+        XCTAssertEqual(time.hour, 0)
+        XCTAssertEqual(time.minute, 59)
+        XCTAssertEqual(time.second, 50)
+    }
 }
