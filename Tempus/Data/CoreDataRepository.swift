@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import Foundation
 
 class CoreDataRepository: DataManagerRepository {
     let container: NSPersistentContainer

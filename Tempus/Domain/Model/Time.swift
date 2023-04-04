@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/04/04.
 //
 
-import Foundation
-
 struct Time {
     private(set) var hour: Int
     private(set) var minute: Int
@@ -14,6 +12,7 @@ struct Time {
     
     init(second: Double) {
         let second = Int(second)
+        
         self.hour = second / 3600
         self.minute = second / 60 % 60
         self.second = second % 60
