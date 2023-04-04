@@ -8,9 +8,9 @@
 import Foundation
 
 struct Time {
-    private(set) hour: Int
-    private(set) minute: Int
-    private(set) second: Int
+    private(set) var hour: Int
+    private(set) var minute: Int
+    private(set) var second: Int
     
     init(second: Double) {
         let second = Int(second)
