@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BlockEditUseCase {
+final class BlockEditUseCase {
     let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {

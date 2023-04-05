@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DailyCreateUseCase {
+final class DailyCreateUseCase {
     let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {

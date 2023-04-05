@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-class TimerStartUseCase {
+final class TimerStartUseCase {
     private var time: Time
     private let timeObservable: BehaviorSubject<Time>
     

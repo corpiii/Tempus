@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BlockDeleteUseCase {
+final class BlockDeleteUseCase {
     let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {

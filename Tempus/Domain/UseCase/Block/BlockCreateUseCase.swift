@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BlockCreateUseCase {
+final class BlockCreateUseCase {
     let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {
