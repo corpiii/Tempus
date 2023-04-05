@@ -18,7 +18,7 @@ struct Time {
         self.second = second % 60
     }
     
-    mutating func secondForward() {
+    mutating func flowOneSecond() {
         self.second -= 1
         
         if self.second == -1 {
