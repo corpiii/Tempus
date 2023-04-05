@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/04/02.
 //
 
-import Foundation
-
 class DailyDeleteUseCase {
     let repository: DataManagerRepository
     
