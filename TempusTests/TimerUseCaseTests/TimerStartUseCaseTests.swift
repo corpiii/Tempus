@@ -32,10 +32,11 @@ final class TimerStartUseCaseTests: XCTestCase {
         var resultValues: [Double] = []
         let expectation = XCTestExpectation(description: "timer completed")
 
-        for i in stride(from: timerModel.wasteTime, through: 0, by: -0.1) {
-            let value = abs(round((i - 0.1) * 10)) / 10
+        for i in stride(from: timerModel.wasteTime, to: 0, by: -0.1) {
+            let value = abs(round(i * 10)) / 10
             expectValues.append(value)
         }
+        expectValues.append(0.0)
 
         // Act
         timeObservable.subscribe(onNext: { time in

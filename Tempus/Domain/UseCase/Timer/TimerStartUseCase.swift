@@ -18,9 +18,11 @@ final class TimerStartUseCase {
     }
     private let timeObservable: PublishSubject<Time> = .init()
     private var timer: Timer?
+    private let originTime: Time
     
     init(model: TimerModel) {
-        self.time = Time(second: model.wasteTime)
+        self.originTime = Time(second: model.wasteTime)
+        self.time = originTime
     }
     
     private func flowSecond(second: Double) {
@@ -48,18 +50,20 @@ extension TimerStartUseCase: ModeInfo {
 
 extension TimerStartUseCase: ModeController {
     func modeStart() {
+        guard timer == nil else { return }
+
         let interval = 0.1
+        
+        time = originTime
         timer = Timer(timeInterval: interval, repeats: true, block: { timer in
-            if self.time.totalSecond < 0 {
-                timer.invalidate()
+            if self.time.totalSecond == 0 {
+                self.time = self.originTime
             } else {
                 self.flowSecond(second: interval)
             }
         })
         
-        if timer != nil {
-            RunLoop.current.add(timer!, forMode: .default)
-        }
+        RunLoop.current.add(timer!, forMode: .default)
     }
     
     func modeStop() {
