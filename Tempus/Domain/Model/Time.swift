@@ -5,6 +5,8 @@
 //  Created by 이정민 on 2023/04/04.
 //
 
+import Foundation
+
 struct Time {
     private(set) var hour: Int
     private(set) var minute: Int
@@ -24,6 +26,7 @@ struct Time {
     
     mutating func flow(second: Double) {
         self.second -= second
+        self.second = Double(Int(round(self.second * 10))) / 10
         
         if self.second < 0 {
             self.minute -= 1

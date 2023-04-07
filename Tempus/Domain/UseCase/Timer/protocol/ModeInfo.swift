@@ -9,5 +9,5 @@ import RxSwift
 
 protocol ModeInfo {
     var type: ModeType { get }
-    func fetchTimeObservable() -> BehaviorSubject<Time>
+    func fetchTimeObservable() -> PublishSubject<Time>
 }

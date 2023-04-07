@@ -9,19 +9,22 @@ import Foundation
 
 import RxSwift
 
+/// Start Timer used by TimerModel
 final class TimerStartUseCase {
-    private var time: Time
-    private let timeObservable: BehaviorSubject<Time>
+    private var time: Time {
+        didSet {
+            timeObservable.onNext(time)
+        }
+    }
+    private let timeObservable: PublishSubject<Time> = .init()
     private var timer: Timer?
     
     init(model: TimerModel) {
         self.time = Time(second: model.wasteTime)
-        self.timeObservable = BehaviorSubject(value: self.time)
     }
     
     private func flowSecond(second: Double) {
         time.flow(second: second)
-        timeObservable.onNext(time)
     }
     
     func isTimerOver() -> Bool {
@@ -38,7 +41,7 @@ extension TimerStartUseCase: ModeInfo {
         return .timer
     }
     
-    func fetchTimeObservable() -> BehaviorSubject<Time> {
+    func fetchTimeObservable() -> PublishSubject<Time> {
         return timeObservable
     }
 }
@@ -47,7 +50,11 @@ extension TimerStartUseCase: ModeController {
     func modeStart() {
         let interval = 0.1
         timer = Timer(timeInterval: interval, repeats: true, block: { timer in
-            self.flowSecond(second: interval)
+            if self.time.totalSecond < 0 {
+                timer.invalidate()
+            } else {
+                self.flowSecond(second: interval)
+            }
         })
         
         if timer != nil {

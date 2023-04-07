@@ -30,7 +30,7 @@ final class TimeTests: XCTestCase {
         
         // Act
         (1...50).forEach { _ in
-            time.secondForward()
+            time.flow(second: 1)
         }
         
         // Assert
