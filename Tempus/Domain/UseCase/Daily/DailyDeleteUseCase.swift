@@ -5,7 +5,7 @@
 //  Created by 이정민 on 2023/04/02.
 //
 
-class DailyDeleteUseCase {
+final class DailyDeleteUseCase {
     let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {

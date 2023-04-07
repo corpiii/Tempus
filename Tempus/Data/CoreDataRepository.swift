@@ -7,7 +7,7 @@
 
 import CoreData
 
-class CoreDataRepository: DataManagerRepository {
+final class CoreDataRepository: DataManagerRepository {
     let container: NSPersistentContainer
     
     init(container: NSPersistentContainer) {
