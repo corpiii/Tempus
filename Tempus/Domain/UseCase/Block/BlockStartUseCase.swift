@@ -37,10 +37,35 @@ extension BlockStartUseCase: ModeInfo {
 
 extension BlockStartUseCase: ModeController {
     func modeStart() {
+        self.schedule = generateSchedule(divideCount: originModel.divideCount)
     }
     
     func modeStop() {
         
     }
     
+    func generateSchedule(divideCount: Double) -> [Date] {
+        let calendar = Calendar.current
+        let now = Date()
+        let interval = 24 / divideCount
+        let oneDaySecond = 24.0 * 60.0 * 60.0
+        let oneHourSecond = 60.0 * 60.0
+        
+        var schedule: [Date] = []
+        var date = calendar.startOfDay(for: now)
+        let lastDate = date.addingTimeInterval(oneDaySecond)
+        
+        while date < lastDate {
+            schedule.append(date)
+            date = date.addingTimeInterval(interval * oneHourSecond)
+        }
+        
+        while schedule[1] < now {
+            let lastDate = schedule.removeFirst()
+            let newDate = lastDate.addingTimeInterval(oneDaySecond)
+            schedule.append(newDate)
+        }
+        
+        return schedule
+    }
 }
