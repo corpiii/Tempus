@@ -25,10 +25,6 @@ final class TimerStartUseCase {
         self.time = Time(second: model.wasteTime)
     }
     
-    private func flowSecond(second: Double) {
-        time.flow(second: second)
-    }
-    
     func isTimerOver() -> Bool {
         if time.totalSecond == 0 {
             return true
@@ -55,11 +51,12 @@ extension TimerStartUseCase: ModeController {
         let interval = 0.1
         
         time = Time(second: originModel.wasteTime)
-        timer = Timer(timeInterval: interval, repeats: true, block: { timer in
-            if self.time.totalSecond == 0 {
-                self.time = Time(second: self.originModel.wasteTime)
+        timer = Timer(timeInterval: interval, repeats: true, block: { [self] timer in
+            if time.totalSecond == 0 {
+                /* Noti */
+                time = Time(second: originModel.wasteTime)
             } else {
-                self.flowSecond(second: interval)
+                time.flow(second: interval)
             }
         })
         
