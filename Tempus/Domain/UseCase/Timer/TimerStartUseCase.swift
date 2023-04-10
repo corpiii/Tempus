@@ -18,15 +18,11 @@ final class TimerStartUseCase {
     }
     private let timeObservable: PublishSubject<Time> = .init()
     private var timer: Timer?
-    private let originTime: Time
+    private let originModel: TimerModel
     
     init(model: TimerModel) {
-        self.originTime = Time(second: model.wasteTime)
-        self.time = originTime
-    }
-    
-    private func flowSecond(second: Double) {
-        time.flow(second: second)
+        self.originModel = model
+        self.time = Time(second: model.wasteTime)
     }
     
     func isTimerOver() -> Bool {
@@ -54,12 +50,13 @@ extension TimerStartUseCase: ModeController {
 
         let interval = 0.1
         
-        time = originTime
-        timer = Timer(timeInterval: interval, repeats: true, block: { timer in
-            if self.time.totalSecond == 0 {
-                self.time = self.originTime
+        time = Time(second: originModel.wasteTime)
+        timer = Timer(timeInterval: interval, repeats: true, block: { [self] timer in
+            if time.totalSecond == 0 {
+                /* Noti */
+                time = Time(second: originModel.wasteTime)
             } else {
-                self.flowSecond(second: interval)
+                time.flow(second: interval)
             }
         })
         

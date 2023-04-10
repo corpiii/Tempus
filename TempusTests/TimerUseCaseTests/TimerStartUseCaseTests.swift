@@ -24,7 +24,7 @@ final class TimerStartUseCaseTests: XCTestCase {
         disposeBag = DisposeBag()
     }
     
-    func test_timer_working_valid() {
+    func test_modeStart() {
         // Arrange
         let timeObservable = timerStartUseCase.fetchTimeObservable()
 
