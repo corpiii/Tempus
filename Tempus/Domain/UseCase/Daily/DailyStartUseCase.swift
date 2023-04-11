@@ -25,6 +25,13 @@ final class DailyStartUseCase {
         self.time = Time(second: 0)
     }
     
+    func isTimerOver() -> Bool {
+        if time.totalSecond == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 extension DailyStartUseCase: ModeInfo {
@@ -35,6 +42,10 @@ extension DailyStartUseCase: ModeInfo {
     func fetchTimeObservable() -> PublishSubject<Time> {
         return timeObservable
     }
+    
+    func fetchSchedule() -> [Date] {
+        return schedule
+    }
 }
 
 extension DailyStartUseCase: ModeController {
@@ -42,14 +53,8 @@ extension DailyStartUseCase: ModeController {
         guard timer == nil else { return }
         
         /* Noti enroll */
-        
-        let startTime = originModel.startTime
-        let repeatCount = originModel.repeatCount
-        let focusTime = originModel.focusTime
-        let breakTime = originModel.breakTime
-        
         let interval = 1.0
-        let schedule = generateSchedule(originModel)
+        schedule = generateSchedule(originModel)
         
         let target = schedule[0].timeIntervalSince1970
         let now = Date().timeIntervalSince1970
@@ -95,10 +100,11 @@ extension DailyStartUseCase: ModeController {
         let oneDaySecond = 24.0 * 60.0 * 60.0
         
         var schedule: [Date] = []
+        schedule.append(startTime)
         
         (1...repeatCount).forEach({ _ in
             schedule.append(startTime.addingTimeInterval(focusTime))
-            schedule.append(startTime.addingTimeInterval(breakTime))
+            schedule.append(startTime.addingTimeInterval(focusTime + breakTime))
             startTime = startTime.addingTimeInterval(oneIntervalSecond)
         })
         

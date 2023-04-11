@@ -44,6 +44,10 @@ extension BlockStartUseCase: ModeInfo {
     func fetchTimeObservable() -> PublishSubject<Time> {
         return timeObservable
     }
+    
+    func fetchSchedule() -> [Date] {
+        return schedule
+    }
 }
 
 extension BlockStartUseCase: ModeController {
