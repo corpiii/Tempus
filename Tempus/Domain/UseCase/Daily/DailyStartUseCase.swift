@@ -1,28 +1,26 @@
 //
-//  BlockStartUseCase.swift
+//  DailyStartUseCase.swift
 //  Tempus
 //
-//  Created by 이정민 on 2023/04/07.
+//  Created by 이정민 on 2023/04/10.
 //
 
 import Foundation
 
 import RxSwift
-import UIKit
 
-/// Start Block used by BlockModel
-final class BlockStartUseCase {
+final class DailyStartUseCase {
     private var time: Time {
         didSet {
             timeObservable.onNext(time)
         }
     }
     private let timeObservable: PublishSubject<Time> = .init()
-    private let originModel: BlockModel
+    private let originModel: DailyModel
     private var schedule: [Date] = []
     private var timer: Timer?
     
-    init(originModel: BlockModel) {
+    init(originModel: DailyModel) {
         self.originModel = originModel
         self.time = Time(second: 0)
     }
@@ -36,9 +34,9 @@ final class BlockStartUseCase {
     }
 }
 
-extension BlockStartUseCase: ModeInfo {
+extension DailyStartUseCase: ModeInfo {
     var type: ModeType {
-        return .block
+        .daily
     }
     
     func fetchTimeObservable() -> PublishSubject<Time> {
@@ -50,19 +48,18 @@ extension BlockStartUseCase: ModeInfo {
     }
 }
 
-extension BlockStartUseCase: ModeController {
+extension DailyStartUseCase: ModeController {
     func modeStart() {
         guard timer == nil else { return }
         
         /* Noti enroll */
-        
         let interval = 1.0
-        self.schedule = generateSchedule(divideCount: originModel.divideCount)
+        schedule = generateSchedule(originModel)
         
         let target = schedule[0].timeIntervalSince1970
         let now = Date().timeIntervalSince1970
         time = Time(second: target - now)
-                
+        
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self = self else { return }
             
@@ -81,28 +78,35 @@ extension BlockStartUseCase: ModeController {
         })
         
         RunLoop.current.add(timer!, forMode: .default)
+        
     }
     
     func modeStop() {
+        /* Noti remove */
         timer?.invalidate()
         timer = nil
     }
     
-    private func generateSchedule(divideCount: Double) -> [Date] {
+    private func generateSchedule(_ originModel: DailyModel) -> [Date] {
         let calendar = Calendar.current
         let now = Date()
-        let interval = 24 / divideCount
+        
+        var startTime = calendar.startOfDay(for: now).addingTimeInterval(originModel.startTime)
+        let repeatCount = originModel.repeatCount
+        let focusTime = originModel.focusTime
+        let breakTime = originModel.breakTime
+        
+        let oneIntervalSecond = focusTime + breakTime
         let oneDaySecond = 24.0 * 60.0 * 60.0
-        let oneHourSecond = 60.0 * 60.0
         
         var schedule: [Date] = []
-        var date = calendar.startOfDay(for: now)
-        let lastDate = date.addingTimeInterval(oneDaySecond)
+        schedule.append(startTime)
         
-        while date < lastDate {
-            schedule.append(date)
-            date = date.addingTimeInterval(interval * oneHourSecond)
-        }
+        (1...repeatCount).forEach({ _ in
+            schedule.append(startTime.addingTimeInterval(focusTime))
+            schedule.append(startTime.addingTimeInterval(focusTime + breakTime))
+            startTime = startTime.addingTimeInterval(oneIntervalSecond)
+        })
         
         while schedule.first! < now {
             let lastDate = schedule.removeFirst()
