@@ -39,6 +39,7 @@ final class ClockStartUseCase {
         
         let output = Output(timeObservable: modeInfoDelegate.fetchTimeObservable())
         
+        
         input.modeStartButtonTappedEvent
             .subscribe(onNext: { [weak self] in
                 guard let self = self,

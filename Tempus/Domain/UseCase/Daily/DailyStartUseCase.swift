@@ -42,10 +42,6 @@ extension DailyStartUseCase: ModeInfo {
     func fetchTimeObservable() -> PublishSubject<Time> {
         return timeObservable
     }
-    
-    func fetchSchedule() -> [Date] {
-        return schedule
-    }
 }
 
 extension DailyStartUseCase: ModeController {
