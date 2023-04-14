@@ -22,11 +22,11 @@ final class ClockStartUseCase {
     var modeControllerDelegate: ModeController?
     
     func bind(to input: Input) throws -> Output {
-//        guard let modeControllerDelegate else {
-//            throw DataManageError.createFailure
-//        }
+        guard let modeControllerDelegate else {
+            throw ModeManageError.modeNotExist
+        }
         
-        let output = modeControllerDelegate!.bind(to: input)
+        let output = modeControllerDelegate.bind(to: input)
         
         return output
     }
