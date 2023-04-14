@@ -22,13 +22,14 @@ final class DailyStartUseCaseTest: XCTestCase {
     var modeStartEvent: PublishSubject<Void> = .init()
     var modeStopEvent: PublishSubject<Void> = .init()
     var output: DailyStartUseCase.Output!
-    var disposeBag = DisposeBag()
+    var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
         dailyStartUseCase = DailyStartUseCase(originModel: originModel)
         input = DailyStartUseCase.Input(modeStartEvent: modeStartEvent,
                                         modeStopEvent: modeStopEvent)
         output = dailyStartUseCase.bind(to: input)
+        disposeBag = DisposeBag()
     }
     
     func test_modeStart() {
