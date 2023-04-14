@@ -9,36 +9,41 @@ import XCTest
 import RxSwift
 
 class BlockStartUseCaseTests: XCTestCase {
-    
+    var originModel: BlockModel = BlockModel(id: UUID(),
+                                             title: "testTitle",
+                                             divideCount: 4)
     var blockStartUseCase: BlockStartUseCase!
+    var input: BlockStartUseCase.Input!
+    var modeStartEvent: PublishSubject<Void> = .init()
+    var modeStopEvent: PublishSubject<Void> = .init()
+    var output: BlockStartUseCase.Output!
     var disposeBag: DisposeBag!
-    var originModel: BlockModel!
-    let divideCount: Double = 4
     
     override func setUpWithError() throws {
-        originModel = BlockModel(id: UUID(), title: "testTitle", divideCount: divideCount)
         blockStartUseCase = BlockStartUseCase(originModel: originModel)
+        input = BlockStartUseCase.Input(modeStartEvent: modeStartEvent,
+                                        modeStopEvent: modeStopEvent)
+        output = blockStartUseCase.bind(to: input)
         disposeBag = DisposeBag()
     }
     
     func test_modeStart() throws {
         // Arrange
-        let timeObservable = blockStartUseCase.fetchTimeObservable()
         let expectation = self.expectation(description: "timeObservable onNext called")
-        
-        let schedule = generateSchedule(divideCount: divideCount)
-        
+        let schedule = generateSchedule(divideCount: originModel.divideCount)
+
         // Act, Assert
-        timeObservable.subscribe(onNext: { time in
-            let now = Date().timeIntervalSince1970
-            let target = schedule[0].timeIntervalSince1970
-            
-            XCTAssertEqual(time.totalSecond, Double(Int(target - now)))
-            
-            expectation.fulfill()
-        }).disposed(by: disposeBag)
+        output.remainTime
+            .subscribe(onNext: { time in
+                let now = Date().timeIntervalSince1970
+                let target = schedule[0].timeIntervalSince1970
+                
+                XCTAssertEqual(time.totalSecond, Double(Int(target - now)))
+                
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
         
-        blockStartUseCase.modeStart()
+        modeStartEvent.onNext(())
         wait(for: [expectation], timeout: 1.0)
     }
     

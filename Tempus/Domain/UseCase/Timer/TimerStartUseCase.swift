@@ -17,6 +17,7 @@ final class TimerStartUseCase {
         }
     }
     private let timeObservable: PublishSubject<Time> = .init()
+    private let disposeBag: DisposeBag = .init()
     private var timer: Timer?
     private let originModel: TimerModel
     
@@ -25,27 +26,7 @@ final class TimerStartUseCase {
         self.time = Time(second: model.wasteTime)
     }
     
-    func isTimerOver() -> Bool {
-        if time.totalSecond == 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-}
-
-extension TimerStartUseCase: ModeInfo {
-    var type: ModeType {
-        return .timer
-    }
-    
-    func fetchTimeObservable() -> PublishSubject<Time> {
-        return timeObservable
-    }
-}
-
-extension TimerStartUseCase: ModeController {
-    func modeStart() {
+    private func modeStart() {
         guard timer == nil else { return }
 
         let interval = 0.1
@@ -63,8 +44,28 @@ extension TimerStartUseCase: ModeController {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
-    func modeStop() {
+    private func modeStop() {
         timer?.invalidate()
         timer = nil
+    }
+}
+
+extension TimerStartUseCase: ModeController {
+    func bind(to input: Input) -> Output {
+        let output = ClockStartUseCase.Output(remainTime: timeObservable)
+
+        input.modeStartEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStart()
+            }).disposed(by: disposeBag)
+
+        input.modeStopEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStop()
+            }).disposed(by: disposeBag)
+
+        return output
     }
 }

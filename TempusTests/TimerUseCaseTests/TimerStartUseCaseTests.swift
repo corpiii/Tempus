@@ -10,24 +10,25 @@ import XCTest
 import RxSwift
 
 final class TimerStartUseCaseTests: XCTestCase {
-    var timerModel: TimerModel!
+    var timerModel: TimerModel = .init(id: UUID(),
+                                       title: "testTitle",
+                                       wasteTime: 3.0)
     var timerStartUseCase: TimerStartUseCase!
+    var input: TimerStartUseCase.Input!
+    var modeStartEvent: PublishSubject<Void> = .init()
+    var modeStopEvent: PublishSubject<Void> = .init()
+    var output: TimerStartUseCase.Output!
     var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
-        let id = UUID()
-        let title = "testTitle"
-        let wasteTime = Double(3)
-        
-        timerModel = TimerModel(id: id, title: title, wasteTime: wasteTime)
         timerStartUseCase = TimerStartUseCase(model: timerModel)
+        input = .init(modeStartEvent: modeStartEvent, modeStopEvent: modeStopEvent)
+        output = timerStartUseCase.bind(to: input)
         disposeBag = DisposeBag()
     }
     
     func test_modeStart() {
         // Arrange
-        let timeObservable = timerStartUseCase.fetchTimeObservable()
-
         var expectValues: [Double] = []
         var resultValues: [Double] = []
         let expectation = XCTestExpectation(description: "timer completed")
@@ -39,21 +40,18 @@ final class TimerStartUseCaseTests: XCTestCase {
         expectValues.append(0.0)
 
         // Act
-        timeObservable.subscribe(onNext: { time in
-            if time.totalSecond < 0 {
-                expectation.fulfill()
-            } else {
+        output.remainTime
+            .subscribe(onNext: { time in
                 resultValues.append(time.totalSecond)
-            }
-        }).disposed(by: disposeBag)
-
-        self.timerStartUseCase.modeStart()
-
+                if time.totalSecond == 0 {
+                    expectation.fulfill()
+                }
+            }).disposed(by: disposeBag)
+        
+        modeStartEvent.onNext(())
         wait(for: [expectation], timeout: timerModel.wasteTime + 1)
         
         // Assert
         XCTAssertEqual(resultValues, expectValues)
-
     }
-
 }
