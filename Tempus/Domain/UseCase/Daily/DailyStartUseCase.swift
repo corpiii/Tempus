@@ -95,11 +95,6 @@ final class DailyStartUseCase {
     }
 }
 
-/// 버튼 이벤트를 inpput 받아서 modeStart, stop과 엮을 것.
-/// 아웃풋으로 timeObservable 줄 것.
-/// 그러면 ModeInfo와 ModeController가 필요한가? 그냥 하나로 합칠까
-/// isp
-
 extension DailyStartUseCase: ModeController {
     func bind(to input: Input) -> Output {
         let output = ClockStartUseCase.Output(remainTime: timeObservable)
