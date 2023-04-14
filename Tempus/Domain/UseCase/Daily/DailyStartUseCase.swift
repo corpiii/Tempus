@@ -10,42 +10,23 @@ import Foundation
 import RxSwift
 
 final class DailyStartUseCase {
-    private var time: Time {
+    private var remainTime: Time {
         didSet {
-            timeObservable.onNext(time)
+            timeObservable.onNext(remainTime)
         }
     }
     private let timeObservable: PublishSubject<Time> = .init()
+    private let disposeBag: DisposeBag = .init()
     private let originModel: DailyModel
     private var schedule: [Date] = []
     private var timer: Timer?
     
     init(originModel: DailyModel) {
         self.originModel = originModel
-        self.time = Time(second: 0)
+        self.remainTime = Time(second: 0)
     }
     
-    func isTimerOver() -> Bool {
-        if time.totalSecond == 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-}
-
-extension DailyStartUseCase: ModeInfo {
-    var type: ModeType {
-        .daily
-    }
-    
-    func fetchTimeObservable() -> PublishSubject<Time> {
-        return timeObservable
-    }
-}
-
-extension DailyStartUseCase: ModeController {
-    func modeStart() {
+    private func modeStart() {
         guard timer == nil else { return }
         
         /* Noti enroll */
@@ -54,12 +35,12 @@ extension DailyStartUseCase: ModeController {
         
         let target = schedule[0].timeIntervalSince1970
         let now = Date().timeIntervalSince1970
-        time = Time(second: target - now)
+        remainTime = Time(second: target - now)
         
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
-            guard let self = self else { return }
+            guard let self else { return }
             
-            if self.time.totalSecond == 0 {
+            if self.remainTime.totalSecond == 0 {
                 let endDate = self.schedule.removeFirst()
                 let addingOneDayDate = endDate.addingTimeInterval(24 * 60 * 60)
                 
@@ -67,9 +48,9 @@ extension DailyStartUseCase: ModeController {
                 let now = Date().timeIntervalSince1970
                 let target = self.schedule[0].timeIntervalSince1970
                 
-                self.time = Time(second: target - now)
+                self.remainTime = Time(second: target - now)
             } else {
-                self.time.flow(second: interval)
+                self.remainTime.flow(second: interval)
             }
         })
         
@@ -77,7 +58,7 @@ extension DailyStartUseCase: ModeController {
         
     }
     
-    func modeStop() {
+    private func modeStop() {
         /* Noti remove */
         timer?.invalidate()
         timer = nil
@@ -111,5 +92,30 @@ extension DailyStartUseCase: ModeController {
         }
         
         return schedule
+    }
+}
+
+/// 버튼 이벤트를 inpput 받아서 modeStart, stop과 엮을 것.
+/// 아웃풋으로 timeObservable 줄 것.
+/// 그러면 ModeInfo와 ModeController가 필요한가? 그냥 하나로 합칠까
+/// isp
+
+extension DailyStartUseCase: ModeController {
+    func bind(to input: Input) -> Output {
+        let output = ClockStartUseCase.Output(remainTime: timeObservable)
+
+        input.modeStartEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStart()
+            }).disposed(by: disposeBag)
+
+        input.modeStopEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStop()
+            }).disposed(by: disposeBag)
+
+        return output
     }
 }

@@ -18,6 +18,7 @@ final class BlockStartUseCase {
         }
     }
     private let timeObservable: PublishSubject<Time> = .init()
+    private let disposeBag: DisposeBag = .init()
     private let originModel: BlockModel
     private var schedule: [Date] = []
     private var timer: Timer?
@@ -27,27 +28,7 @@ final class BlockStartUseCase {
         self.time = Time(second: 0)
     }
     
-    func isTimerOver() -> Bool {
-        if time.totalSecond == 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-}
-
-extension BlockStartUseCase: ModeInfo {
-    var type: ModeType {
-        return .block
-    }
-    
-    func fetchTimeObservable() -> PublishSubject<Time> {
-        return timeObservable
-    }
-}
-
-extension BlockStartUseCase: ModeController {
-    func modeStart() {
+    private func modeStart() {
         guard timer == nil else { return }
         
         /* Noti enroll */
@@ -79,7 +60,7 @@ extension BlockStartUseCase: ModeController {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
-    func modeStop() {
+    private func modeStop() {
         timer?.invalidate()
         timer = nil
     }
@@ -107,5 +88,25 @@ extension BlockStartUseCase: ModeController {
         }
         
         return schedule
+    }
+}
+
+extension BlockStartUseCase: ModeController {
+    func bind(to input: Input) -> Output {
+        let output = ClockStartUseCase.Output(remainTime: timeObservable)
+
+        input.modeStartEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStart()
+            }).disposed(by: disposeBag)
+
+        input.modeStopEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStop()
+            }).disposed(by: disposeBag)
+
+        return output
     }
 }

@@ -6,6 +6,8 @@
 //
 
 protocol ModeController {
-    func modeStart()
-    func modeStop()
+    typealias Input = ClockStartUseCase.Input
+    typealias Output = ClockStartUseCase.Output
+    
+    func bind(to input: Input) -> Output
 }
