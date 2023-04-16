@@ -12,12 +12,19 @@ import UIKit
 
 /// Start Block used by BlockModel
 final class BlockStartUseCase {
-    private var time: Time {
+    private var remainTime: Time {
         didSet {
-            timeObservable.onNext(time)
+            timeObservable.onNext(remainTime)
         }
     }
+    private var modeState: ModeState {
+        didSet {
+            modeStateObservable.onNext(modeState)
+        }
+    }
+    
     private let timeObservable: PublishSubject<Time> = .init()
+    private let modeStateObservable: PublishSubject<ModeState> = .init()
     private let disposeBag: DisposeBag = .init()
     private let originModel: BlockModel
     private var schedule: [Date] = []
@@ -25,7 +32,8 @@ final class BlockStartUseCase {
     
     init(originModel: BlockModel) {
         self.originModel = originModel
-        self.time = Time(second: 0)
+        self.remainTime = Time(second: 0)
+        self.modeState = .focusTime
     }
     
     private func modeStart() {
@@ -35,15 +43,16 @@ final class BlockStartUseCase {
         
         let interval = 1.0
         self.schedule = generateSchedule(divideCount: originModel.divideCount)
+        self.modeState = .focusTime
         
         let target = schedule[0].timeIntervalSince1970
         let now = Date().timeIntervalSince1970
-        time = Time(second: target - now)
+        remainTime = Time(second: target - now)
                 
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self = self else { return }
             
-            if self.time.totalSecond == 0 {
+            if self.remainTime.totalSecond == 0 {
                 let endDate = self.schedule.removeFirst()
                 let addingOneDayDate = endDate.addingTimeInterval(24 * 60 * 60)
                 
@@ -51,9 +60,9 @@ final class BlockStartUseCase {
                 let now = Date().timeIntervalSince1970
                 let target = self.schedule[0].timeIntervalSince1970
                 
-                self.time = Time(second: target - now)
+                self.remainTime = Time(second: target - now)
             } else {
-                self.time.flow(second: interval)
+                self.remainTime.flow(second: interval)
             }
         })
         
@@ -93,7 +102,8 @@ final class BlockStartUseCase {
 
 extension BlockStartUseCase: ModeController {
     func bind(to input: Input) -> Output {
-        let output = ClockStartUseCase.Output(remainTime: timeObservable)
+        let output = ClockStartUseCase.Output(remainTime: timeObservable,
+                                              modeState: modeStateObservable)
 
         input.modeStartEvent
             .subscribe(onNext: { [weak self] _ in

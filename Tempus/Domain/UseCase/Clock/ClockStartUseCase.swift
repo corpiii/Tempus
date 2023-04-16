@@ -17,6 +17,7 @@ final class ClockStartUseCase {
     
     struct Output {
         let remainTime: PublishSubject<Time>
+        let modeState: PublishSubject<ModeState>
     }
     
     var modeControllerDelegate: ModeController?
