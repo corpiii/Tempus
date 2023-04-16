@@ -9,35 +9,43 @@ import Foundation
 
 import RxSwift
 
-/// Start Timer used by TimerModel
 final class TimerStartUseCase {
-    private var time: Time {
+    private var remainTime: Time {
         didSet {
-            timeObservable.onNext(time)
+            timeObservable.onNext(remainTime)
         }
     }
+    private var modeState: ModeState {
+        didSet {
+            modeStateObservable.onNext(modeState)
+        }
+    }
+    
     private let timeObservable: PublishSubject<Time> = .init()
+    private let modeStateObservable: PublishSubject<ModeState> = .init()
     private let disposeBag: DisposeBag = .init()
     private var timer: Timer?
     private let originModel: TimerModel
     
     init(model: TimerModel) {
         self.originModel = model
-        self.time = Time(second: model.wasteTime)
+        self.remainTime = Time(second: model.wasteTime)
+        self.modeState = .focusTime
     }
     
     private func modeStart() {
         guard timer == nil else { return }
 
         let interval = 0.1
+        self.modeState = .focusTime
         
-        time = Time(second: originModel.wasteTime)
+        remainTime = Time(second: originModel.wasteTime)
         timer = Timer(timeInterval: interval, repeats: true, block: { [self] timer in
-            if time.totalSecond == 0 {
+            if remainTime.totalSecond == 0 {
                 /* Noti */
-                time = Time(second: originModel.wasteTime)
+                remainTime = Time(second: originModel.wasteTime)
             } else {
-                time.flow(second: interval)
+                remainTime.flow(second: interval)
             }
         })
         
@@ -52,7 +60,8 @@ final class TimerStartUseCase {
 
 extension TimerStartUseCase: ModeController {
     func bind(to input: Input) -> Output {
-        let output = ClockStartUseCase.Output(remainTime: timeObservable)
+        let output = ClockStartUseCase.Output(remainTime: timeObservable,
+                                              modeState: modeStateObservable)
 
         input.modeStartEvent
             .subscribe(onNext: { [weak self] _ in
