@@ -15,20 +15,8 @@ final class DailyFetchUseCase {
     }
     
     func execute(_ completion: @escaping ([DailyModel]) -> Void) throws {
-        let entities = try repository.fetchAllDailyEntity()
-        let models = transform(entities: entities)
+        let models = try repository.fetchAllDailyModel()
         
         completion(models)
-    }
-    
-    private func transform(entities: [DailyEntity]) -> [DailyModel] {
-        return entities.map { entity in
-            DailyModel(id: entity.uuid,
-                       title: entity.title,
-                       startTime: entity.startTime,
-                       repeatCount: entity.repeatCount,
-                       focusTime: entity.focusTime,
-                       breakTime: entity.breakTime)
-        }
     }
 }

@@ -90,7 +90,7 @@ extension CoreDataRepositoryTests {
         let uuid = UUID()
         let testTitle = "testTitle"
         let divideCount = 4
-        let model = BlockModel(id: uuid, title: testTitle, divideCount: Double(divideCount))
+        let model = BlockModel(id: uuid, title: testTitle, divideCount: divideCount)
         
         // Act, Assert
         do {
@@ -114,10 +114,10 @@ extension CoreDataRepositoryTests {
         
         // Act, Assert
         do {
-            let result = try repository.fetchAllTimerEntity()
+            let result = try repository.fetchAllTimerModel()
             let object = result.first!
             
-            XCTAssertEqual(uuid, object.uuid)
+            XCTAssertEqual(uuid, object.id)
         } catch {
             XCTFail()
         }
