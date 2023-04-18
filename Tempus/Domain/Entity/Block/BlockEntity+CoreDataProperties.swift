@@ -18,7 +18,7 @@ extension BlockEntity {
 
     @NSManaged public var divideCount: Int16
     @NSManaged public var createdAt: Double
-    @NSManaged public var uuid: UUID?
+    @NSManaged public var uuid: UUID
     @NSManaged public var title: String
 
 }

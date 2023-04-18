@@ -20,7 +20,7 @@ struct DailyModel {
         entity.uuid = id
         entity.title = title
         entity.startTime = startTime
-        entity.repeatCount = Int16(repeatCount)
+        entity.repeatCount = repeatCount
         entity.focusTime = focusTime
         entity.breakTime = breakTime
         

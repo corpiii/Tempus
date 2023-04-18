@@ -17,9 +17,9 @@ extension DailyEntity {
     }
 
     @NSManaged public var title: String
-    @NSManaged public var uuid: UUID?
+    @NSManaged public var uuid: UUID
     @NSManaged public var startTime: Double
-    @NSManaged public var repeatCount: Int16
+    @NSManaged public var repeatCount: Int
     @NSManaged public var focusTime: Double
     @NSManaged public var breakTime: Double
     @NSManaged public var createdAt: Double
