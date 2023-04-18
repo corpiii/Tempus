@@ -8,28 +8,40 @@
 import XCTest
 
 final class DailyFetchUseCaseTests: XCTestCase {
-
+    var dailyCreateUseCase: DailyCreateUseCase!
+    var dailyFetchUseCase: DailyFetchUseCase!
+    var coreDataRepositoryMock: DataManagerRepositoryMock!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        coreDataRepositoryMock = DataManagerRepositoryMock()
+        dailyCreateUseCase = DailyCreateUseCase(repository: coreDataRepositoryMock)
+        dailyFetchUseCase = DailyFetchUseCase(repository: coreDataRepositoryMock)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_Daily_fetch_is_success() {
+        // Arrange
+        let id = UUID()
+        let title = "testTitle"
+        let startTime: Double = 123456
+        let repeatCount: Int = 4
+        let focusTime: Double = 123456789
+        let breakTime: Double = 123456789
+        let model = DailyModel(id: id,
+                               title: title,
+                               startTime: startTime,
+                               repeatCount: repeatCount,
+                               focusTime: focusTime,
+                               breakTime: breakTime)
+        
+        try! dailyCreateUseCase.execute(model: model) {}
+        
+        // Act, Assert
+        do {
+            try dailyFetchUseCase.execute { models in
+                XCTAssertEqual(models.first!.id, id)
+            }
+        } catch {
+            XCTFail()
         }
     }
-
 }

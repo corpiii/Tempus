@@ -24,16 +24,16 @@ class DataManagerRepositoryMock: DataManagerRepository {
         dailyModel = model
     }
     
-    func fetchAllTimerEntity() throws -> [TimerEntity] {
-        return timerModel != nil ? [timerModel!.toEntity] : []
+    func fetchAllTimerModel() throws -> [TimerModel] {
+        return [timerModel!]
     }
     
-    func fetchAllBlockEntity() throws -> [BlockEntity] {
-        return blockModel != nil ? [blockModel!.toEntity] : []
+    func fetchAllBlockModel() throws -> [BlockModel] {
+        return [blockModel!]
     }
     
-    func fetchAllDailyEntity() throws -> [DailyEntity] {
-        return dailyModel != nil ? [dailyModel!.toEntity] : []
+    func fetchAllDailyModel() throws -> [DailyModel] {
+        return [dailyModel!]
     }
     
     func update(_ model: TimerModel) throws {
