@@ -74,10 +74,10 @@ final class BlockStartUseCase {
         timer = nil
     }
     
-    private func generateSchedule(divideCount: Double) -> [Date] {
+    private func generateSchedule(divideCount: Int) -> [Date] {
         let calendar = Calendar.current
         let now = Date()
-        let interval = 24 / divideCount
+        let interval = Double(24 / divideCount)
         let oneDaySecond = 24.0 * 60.0 * 60.0
         let oneHourSecond = 60.0 * 60.0
         

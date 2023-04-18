@@ -16,11 +16,16 @@ extension BlockEntity {
         return NSFetchRequest<BlockEntity>(entityName: "BlockEntity")
     }
 
-    @NSManaged public var divideCount: Int16
+    @NSManaged public var divideCount: Int
     @NSManaged public var createdAt: Double
-    @NSManaged public var uuid: UUID?
+    @NSManaged public var uuid: UUID
     @NSManaged public var title: String
 
+    var toModel: BlockModel {
+        return BlockModel(id: uuid,
+                          title: title,
+                          divideCount: divideCount)
+    }
 }
 
 extension BlockEntity : Identifiable {

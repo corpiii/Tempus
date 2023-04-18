@@ -17,10 +17,15 @@ extension TimerEntity {
     }
 
     @NSManaged public var wasteTime: Double
-    @NSManaged public var uuid: UUID?
+    @NSManaged public var uuid: UUID
     @NSManaged public var title: String
     @NSManaged public var createdAt: Double
-
+    
+    var toModel: TimerModel {
+        return TimerModel(id: uuid,
+                          title: title,
+                          wasteTime: wasteTime)
+    }
 }
 
 extension TimerEntity : Identifiable {

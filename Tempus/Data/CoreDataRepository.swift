@@ -98,7 +98,7 @@ extension CoreDataRepository {
 
 // MARK: - Fetch Method
 extension CoreDataRepository {
-    func fetchAllTimerEntity() throws -> [TimerEntity] {
+    func fetchAllTimerModel() throws -> [TimerModel] {
         let context = container.viewContext
         let fetchRequest = TimerEntity.fetchRequest()
         
@@ -106,7 +106,9 @@ extension CoreDataRepository {
         
         do {
             let result = try context.fetch(fetchRequest)
-            return result
+            return result.map { entity in
+                entity.toModel
+            }
         } catch {
             #if DEBUG
             print(error)
@@ -116,7 +118,7 @@ extension CoreDataRepository {
         }
     }
     
-    func fetchAllBlockEntity() throws -> [BlockEntity] {
+    func fetchAllBlockModel() throws -> [BlockModel] {
         let context = container.viewContext
         let fetchRequest = BlockEntity.fetchRequest()
         
@@ -124,7 +126,9 @@ extension CoreDataRepository {
         
         do {
             let result = try context.fetch(fetchRequest) as [BlockEntity]
-            return result
+            return result.map { entity in
+                entity.toModel
+            }
         } catch {
             #if DEBUG
             print(error)
@@ -134,7 +138,7 @@ extension CoreDataRepository {
         }
     }
     
-    func fetchAllDailyEntity() throws -> [DailyEntity] {
+    func fetchAllDailyModel() throws -> [DailyModel] {
         let context = container.viewContext
         let fetchRequest = DailyEntity.fetchRequest()
         
@@ -142,7 +146,9 @@ extension CoreDataRepository {
         
         do {
             let result = try context.fetch(fetchRequest) as [DailyEntity]
-            return result
+            return result.map { entity in
+                entity.toModel
+            }
         } catch {
             #if DEBUG
             print(error)

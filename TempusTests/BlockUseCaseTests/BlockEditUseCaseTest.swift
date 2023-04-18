@@ -23,7 +23,7 @@ final class BlockEditUseCaseTest: XCTestCase {
         let id = UUID()
         let title = "testTitle"
         let changeTitle = "changeTitle"
-        let divideCount = Double(6)
+        let divideCount = 6
         var model = BlockModel(id: id, title: title, divideCount: divideCount)
         try! blockCreateUseCase.execute(model: model) {}
         
