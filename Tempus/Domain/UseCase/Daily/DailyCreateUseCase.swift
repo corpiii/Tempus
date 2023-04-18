@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/04/01.
 //
 
-import Foundation
-
 final class DailyCreateUseCase {
     let repository: DataManagerRepository
     
