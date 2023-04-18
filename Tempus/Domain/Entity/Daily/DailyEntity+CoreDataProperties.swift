@@ -24,6 +24,14 @@ extension DailyEntity {
     @NSManaged public var breakTime: Double
     @NSManaged public var createdAt: Double
 
+    var toModel: DailyModel {
+        return DailyModel(id: uuid,
+                          title: title,
+                          startTime: startTime,
+                          repeatCount: repeatCount,
+                          focusTime: focusTime,
+                          breakTime: breakTime)
+    }
 }
 
 extension DailyEntity : Identifiable {
