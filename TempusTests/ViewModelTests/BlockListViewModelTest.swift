@@ -62,10 +62,31 @@ final class BlockListViewModelTest: XCTestCase {
 
     func test_delete_event_emit_then_fetch_success() {
         // Arrange
+        let expectation = XCTestExpectation(description: "delete_event_test_description")
+        let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
+        var resultModel: BlockModel?
+        let fetchModelEvent = PublishSubject<Void>()
+        let deleteModelEvent = PublishSubject<BlockModel>()
+
+        try! repositoryMock.create(model: testModel)
+        
+        let fetchInput = BlockFetchUseCase.Input(fetchModelEvent: fetchModelEvent)
+        let fetchOutput = blockFetchUseCase.transform(input: fetchInput, disposeBag: disposeBag)
+        
+        let deleteInput = BlockDeleteUseCase.Input(blockDeleteEvent: deleteModelEvent, blockFetchEvent: fetchModelEvent)
+        blockDeleteUseCase.bind(input: deleteInput, disposeBag: disposeBag)
         
         // Act
+        fetchOutput.modelArrayObservable
+            .subscribe(onNext: { models in
+                resultModel = models.first
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        deleteModelEvent.onNext(testModel)
         
         // Assert
+        wait(for: [expectation], timeout: 2.0)
+        XCTAssertNil(resultModel)
     }
-
 }

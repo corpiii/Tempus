@@ -25,15 +25,15 @@ final class DataManagerRepositoryMock: DataManagerRepository {
     }
     
     func fetchAllTimerModel() throws -> [TimerModel] {
-        return [timerModel!]
+        return timerModel == nil ? [] : [timerModel!]
     }
     
     func fetchAllBlockModel() throws -> [BlockModel] {
-        return [blockModel!]
+        return blockModel == nil ? [] : [blockModel!]
     }
     
     func fetchAllDailyModel() throws -> [DailyModel] {
-        return [dailyModel!]
+        return dailyModel == nil ? [] : [dailyModel!]
     }
     
     func update(_ model: TimerModel) throws {
