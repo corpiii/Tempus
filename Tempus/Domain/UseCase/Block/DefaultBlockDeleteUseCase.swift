@@ -7,7 +7,14 @@
 
 import RxSwift
 
-final class BlockDeleteUseCase {
+protocol BlockFetchUseCase {
+    associatedtype Input
+    associatedtype OutPut
+    
+    func transform(input: Input, disposeBag: DisposeBag) -> OutPut
+}
+
+final class DefaultBlockDeleteUseCase {
     struct Input {
         let blockDeleteEvent: Observable<BlockModel>
         let blockFetchEvent: PublishSubject<Void>
@@ -35,7 +42,7 @@ final class BlockDeleteUseCase {
     }
 }
 
-private extension BlockDeleteUseCase {
+private extension DefaultBlockDeleteUseCase {
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
         try repository.delete(model)
         completion()

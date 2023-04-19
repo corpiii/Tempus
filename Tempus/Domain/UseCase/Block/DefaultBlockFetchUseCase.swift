@@ -1,5 +1,5 @@
 //
-//  BlockFetchUseCase.swift
+//  DefaultBlockFetchUseCase.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/04/18.
@@ -7,7 +7,15 @@
 
 import RxSwift
 
-final class BlockFetchUseCase {
+protocol BlockFetchUseCase {
+    associatedtype Input
+    associatedtype OutPut
+    
+    func transform(input: Input, disposeBag: DisposeBag) -> OutPut
+
+}
+
+final class DefaultBlockFetchUseCase: BlockFetchUseCase {
     struct Input {
         let fetchModelEvent: Observable<Void>
     }
@@ -30,7 +38,7 @@ final class BlockFetchUseCase {
     }
 }
 
-private extension BlockFetchUseCase {
+private extension DefaultBlockFetchUseCase {
     func bindFetchModelEvent(_ fetchModelEvent: Observable<Void>, disposeBag: DisposeBag) {
         fetchModelEvent
             .subscribe(onNext: { [weak self] _ in
@@ -40,7 +48,8 @@ private extension BlockFetchUseCase {
                         self.modelArrayObservable.onNext(models)
                     }
                 } catch {
-                    self.modelArrayObservable.onError(error)
+//                    self.modelArrayObservable.onError(error)
+                    return
                 }
             })
             .disposed(by: disposeBag)

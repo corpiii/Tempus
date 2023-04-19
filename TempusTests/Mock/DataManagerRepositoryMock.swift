@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DataManagerRepositoryMock: DataManagerRepository {
+final class DataManagerRepositoryMock: DataManagerRepository {
     var timerModel: TimerModel?
     var blockModel: BlockModel?
     var dailyModel: DailyModel?
