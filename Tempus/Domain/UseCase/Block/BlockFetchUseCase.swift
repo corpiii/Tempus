@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/04/18.
 //
 
-import Foundation
-
 import RxSwift
 
 final class BlockFetchUseCase {
@@ -25,8 +23,16 @@ final class BlockFetchUseCase {
         self.repository = repository
     }
     
-    func bind(input: Input, disposeBag: DisposeBag) -> OutPut {
-        input.fetchModelEvent
+    func transform(input: Input, disposeBag: DisposeBag) -> OutPut {
+        bindFetchModelEvent(input.fetchModelEvent, disposeBag: disposeBag)
+        
+        return OutPut(modelArrayObservable: modelArrayObservable)
+    }
+}
+
+private extension BlockFetchUseCase {
+    func bindFetchModelEvent(_ fetchModelEvent: Observable<Void>, disposeBag: DisposeBag) {
+        fetchModelEvent
             .subscribe(onNext: { [weak self] _ in
                 guard let self else { return }
                 do {
@@ -38,11 +44,9 @@ final class BlockFetchUseCase {
                 }
             })
             .disposed(by: disposeBag)
-        
-        return OutPut(modelArrayObservable: modelArrayObservable)
     }
     
-    private func execute(_ completion: @escaping ([BlockModel]) -> Void) throws {
+    func execute(_ completion: @escaping ([BlockModel]) -> Void) throws {
         let models = try repository.fetchAllBlockModel()
         completion(models)
     }

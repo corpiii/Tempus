@@ -5,14 +5,9 @@
 //  Created by 이정민 on 2023/04/18.
 //
 
-import Foundation
-
 import RxSwift
 
 final class BlockListViewModel {
-    private weak var blockFetchUseCase: BlockFetchUseCase?
-    private weak var blockDeleteUseCase: BlockDeleteUseCase?
-    
     struct Input {
         let addButtonEvent: Observable<Void>
         let modelDeleteEvent: Observable<BlockModel>
@@ -23,38 +18,32 @@ final class BlockListViewModel {
         let blockModelArray: Observable<[BlockModel]>
     }
     
-    init(blockFetchUseCase: BlockFetchUseCase, blockDeleteUseCase: BlockDeleteUseCase) {
-        self.blockFetchUseCase = blockFetchUseCase
-        self.blockDeleteUseCase = blockDeleteUseCase
-    }
+    weak var blockFetchUseCase: BlockFetchUseCase?
+    weak var blockDeleteUseCase: BlockDeleteUseCase?
     
-    func bind(input: Input, disPoseBag: DisposeBag) -> Output {
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
         guard let blockFetchUseCase, let blockDeleteUseCase else {
             fatalError()
         }
         
         let fetchUseCaseInput = BlockFetchUseCase.Input(fetchModelEvent: input.modelFetchEvent)
-        let fetchUseCaseOutput = blockFetchUseCase.bind(input: fetchUseCaseInput,
-                                                         disposeBag: disPoseBag)
+        let fetchUseCaseOutput = blockFetchUseCase.transform(input: fetchUseCaseInput,
+                                                             disposeBag: disposeBag)
         
-        input.addButtonEvent
-            .subscribe(onNext: {
-                // coordinator push
-            }).disposed(by: disPoseBag)
+        let deleteUseCaseInput = BlockDeleteUseCase.Input(blockDeleteEvent: input.modelDeleteEvent,
+                                                          blockFetchEvent: input.modelFetchEvent)
+        blockDeleteUseCase.bind(input: deleteUseCaseInput, disposeBag: disposeBag)
         
-        input.modelDeleteEvent
-            .subscribe(onNext: { [weak self] model in
-                guard let self else { return }
-                
-                do {
-                    try self.blockDeleteUseCase?.execute(model: model, {
-                        input.modelFetchEvent.onNext(())
-                    })
-                } catch {
-                    
-                }
-            }).disposed(by: disPoseBag)
+        bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         
         return Output(blockModelArray: fetchUseCaseOutput.modelArrayObservable)
     }
+    
+    private func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
+        addButtonEvent
+            .subscribe(onNext: {
+                // coordinator push
+            }).disposed(by: disposeBag)
+    }
+
 }
