@@ -7,29 +7,65 @@
 
 import XCTest
 
+import RxSwift
+
 final class BlockListViewModelTest: XCTestCase {
-
+    var blockListViewModel: BlockListViewModel!
+    var blockFetchUseCase: BlockFetchUseCase!
+    var blockDeleteUseCase: BlockDeleteUseCase!
+    var repositoryMock: DataManagerRepositoryMock!
+    var disposeBag: DisposeBag!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        repositoryMock = DataManagerRepositoryMock()
+        blockFetchUseCase = BlockFetchUseCase(repository: repositoryMock)
+        blockDeleteUseCase = BlockDeleteUseCase(repository: repositoryMock)
+        
+        blockListViewModel = BlockListViewModel()
+        
+        blockListViewModel.blockFetchUseCase = blockFetchUseCase
+        blockListViewModel.blockDeleteUseCase = blockDeleteUseCase
+        
+        disposeBag = DisposeBag()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    func test_fetch_event_emit_then_fetch_success() {
+        // Arrange
+        let expectation = XCTestExpectation(description: "fetch_event_test_description")
+        let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
+        var resultModel: BlockModel?
+        let fetchModelEvent = PublishSubject<Void>()
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        try! repositoryMock.create(model: testModel)
+        
+        let input = BlockFetchUseCase.Input(fetchModelEvent: fetchModelEvent)
+        let output = blockFetchUseCase.transform(input: input, disposeBag: disposeBag)
+        
+        // Act
+        output.modelArrayObservable
+            .subscribe(onNext: { models in
+                resultModel = models.first
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        fetchModelEvent.onNext(())
+        
+        // Assert
+        wait(for: [expectation], timeout: 2.0)
+        
+        if let resultModel {            
+            XCTAssertEqual(resultModel.id, testModel.id)
+        } else {
+            XCTFail("resultModel is nil")
         }
+    }
+
+    func test_delete_event_emit_then_fetch_success() {
+        // Arrange
+        
+        // Act
+        
+        // Assert
     }
 
 }

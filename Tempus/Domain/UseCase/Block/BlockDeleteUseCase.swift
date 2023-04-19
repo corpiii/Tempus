@@ -7,21 +7,13 @@
 
 import RxSwift
 
-protocol BlockFetchUseCase {
-    associatedtype Input
-    associatedtype OutPut
-    
-    func transform(input: Input, disposeBag: DisposeBag) -> OutPut
-}
-
-final class DefaultBlockDeleteUseCase {
+final class BlockDeleteUseCase {
     struct Input {
         let blockDeleteEvent: Observable<BlockModel>
         let blockFetchEvent: PublishSubject<Void>
     }
     
     private let repository: DataManagerRepository
-    private weak var fetchDelegate: FetchDelegate?
     
     init(repository: DataManagerRepository) {
         self.repository = repository
@@ -42,7 +34,7 @@ final class DefaultBlockDeleteUseCase {
     }
 }
 
-private extension DefaultBlockDeleteUseCase {
+private extension BlockDeleteUseCase {
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
         try repository.delete(model)
         completion()
