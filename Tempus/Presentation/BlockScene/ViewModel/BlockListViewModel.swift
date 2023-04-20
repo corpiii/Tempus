@@ -18,20 +18,26 @@ final class BlockListViewModel {
         let blockModelArray: Observable<[BlockModel]>
     }
     
-    weak var blockFetchUseCase: BlockFetchUseCase?
-    weak var blockDeleteUseCase: BlockDeleteUseCase?
+    private var blockFetchUseCase: BlockFetchUseCase
+    private var blockDeleteUseCase: BlockDeleteUseCase
+    
+    private var modelFetchEvent: PublishSubject<Void>!
+    
+    init(repository: DataManagerRepository, blockDeleteUseCase: BlockDeleteUseCase) {
+        self.blockFetchUseCase = .init(repository: repository)
+        self.blockDeleteUseCase = blockDeleteUseCase
+    }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        guard let blockFetchUseCase, let blockDeleteUseCase else {
-            fatalError()
-        }
+        let fetchEvent = input.modelFetchEvent
+        self.modelFetchEvent = fetchEvent
         
-        let fetchUseCaseInput = BlockFetchUseCase.Input(fetchModelEvent: input.modelFetchEvent)
+        let fetchUseCaseInput = BlockFetchUseCase.Input(fetchModelEvent: fetchEvent)
         let fetchUseCaseOutput = blockFetchUseCase.transform(input: fetchUseCaseInput,
                                                              disposeBag: disposeBag)
         
         let deleteUseCaseInput = BlockDeleteUseCase.Input(blockDeleteEvent: input.modelDeleteEvent,
-                                                          blockFetchEvent: input.modelFetchEvent)
+                                                          blockFetchEvent: fetchEvent)
         blockDeleteUseCase.bind(input: deleteUseCaseInput, disposeBag: disposeBag)
         
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
@@ -42,8 +48,7 @@ final class BlockListViewModel {
     private func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
         addButtonEvent
             .subscribe(onNext: {
-                // coordinator push
+                // coordinator push to createViewModel by 'push(self.modelFetchEvent)' function
             }).disposed(by: disposeBag)
     }
-
 }
