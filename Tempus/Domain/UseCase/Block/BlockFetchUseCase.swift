@@ -24,14 +24,13 @@ final class BlockFetchUseCase {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> OutPut {
-        bindFetchModelEvent(input.fetchModelEvent, disposeBag: disposeBag)
-        
+        bind(input.fetchModelEvent, disposeBag: disposeBag)
         return OutPut(modelArrayObservable: modelArrayObservable)
     }
 }
 
 private extension BlockFetchUseCase {
-    func bindFetchModelEvent(_ fetchModelEvent: Observable<Void>, disposeBag: DisposeBag) {
+    func bind(_ fetchModelEvent: Observable<Void>, disposeBag: DisposeBag) {
         fetchModelEvent
             .subscribe(onNext: { [weak self] _ in
                 guard let self else { return }
