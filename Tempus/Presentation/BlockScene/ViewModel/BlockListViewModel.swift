@@ -16,6 +16,7 @@ final class BlockListViewModel {
     
     struct Output {
         let blockModelArray: Observable<[BlockModel]>
+        let isDeleteSuccess: Observable<Bool>
     }
     
     private var blockFetchUseCase: BlockFetchUseCase
@@ -38,11 +39,13 @@ final class BlockListViewModel {
         
         let deleteUseCaseInput = BlockDeleteUseCase.Input(blockDeleteEvent: input.modelDeleteEvent,
                                                           blockFetchEvent: fetchEvent)
-        blockDeleteUseCase.bind(input: deleteUseCaseInput, disposeBag: disposeBag)
+        let deleteUseCaseOutput = blockDeleteUseCase.transform(input: deleteUseCaseInput,
+                                                               disposeBag: disposeBag)
         
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         
-        return Output(blockModelArray: fetchUseCaseOutput.modelArrayObservable)
+        return Output(blockModelArray: fetchUseCaseOutput.modelArrayObservable,
+                      isDeleteSuccess: deleteUseCaseOutput.isDeleteSuccess)
     }
     
     private func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
