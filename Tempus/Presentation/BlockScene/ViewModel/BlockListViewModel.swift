@@ -23,9 +23,9 @@ final class BlockListViewModel {
     
     private var modelFetchEvent: PublishSubject<Void>!
     
-    init(repository: DataManagerRepository, blockDeleteUseCase: BlockDeleteUseCase) {
+    init(repository: DataManagerRepository) {
         self.blockFetchUseCase = .init(repository: repository)
-        self.blockDeleteUseCase = blockDeleteUseCase
+        self.blockDeleteUseCase = .init(repository: repository)
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
