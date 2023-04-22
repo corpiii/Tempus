@@ -9,24 +9,24 @@ import XCTest
 
 import RxSwift
 
+
+// createViewModelTests 만들기
+
 final class BlockListViewModelTest: XCTestCase {
     var blockListViewModel: BlockListViewModel!
-    var blockFetchUseCase: BlockFetchUseCase!
-    var blockDeleteUseCase: BlockDeleteUseCase!
     var repositoryMock: DataManagerRepositoryMock!
     var disposeBag: DisposeBag!
+    var addButtonTapEvent: PublishSubject<Void>!
+    var modelDeleteEvent: PublishSubject<BlockModel>!
+    var modelFetchEvent: PublishSubject<Void>!
     
     override func setUpWithError() throws {
         repositoryMock = DataManagerRepositoryMock()
-        blockFetchUseCase = BlockFetchUseCase(repository: repositoryMock)
-        blockDeleteUseCase = BlockDeleteUseCase(repository: repositoryMock)
-        
-        blockListViewModel = BlockListViewModel()
-        
-        blockListViewModel.blockFetchUseCase = blockFetchUseCase
-        blockListViewModel.blockDeleteUseCase = blockDeleteUseCase
-        
+        blockListViewModel = BlockListViewModel(repository: repositoryMock)
         disposeBag = DisposeBag()
+        addButtonTapEvent = .init()
+        modelDeleteEvent = .init()
+        modelFetchEvent = .init()
     }
 
     func test_fetch_event_emit_then_fetch_success() {
@@ -34,26 +34,30 @@ final class BlockListViewModelTest: XCTestCase {
         let expectation = XCTestExpectation(description: "fetch_event_test_description")
         let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
         var resultModel: BlockModel?
-        let fetchModelEvent = PublishSubject<Void>()
 
         try! repositoryMock.create(model: testModel)
         
-        let input = BlockFetchUseCase.Input(fetchModelEvent: fetchModelEvent)
-        let output = blockFetchUseCase.transform(input: input, disposeBag: disposeBag)
+        let input = BlockListViewModel.Input(addButtonEvent: addButtonTapEvent,
+                                             modelDeleteEvent: modelDeleteEvent,
+                                             modelFetchEvent: modelFetchEvent)
         
-        // Act
-        output.modelArrayObservable
+        let output = blockListViewModel.transform(input: input, disposeBag: disposeBag)
+        
+        output.blockModelArray
             .subscribe(onNext: { models in
-                resultModel = models.first
-                expectation.fulfill()
+                if !models.isEmpty {
+                    resultModel = models.first!
+                    expectation.fulfill()
+                }
             }).disposed(by: disposeBag)
         
-        fetchModelEvent.onNext(())
-        
-        // Assert
+        // Act
+        modelFetchEvent.onNext(())
         wait(for: [expectation], timeout: 2.0)
         
-        if let resultModel {            
+        // Assert
+        
+        if let resultModel {
             XCTAssertEqual(resultModel.id, testModel.id)
         } else {
             XCTFail("resultModel is nil")
@@ -64,29 +68,34 @@ final class BlockListViewModelTest: XCTestCase {
         // Arrange
         let expectation = XCTestExpectation(description: "delete_event_test_description")
         let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
-        var resultModel: BlockModel?
-        let fetchModelEvent = PublishSubject<Void>()
-        let deleteModelEvent = PublishSubject<BlockModel>()
-
-        try! repositoryMock.create(model: testModel)
+        var resultModel: [BlockModel] = []
         
-        let fetchInput = BlockFetchUseCase.Input(fetchModelEvent: fetchModelEvent)
-        let fetchOutput = blockFetchUseCase.transform(input: fetchInput, disposeBag: disposeBag)
+        let input = BlockListViewModel.Input(addButtonEvent: addButtonTapEvent,
+                                             modelDeleteEvent: modelDeleteEvent,
+                                             modelFetchEvent: modelFetchEvent)
         
-        let deleteInput = BlockDeleteUseCase.Input(blockDeleteEvent: deleteModelEvent, blockFetchEvent: fetchModelEvent)
-        blockDeleteUseCase.bind(input: deleteInput, disposeBag: disposeBag)
+        let output = blockListViewModel.transform(input: input, disposeBag: disposeBag)
         
-        // Act
-        fetchOutput.modelArrayObservable
-            .subscribe(onNext: { models in
-                resultModel = models.first
-                expectation.fulfill()
+        output.isDeleteSuccess
+            .subscribe(onNext: { isSuccess in
+                XCTAssertTrue(isSuccess)
             }).disposed(by: disposeBag)
         
-        deleteModelEvent.onNext(testModel)
+        output.blockModelArray
+            .subscribe(onNext: { models in
+                resultModel = models
+                if models.isEmpty {
+                    expectation.fulfill()
+                }
+            }).disposed(by: disposeBag)
+        
+        // Act
+        try! repositoryMock.create(model: testModel)
+        modelFetchEvent.onNext(())
+        modelDeleteEvent.onNext(testModel)
         
         // Assert
         wait(for: [expectation], timeout: 2.0)
-        XCTAssertNil(resultModel)
+        XCTAssertTrue(resultModel.isEmpty)
     }
 }
