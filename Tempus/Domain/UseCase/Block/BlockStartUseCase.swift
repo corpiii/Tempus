@@ -11,7 +11,7 @@ import RxSwift
 import UIKit
 
 /// Start Block used by BlockModel
-final class BlockStartUseCase {
+final class BlockStartUseCase: ModeController {
     private var remainTime: Time {
         didSet {
             timeObservable.onNext(remainTime)
@@ -36,6 +36,27 @@ final class BlockStartUseCase {
         self.modeState = .focusTime
     }
     
+    func bind(to input: Input) -> Output {
+        let output = ClockStartUseCase.Output(remainTime: timeObservable,
+                                              modeState: modeStateObservable)
+
+        input.modeStartEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStart()
+            }).disposed(by: disposeBag)
+
+        input.modeStopEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStop()
+            }).disposed(by: disposeBag)
+
+        return output
+    }
+}
+
+private extension BlockStartUseCase {
     private func modeStart() {
         guard timer == nil else { return }
         
@@ -97,26 +118,5 @@ final class BlockStartUseCase {
         }
         
         return schedule
-    }
-}
-
-extension BlockStartUseCase: ModeController {
-    func bind(to input: Input) -> Output {
-        let output = ClockStartUseCase.Output(remainTime: timeObservable,
-                                              modeState: modeStateObservable)
-
-        input.modeStartEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStart()
-            }).disposed(by: disposeBag)
-
-        input.modeStopEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStop()
-            }).disposed(by: disposeBag)
-
-        return output
     }
 }
