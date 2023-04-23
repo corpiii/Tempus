@@ -28,11 +28,10 @@ final class BlockCreateViewModel {
     private let disposeBag: DisposeBag = .init()
     
     private let createUseCase: BlockCreateUseCase
-    private let startUseCase: BlockStartUseCase
+    var startUseCase: BlockStartUseCase?
     
-    init(repository: DataManagerRepository, startUseCase: BlockStartUseCase) {
+    init(repository: DataManagerRepository) {
         self.createUseCase = .init(repository: repository)
-        self.startUseCase = startUseCase
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
@@ -73,7 +72,19 @@ private extension BlockCreateViewModel {
                 
                 let model = BlockModel(id: UUID(), title: title, divideCount: divideCount)
                 
-                self.modelCreateEvent.onNext(model)
+                switch completeAlert {
+                case .completeWithStart:
+                    self.startUseCase = .init(originModel: model)
+                    self.modelCreateEvent.onNext(model)
+                    
+                    /* coordinator finish and switch to ClockView */
+                    
+                case .completeWithoutStart:
+                    self.modelCreateEvent.onNext(model)
+                    
+                    /* coordinaotr just finish */
+                    
+                }
             }).disposed(by: disposeBag)
     }
 }
