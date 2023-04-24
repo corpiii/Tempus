@@ -28,7 +28,6 @@ final class BlockCreateViewModel {
     private let disposeBag: DisposeBag = .init()
     
     private let createUseCase: BlockCreateUseCase
-    var startUseCase: BlockStartUseCase?
     
     init(repository: DataManagerRepository) {
         self.createUseCase = .init(repository: repository)
@@ -74,10 +73,10 @@ private extension BlockCreateViewModel {
                 
                 switch completeAlert {
                 case .completeWithStart:
-                    self.startUseCase = .init(originModel: model)
+                    let startUseCase = BlockStartUseCase(originModel: model)
                     self.modelCreateEvent.onNext(model)
                     
-                    /* coordinator finish and switch to ClockView */
+                    /* coordinator finish and switch to ClockView with model or startUseCase */
                     
                 case .completeWithoutStart:
                     self.modelCreateEvent.onNext(model)
