@@ -9,26 +9,43 @@ import Foundation
 
 import RxSwift
 
-final class ClockStartUseCase {
-    struct Input {
-        let modeStartEvent: Observable<Void>
-        let modeStopEvent: Observable<Void>
-    }
-    
-    struct Output {
-        let remainTime: PublishSubject<Time>
-        let modeState: PublishSubject<ModeState>
-    }
-    
-    var modeControllerDelegate: ModeController?
-    
-    func bind(to input: Input) throws -> Output {
-        guard let modeControllerDelegate else {
-            throw ModeManageError.modeNotExist
-        }
-        
-        let output = modeControllerDelegate.bind(to: input)
-        
-        return output
-    }
-}
+//final class ClockStartUseCase {
+//    struct Input {
+//        let modeStartEvent: Observable<Void>
+//        let modeStopEvent: Observable<Void>
+//    }
+//
+//    struct Output {
+//        let remainTime: PublishSubject<Time>
+//        let modeState: PublishSubject<ModeState>
+//    }
+//
+//    var modeStartUseCase: ModeStartUseCase?
+//
+//    func transform(to input: Input, disposeBag: DisposeBag) -> Output {
+//        input.modeStartEvent
+//            .subscribe(onNext: { [weak self] in
+//                guard let self,
+//                      let modeStartUseCase = self.modeStartUseCase else {
+//                    return
+//                }
+//
+//
+//            }).disposed(by: disposeBag)
+//        let startUseCaseInput = ModeStartUseCase.Input(modeStartEvent: input.modeStartEvent,
+//                                                       modeStopEvent: input.modeStopEvent)
+//
+//        let startUseCaseOutput = modeStartUseCase.transform(to: startUseCaseInput)
+//
+//        let output = Output(remainTime: startUseCaseOutput.remainTime,
+//                            modeState: startUseCaseOutput.modeState)
+//
+//        return output
+//    }
+//}
+//
+//private extension ClockStartUseCase {
+//    func bindToStartUseCase(input: ModeStartUseCase.Input, disposeBag: DisposeBag) -> ModeStartUseCase.Output {
+//
+//    }
+//}
