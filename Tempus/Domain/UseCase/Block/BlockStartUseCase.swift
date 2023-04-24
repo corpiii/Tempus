@@ -36,7 +36,7 @@ final class BlockStartUseCase: ModeStartUseCase {
         self.modeState = .focusTime
     }
     
-    func transform(to input: Input) -> Output {
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: timeObservable,
                             modeState: modeStateObservable)
 

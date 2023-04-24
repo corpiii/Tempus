@@ -11,11 +11,11 @@ protocol ModeTransform {
     associatedtype Input
     associatedtype Output
     
-    func transform(to input: Input) -> Output
+    func transform(input: Input, disposeBag: DisposeBag) -> Output
 }
 
 extension ModeTransform {
-    func transform(to input: Input) -> Output {
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
         return Output.self as! Self.Output
     }
 }

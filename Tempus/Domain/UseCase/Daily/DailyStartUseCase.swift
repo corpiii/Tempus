@@ -35,7 +35,7 @@ final class DailyStartUseCase: ModeStartUseCase {
         self.modeState = .waitingTime
     }
     
-    func transform(to input: Input) -> Output {
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: timeObservable,
                             modeState: modeStateObservable)
 
