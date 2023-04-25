@@ -23,7 +23,7 @@ class BlockStartUseCaseTests: XCTestCase {
         blockStartUseCase = BlockStartUseCase(originModel: originModel)
         input = BlockStartUseCase.Input(modeStartEvent: modeStartEvent,
                                         modeStopEvent: modeStopEvent)
-        output = blockStartUseCase.bind(to: input)
+        output = blockStartUseCase.transform(input: input, disposeBag: disposeBag)
         disposeBag = DisposeBag()
     }
     

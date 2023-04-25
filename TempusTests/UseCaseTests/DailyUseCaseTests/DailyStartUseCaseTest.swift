@@ -28,7 +28,7 @@ final class DailyStartUseCaseTest: XCTestCase {
         dailyStartUseCase = DailyStartUseCase(originModel: originModel)
         input = DailyStartUseCase.Input(modeStartEvent: modeStartEvent,
                                         modeStopEvent: modeStopEvent)
-        output = dailyStartUseCase.bind(to: input)
+        output = dailyStartUseCase.transform(input: input, disposeBag: disposeBag)
         disposeBag = DisposeBag()
     }
     

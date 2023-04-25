@@ -33,7 +33,7 @@ final class TimerStartUseCase: ModeStartUseCase {
         self.modeState = .focusTime
     }
     
-    func transform(to input: Input) -> Output {
+    override func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: timeObservable,
                             modeState: modeStateObservable)
 
