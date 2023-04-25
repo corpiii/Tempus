@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimerModel {
+struct TimerModel: Model {
     let id: UUID
     var title: String
     var wasteTime: Double

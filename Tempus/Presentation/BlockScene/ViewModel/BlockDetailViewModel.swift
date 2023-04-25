@@ -16,13 +16,31 @@ final class BlockDetailViewModel {
         let cancelButtonTapEvent: Observable<Void>
     }
     
-    private let originModel: BlockModel
+    struct Output {
+        let modelTitle: PublishSubject<String>
+        let divideCount: PublishSubject<Int>
+    }
+    
+    private var originModel: BlockModel {
+        didSet {
+            self.modelTitle.onNext(originModel.title)
+            self.modelDivideCount.onNext(originModel.divideCount)
+        }
+    }
+    
+    private let modelTitle: PublishSubject<String>
+    private let modelDivideCount: PublishSubject<Int>
     
     init(originModel: BlockModel) {
+        self.modelTitle = .init()
+        self.modelDivideCount = .init()
         self.originModel = originModel
     }
     
-    func bind(input: Input, disposeBag: DisposeBag) {
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output(modelTitle: modelTitle,
+                            divideCount: modelDivideCount)
+        
         input.startButtonTapEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
@@ -41,5 +59,15 @@ final class BlockDetailViewModel {
             .subscribe(onNext: {
                 // coordinator finish
             }).disposed(by: disposeBag)
+        
+        return output
+    }
+}
+
+extension BlockDetailViewModel: EditReflectDelegate {
+    func reflect(_ model: Model) {
+        if let model = model as? BlockModel {
+            self.originModel = model
+        }
     }
 }
