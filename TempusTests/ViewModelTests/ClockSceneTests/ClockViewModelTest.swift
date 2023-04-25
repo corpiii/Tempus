@@ -7,29 +7,60 @@
 
 import XCTest
 
+import RxSwift
+
 final class ClockViewModelTest: XCTestCase {
-
+    var clockViewModel: ClockViewModel!
+    var modeStartEvent: PublishSubject<Void>!
+    var modeStopEvent: PublishSubject<Void>!
+    
+    var disposeBag: DisposeBag!
+    var clockViewModelInput: ClockViewModel.Input!
+    var clockViewModelOutput: ClockViewModel.Output!
+    
+    var repositoryMock: DataManagerRepositoryMock!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        clockViewModel = .init()
+        modeStartEvent = .init()
+        modeStopEvent = .init()
+        
+        disposeBag = .init()
+        clockViewModelInput = .init(modeStartEvent: modeStartEvent, modeStopEvent: modeStopEvent)
+        clockViewModelOutput = clockViewModel.transform(input: clockViewModelInput, disposeBag: disposeBag)
+        
+        repositoryMock = .init()
     }
+    
+    func test_when_start_usecase_inject_by_BlockCreateViewModel_start_success() {
+        // Arrange
+        let modeStateExpectation = XCTestExpectation(description: "modeState_test")
+        let remainTimeExpectation = XCTestExpectation(description: "remainTime_test")
+        let blockModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 12)
+        
+        clockViewModelOutput.modeStartUseCaseOutput
+            .subscribe(onNext: { [weak self] output in
+                guard let self else { return }
+                print(output)
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+                output.modeState
+                    .subscribe(onNext: { modeState in
+                        if modeState == .focusTime {
+                            modeStateExpectation.fulfill()
+                        }
+                    }).disposed(by: self.disposeBag)
+
+                output.remainTime
+                    .subscribe(onNext: { time in
+                        remainTimeExpectation.fulfill()
+                    }).disposed(by: self.disposeBag)
+            }).disposed(by: disposeBag)
+
+        // Act
+        clockViewModel.modeStartUseCase = BlockStartUseCase(originModel: blockModel)
+        modeStartEvent.onNext(())
+        
+        // Assert
+        wait(for: [modeStateExpectation, remainTimeExpectation], timeout: 30.0)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

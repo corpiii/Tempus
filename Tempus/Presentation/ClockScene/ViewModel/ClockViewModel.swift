@@ -19,7 +19,6 @@ final class ClockViewModel {
     // MARK: - Output
     struct Output {
         let modeStartUseCaseOutput: PublishSubject<ModeStartUseCase.Output>
-        let modeEmpty: PublishSubject<Void>
     }
     
     var modeStartUseCase: ModeStartUseCase? {
@@ -39,24 +38,13 @@ final class ClockViewModel {
     private var disposeBag: DisposeBag = .init()
     
     private let modeStartUseCaseOutput: PublishSubject<ModeStartUseCase.Output> = .init()
-    private let modeEmpty: PublishSubject<Void> = .init()
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(modeStartUseCaseOutput: modeStartUseCaseOutput,
-                            modeEmpty: modeEmpty)
+        let output = Output(modeStartUseCaseOutput: modeStartUseCaseOutput)
         
         self.modeStartEvent = input.modeStartEvent
         self.modeStopEvent = input.modeStopEvent
-        
-        input.modeStartEvent
-            .subscribe(onNext: { [weak self] in
-                guard let self,
-                      self.modeStartUseCase != nil else {
-                    return output.modeEmpty.onNext(())
-                }
-                
-                self.modeStartEvent.onNext(())
-            }).disposed(by: disposeBag)
+        self.disposeBag = disposeBag
         
         return output
     }
