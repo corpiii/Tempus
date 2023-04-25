@@ -11,7 +11,7 @@ import RxSwift
 import UIKit
 
 /// Start Block used by BlockModel
-final class BlockStartUseCase: ModeController {
+final class BlockStartUseCase: ModeStartUseCase {
     private var remainTime: Time {
         didSet {
             timeObservable.onNext(remainTime)
@@ -36,9 +36,9 @@ final class BlockStartUseCase: ModeController {
         self.modeState = .focusTime
     }
     
-    func bind(to input: Input) -> Output {
-        let output = ClockStartUseCase.Output(remainTime: timeObservable,
-                                              modeState: modeStateObservable)
+    override func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output(remainTime: timeObservable,
+                            modeState: modeStateObservable)
 
         input.modeStartEvent
             .subscribe(onNext: { [weak self] _ in

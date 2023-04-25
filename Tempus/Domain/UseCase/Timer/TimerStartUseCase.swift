@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class TimerStartUseCase {
+final class TimerStartUseCase: ModeStartUseCase {
     private var remainTime: Time {
         didSet {
             timeObservable.onNext(remainTime)
@@ -33,7 +33,28 @@ final class TimerStartUseCase {
         self.modeState = .focusTime
     }
     
-    private func modeStart() {
+    override func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output(remainTime: timeObservable,
+                            modeState: modeStateObservable)
+
+        input.modeStartEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStart()
+            }).disposed(by: disposeBag)
+
+        input.modeStopEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStop()
+            }).disposed(by: disposeBag)
+
+        return output
+    }
+}
+
+private extension TimerStartUseCase {
+    func modeStart() {
         guard timer == nil else { return }
 
         let interval = 0.1
@@ -52,29 +73,8 @@ final class TimerStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
-    private func modeStop() {
+    func modeStop() {
         timer?.invalidate()
         timer = nil
-    }
-}
-
-extension TimerStartUseCase: ModeController {
-    func bind(to input: Input) -> Output {
-        let output = ClockStartUseCase.Output(remainTime: timeObservable,
-                                              modeState: modeStateObservable)
-
-        input.modeStartEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStart()
-            }).disposed(by: disposeBag)
-
-        input.modeStopEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStop()
-            }).disposed(by: disposeBag)
-
-        return output
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class DailyStartUseCase {
+final class DailyStartUseCase: ModeStartUseCase {
     private var remainTime: Time {
         didSet {
             timeObservable.onNext(remainTime)
@@ -35,7 +35,28 @@ final class DailyStartUseCase {
         self.modeState = .waitingTime
     }
     
-    private func modeStart() {
+    override func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output(remainTime: timeObservable,
+                            modeState: modeStateObservable)
+
+        input.modeStartEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStart()
+            }).disposed(by: disposeBag)
+
+        input.modeStopEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.modeStop()
+            }).disposed(by: disposeBag)
+
+        return output
+    }
+}
+
+private extension DailyStartUseCase {
+    func modeStart() {
         guard timer == nil else { return }
         
         /* Noti enroll */
@@ -76,13 +97,13 @@ final class DailyStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
-    private func modeStop() {
+    func modeStop() {
         /* Noti remove */
         timer?.invalidate()
         timer = nil
     }
     
-    private func generateSchedule(_ originModel: DailyModel) -> (timeSchedule: [Date], stateSchedule: [ModeState]) {
+    func generateSchedule(_ originModel: DailyModel) -> (timeSchedule: [Date], stateSchedule: [ModeState]) {
         let calendar = Calendar.current
         let now = Date()
         
@@ -118,27 +139,5 @@ final class DailyStartUseCase {
         }
         
         return (schedule, state)
-    }
-}
-
-extension DailyStartUseCase: ModeController {
-    func bind(to input: Input) -> Output {
-        let output = ClockStartUseCase.Output(remainTime: timeObservable,
-                                              modeState: modeStateObservable
-        )
-
-        input.modeStartEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStart()
-            }).disposed(by: disposeBag)
-
-        input.modeStopEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStop()
-            }).disposed(by: disposeBag)
-
-        return output
     }
 }

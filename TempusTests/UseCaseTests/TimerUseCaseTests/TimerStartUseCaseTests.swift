@@ -23,7 +23,7 @@ final class TimerStartUseCaseTests: XCTestCase {
     override func setUpWithError() throws {
         timerStartUseCase = TimerStartUseCase(model: timerModel)
         input = .init(modeStartEvent: modeStartEvent, modeStopEvent: modeStopEvent)
-        output = timerStartUseCase.bind(to: input)
+        output = timerStartUseCase.transform(input: input, disposeBag: disposeBag)
         disposeBag = DisposeBag()
     }
     
