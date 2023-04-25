@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DailyModel: Model {
+struct DailyModel: Mode {
     let id: UUID
     var title: String
     var startTime: Double

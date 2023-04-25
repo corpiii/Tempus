@@ -6,5 +6,5 @@
 //
 
 protocol EditReflectDelegate {
-    func reflect(_ model: Model)
+    func reflect(_ model: Mode)
 }
