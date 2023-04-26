@@ -13,18 +13,19 @@ class BlockStartUseCaseTests: XCTestCase {
                                              title: "testTitle",
                                              divideCount: 4)
     var blockStartUseCase: BlockStartUseCase!
+    var disposeBag: DisposeBag!
     var input: BlockStartUseCase.Input!
+    var output: BlockStartUseCase.Output!
+    
     var modeStartEvent: PublishSubject<Void> = .init()
     var modeStopEvent: PublishSubject<Void> = .init()
-    var output: BlockStartUseCase.Output!
-    var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
         blockStartUseCase = BlockStartUseCase(originModel: originModel)
+        disposeBag = DisposeBag()
         input = BlockStartUseCase.Input(modeStartEvent: modeStartEvent,
                                         modeStopEvent: modeStopEvent)
         output = blockStartUseCase.transform(input: input, disposeBag: disposeBag)
-        disposeBag = DisposeBag()
     }
     
     func test_modeStart() throws {

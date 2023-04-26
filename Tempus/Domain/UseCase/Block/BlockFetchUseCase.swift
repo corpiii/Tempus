@@ -9,7 +9,7 @@ import RxSwift
 
 final class BlockFetchUseCase {
     struct Input {
-        let fetchModelEvent: Observable<Void>
+        let modelFetchEvent: Observable<Void>
     }
     
     struct OutPut {
@@ -24,7 +24,7 @@ final class BlockFetchUseCase {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> OutPut {
-        bind(input.fetchModelEvent, disposeBag: disposeBag)
+        bind(input.modelFetchEvent, disposeBag: disposeBag)
         return OutPut(modelArrayObservable: modelArrayObservable)
     }
 }

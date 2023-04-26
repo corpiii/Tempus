@@ -7,13 +7,46 @@
 
 import Foundation
 
+import RxSwift
+
 final class BlockEditUseCase {
-    let repository: DataManagerRepository
+    struct Input {
+        let modelEditEvent: Observable<BlockModel>
+        let modelFetchEvent: PublishSubject<Void>
+    }
+    
+    struct Output {
+        let isEditSuccess: PublishSubject<Bool>
+    }
+    
+    private let isEditSuccess: PublishSubject<Bool> = .init()
+    private let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {
         self.repository = repository
     }
     
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output(isEditSuccess: isEditSuccess)
+        
+        input.modelEditEvent
+            .subscribe(onNext: { [weak self] model in
+                guard let self else { return }
+                do {
+                    try self.execute(model: model) {
+                        self.isEditSuccess.onNext(true)
+                        input.modelFetchEvent.onNext(())
+                    }
+                } catch {
+                    self.isEditSuccess.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+        
+        return output
+    }
+}
+
+private extension BlockEditUseCase {
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
         try repository.update(model)
         completion()

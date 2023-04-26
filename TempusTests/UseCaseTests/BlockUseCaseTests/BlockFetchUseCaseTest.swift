@@ -43,7 +43,7 @@ final class BlockFetchUseCaseTest: XCTestCase {
         createEvent.onNext(model)
         
         // Act, Assert
-        let fetchInput = BlockFetchUseCase.Input(fetchModelEvent: fetchEvent)
+        let fetchInput = BlockFetchUseCase.Input(modelFetchEvent: fetchEvent)
         let fetchOutput = blockFetchUseCase.transform(input: fetchInput, disposeBag: disposeBag)
         
         fetchOutput.modelArrayObservable

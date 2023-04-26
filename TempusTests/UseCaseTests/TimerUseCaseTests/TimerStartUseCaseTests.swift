@@ -14,17 +14,18 @@ final class TimerStartUseCaseTests: XCTestCase {
                                        title: "testTitle",
                                        wasteTime: 3.0)
     var timerStartUseCase: TimerStartUseCase!
+    var disposeBag: DisposeBag!
     var input: TimerStartUseCase.Input!
+    var output: TimerStartUseCase.Output!
+    
     var modeStartEvent: PublishSubject<Void> = .init()
     var modeStopEvent: PublishSubject<Void> = .init()
-    var output: TimerStartUseCase.Output!
-    var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
         timerStartUseCase = TimerStartUseCase(model: timerModel)
+        disposeBag = DisposeBag()
         input = .init(modeStartEvent: modeStartEvent, modeStopEvent: modeStopEvent)
         output = timerStartUseCase.transform(input: input, disposeBag: disposeBag)
-        disposeBag = DisposeBag()
     }
     
     func test_modeStart() {

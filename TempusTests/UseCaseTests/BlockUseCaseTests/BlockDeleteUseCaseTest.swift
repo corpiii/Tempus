@@ -44,7 +44,7 @@ final class BlockDeleteUseCaseTest: XCTestCase {
         
         // Act, Assert
         let deleteEvent: PublishSubject<BlockModel> = .init()
-        let deleteInput = BlockDeleteUseCase.Input(blockDeleteEvent: deleteEvent, blockFetchEvent: fetchEvent)
+        let deleteInput = BlockDeleteUseCase.Input(modelDeleteEvent: deleteEvent, modelFetchEvent: fetchEvent)
         let deleteOutput = blockDeleteUseCase.transform(input: deleteInput, disposeBag: disposeBag)
         
         deleteOutput.isDeleteSuccess

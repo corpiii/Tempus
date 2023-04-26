@@ -12,15 +12,15 @@ final class DataManagerRepositoryMock: DataManagerRepository {
     var blockModel: BlockModel?
     var dailyModel: DailyModel?
     
-    func create(model: TimerModel) throws {
+    func create(_ model: TimerModel) throws {
         timerModel = model
     }
     
-    func create(model: BlockModel) throws {
+    func create(_ model: BlockModel) throws {
         blockModel = model
     }
     
-    func create(model: DailyModel) throws {
+    func create(_ model: DailyModel) throws {
         dailyModel = model
     }
     

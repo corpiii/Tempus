@@ -10,19 +10,18 @@ import XCTest
 import RxSwift
 
 final class BlockCreateViewModelTest: XCTestCase {
-    var blockCreateViewModel: BlockCreateViewModel!
     var repositoryMock: DataManagerRepositoryMock!
-    var blockStartUseCase: BlockStartUseCase!
     var modelFetchEvent: PublishSubject<Void>!
     var completeEvent: PublishSubject<CompleteAlert>!
     var disposeBag: DisposeBag!
+    var blockCreateViewModel: BlockCreateViewModel!
     
     override func setUpWithError() throws {
         repositoryMock = .init()
-        blockCreateViewModel = .init(repository: repositoryMock)
         modelFetchEvent = .init()
         completeEvent = .init()
         disposeBag = .init()
+        blockCreateViewModel = .init(repository: repositoryMock, modelFetchEvent: modelFetchEvent)
     }
     
     func test_create_is_success() {
@@ -35,8 +34,7 @@ final class BlockCreateViewModelTest: XCTestCase {
         
         let input = BlockCreateViewModel.Input(completeEvent: completeEvent,
                                                modelTitle: modelTitleObservable,
-                                               divideCount: divideCountObservable,
-                                               modelFetchEvent: modelFetchEvent)
+                                               divideCount: divideCountObservable)
         
         let output = blockCreateViewModel.transform(input: input, disposeBag: disposeBag)
         

@@ -33,12 +33,12 @@ final class BlockListViewModel {
         let fetchEvent = input.modelFetchEvent
         self.modelFetchEvent = fetchEvent
         
-        let fetchUseCaseInput = BlockFetchUseCase.Input(fetchModelEvent: fetchEvent)
+        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: fetchEvent)
         let fetchUseCaseOutput = blockFetchUseCase.transform(input: fetchUseCaseInput,
                                                              disposeBag: disposeBag)
         
-        let deleteUseCaseInput = BlockDeleteUseCase.Input(blockDeleteEvent: input.modelDeleteEvent,
-                                                          blockFetchEvent: fetchEvent)
+        let deleteUseCaseInput = BlockDeleteUseCase.Input(modelDeleteEvent: input.modelDeleteEvent,
+                                                          modelFetchEvent: fetchEvent)
         let deleteUseCaseOutput = blockDeleteUseCase.transform(input: deleteUseCaseInput,
                                                                disposeBag: disposeBag)
         
