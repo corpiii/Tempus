@@ -18,18 +18,18 @@ final class DailyStartUseCaseTest: XCTestCase {
                                  breakTime: 0.5 * 60 * 60)
     
     var dailyStartUseCase: DailyStartUseCase!
+    var disposeBag: DisposeBag!
     var input: DailyStartUseCase.Input!
+    var output: DailyStartUseCase.Output!
+    
     var modeStartEvent: PublishSubject<Void> = .init()
     var modeStopEvent: PublishSubject<Void> = .init()
-    var output: DailyStartUseCase.Output!
-    var disposeBag: DisposeBag!
-    
     override func setUpWithError() throws {
         dailyStartUseCase = DailyStartUseCase(originModel: originModel)
+        disposeBag = DisposeBag()
         input = DailyStartUseCase.Input(modeStartEvent: modeStartEvent,
                                         modeStopEvent: modeStopEvent)
         output = dailyStartUseCase.transform(input: input, disposeBag: disposeBag)
-        disposeBag = DisposeBag()
     }
     
     func test_modeStart() {

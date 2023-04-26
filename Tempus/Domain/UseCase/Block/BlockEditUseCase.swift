@@ -11,31 +11,31 @@ import RxSwift
 
 final class BlockEditUseCase {
     struct Input {
-        let modelCreateEvent: Observable<BlockModel>
+        let modelEditEvent: Observable<BlockModel>
+        let modelFetchEvent: PublishSubject<Void>
     }
     
     struct Output {
-        let isCreateSuccess: PublishSubject<Bool>
+        let isEditSuccess: PublishSubject<Bool>
     }
     
     private let isEditSuccess: PublishSubject<Bool> = .init()
     private let repository: DataManagerRepository
-    private let modelFetchEvent: PublishSubject<Void>
     
-    init(repository: DataManagerRepository, modelFetchEvent: PublishSubject<Void>) {
+    init(repository: DataManagerRepository) {
         self.repository = repository
-        self.modelFetchEvent = modelFetchEvent
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(isCreateSuccess: isEditSuccess)
+        let output = Output(isEditSuccess: isEditSuccess)
         
-        input.modelCreateEvent
+        input.modelEditEvent
             .subscribe(onNext: { [weak self] model in
                 guard let self else { return }
                 do {
                     try self.execute(model: model) {
                         self.isEditSuccess.onNext(true)
+                        input.modelFetchEvent.onNext(())
                     }
                 } catch {
                     self.isEditSuccess.onNext(false)

@@ -25,18 +25,21 @@ final class BlockEditViewModel {
     private var modelDivideCount: Int?
     private let blockEditUseCase: BlockEditUseCase
     private let completeButtonTapEvent: PublishSubject<BlockModel> = .init()
+    private let modelFetchEvent: PublishSubject<Void>
     
     init(originModel: BlockModel, repository: DataManagerRepository, modelFetchEvent: PublishSubject<Void>) {
         self.originModel = originModel
-        self.blockEditUseCase = .init(repository: repository, modelFetchEvent: modelFetchEvent)
+        self.blockEditUseCase = .init(repository: repository)
+        self.modelFetchEvent = modelFetchEvent
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let editUseCaseInput = BlockEditUseCase.Input(modelCreateEvent: self.completeButtonTapEvent)
+        let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent,
+                                                      modelFetchEvent: self.modelFetchEvent)
         let editUSeCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
         
-        let output = Output(isEditSuccess: editUSeCaseOutput.isCreateSuccess)
+        let output = Output(isEditSuccess: editUSeCaseOutput.isEditSuccess)
         
         input.modelTitle
             .subscribe(onNext: { [weak self] modelTitle in

@@ -9,8 +9,8 @@ import RxSwift
 
 final class BlockDeleteUseCase {
     struct Input {
-        let blockDeleteEvent: Observable<BlockModel>
-        let blockFetchEvent: PublishSubject<Void>
+        let modelDeleteEvent: Observable<BlockModel>
+        let modelFetchEvent: PublishSubject<Void>
     }
     
     struct Output {
@@ -40,13 +40,13 @@ private extension BlockDeleteUseCase {
     }
     
     func bind(input: Input, disposeBag: DisposeBag) {
-        input.blockDeleteEvent
+        input.modelDeleteEvent
             .subscribe(onNext: { [weak self] model in
                 guard let self else { return }
                 do {
                     try self.execute(model: model) {
                         self.isDeleteSuccess.onNext(true)
-                        input.blockFetchEvent.onNext(())
+                        input.modelFetchEvent.onNext(())
                     }
                 } catch {
                     self.isDeleteSuccess.onNext(false)

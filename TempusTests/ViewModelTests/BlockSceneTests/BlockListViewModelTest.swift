@@ -35,7 +35,7 @@ final class BlockListViewModelTest: XCTestCase {
         let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
         var resultModel: BlockModel?
 
-        try! repositoryMock.create(model: testModel)
+        try! repositoryMock.create(testModel)
         
         let input = BlockListViewModel.Input(addButtonEvent: addButtonTapEvent,
                                              modelDeleteEvent: modelDeleteEvent,
@@ -90,7 +90,7 @@ final class BlockListViewModelTest: XCTestCase {
             }).disposed(by: disposeBag)
         
         // Act
-        try! repositoryMock.create(model: testModel)
+        try! repositoryMock.create(testModel)
         modelFetchEvent.onNext(())
         modelDeleteEvent.onNext(testModel)
         
