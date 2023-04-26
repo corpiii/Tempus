@@ -13,7 +13,6 @@ final class BlockEditViewModel {
     struct Input {
         let modelTitle: Observable<String>
         let modelDivideCount: Observable<Int>
-        
         let completeButtonTapEvent: Observable<Void>
     }
     
@@ -21,20 +20,23 @@ final class BlockEditViewModel {
         let isEditSuccess: PublishSubject<Bool>
     }
     
-    private let isEditSuccess: PublishSubject<Bool>
     private var originModel: BlockModel
     private var modelTitle: String?
     private var modelDivideCount: Int?
     private let blockEditUseCase: BlockEditUseCase
+    private let completeButtonTapEvent: PublishSubject<BlockModel> = .init()
     
-    init(originModel: BlockModel, repository: DataManagerRepository) {
-        self.isEditSuccess = .init()
+    init(originModel: BlockModel, repository: DataManagerRepository, modelFetchEvent: PublishSubject<Void>) {
         self.originModel = originModel
-        self.blockEditUseCase = .init(repository: repository)
+        self.blockEditUseCase = .init(repository: repository, modelFetchEvent: modelFetchEvent)
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(isEditSuccess: isEditSuccess)
+        let editUseCaseInput = BlockEditUseCase.Input(modelCreateEvent: self.completeButtonTapEvent)
+        let editUSeCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
+                                                           disposeBag: disposeBag)
+        
+        let output = Output(isEditSuccess: editUSeCaseOutput.isCreateSuccess)
         
         input.modelTitle
             .subscribe(onNext: { [weak self] modelTitle in
@@ -57,13 +59,7 @@ final class BlockEditViewModel {
                 self.originModel.title = modelTitle
                 self.originModel.divideCount = modelDivideCount
                 
-                do {
-                    try self.blockEditUseCase.execute(model: self.originModel) {
-                        output.isEditSuccess.onNext(true)
-                    }
-                } catch {
-                    output.isEditSuccess.onNext(false)
-                }
+                self.completeButtonTapEvent.onNext(self.originModel)
             }).disposed(by: disposeBag)
         
         return output

@@ -14,8 +14,6 @@ final class BlockCreateViewModel {
         let completeEvent: Observable<CompleteAlert>
         let modelTitle: Observable<String>
         let divideCount: Observable<Int>
-        
-        let modelFetchEvent: PublishSubject<Void>
     }
     
     struct Output {
@@ -25,16 +23,18 @@ final class BlockCreateViewModel {
     private var modelTitle: String?
     private var divideCount: Int?
     private let modelCreateEvent: PublishSubject<BlockModel> = .init()
+    private let modelFetchEvent: PublishSubject<Void>
     private let disposeBag: DisposeBag = .init()
     
     private let createUseCase: BlockCreateUseCase
     
-    init(repository: DataManagerRepository) {
+    init(repository: DataManagerRepository, modelFetchEvent: PublishSubject<Void>) {
         self.createUseCase = .init(repository: repository)
+        self.modelFetchEvent = modelFetchEvent
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let createUseCaseInput = BlockCreateUseCase.Input(modelFetchEvent: input.modelFetchEvent,
+        let createUseCaseInput = BlockCreateUseCase.Input(modelFetchEvent: self.modelFetchEvent,
                                                           modelCreate: modelCreateEvent)
         let createUseCaseOutput = createUseCase.transform(input: createUseCaseInput,
                                                           disposeBag: self.disposeBag)
@@ -77,6 +77,8 @@ private extension BlockCreateViewModel {
                     self.modelCreateEvent.onNext(model)
                     
                     /* coordinator finish and switch to ClockView with model or startUseCase */
+                    // delegate? or function?
+                    // delegate가 나을듯
                     
                 case .completeWithoutStart:
                     self.modelCreateEvent.onNext(model)
