@@ -55,12 +55,14 @@ final class BlockEditViewModel {
         
         input.completeButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let self,
-                      let modelTitle = self.modelTitle,
-                      let modelDivideCount = self.modelDivideCount else { return }
+                guard let self else { return }
+                if let modelTitle = self.modelTitle {
+                    self.originModel.title = modelTitle
+                }
                 
-                self.originModel.title = modelTitle
-                self.originModel.divideCount = modelDivideCount
+                if let modelDivideCount = self.modelDivideCount {
+                    self.originModel.divideCount = modelDivideCount
+                }
                 
                 self.completeButtonTapEvent.onNext(self.originModel)
             }).disposed(by: disposeBag)
