@@ -52,7 +52,7 @@ private extension BlockCreateUseCase {
     }
     
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
-        try repository.create(model: model)
+        try repository.create(model)
         completion()
     }
 }

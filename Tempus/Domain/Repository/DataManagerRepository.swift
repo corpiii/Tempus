@@ -8,9 +8,9 @@
 import Foundation
 
 protocol DataManagerRepository {
-    func create(model: TimerModel) throws
-    func create(model: BlockModel) throws
-    func create(model: DailyModel) throws
+    func create(_ model: TimerModel) throws
+    func create(_ model: BlockModel) throws
+    func create(_ model: DailyModel) throws
     
     func fetchAllTimerModel() throws -> [TimerModel]
     func fetchAllBlockModel() throws -> [BlockModel]

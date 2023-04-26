@@ -13,7 +13,7 @@ final class DailyCreateUseCase {
     }
     
     func execute(model: DailyModel, _ completion: @escaping () -> Void) throws {
-        try repository.create(model: model)
+        try repository.create(model)
         completion()
     }
 }

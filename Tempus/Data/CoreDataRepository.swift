@@ -17,7 +17,7 @@ final class CoreDataRepository: DataManagerRepository {
 
 // MARK: - Create Method
 extension CoreDataRepository {
-    func create(model: TimerModel) throws {
+    func create(_ model: TimerModel) throws {
         let context = container.viewContext
         
         guard let entity = NSEntityDescription.entity(forEntityName: "TimerEntity",
@@ -42,7 +42,7 @@ extension CoreDataRepository {
         }
     }
     
-    func create(model: BlockModel) throws {
+    func create(_ model: BlockModel) throws {
         let context = container.viewContext
         
         guard let entity = NSEntityDescription.entity(forEntityName: "BlockEntity",
@@ -67,7 +67,7 @@ extension CoreDataRepository {
         }
     }
     
-    func create(model: DailyModel) throws {
+    func create(_ model: DailyModel) throws {
         let context = container.viewContext
         
         guard let entity = NSEntityDescription.entity(forEntityName: "DailyEntity",
