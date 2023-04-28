@@ -11,17 +11,26 @@ import RxSwift
 
 final class BlockCreateViewModelTest: XCTestCase {
     var repositoryMock: DataManagerRepositoryMock!
-    var modelFetchEvent: PublishSubject<Void>!
     var completeEvent: PublishSubject<CompleteAlert>!
-    var disposeBag: DisposeBag!
+    var blockListViewModel: BlockListViewModel!
+    
     var blockCreateViewModel: BlockCreateViewModel!
+    var disposeBag: DisposeBag!
+    var listViewModelInput: BlockListViewModel.Input!
+    var listViewModelOutput: BlockListViewModel.Output!
     
     override func setUpWithError() throws {
         repositoryMock = .init()
-        modelFetchEvent = .init()
         completeEvent = .init()
+        blockListViewModel = .init(repository: repositoryMock)
+        blockCreateViewModel = .init(repository: repositoryMock,
+                                     fetchRefreshDelegate: blockListViewModel)
         disposeBag = .init()
-        blockCreateViewModel = .init(repository: repositoryMock, modelFetchEvent: modelFetchEvent)
+        
+        listViewModelInput = .init(addButtonEvent: PublishSubject<Void>(),
+                                   modelDeleteEvent: PublishSubject<BlockModel>(),
+                                   modelFetchEvent: PublishSubject<Void>())
+        listViewModelOutput = blockListViewModel.transform(input: listViewModelInput, disposeBag: disposeBag)
     }
     
     func test_create_is_success() {
@@ -38,7 +47,7 @@ final class BlockCreateViewModelTest: XCTestCase {
         
         let output = blockCreateViewModel.transform(input: input, disposeBag: disposeBag)
         
-        output.isCreateSucess
+        output.isCreateSuccess
             .subscribe(onNext: { isSuccess in
                 if isSuccess {
                     expectation.fulfill()

@@ -32,7 +32,7 @@ final class BlockCreateUseCaseTest: XCTestCase {
         let fetchEvent: PublishSubject<Void> = .init()
         let createEvent: PublishSubject<BlockModel> = .init()
         
-        let input = BlockCreateUseCase.Input(modelFetchEvent: fetchEvent, modelCreate: createEvent)
+        let input = BlockCreateUseCase.Input(modelCreate: createEvent)
         let output = blockCreateUseCase.transform(input: input, disposeBag: disposeBag)
         
         output.isCreateSuccess

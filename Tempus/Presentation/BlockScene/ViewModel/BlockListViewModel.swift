@@ -6,6 +6,7 @@
 //
 
 import RxCocoa
+import RxRelay
 import RxSwift
 
 final class BlockListViewModel {
@@ -17,7 +18,7 @@ final class BlockListViewModel {
     
     struct Output {
         let blockModelArray: BehaviorSubject<[BlockModel]> = .init(value: [])
-        let isDeleteSuccess: PublishSubject<Bool> = .init()
+        let isDeleteSuccess: PublishRelay<Bool> = .init()
     }
     
     private var blockFetchUseCase: BlockFetchUseCase
@@ -45,6 +46,16 @@ final class BlockListViewModel {
         fetchUseCaseOutput.modelArrayObservable
             .bind(to: output.blockModelArray)
             .disposed(by: disposeBag)
+        
+        deleteUseCaseOutput.isDeleteSuccess
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let self = self else { return }
+                if isSuccess {
+                    self.refresh()
+                }
+                
+                output.isDeleteSuccess.accept(isSuccess)
+            }).disposed(by: disposeBag)
         
         deleteUseCaseOutput.isDeleteSuccess
             .bind(to: output.isDeleteSuccess)
