@@ -17,29 +17,24 @@ final class BlockDetailViewModel {
     }
     
     struct Output {
-        let modelTitle: PublishSubject<String>
-        let divideCount: PublishSubject<Int>
+        let originModelSubject: BehaviorSubject<BlockModel>
     }
     
     private var originModel: BlockModel {
         didSet {
-            self.modelTitle.onNext(originModel.title)
-            self.modelDivideCount.onNext(originModel.divideCount)
+            self.originModelSubject.onNext(originModel)
         }
     }
     
-    private let modelTitle: PublishSubject<String>
-    private let modelDivideCount: PublishSubject<Int>
+    private let originModelSubject: BehaviorSubject<BlockModel>
     
     init(originModel: BlockModel) {
-        self.modelTitle = .init()
-        self.modelDivideCount = .init()
+        self.originModelSubject = .init(value: originModel)
         self.originModel = originModel
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(modelTitle: modelTitle,
-                            divideCount: modelDivideCount)
+        let output = Output(originModelSubject: originModelSubject)
         
         input.startButtonTapEvent
             .subscribe(onNext: { [weak self] in
