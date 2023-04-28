@@ -7,10 +7,6 @@
 
 import RxSwift
 
-protocol FetchRefreshDelegate: AnyObject {
-    func refresh()
-}
-
 final class BlockListViewModel {
     struct Input {
         let addButtonEvent: Observable<Void>
