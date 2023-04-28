@@ -25,22 +25,43 @@ final class BlockEditViewModel {
     private var modelDivideCount: Int?
     private let blockEditUseCase: BlockEditUseCase
     private let completeButtonTapEvent: PublishSubject<BlockModel> = .init()
-    private let modelFetchEvent: PublishSubject<Void>
     
-    init(originModel: BlockModel, repository: DataManagerRepository, modelFetchEvent: PublishSubject<Void>) {
+    private weak var fetchRefreshDelegate: FetchRefreshDelegate?
+    private weak var editReflectDelegate: EditReflectDelegate?
+    
+    init(originModel: BlockModel,
+         repository: DataManagerRepository,
+         fetchRefreshDelegate: FetchRefreshDelegate,
+         editReflectDelegate: EditReflectDelegate) {
         self.originModel = originModel
         self.blockEditUseCase = .init(repository: repository)
-        self.modelFetchEvent = modelFetchEvent
+        self.fetchRefreshDelegate = fetchRefreshDelegate
+        self.editReflectDelegate = editReflectDelegate
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent,
-                                                      modelFetchEvent: self.modelFetchEvent)
+        let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent)
         let editUSeCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
-        
         let output = Output(isEditSuccess: editUSeCaseOutput.isEditSuccess)
         
+        bind(input: input, disposeBag: disposeBag)
+        
+        editUSeCaseOutput.isEditSuccess
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let self else { return }
+                if isSuccess {
+                    self.fetchRefreshDelegate?.refresh()
+                    self.editReflectDelegate?.reflect(self.originModel)
+                }
+            }).disposed(by: disposeBag)
+        
+        return output
+    }
+}
+
+private extension BlockEditViewModel {
+    func bind(input: Input, disposeBag: DisposeBag) {
         input.modelTitle
             .subscribe(onNext: { [weak self] modelTitle in
                 guard let self else { return }
@@ -66,7 +87,5 @@ final class BlockEditViewModel {
                 
                 self.completeButtonTapEvent.onNext(self.originModel)
             }).disposed(by: disposeBag)
-        
-        return output
     }
 }

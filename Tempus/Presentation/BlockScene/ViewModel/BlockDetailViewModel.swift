@@ -20,17 +20,10 @@ final class BlockDetailViewModel {
         let originModelSubject: BehaviorSubject<BlockModel>
     }
     
-    private var originModel: BlockModel {
-        didSet {
-            self.originModelSubject.onNext(originModel)
-        }
-    }
-    
     private let originModelSubject: BehaviorSubject<BlockModel>
     
     init(originModel: BlockModel) {
         self.originModelSubject = .init(value: originModel)
-        self.originModel = originModel
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
@@ -38,8 +31,10 @@ final class BlockDetailViewModel {
         
         input.startButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                let startUseCase = BlockStartUseCase(originModel: self.originModel)
+                guard let self,
+                      let originModel = try? self.originModelSubject.value() else { return }
+                
+                let startUseCase = BlockStartUseCase(originModel: originModel)
                 // coordinator push with startUseCase
             }).disposed(by: disposeBag)
         
@@ -62,7 +57,7 @@ final class BlockDetailViewModel {
 extension BlockDetailViewModel: EditReflectDelegate {
     func reflect(_ model: Mode) {
         if let model = model as? BlockModel {
-            self.originModel = model
+            self.originModelSubject.onNext(model)
         }
     }
 }

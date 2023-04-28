@@ -12,7 +12,6 @@ import RxSwift
 final class BlockEditUseCase {
     struct Input {
         let modelEditEvent: Observable<BlockModel>
-        let modelFetchEvent: PublishSubject<Void>
     }
     
     struct Output {
@@ -35,7 +34,6 @@ final class BlockEditUseCase {
                 do {
                     try self.execute(model: model) {
                         self.isEditSuccess.onNext(true)
-                        input.modelFetchEvent.onNext(())
                     }
                 } catch {
                     self.isEditSuccess.onNext(false)
