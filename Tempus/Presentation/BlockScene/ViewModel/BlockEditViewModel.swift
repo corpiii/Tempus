@@ -41,22 +41,14 @@ final class BlockEditViewModel {
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent)
-        let editUSeCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
+        let editUseCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
-        let output = Output(isEditSuccess: editUSeCaseOutput.isEditSuccess)
+        let output = Output(isEditSuccess: editUseCaseOutput.isEditSuccess)
         
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.modelDivideCount, disposeBag)
         bindCompleteEvent(input.completeButtonTapEvent, disposeBag)
-        
-        editUSeCaseOutput.isEditSuccess
-            .subscribe(onNext: { [weak self] isSuccess in
-                guard let self else { return }
-                if isSuccess {
-                    self.fetchRefreshDelegate?.refresh()
-                    self.editReflectDelegate?.reflect(self.originModel)
-                }
-            }).disposed(by: disposeBag)
+        bindEditSuccess(editUseCaseOutput.isEditSuccess, disposeBag)
         
         return output
     }
@@ -92,6 +84,17 @@ private extension BlockEditViewModel {
                 }
                 
                 self.completeButtonTapEvent.onNext(self.originModel)
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindEditSuccess(_ isEditSuccess: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
+        isEditSuccess
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let self else { return }
+                if isSuccess {
+                    self.fetchRefreshDelegate?.refresh()
+                    self.editReflectDelegate?.reflect(self.originModel)
+                }
             }).disposed(by: disposeBag)
     }
 }
