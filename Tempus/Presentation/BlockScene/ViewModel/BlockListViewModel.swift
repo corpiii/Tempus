@@ -5,6 +5,7 @@
 //  Created by 이정민 on 2023/04/18.
 //
 
+import RxCocoa
 import RxSwift
 
 final class BlockListViewModel {
@@ -15,8 +16,8 @@ final class BlockListViewModel {
     }
     
     struct Output {
-        let blockModelArray: Observable<[BlockModel]>
-        let isDeleteSuccess: Observable<Bool>
+        let blockModelArray: BehaviorSubject<[BlockModel]> = .init(value: [])
+        let isDeleteSuccess: PublishSubject<Bool> = .init()
     }
     
     private var blockFetchUseCase: BlockFetchUseCase
@@ -30,22 +31,28 @@ final class BlockListViewModel {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let fetchEvent = input.modelFetchEvent
-        self.modelFetchEvent = fetchEvent
+        let output = Output()
+        self.modelFetchEvent = input.modelFetchEvent
         
-        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: fetchEvent)
+        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: input.modelFetchEvent)
         let fetchUseCaseOutput = blockFetchUseCase.transform(input: fetchUseCaseInput,
                                                              disposeBag: disposeBag)
         
-        let deleteUseCaseInput = BlockDeleteUseCase.Input(modelDeleteEvent: input.modelDeleteEvent,
-                                                          modelFetchEvent: fetchEvent)
+        let deleteUseCaseInput = BlockDeleteUseCase.Input(modelDeleteEvent: input.modelDeleteEvent)
         let deleteUseCaseOutput = blockDeleteUseCase.transform(input: deleteUseCaseInput,
                                                                disposeBag: disposeBag)
         
+        fetchUseCaseOutput.modelArrayObservable
+            .bind(to: output.blockModelArray)
+            .disposed(by: disposeBag)
+        
+        deleteUseCaseOutput.isDeleteSuccess
+            .bind(to: output.isDeleteSuccess)
+            .disposed(by: disposeBag)
+        
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         
-        return Output(blockModelArray: fetchUseCaseOutput.modelArrayObservable,
-                      isDeleteSuccess: deleteUseCaseOutput.isDeleteSuccess)
+        return output
     }
     
     private func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
