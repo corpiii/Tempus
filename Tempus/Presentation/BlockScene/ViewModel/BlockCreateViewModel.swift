@@ -40,16 +40,12 @@ final class BlockCreateViewModel {
         let createUseCaseOutput = createUseCase.transform(input: createUseCaseInput,
                                                           disposeBag: disposeBag)
         
-        createUseCaseOutput.isCreateSuccess
-            .subscribe(onNext: { [self] isCreateSuccess in
-                if isCreateSuccess {
-                    self.fetchRefreshDelegate?.refresh()
-                }
-                
-                output.isCreateSuccess.accept(isCreateSuccess)
-            }).disposed(by: disposeBag)
-        
-        bind(input, disposeBag)
+        bindCreateSuccess(createUseCaseOutput.isCreateSuccess,
+                          to: output.isCreateSuccess,
+                          disposeBag)
+        bindModelTitle(input.modelTitle, disposeBag)
+        bindDivideCount(input.divideCount, disposeBag)
+        bindCompleteEvent(input.completeEvent, disposeBag)
         
         return output
     }
@@ -59,20 +55,24 @@ final class BlockCreateViewModel {
 }
 
 private extension BlockCreateViewModel {
-    func bind(_ input: Input, _ disposeBag: DisposeBag) {
-        input.modelTitle
+    func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
+        modelTitle
             .subscribe(onNext: { [weak self] title in
                 guard let self else { return }
                 self.modelTitle = title
             }).disposed(by: disposeBag)
-        
-        input.divideCount
+    }
+    
+    func bindDivideCount(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
+        divideCount
             .subscribe(onNext: { [weak self] divideCount in
                 guard let self else { return }
                 self.divideCount = divideCount
             }).disposed(by: disposeBag)
-        
-        input.completeEvent
+    }
+    
+    func bindCompleteEvent(_ completeEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
+        completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
                 guard let self = self,
                       let title = self.modelTitle,
@@ -95,6 +95,20 @@ private extension BlockCreateViewModel {
                     /* coordinaotr just finish */
                     
                 }
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindCreateSuccess(_ isCreateSuccess: Observable<Bool>,
+                           to isCreateSuccessRelay: PublishRelay<Bool>,
+                           _ disposeBag: DisposeBag) {
+        isCreateSuccess
+            .subscribe(onNext: { [weak self] isCreateSuccess in
+                guard let self = self else { return }
+                if isCreateSuccess {
+                    self.fetchRefreshDelegate?.refresh()
+                }
+                
+                isCreateSuccessRelay.accept(isCreateSuccess)
             }).disposed(by: disposeBag)
     }
 }

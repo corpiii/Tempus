@@ -45,7 +45,9 @@ final class BlockEditViewModel {
                                                            disposeBag: disposeBag)
         let output = Output(isEditSuccess: editUSeCaseOutput.isEditSuccess)
         
-        bind(input: input, disposeBag: disposeBag)
+        bindModelTitle(input.modelTitle, disposeBag)
+        bindDivideCount(input.modelDivideCount, disposeBag)
+        bindCompleteEvent(input.completeButtonTapEvent, disposeBag)
         
         editUSeCaseOutput.isEditSuccess
             .subscribe(onNext: { [weak self] isSuccess in
@@ -61,20 +63,24 @@ final class BlockEditViewModel {
 }
 
 private extension BlockEditViewModel {
-    func bind(input: Input, disposeBag: DisposeBag) {
-        input.modelTitle
+    func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
+        modelTitle
             .subscribe(onNext: { [weak self] modelTitle in
                 guard let self else { return }
                 self.modelTitle = modelTitle
             }).disposed(by: disposeBag)
-        
-        input.modelDivideCount
+    }
+    
+    func bindDivideCount(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
+        divideCount
             .subscribe(onNext: { [weak self] modelDivideCount in
                 guard let self else { return }
                 self.modelDivideCount = modelDivideCount
             }).disposed(by: disposeBag)
-        
-        input.completeButtonTapEvent
+    }
+    
+    func bindCompleteEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        completeEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 if let modelTitle = self.modelTitle {

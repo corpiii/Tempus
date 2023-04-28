@@ -47,30 +47,10 @@ final class BlockListViewModel {
             .bind(to: output.blockModelArray)
             .disposed(by: disposeBag)
         
-        deleteUseCaseOutput.isDeleteSuccess
-            .subscribe(onNext: { [weak self] isSuccess in
-                guard let self = self else { return }
-                if isSuccess {
-                    self.refresh()
-                }
-                
-                output.isDeleteSuccess.accept(isSuccess)
-            }).disposed(by: disposeBag)
-        
-        deleteUseCaseOutput.isDeleteSuccess
-            .bind(to: output.isDeleteSuccess)
-            .disposed(by: disposeBag)
-        
+        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, disposeBag)
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         
         return output
-    }
-    
-    private func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
-        addButtonEvent
-            .subscribe(onNext: {
-                // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
-            }).disposed(by: disposeBag)
     }
 }
 
@@ -79,3 +59,23 @@ extension BlockListViewModel: FetchRefreshDelegate {
         modelFetchEvent.onNext(())
     }
 }
+
+private extension BlockListViewModel {
+    func bindDeleteSuccess(_ isDeleteSuccess: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
+        isDeleteSuccess
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let self = self else { return }
+                if isSuccess {
+                    self.refresh()
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
+        addButtonEvent
+            .subscribe(onNext: {
+                // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
+            }).disposed(by: disposeBag)
+    }
+}
+
