@@ -39,23 +39,30 @@ final class DailyStartUseCase: ModeStartUseCase {
         let output = Output(remainTime: timeObservable,
                             modeState: modeStateObservable)
 
-        input.modeStartEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStart()
-            }).disposed(by: disposeBag)
-
-        input.modeStopEvent
-            .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.modeStop()
-            }).disposed(by: disposeBag)
+        bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
+        bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
 
         return output
     }
 }
 
 private extension DailyStartUseCase {
+    func bindModeStartEvent(_ modeStartEvent: Observable<Void>, disposeBag: DisposeBag) {
+        modeStartEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.modeStart()
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindModeStopEvent(_ modeStopEvent: Observable<Void>, disposeBag: DisposeBag) {
+        modeStopEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.modeStop()
+            }).disposed(by: disposeBag)
+    }
+    
     func modeStart() {
         guard timer == nil else { return }
         

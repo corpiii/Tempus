@@ -27,23 +27,30 @@ final class BlockCreateUseCase {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.modelCreate
-            .subscribe(onNext: { [weak self] model in
-                guard let self else { return }
-                do {
-                    try self.execute(model: model) {
-                        output.isCreateSuccess.onNext(true)
-                    }
-                } catch {
-                    output.isCreateSuccess.onNext(false)
-                }
-            }).disposed(by: disposeBag)
+        bindModelCreate(input.modelCreate, to: output.isCreateSuccess, disposeBag)
         
         return output
     }
 }
 
 private extension BlockCreateUseCase {
+    func bindModelCreate(_ modelCreate: Observable<BlockModel>,
+                         to isCreateSuccess: PublishSubject<Bool>,
+                         _ disposeBag: DisposeBag) {
+        modelCreate
+            .subscribe(onNext: { [weak self] model in
+                guard let self else { return }
+                do {
+                    try self.execute(model: model) {
+                        isCreateSuccess.onNext(true)
+                    }
+                } catch {
+                    isCreateSuccess.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
         try repository.create(model)
         completion()

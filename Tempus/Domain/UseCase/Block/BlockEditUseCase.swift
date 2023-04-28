@@ -15,10 +15,9 @@ final class BlockEditUseCase {
     }
     
     struct Output {
-        let isEditSuccess: PublishSubject<Bool>
+        let isEditSuccess: PublishSubject<Bool> = .init()
     }
     
-    private let isEditSuccess: PublishSubject<Bool> = .init()
     private let repository: DataManagerRepository
     
     init(repository: DataManagerRepository) {
@@ -26,25 +25,30 @@ final class BlockEditUseCase {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(isEditSuccess: isEditSuccess)
+        let output = Output()
         
-        input.modelEditEvent
-            .subscribe(onNext: { [weak self] model in
-                guard let self else { return }
-                do {
-                    try self.execute(model: model) {
-                        self.isEditSuccess.onNext(true)
-                    }
-                } catch {
-                    self.isEditSuccess.onNext(false)
-                }
-            }).disposed(by: disposeBag)
+        bindModelEditEvent(input.modelEditEvent, to: output.isEditSuccess, disposeBag: disposeBag)
         
         return output
     }
 }
 
 private extension BlockEditUseCase {
+    func bindModelEditEvent(_ editEvent: Observable<BlockModel>,
+                            to isEditSuccess: PublishSubject<Bool>,
+                            disposeBag: DisposeBag) {
+        editEvent
+            .subscribe(onNext: { model in
+                do {
+                    try self.execute(model: model) {
+                        isEditSuccess.onNext(true)
+                    }
+                } catch {
+                    isEditSuccess.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
         try repository.update(model)
         completion()

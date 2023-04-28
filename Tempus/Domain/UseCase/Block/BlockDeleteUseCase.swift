@@ -25,23 +25,28 @@ final class BlockDeleteUseCase {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.modelDeleteEvent
-            .subscribe(onNext: { [weak self] model in
-                guard let self else { return }
-                do {
-                    try self.execute(model: model) {
-                        output.isDeleteSuccess.onNext(true)
-                    }
-                } catch {
-                    output.isDeleteSuccess.onNext(false)
-                }
-            }).disposed(by: disposeBag)
+        bindModelDeleteEvent(input.modelDeleteEvent, to: output.isDeleteSuccess, disposeBag: disposeBag)
         
         return output
     }
 }
 
 private extension BlockDeleteUseCase {
+    func bindModelDeleteEvent(_ modelDeleteEvent: Observable<BlockModel>, to isDeleteSuccess: PublishSubject<Bool>, disposeBag: DisposeBag) {
+        modelDeleteEvent
+            .subscribe(onNext: { [weak self] model in
+                guard let self else { return }
+                do {
+                    try self.execute(model: model) {
+                        isDeleteSuccess.onNext(true)
+                    }
+                } catch {
+                    isDeleteSuccess.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    
     func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
         try repository.delete(model)
         completion()
