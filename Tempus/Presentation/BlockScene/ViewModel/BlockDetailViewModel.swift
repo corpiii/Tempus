@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/04/25.
 //
 
-import Foundation
-
 import RxSwift
 
 final class BlockDetailViewModel {
@@ -37,14 +35,6 @@ final class BlockDetailViewModel {
     }
 }
 
-extension BlockDetailViewModel: EditReflectDelegate {
-    func reflect(_ model: Mode) {
-        if let model = model as? BlockModel {
-            self.originModelSubject.onNext(model)
-        }
-    }
-}
-
 private extension BlockDetailViewModel {
     func bindStartButtonTapEvent(_ startEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         startEvent
@@ -71,5 +61,13 @@ private extension BlockDetailViewModel {
             .subscribe(onNext: {
                 // coordinator finish
             }).disposed(by: disposeBag)
+    }
+}
+
+extension BlockDetailViewModel: EditReflectDelegate {
+    func reflect(_ model: Mode) {
+        if let model = model as? BlockModel {
+            self.originModelSubject.onNext(model)
+        }
     }
 }

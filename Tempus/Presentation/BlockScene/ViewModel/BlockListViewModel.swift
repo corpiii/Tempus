@@ -78,4 +78,3 @@ private extension BlockListViewModel {
             }).disposed(by: disposeBag)
     }
 }
-

@@ -12,9 +12,15 @@ import RxSwift
 final class BlockEditViewModelTest: XCTestCase {
     var repositoryMock: DataManagerRepositoryMock!
     var originModel: BlockModel!
-    
-    var modelFetchEvent: PublishSubject<Void>!
     var disposeBag: DisposeBag!
+    
+    var blockListViewModel: BlockListViewModel!
+    var listViewModelInput: BlockListViewModel.Input!
+    var listViewModelOutput: BlockListViewModel.Output!
+    
+    var blockDetailViewModel: BlockDetailViewModel!
+    var detailViewModelInput: BlockDetailViewModel.Input!
+    var detailViewModelOutput: BlockDetailViewModel.Output!
     
     var blockEditViewModel: BlockEditViewModel!
     
@@ -28,13 +34,27 @@ final class BlockEditViewModelTest: XCTestCase {
     override func setUpWithError() throws {
         repositoryMock = .init()
         originModel = .init(id: UUID(), title: "testTitle", divideCount: 4)
-        
-        modelFetchEvent = .init()
         disposeBag = .init()
+        
+        blockListViewModel = .init(repository: repositoryMock)
+        listViewModelInput = .init(addButtonEvent: PublishSubject<Void>(),
+                                   modelDeleteEvent: PublishSubject<BlockModel>(),
+                                   modelFetchEvent: PublishSubject<Void>())
+        listViewModelOutput = blockListViewModel.transform(input: listViewModelInput,
+                                                           disposeBag: disposeBag)
+
+        blockDetailViewModel = .init(originModel: originModel)
+        detailViewModelInput = BlockDetailViewModel.Input(
+            startButtonTapEvent: PublishSubject<Void>(),
+            editButtonTapEvent: PublishSubject<Void>(),
+            cancelButtonTapEvent: PublishSubject<Void>())
+        detailViewModelOutput = blockDetailViewModel.transform(input: detailViewModelInput,
+                                                               disposeBag: disposeBag)
         
         blockEditViewModel = .init(originModel: originModel,
                                    repository: repositoryMock,
-                                   modelFetchEvent: modelFetchEvent)
+                                   fetchRefreshDelegate: blockListViewModel,
+                                   editReflectDelegate: blockDetailViewModel)
         
         modelTitle = .init()
         modelDivideCount = .init()

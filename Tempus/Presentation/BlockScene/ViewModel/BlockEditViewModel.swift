@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/04/26.
 //
 
-import Foundation
-
 import RxSwift
 
 final class BlockEditViewModel {
