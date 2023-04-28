@@ -8,6 +8,7 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
 final class BlockCreateViewModel {
     struct Input {
@@ -17,28 +18,36 @@ final class BlockCreateViewModel {
     }
     
     struct Output {
-        let isCreateSucess: Observable<Bool>
+        let isCreateSuccess: PublishRelay<Bool> = .init()
     }
     
     private var modelTitle: String?
     private var divideCount: Int?
     private let modelCreateEvent: PublishSubject<BlockModel> = .init()
-    private let modelFetchEvent: PublishSubject<Void>
-    private let disposeBag: DisposeBag = .init()
     
     private let createUseCase: BlockCreateUseCase
+    private weak var fetchRefreshDelegate: FetchRefreshDelegate?
     
-    init(repository: DataManagerRepository, modelFetchEvent: PublishSubject<Void>) {
+    init(repository: DataManagerRepository, fetchRefreshDelegate: FetchRefreshDelegate) {
         self.createUseCase = .init(repository: repository)
-        self.modelFetchEvent = modelFetchEvent
+        self.fetchRefreshDelegate = fetchRefreshDelegate
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let createUseCaseInput = BlockCreateUseCase.Input(modelFetchEvent: self.modelFetchEvent,
-                                                          modelCreate: modelCreateEvent)
+        let output = Output()
+        
+        let createUseCaseInput = BlockCreateUseCase.Input(modelCreate: self.modelCreateEvent)
         let createUseCaseOutput = createUseCase.transform(input: createUseCaseInput,
-                                                          disposeBag: self.disposeBag)
-        let output = Output(isCreateSucess: createUseCaseOutput.isCreateSuccess)
+                                                          disposeBag: disposeBag)
+        
+        createUseCaseOutput.isCreateSuccess
+            .subscribe(onNext: { [self] isCreateSuccess in
+                if isCreateSuccess {
+                    self.fetchRefreshDelegate?.refresh()
+                }
+                
+                output.isCreateSuccess.accept(isCreateSuccess)
+            }).disposed(by: disposeBag)
         
         bind(input, disposeBag)
         

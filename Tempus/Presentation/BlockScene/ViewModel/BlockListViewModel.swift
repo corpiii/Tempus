@@ -7,6 +7,10 @@
 
 import RxSwift
 
+protocol FetchRefreshDelegate: AnyObject {
+    func refresh()
+}
+
 final class BlockListViewModel {
     struct Input {
         let addButtonEvent: Observable<Void>
@@ -51,7 +55,13 @@ final class BlockListViewModel {
     private func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
         addButtonEvent
             .subscribe(onNext: {
-                // coordinator push to createViewModel by 'push(self.modelFetchEvent)' function
+                // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
             }).disposed(by: disposeBag)
+    }
+}
+
+extension BlockListViewModel: FetchRefreshDelegate {
+    func refresh() {
+        modelFetchEvent.onNext(())
     }
 }

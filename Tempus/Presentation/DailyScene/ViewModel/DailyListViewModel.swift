@@ -15,7 +15,7 @@ final class DailyListViewModel {
     }
     
     struct Output {
-        let blockModelArray: Observable<[DailyModel]>
+        let dailyModelArray: Observable<[DailyModel]>
         let isDeleteSuccess: Observable<Bool>
     }
 }
