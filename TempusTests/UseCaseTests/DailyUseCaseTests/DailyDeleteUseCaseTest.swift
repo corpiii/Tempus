@@ -11,7 +11,6 @@ import RxSwift
 
 final class DailyDeleteUseCaseTest: XCTestCase {
     var repository: DataManagerRepositoryMock!
-    var createUseCase: DailyCreateUseCase!
     var deleteUseCase: DailyDeleteUseCase!
     var disposeBag: DisposeBag!
     

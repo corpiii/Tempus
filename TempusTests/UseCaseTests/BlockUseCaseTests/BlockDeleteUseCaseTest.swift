@@ -10,14 +10,12 @@ import XCTest
 import RxSwift
 
 final class BlockDeleteUseCaseTest: XCTestCase {
-    var blockCreateUseCase: BlockCreateUseCase!
     var blockDeleteUseCase: BlockDeleteUseCase!
     var coreDataRepositoryMock: DataManagerRepositoryMock!
     var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
         coreDataRepositoryMock = DataManagerRepositoryMock()
-        blockCreateUseCase = BlockCreateUseCase(repository: coreDataRepositoryMock)
         blockDeleteUseCase = BlockDeleteUseCase(repository: coreDataRepositoryMock)
         disposeBag = .init()
     }
@@ -30,31 +28,24 @@ final class BlockDeleteUseCaseTest: XCTestCase {
         let model = BlockModel(id: id, title: title, divideCount: divideCount)
         let expectation = XCTestExpectation(description: "block_delete_test")
         
-        let fetchEvent: PublishSubject<Void> = .init()
-        let createEvent: PublishSubject<BlockModel> = .init()
         
-        let createInput = BlockCreateUseCase.Input(modelCreate: createEvent)
-        let createOutput = blockCreateUseCase.transform(input: createInput, disposeBag: disposeBag)
+        try! coreDataRepositoryMock.create(model)
         
-        createOutput.isCreateSuccess
-            .subscribe(onNext: { isSuccess in
-                XCTAssertEqual(isSuccess, true)
-            }).disposed(by: disposeBag)
-        createEvent.onNext(model)
-        
-        // Act, Assert
+        // Act
         let deleteEvent: PublishSubject<BlockModel> = .init()
         let deleteInput = BlockDeleteUseCase.Input(modelDeleteEvent: deleteEvent)
         let deleteOutput = blockDeleteUseCase.transform(input: deleteInput, disposeBag: disposeBag)
         
         deleteOutput.isDeleteSuccess
             .subscribe(onNext: { isSuccess in
-                XCTAssertEqual(isSuccess, true)
-                XCTAssertNil(self.coreDataRepositoryMock.blockModel)
+                XCTAssertTrue(isSuccess)
                 expectation.fulfill()
             }).disposed(by: disposeBag)
         
         deleteEvent.onNext(model)
+        
+        // Assert
         wait(for: [expectation], timeout: 2.0)
+        XCTAssertNil(coreDataRepositoryMock.blockModel)
     }
 }
