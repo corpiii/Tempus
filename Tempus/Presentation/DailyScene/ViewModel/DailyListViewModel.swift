@@ -46,7 +46,7 @@ final class DailyListViewModel {
             .bind(to: output.dailyModelArray)
             .disposed(by: disposeBag)
         
-        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, disposeBag)
+        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         
         return output
@@ -54,13 +54,15 @@ final class DailyListViewModel {
 }
 
 private extension DailyListViewModel {
-    func bindDeleteSuccess(_ isDeleteSuccess: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
-        isDeleteSuccess
+    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Bool>, to isDeleteSuccess: PublishRelay<Bool>, _ disposeBag: DisposeBag) {
+        deleteEvent
             .subscribe(onNext: { [weak self] isSuccess in
                 guard let self = self else { return }
                 if isSuccess {
                     self.refresh()
                 }
+                
+                isDeleteSuccess.accept(isSuccess)
             }).disposed(by: disposeBag)
     }
     

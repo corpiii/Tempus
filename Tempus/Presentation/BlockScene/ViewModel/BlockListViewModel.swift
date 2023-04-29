@@ -47,27 +47,23 @@ final class BlockListViewModel {
             .bind(to: output.blockModelArray)
             .disposed(by: disposeBag)
         
-        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, disposeBag)
+        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         
         return output
     }
 }
 
-extension BlockListViewModel: FetchRefreshDelegate {
-    func refresh() {
-        modelFetchEvent.onNext(())
-    }
-}
-
 private extension BlockListViewModel {
-    func bindDeleteSuccess(_ isDeleteSuccess: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
-        isDeleteSuccess
+    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Bool>, to isDeleteSuccess: PublishRelay<Bool>, _ disposeBag: DisposeBag) {
+        deleteEvent
             .subscribe(onNext: { [weak self] isSuccess in
                 guard let self = self else { return }
                 if isSuccess {
                     self.refresh()
                 }
+                
+                isDeleteSuccess.accept(isSuccess)
             }).disposed(by: disposeBag)
     }
     
@@ -76,5 +72,11 @@ private extension BlockListViewModel {
             .subscribe(onNext: {
                 // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
             }).disposed(by: disposeBag)
+    }
+}
+
+extension BlockListViewModel: FetchRefreshDelegate {
+    func refresh() {
+        modelFetchEvent.onNext(())
     }
 }
