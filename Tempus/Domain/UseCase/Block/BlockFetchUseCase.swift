@@ -13,30 +13,34 @@ final class BlockFetchUseCase {
     }
     
     struct OutPut {
-        let modelArrayObservable: Observable<[BlockModel]>
+        let modelArrayObservable: PublishSubject<[BlockModel]> = .init()
     }
     
     private let repository: DataManagerRepository
-    private var modelArrayObservable: BehaviorSubject<[BlockModel]> = .init(value: [])
     
     init(repository: DataManagerRepository) {
         self.repository = repository
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> OutPut {
-        bind(input.modelFetchEvent, disposeBag: disposeBag)
-        return OutPut(modelArrayObservable: modelArrayObservable)
+        let output = OutPut()
+        
+        bindModelFetchEvent(input.modelFetchEvent,
+                            to: output.modelArrayObservable,
+                            disposeBag: disposeBag)
+        
+        return output
     }
 }
 
 private extension BlockFetchUseCase {
-    func bind(_ fetchModelEvent: Observable<Void>, disposeBag: DisposeBag) {
-        fetchModelEvent
+    func bindModelFetchEvent(_ modelFetchEvent: Observable<Void>, to modelArrayObservable: PublishSubject<[BlockModel]>, disposeBag: DisposeBag) {
+        modelFetchEvent
             .subscribe(onNext: { [weak self] _ in
                 guard let self else { return }
                 do {
                     try self.execute { models in
-                        self.modelArrayObservable.onNext(models)
+                        modelArrayObservable.onNext(models)
                     }
                 } catch {
 //                    self.modelArrayObservable.onError(error)

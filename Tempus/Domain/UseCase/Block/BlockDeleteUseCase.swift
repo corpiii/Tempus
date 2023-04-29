@@ -10,47 +10,45 @@ import RxSwift
 final class BlockDeleteUseCase {
     struct Input {
         let modelDeleteEvent: Observable<BlockModel>
-        let modelFetchEvent: PublishSubject<Void>
     }
     
     struct Output {
-        let isDeleteSuccess: PublishSubject<Bool>
+        let isDeleteSuccess: PublishSubject<Bool> = .init()
     }
     
     private let repository: DataManagerRepository
-    private let isDeleteSuccess: PublishSubject<Bool> = .init()
     
     init(repository: DataManagerRepository) {
         self.repository = repository
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(isDeleteSuccess: isDeleteSuccess)
+        let output = Output()
         
-        bind(input: input, disposeBag: disposeBag)
+        bindModelDeleteEvent(input.modelDeleteEvent, to: output.isDeleteSuccess, disposeBag: disposeBag)
         
         return output
     }
 }
 
 private extension BlockDeleteUseCase {
-    func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
-        try repository.delete(model)
-        completion()
-    }
-    
-    func bind(input: Input, disposeBag: DisposeBag) {
-        input.modelDeleteEvent
+    func bindModelDeleteEvent(_ modelDeleteEvent: Observable<BlockModel>, to isDeleteSuccess: PublishSubject<Bool>, disposeBag: DisposeBag) {
+        modelDeleteEvent
             .subscribe(onNext: { [weak self] model in
                 guard let self else { return }
                 do {
                     try self.execute(model: model) {
-                        self.isDeleteSuccess.onNext(true)
-                        input.modelFetchEvent.onNext(())
+                        isDeleteSuccess.onNext(true)
                     }
                 } catch {
-                    self.isDeleteSuccess.onNext(false)
+                    isDeleteSuccess.onNext(false)
                 }
             }).disposed(by: disposeBag)
+    }
+    
+    
+    func execute(model: BlockModel, _ completion: @escaping () -> Void) throws {
+        try repository.delete(model)
+        completion()
     }
 }

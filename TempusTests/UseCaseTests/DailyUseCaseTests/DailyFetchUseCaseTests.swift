@@ -7,19 +7,22 @@
 
 import XCTest
 
+import RxSwift
+
 final class DailyFetchUseCaseTests: XCTestCase {
-    var dailyCreateUseCase: DailyCreateUseCase!
     var dailyFetchUseCase: DailyFetchUseCase!
-    var coreDataRepositoryMock: DataManagerRepositoryMock!
+    var repository: DataManagerRepositoryMock!
+    var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
-        coreDataRepositoryMock = DataManagerRepositoryMock()
-        dailyCreateUseCase = DailyCreateUseCase(repository: coreDataRepositoryMock)
-        dailyFetchUseCase = DailyFetchUseCase(repository: coreDataRepositoryMock)
+        repository = DataManagerRepositoryMock()
+        dailyFetchUseCase = DailyFetchUseCase(repository: repository)
+        disposeBag = .init()
     }
     
     func test_Daily_fetch_is_success() {
         // Arrange
+        let expectation = XCTestExpectation(description: "fetch_test_is_success")
         let id = UUID()
         let title = "testTitle"
         let startTime: Double = 123456
@@ -32,16 +35,26 @@ final class DailyFetchUseCaseTests: XCTestCase {
                                repeatCount: repeatCount,
                                focusTime: focusTime,
                                breakTime: breakTime)
+        var resultModels: [DailyModel] = []
         
-        try! dailyCreateUseCase.execute(model: model) {}
+        try! repository.create(model)
+        XCTAssertNotNil(repository.dailyModel)
         
-        // Act, Assert
-        do {
-            try dailyFetchUseCase.execute { models in
-                XCTAssertEqual(models.first!.id, id)
-            }
-        } catch {
-            XCTFail()
-        }
+        // Act
+        let fetchEvent: PublishSubject<Void> = .init()
+        let fetchUseCaseInput = DailyFetchUseCase.Input(modelFetchEvent: fetchEvent)
+        let fetchUseCaseOutput = dailyFetchUseCase.transform(input: fetchUseCaseInput, disposeBag: disposeBag)
+        
+        fetchUseCaseOutput.modelArrayObservable
+            .subscribe(onNext: { models in
+                resultModels = models
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        fetchEvent.onNext(())
+        
+        // Assert
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(resultModels.first!.id, id)
     }
 }

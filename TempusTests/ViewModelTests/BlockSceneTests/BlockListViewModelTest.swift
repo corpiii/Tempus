@@ -66,7 +66,8 @@ final class BlockListViewModelTest: XCTestCase {
 
     func test_delete_event_emit_then_fetch_success() {
         // Arrange
-        let expectation = XCTestExpectation(description: "delete_event_test_description")
+        let fetchExpectation = XCTestExpectation(description: "fetch_is_success")
+        let deleteExpectation = XCTestExpectation(description: "delete_is_success")
         let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
         var resultModel: [BlockModel] = []
         
@@ -79,13 +80,14 @@ final class BlockListViewModelTest: XCTestCase {
         output.isDeleteSuccess
             .subscribe(onNext: { isSuccess in
                 XCTAssertTrue(isSuccess)
+                deleteExpectation.fulfill()
             }).disposed(by: disposeBag)
         
         output.blockModelArray
             .subscribe(onNext: { models in
                 resultModel = models
                 if models.isEmpty {
-                    expectation.fulfill()
+                    fetchExpectation.fulfill()
                 }
             }).disposed(by: disposeBag)
         
@@ -95,7 +97,7 @@ final class BlockListViewModelTest: XCTestCase {
         modelDeleteEvent.onNext(testModel)
         
         // Assert
-        wait(for: [expectation], timeout: 2.0)
+        wait(for: [fetchExpectation, deleteExpectation], timeout: 2.0)
         XCTAssertTrue(resultModel.isEmpty)
     }
 }

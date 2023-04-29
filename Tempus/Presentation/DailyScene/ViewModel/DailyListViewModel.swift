@@ -1,50 +1,49 @@
 //
-//  BlockListViewModel.swift
+//  DailyListViewModel.swift
 //  Tempus
 //
-//  Created by 이정민 on 2023/04/18.
+//  Created by 이정민 on 2023/04/28.
 //
 
 import RxCocoa
 import RxRelay
 import RxSwift
 
-final class BlockListViewModel {
+final class DailyListViewModel {
     struct Input {
         let addButtonEvent: Observable<Void>
-        let modelDeleteEvent: Observable<BlockModel>
+        let modelDeleteEvent: Observable<DailyModel>
         let modelFetchEvent: PublishSubject<Void>
     }
     
     struct Output {
-        let blockModelArray: BehaviorSubject<[BlockModel]> = .init(value: [])
+        let dailyModelArray: BehaviorSubject<[DailyModel]> = .init(value: [])
         let isDeleteSuccess: PublishRelay<Bool> = .init()
     }
     
-    private var blockFetchUseCase: BlockFetchUseCase
-    private var blockDeleteUseCase: BlockDeleteUseCase
+    private var dailyFetchUseCase: DailyFetchUseCase
+    private var dailyDeleteUseCase: DailyDeleteUseCase
     
     private var modelFetchEvent: PublishSubject<Void>!
     
     init(repository: DataManagerRepository) {
-        self.blockFetchUseCase = .init(repository: repository)
-        self.blockDeleteUseCase = .init(repository: repository)
+        self.dailyFetchUseCase = .init(repository: repository)
+        self.dailyDeleteUseCase = .init(repository: repository)
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         self.modelFetchEvent = input.modelFetchEvent
         
-        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: input.modelFetchEvent)
-        let fetchUseCaseOutput = blockFetchUseCase.transform(input: fetchUseCaseInput,
+        let fetchUseCaseInput = DailyFetchUseCase.Input(modelFetchEvent: input.modelFetchEvent)
+        let fetchUseCaseOutput = dailyFetchUseCase.transform(input: fetchUseCaseInput,
                                                              disposeBag: disposeBag)
         
-        let deleteUseCaseInput = BlockDeleteUseCase.Input(modelDeleteEvent: input.modelDeleteEvent)
-        let deleteUseCaseOutput = blockDeleteUseCase.transform(input: deleteUseCaseInput,
+        let deleteUseCaseInput = DailyDeleteUseCase.Input(modelDeleteEvent: input.modelDeleteEvent)
+        let deleteUseCaseOutput = dailyDeleteUseCase.transform(input: deleteUseCaseInput,
                                                                disposeBag: disposeBag)
-        
         fetchUseCaseOutput.modelArrayObservable
-            .bind(to: output.blockModelArray)
+            .bind(to: output.dailyModelArray)
             .disposed(by: disposeBag)
         
         bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
@@ -54,7 +53,7 @@ final class BlockListViewModel {
     }
 }
 
-private extension BlockListViewModel {
+private extension DailyListViewModel {
     func bindDeleteSuccess(_ deleteEvent: PublishSubject<Bool>, to isDeleteSuccess: PublishRelay<Bool>, _ disposeBag: DisposeBag) {
         deleteEvent
             .subscribe(onNext: { [weak self] isSuccess in
@@ -75,7 +74,7 @@ private extension BlockListViewModel {
     }
 }
 
-extension BlockListViewModel: FetchRefreshDelegate {
+extension DailyListViewModel: FetchRefreshDelegate {
     func refresh() {
         modelFetchEvent.onNext(())
     }

@@ -8,6 +8,7 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
 final class BlockCreateViewModel {
     struct Input {
@@ -17,30 +18,34 @@ final class BlockCreateViewModel {
     }
     
     struct Output {
-        let isCreateSucess: Observable<Bool>
+        let isCreateSuccess: PublishRelay<Bool> = .init()
     }
     
     private var modelTitle: String?
     private var divideCount: Int?
     private let modelCreateEvent: PublishSubject<BlockModel> = .init()
-    private let modelFetchEvent: PublishSubject<Void>
-    private let disposeBag: DisposeBag = .init()
     
     private let createUseCase: BlockCreateUseCase
+    private weak var fetchRefreshDelegate: FetchRefreshDelegate?
     
-    init(repository: DataManagerRepository, modelFetchEvent: PublishSubject<Void>) {
+    init(repository: DataManagerRepository, fetchRefreshDelegate: FetchRefreshDelegate) {
         self.createUseCase = .init(repository: repository)
-        self.modelFetchEvent = modelFetchEvent
+        self.fetchRefreshDelegate = fetchRefreshDelegate
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let createUseCaseInput = BlockCreateUseCase.Input(modelFetchEvent: self.modelFetchEvent,
-                                                          modelCreate: modelCreateEvent)
-        let createUseCaseOutput = createUseCase.transform(input: createUseCaseInput,
-                                                          disposeBag: self.disposeBag)
-        let output = Output(isCreateSucess: createUseCaseOutput.isCreateSuccess)
+        let output = Output()
         
-        bind(input, disposeBag)
+        let createUseCaseInput = BlockCreateUseCase.Input(modelCreate: self.modelCreateEvent)
+        let createUseCaseOutput = createUseCase.transform(input: createUseCaseInput,
+                                                          disposeBag: disposeBag)
+        
+        bindCreateSuccess(createUseCaseOutput.isCreateSuccess,
+                          to: output.isCreateSuccess,
+                          disposeBag)
+        bindModelTitle(input.modelTitle, disposeBag)
+        bindDivideCount(input.divideCount, disposeBag)
+        bindCompleteEvent(input.completeEvent, disposeBag)
         
         return output
     }
@@ -50,20 +55,24 @@ final class BlockCreateViewModel {
 }
 
 private extension BlockCreateViewModel {
-    func bind(_ input: Input, _ disposeBag: DisposeBag) {
-        input.modelTitle
+    func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
+        modelTitle
             .subscribe(onNext: { [weak self] title in
                 guard let self else { return }
                 self.modelTitle = title
             }).disposed(by: disposeBag)
-        
-        input.divideCount
+    }
+    
+    func bindDivideCount(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
+        divideCount
             .subscribe(onNext: { [weak self] divideCount in
                 guard let self else { return }
                 self.divideCount = divideCount
             }).disposed(by: disposeBag)
-        
-        input.completeEvent
+    }
+    
+    func bindCompleteEvent(_ completeEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
+        completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
                 guard let self = self,
                       let title = self.modelTitle,
@@ -86,6 +95,20 @@ private extension BlockCreateViewModel {
                     /* coordinaotr just finish */
                     
                 }
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindCreateSuccess(_ isCreateSuccess: Observable<Bool>,
+                           to isCreateSuccessRelay: PublishRelay<Bool>,
+                           _ disposeBag: DisposeBag) {
+        isCreateSuccess
+            .subscribe(onNext: { [weak self] isCreateSuccess in
+                guard let self = self else { return }
+                if isCreateSuccess {
+                    self.fetchRefreshDelegate?.refresh()
+                }
+                
+                isCreateSuccessRelay.accept(isCreateSuccess)
             }).disposed(by: disposeBag)
     }
 }

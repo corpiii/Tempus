@@ -28,7 +28,7 @@ final class BlockEditUseCaseTest: XCTestCase {
         modelFetchEvent = .init()
         disposeBag = .init()
         
-        editUseCaseInput = .init(modelEditEvent: modelEditEvent, modelFetchEvent: modelFetchEvent)
+        editUseCaseInput = .init(modelEditEvent: modelEditEvent)
         editUseCaseOutput = blockEditUseCase.transform(input: editUseCaseInput, disposeBag: disposeBag)
     }
 

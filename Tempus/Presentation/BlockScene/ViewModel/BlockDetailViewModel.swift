@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/04/25.
 //
 
-import Foundation
-
 import RxSwift
 
 final class BlockDetailViewModel {
@@ -17,57 +15,59 @@ final class BlockDetailViewModel {
     }
     
     struct Output {
-        let modelTitle: PublishSubject<String>
-        let divideCount: PublishSubject<Int>
+        let originModelSubject: BehaviorSubject<BlockModel>
     }
     
-    private var originModel: BlockModel {
-        didSet {
-            self.modelTitle.onNext(originModel.title)
-            self.modelDivideCount.onNext(originModel.divideCount)
-        }
-    }
-    
-    private let modelTitle: PublishSubject<String>
-    private let modelDivideCount: PublishSubject<Int>
+    private let originModelSubject: BehaviorSubject<BlockModel>
     
     init(originModel: BlockModel) {
-        self.modelTitle = .init()
-        self.modelDivideCount = .init()
-        self.originModel = originModel
+        self.originModelSubject = .init(value: originModel)
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(modelTitle: modelTitle,
-                            divideCount: modelDivideCount)
+        let output = Output(originModelSubject: originModelSubject)
         
-        input.startButtonTapEvent
+        bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
+        bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
+        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
+        
+        return output
+    }
+}
+
+private extension BlockDetailViewModel {
+    func bindStartButtonTapEvent(_ startEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        startEvent
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                let startUseCase = BlockStartUseCase(originModel: self.originModel)
+                guard let self,
+                      let originModel = try? self.originModelSubject.value() else { return }
+                
+                let startUseCase = BlockStartUseCase(originModel: originModel)
                 // coordinator push with startUseCase
             }).disposed(by: disposeBag)
-        
-        input.editButtonTapEvent
+    }
+    
+    func bindEditButtonTapEvent(_ EditEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        EditEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 // coordinator push with originModel
                 // and push with self and refresh with edited Data
             }).disposed(by: disposeBag)
-        
-        input.cancelButtonTapEvent
+    }
+    
+    func bindCancelButtonTapEvent(_ CancelEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        CancelEvent
             .subscribe(onNext: {
                 // coordinator finish
             }).disposed(by: disposeBag)
-        
-        return output
     }
 }
 
 extension BlockDetailViewModel: EditReflectDelegate {
     func reflect(_ model: Mode) {
         if let model = model as? BlockModel {
-            self.originModel = model
+            self.originModelSubject.onNext(model)
         }
     }
 }

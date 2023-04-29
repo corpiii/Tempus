@@ -7,19 +7,22 @@
 
 import XCTest
 
+import RxSwift
+
 final class DailyDeleteUseCaseTest: XCTestCase {
     var repository: DataManagerRepositoryMock!
-    var createUseCase: DailyCreateUseCase!
     var deleteUseCase: DailyDeleteUseCase!
+    var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
         repository = DataManagerRepositoryMock()
-        createUseCase = DailyCreateUseCase(repository: repository)
         deleteUseCase = DailyDeleteUseCase(repository: repository)
+        disposeBag = .init()
     }
     
     func test_delete_is_success() {
         // Arrange
+        let expectation = XCTestExpectation(description: "delete_test_isSuccess")
         let id = UUID()
         let title = "testTitle"
         let startTime: Double = 123456
@@ -32,15 +35,25 @@ final class DailyDeleteUseCaseTest: XCTestCase {
                                repeatCount: repeatCount,
                                focusTime: focusTime,
                                breakTime: breakTime)
-        try! createUseCase.execute(model: model) {}
+        try! repository.create(model)
+        XCTAssertNotNil(repository.dailyModel)
         
-        // Act, Assert
-        do {
-            try deleteUseCase.execute(model: model) {}
-            XCTAssertNil(repository.dailyModel)
-        } catch {
-            XCTFail()
-        }
+        // Act
+        let deleteEvent: PublishSubject<DailyModel> = .init()
+        let deleteUseCaseInput = DailyDeleteUseCase.Input(modelDeleteEvent: deleteEvent)
+        let deleteUseCaseOutput = deleteUseCase.transform(input: deleteUseCaseInput, disposeBag: disposeBag)
+        
+        deleteUseCaseOutput.isDeleteSuccess
+            .subscribe(onNext: { isSuccess in
+                XCTAssertTrue(isSuccess)
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        deleteEvent.onNext(model)
+        
+        // Assert
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertNil(repository.dailyModel)
     }
     
 }
