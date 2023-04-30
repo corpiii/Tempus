@@ -29,37 +29,11 @@ final class DailyInfoCreateViewModel {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.modelTitle
-            .subscribe(onNext: { [weak self] title in
-                guard let self = self else { return }
-                self.modelTitle = title
-            }).disposed(by: disposeBag)
+        bindModelTitle(input.modelTitle, disposeBag)
+        bindModelFocusTime(input.modelFocusTime, disposeBag)
+        bindModelBreakTime(input.modelBreakTime, disposeBag)
         
-        input.modelFocusTime
-            .subscribe(onNext: { [weak self] focusTime in
-                guard let self = self else { return }
-                self.modelFocusTime = focusTime
-            }).disposed(by: disposeBag)
-        
-        input.modelBreakTime
-            .subscribe(onNext: { [weak self] breakTime in
-                guard let self = self else { return }
-                self.modelBreakTime = breakTime
-            }).disposed(by: disposeBag)
-        
-        input.nextButtonEvent
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                
-                if let modelTitle = self.modelTitle,
-                   let modelFocusTime = self.modelFocusTime,
-                   let modelBreakTime = self.modelBreakTime {
-                    
-                    // coordinaotr push with data
-                } else {
-                    output.isFillAllInfo.onNext(false)
-                }
-            }).disposed(by: disposeBag)
+        bindNextButtonEvent(input.nextButtonEvent, to: output.isFillAllInfo, disposeBag)
         
         return output
     }
@@ -69,5 +43,43 @@ private extension DailyInfoCreateViewModel {
     /* finish function by coordinator */
     // func finish() {}
     
+    func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
+        modelTitle
+            .subscribe(onNext: { [weak self] title in
+                guard let self = self else { return }
+                self.modelTitle = title
+            }).disposed(by: disposeBag)
+    }
     
+    func bindModelFocusTime(_ modelFocusTime: Observable<Double>, _ disposeBag: DisposeBag) {
+        modelFocusTime
+            .subscribe(onNext: { [weak self] focusTime in
+                guard let self = self else { return }
+                self.modelFocusTime = focusTime
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindModelBreakTime(_ modelBreakTime: Observable<Double>, _ disposeBag: DisposeBag) {
+        modelBreakTime
+            .subscribe(onNext: { [weak self] breakTime in
+                guard let self = self else { return }
+                self.modelBreakTime = breakTime
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindNextButtonEvent(_ nextButtonTapEvent: Observable<Void>, to isFillAllInfo: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
+        nextButtonTapEvent
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                
+                if let modelTitle = self.modelTitle,
+                   let modelFocusTime = self.modelFocusTime,
+                   let modelBreakTime = self.modelBreakTime {
+                    
+                    // coordinaotr push with data
+                } else {
+                    isFillAllInfo.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+    }
 }
