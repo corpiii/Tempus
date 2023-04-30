@@ -34,6 +34,7 @@ final class DailyInfoCreateViewModel {
         bindModelBreakTime(input.modelBreakTime, disposeBag)
         
         bindNextButtonEvent(input.nextButtonEvent, to: output.isFillAllInfo, disposeBag)
+        bindCancelButtonTapEvent(input.cancelButtonEvent, disposeBag)
         
         return output
     }
@@ -76,10 +77,20 @@ private extension DailyInfoCreateViewModel {
                    let modelFocusTime = self.modelFocusTime,
                    let modelBreakTime = self.modelBreakTime {
                     
-                    // coordinaotr push with data
+                    // coordinator push with data
                 } else {
                     isFillAllInfo.onNext(false)
                 }
             }).disposed(by: disposeBag)
     }
+    
+    func bindCancelButtonTapEvent(_ cancelButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        cancelButtonTapEvent
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                
+                // coordinator finish addScene
+            }).disposed(by: disposeBag)
+    }
+
 }
