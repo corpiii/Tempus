@@ -12,7 +12,7 @@ import RxRelay
 
 final class BlockCreateViewModel {
     struct Input {
-        let completeEvent: Observable<CompleteAlert>
+        let completeButtonTapEvent: Observable<CompleteAlert>
         let modelTitle: Observable<String>
         let divideCount: Observable<Int>
     }
@@ -45,7 +45,7 @@ final class BlockCreateViewModel {
                           disposeBag)
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.divideCount, disposeBag)
-        bindCompleteEvent(input.completeEvent, disposeBag)
+        bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
         
         return output
     }
@@ -71,7 +71,7 @@ private extension BlockCreateViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindCompleteEvent(_ completeEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
+    func bindCompleteButtonTapEvent(_ completeEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
         completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
                 guard let self = self,
