@@ -7,17 +7,29 @@
 
 import XCTest
 
+import RxSwift
+
 final class DailyCreateUseCaseTest: XCTestCase {
-    var dailyCreateUseCase: DailyCreateUseCase!
     var coreDataRepositoryMock: DataManagerRepositoryMock!
+    var disposeBag: DisposeBag!
+    var dailyCreateUseCase: DailyCreateUseCase!
+    var modelCreateEvent: PublishSubject<DailyModel>!
+    var createUseCaseInput: DailyCreateUseCase.Input!
+    var createUseCaseOutput: DailyCreateUseCase.Output!
     
     override func setUpWithError() throws {
         coreDataRepositoryMock = DataManagerRepositoryMock()
+        disposeBag = .init()
         dailyCreateUseCase = DailyCreateUseCase(repository: coreDataRepositoryMock)
+        modelCreateEvent = .init()
+        createUseCaseInput = .init(modelCreate: modelCreateEvent)
+        createUseCaseOutput = dailyCreateUseCase.transform(input: createUseCaseInput, disposeBag: disposeBag)
     }
 
     func test_Daily_create_is_success() {
         // Arrange
+        let expectation = XCTestExpectation(description: "create_is_success")
+        
         let id = UUID()
         let title = "testTitle"
         let startTime: Double = 123456
@@ -31,12 +43,17 @@ final class DailyCreateUseCaseTest: XCTestCase {
                                focusTime: focusTime,
                                breakTime: breakTime)
         
-        // Act, Assert
-        do {
-            try dailyCreateUseCase.execute(model: model) {}
-            XCTAssertEqual(coreDataRepositoryMock.dailyModel!.id, id)
-        } catch {
-            XCTFail()
-        }
+        createUseCaseOutput.isCreateSuccess
+            .subscribe(onNext: { isCreateSuccess in
+                XCTAssertTrue(isCreateSuccess)
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        // Act
+        modelCreateEvent.onNext(model)
+        wait(for: [expectation], timeout: 1.0)
+        
+        // Assert
+        XCTAssertNotNil(coreDataRepositoryMock.dailyModel)
     }
 }
