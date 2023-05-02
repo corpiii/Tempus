@@ -75,9 +75,10 @@ private extension DailyInfoCreateViewModel {
                       self.modelTitle != nil,
                       self.modelFocusTime != nil,
                       self.modelBreakTime != nil else {
-                    return
+                          return isFillAllInfo.onNext(false)
                 }
                 
+                isFillAllInfo.onNext(true)
                 // coordinator push
             }).disposed(by: disposeBag)
     }

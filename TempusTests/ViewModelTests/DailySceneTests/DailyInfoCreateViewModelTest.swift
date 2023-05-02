@@ -7,29 +7,62 @@
 
 import XCTest
 
+import RxSwift
+
 final class DailyInfoCreateViewModelTest: XCTestCase {
+    var dailyInfoCreateViewModel: DailyInfoCreateViewModel!
+    var disposeBag: DisposeBag!
+    
+    var modelTitle: PublishSubject<String>!
+    var modelFocusTime: PublishSubject<Double>!
+    var modelBreakTime: PublishSubject<Double>!
+    var nextButtonTapEvent: PublishSubject<Void>!
+    
+    var dailyInfoCreateViewModelInput: DailyInfoCreateViewModel.Input!
+    var dailyInfoCreateViewModelOutput: DailyInfoCreateViewModel.Output!
 
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        dailyInfoCreateViewModel = .init()
+        disposeBag = .init()
+        
+        modelTitle = .init()
+        modelFocusTime = .init()
+        modelBreakTime = .init()
+        nextButtonTapEvent = .init()
+        
+        dailyInfoCreateViewModelInput = DailyInfoCreateViewModel.Input(cancelButtonEvent: PublishSubject<Void>(),
+                                                                       nextButtonEvent: nextButtonTapEvent,
+                                                                       modelTitle: modelTitle,
+                                                                       modelFocusTime: modelFocusTime,
+                                                                       modelBreakTime: modelBreakTime)
+        dailyInfoCreateViewModelOutput = dailyInfoCreateViewModel.transform(input: dailyInfoCreateViewModelInput,
+                                                                            disposeBag: disposeBag)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_isFillAllInfo_is_true() {
+        // Arrange
+        let expectation = XCTestExpectation(description: "isFillAllInfo_is_true")
+        let testTitle = "testTitle"
+        let testFocusTime = 1300.0
+        let testBreakTime = 300.0
+        var resultValue = false
+        
+        dailyInfoCreateViewModelOutput.isFillAllInfo
+            .subscribe(onNext: { isFillAllInfo in
+                print(isFillAllInfo)
+                resultValue = isFillAllInfo
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        // Act
+        modelTitle.onNext(testTitle)
+        modelFocusTime.onNext(testFocusTime)
+        modelBreakTime.onNext(testBreakTime)
+        nextButtonTapEvent.onNext(())
+        
+        // Assert
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertTrue(resultValue)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
