@@ -50,18 +50,17 @@ final class DailyTimeCreateViewModel {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.startTime
-            .subscribe(onNext: { [weak self] startTime in
-                guard let self = self else { return }
-                self.startTime = startTime
-            }).disposed(by: disposeBag)
+        let createUseCaseInput = DailyCreateUseCase.Input(modelCreate: modelCreateEvent)
+        let createUseCaseOutput = createUseCase.transform(input: createUseCaseInput,
+                                                          disposeBag: disposeBag)
         
-        input.repeatCount
-            .subscribe(onNext: { [weak self] repeatCount in
-                guard let self = self else { return }
-                self.repeatCount = repeatCount
-            }).disposed(by: disposeBag)
-    
+        bindStartTime(input.startTime, disposeBag)
+        bindRepeatCount(input.repeatCount, disposeBag)
+        bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
+        bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
+        bindCreateSuccess(createUseCaseOutput.isCreateSuccess,
+                          to: output.isCreateSuccess,
+                          disposeBag)
         
         return output
     }
@@ -133,6 +132,7 @@ private extension DailyTimeCreateViewModel {
                 if isSuccess {
                     self.fetchRefreshDelegate?.refresh()
                 }
+                
                 isCreateSuccess.accept(isSuccess)
             }).disposed(by: disposeBag)
     }

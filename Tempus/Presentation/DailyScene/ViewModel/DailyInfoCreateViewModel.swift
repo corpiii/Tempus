@@ -71,16 +71,14 @@ private extension DailyInfoCreateViewModel {
     func bindNextButtonEvent(_ nextButtonTapEvent: Observable<Void>, to isFillAllInfo: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
         nextButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                
-                if let modelTitle = self.modelTitle,
-                   let modelFocusTime = self.modelFocusTime,
-                   let modelBreakTime = self.modelBreakTime {
-                    
-                    // coordinator push with data
-                } else {
-                    isFillAllInfo.onNext(false)
+                guard let self = self,
+                      self.modelTitle != nil,
+                      self.modelFocusTime != nil,
+                      self.modelBreakTime != nil else {
+                    return
                 }
+                
+                // coordinator push
             }).disposed(by: disposeBag)
     }
     
@@ -89,7 +87,7 @@ private extension DailyInfoCreateViewModel {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 
-                // coordinator finish addScene
+                // coordinator finish createScene
             }).disposed(by: disposeBag)
     }
 
