@@ -7,29 +7,70 @@
 
 import XCTest
 
+import RxSwift
+
 final class DailyTimeCreateViewModelTest: XCTestCase {
-
+    var repositoryMock: DataManagerRepositoryMock!
+    var disposeBag: DisposeBag!
+    var dailyListViewModel: DailyListViewModel!
+    var dailyListViewModelInput: DailyListViewModel.Input!
+    var dailyListViewModelOutput: DailyListViewModel.Output!
+    
+    var startTime: PublishSubject<Double>!
+    var repeatCount: PublishSubject<Int>!
+    var completeButtonTapEvent: PublishSubject<CompleteAlert>!
+    
+    var dailyTimeCreateViewModel: DailyTimeCreateViewModel!
+    var dailyTimeCreateViewModelInput: DailyTimeCreateViewModel.Input!
+    var dailyTimeCreateViewModelOutput: DailyTimeCreateViewModel.Output!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        repositoryMock = .init()
+        disposeBag = .init()
+        dailyListViewModel = .init(repository: repositoryMock)
+        dailyListViewModelInput = .init(addButtonEvent: PublishSubject<Void>(),
+                                        modelDeleteEvent: PublishSubject<DailyModel>(),
+                                        modelFetchEvent: PublishSubject<Void>())
+        dailyListViewModelOutput = dailyListViewModel.transform(input: dailyListViewModelInput, disposeBag: disposeBag)
+                
+        startTime = .init()
+        repeatCount = .init()
+        completeButtonTapEvent = .init()
+        
+        dailyTimeCreateViewModel = .init(modelTitle: "testTitle",
+                                         focusTime: 1.5 * 60 * 60,
+                                         breakTime: 5.0 * 60,
+                                         repository: repositoryMock,
+                                         fetchRefreshDelgate: dailyListViewModel)
+        dailyTimeCreateViewModelInput = .init(startTime: startTime,
+                                              repeatCount: repeatCount,
+                                              backButtonTapEvent: PublishSubject<Void>(),
+                                              completeButtonTapEvent: completeButtonTapEvent)
+        dailyTimeCreateViewModelOutput = dailyTimeCreateViewModel.transform(input: dailyTimeCreateViewModelInput,
+                                                                            disposeBag: disposeBag)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_create_is_success() {
+        // Arrange
+        let expectation = XCTestExpectation(description: "create_is_success")
+        let testStartTime = 12.0 * 60 * 60
+        let testRepeatCount = 4
+        var resultValue = false
+        
+        dailyTimeCreateViewModelOutput.isCreateSuccess
+            .subscribe(onNext: { isSuccess in
+                resultValue = isSuccess
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        // Act
+        startTime.onNext(testStartTime)
+        repeatCount.onNext(testRepeatCount)
+        completeButtonTapEvent.onNext(.completeWithoutStart)
+        
+        // Assert
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertTrue(resultValue)
     }
 
 }
