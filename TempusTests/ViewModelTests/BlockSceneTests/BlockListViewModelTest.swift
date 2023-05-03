@@ -9,9 +9,6 @@ import XCTest
 
 import RxSwift
 
-
-// createViewModelTests 만들기
-
 final class BlockListViewModelTest: XCTestCase {
     var blockListViewModel: BlockListViewModel!
     var repositoryMock: DataManagerRepositoryMock!
@@ -56,7 +53,6 @@ final class BlockListViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
         
         // Assert
-        
         if let resultModel {
             XCTAssertEqual(resultModel.id, testModel.id)
         } else {

@@ -11,53 +11,51 @@ import RxSwift
 
 final class BlockCreateViewModelTest: XCTestCase {
     var repositoryMock: DataManagerRepositoryMock!
-    var completeEvent: PublishSubject<CompleteAlert>!
-    var blockListViewModel: BlockListViewModel!
-    
-    var blockCreateViewModel: BlockCreateViewModel!
     var disposeBag: DisposeBag!
-    var listViewModelInput: BlockListViewModel.Input!
-    var listViewModelOutput: BlockListViewModel.Output!
+    
+    var completeButtonTapEvent: PublishSubject<CompleteAlert>!
+    var modelTitle: PublishSubject<String>!
+    var divideCount: PublishSubject<Int>!
+    
+    var fetchRefreshMock: FetchRefreshMock!
+    var blockCreateViewModel: BlockCreateViewModel!
+    var blockCreateViewModelInput: BlockCreateViewModel.Input!
+    var blockCreateViewModelOutput: BlockCreateViewModel.Output!
     
     override func setUpWithError() throws {
         repositoryMock = .init()
-        completeEvent = .init()
-        blockListViewModel = .init(repository: repositoryMock)
-        blockCreateViewModel = .init(repository: repositoryMock,
-                                     fetchRefreshDelegate: blockListViewModel)
         disposeBag = .init()
         
-        listViewModelInput = .init(addButtonEvent: PublishSubject<Void>(),
-                                   modelDeleteEvent: PublishSubject<BlockModel>(),
-                                   modelFetchEvent: PublishSubject<Void>())
-        listViewModelOutput = blockListViewModel.transform(input: listViewModelInput, disposeBag: disposeBag)
+        completeButtonTapEvent = .init()
+        modelTitle = .init()
+        divideCount = .init()
+        
+        fetchRefreshMock = .init()
+        blockCreateViewModel = .init(repository: repositoryMock,
+                                     fetchRefreshDelegate: fetchRefreshMock)
+        blockCreateViewModelInput = .init(completeButtonTapEvent: completeButtonTapEvent,
+                                          modelTitle: modelTitle,
+                                          divideCount: divideCount)
+        blockCreateViewModelOutput = blockCreateViewModel.transform(input: blockCreateViewModelInput,
+                                                                    disposeBag: disposeBag)
     }
     
     func test_create_is_success() {
         // Arrange
         let expectation = XCTestExpectation(description: "create_is_success_test")
-        let modelTitleObservable: PublishSubject<String> = .init()
-        let divideCountObservable: PublishSubject<Int> = .init()
         let testTitle = "testTitle"
         let testDivideCount = 4
         
-        let input = BlockCreateViewModel.Input(completeButtonTapEvent: completeEvent,
-                                               modelTitle: modelTitleObservable,
-                                               divideCount: divideCountObservable)
-        
-        let output = blockCreateViewModel.transform(input: input, disposeBag: disposeBag)
-        
-        output.isCreateSuccess
+        blockCreateViewModelOutput.isCreateSuccess
             .subscribe(onNext: { isSuccess in
-                if isSuccess {
-                    expectation.fulfill()
-                }
+                XCTAssertTrue(isSuccess)
+                expectation.fulfill()
             }).disposed(by: disposeBag)
         
         // Act
-        modelTitleObservable.onNext(testTitle)
-        divideCountObservable.onNext(testDivideCount)
-        completeEvent.onNext(.completeWithoutStart)
+        modelTitle.onNext(testTitle)
+        divideCount.onNext(testDivideCount)
+        completeButtonTapEvent.onNext(.completeWithoutStart)
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
