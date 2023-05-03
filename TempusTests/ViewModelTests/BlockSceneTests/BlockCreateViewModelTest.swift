@@ -41,7 +41,7 @@ final class BlockCreateViewModelTest: XCTestCase {
         let testTitle = "testTitle"
         let testDivideCount = 4
         
-        let input = BlockCreateViewModel.Input(completeEvent: completeEvent,
+        let input = BlockCreateViewModel.Input(completeButtonTapEvent: completeEvent,
                                                modelTitle: modelTitleObservable,
                                                divideCount: divideCountObservable)
         
