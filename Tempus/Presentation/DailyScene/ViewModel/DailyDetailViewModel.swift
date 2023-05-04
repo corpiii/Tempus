@@ -1,13 +1,13 @@
 //
-//  BlockDetailViewModel.swift
+//  DailyDetailViewModel.swift
 //  Tempus
 //
-//  Created by 이정민 on 2023/04/25.
+//  Created by 이정민 on 2023/05/04.
 //
 
 import RxSwift
 
-final class BlockDetailViewModel {
+final class DailyDetailViewModel {
     struct Input {
         let startButtonTapEvent: Observable<Void>
         let editButtonTapEvent: Observable<Void>
@@ -15,34 +15,34 @@ final class BlockDetailViewModel {
     }
     
     struct Output {
-        let originModelSubject: BehaviorSubject<BlockModel>
+        let originModelSubject: BehaviorSubject<DailyModel>
     }
     
-    private let originModelSubject: BehaviorSubject<BlockModel>
+    private let originModelSubject: BehaviorSubject<DailyModel>
     
-    init(originModel: BlockModel) {
+    init(originModel: DailyModel) {
         self.originModelSubject = .init(value: originModel)
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(originModelSubject: originModelSubject)
         
-        bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
-        bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
         bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
-        
+        bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
+        bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
+                
         return output
     }
 }
 
-private extension BlockDetailViewModel {
+private extension DailyDetailViewModel {
     func bindStartButtonTapEvent(_ startEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         startEvent
             .subscribe(onNext: { [weak self] in
                 guard let self,
                       let originModel = try? self.originModelSubject.value() else { return }
                 
-                let startUseCase = BlockStartUseCase(originModel: originModel)
+                let startUseCase = DailyStartUseCase(originModel: originModel)
                 // coordinator push with startUseCase
             }).disposed(by: disposeBag)
     }
@@ -64,10 +64,11 @@ private extension BlockDetailViewModel {
     }
 }
 
-extension BlockDetailViewModel: EditReflectDelegate {
+extension DailyDetailViewModel: EditReflectDelegate {
     func reflect(_ model: Mode) {
-        if let model = model as? BlockModel {
+        if let model = model as? DailyModel {
             self.originModelSubject.onNext(model)
         }
     }
 }
+
