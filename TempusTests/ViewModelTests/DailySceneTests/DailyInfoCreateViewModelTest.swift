@@ -21,7 +21,6 @@ final class DailyInfoCreateViewModelTest: XCTestCase {
     var dailyInfoCreateViewModelInput: DailyInfoCreateViewModel.Input!
     var dailyInfoCreateViewModelOutput: DailyInfoCreateViewModel.Output!
 
-    
     override func setUpWithError() throws {
         dailyInfoCreateViewModel = .init()
         disposeBag = .init()
@@ -48,6 +47,7 @@ final class DailyInfoCreateViewModelTest: XCTestCase {
         let testBreakTime = 300.0
         var resultValue = false
         
+        // Act
         dailyInfoCreateViewModelOutput.isFillAllInfo
             .subscribe(onNext: { isFillAllInfo in
                 print(isFillAllInfo)
@@ -55,7 +55,6 @@ final class DailyInfoCreateViewModelTest: XCTestCase {
                 expectation.fulfill()
             }).disposed(by: disposeBag)
         
-        // Act
         modelTitle.onNext(testTitle)
         modelFocusTime.onNext(testFocusTime)
         modelBreakTime.onNext(testBreakTime)

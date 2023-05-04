@@ -14,20 +14,14 @@ final class BlockEditViewModelTest: XCTestCase {
     var originModel: BlockModel!
     var disposeBag: DisposeBag!
     
-    var blockListViewModel: BlockListViewModel!
-    var listViewModelInput: BlockListViewModel.Input!
-    var listViewModelOutput: BlockListViewModel.Output!
-    
-    var blockDetailViewModel: BlockDetailViewModel!
-    var detailViewModelInput: BlockDetailViewModel.Input!
-    var detailViewModelOutput: BlockDetailViewModel.Output!
-    
-    var blockEditViewModel: BlockEditViewModel!
+    var fetchRefreshMock: FetchRefreshMock!
+    var editReflectMock: EditReflectMock!
     
     var modelTitle: PublishSubject<String>!
     var modelDivideCount: PublishSubject<Int>!
     var completeButtonTapEvent: PublishSubject<Void>!
     
+    var blockEditViewModel: BlockEditViewModel!
     var editViewModelInput: BlockEditViewModel.Input!
     var editViewModelOutput: BlockEditViewModel.Output!
     
@@ -36,30 +30,17 @@ final class BlockEditViewModelTest: XCTestCase {
         originModel = .init(id: UUID(), title: "testTitle", divideCount: 4)
         disposeBag = .init()
         
-        blockListViewModel = .init(repository: repositoryMock)
-        listViewModelInput = .init(addButtonEvent: PublishSubject<Void>(),
-                                   modelDeleteEvent: PublishSubject<BlockModel>(),
-                                   modelFetchEvent: PublishSubject<Void>())
-        listViewModelOutput = blockListViewModel.transform(input: listViewModelInput,
-                                                           disposeBag: disposeBag)
-
-        blockDetailViewModel = .init(originModel: originModel)
-        detailViewModelInput = BlockDetailViewModel.Input(
-            startButtonTapEvent: PublishSubject<Void>(),
-            editButtonTapEvent: PublishSubject<Void>(),
-            cancelButtonTapEvent: PublishSubject<Void>())
-        detailViewModelOutput = blockDetailViewModel.transform(input: detailViewModelInput,
-                                                               disposeBag: disposeBag)
-        
-        blockEditViewModel = .init(originModel: originModel,
-                                   repository: repositoryMock,
-                                   fetchRefreshDelegate: blockListViewModel,
-                                   editReflectDelegate: blockDetailViewModel)
+        fetchRefreshMock = .init()
+        editReflectMock = .init()
         
         modelTitle = .init()
         modelDivideCount = .init()
         completeButtonTapEvent = .init()
         
+        blockEditViewModel = .init(originModel: originModel,
+                                   repository: repositoryMock,
+                                   fetchRefreshDelegate: fetchRefreshMock,
+                                   editReflectDelegate: editReflectMock)
         editViewModelInput = .init(modelTitle: modelTitle,
                                    modelDivideCount: modelDivideCount,
                                    completeButtonTapEvent: completeButtonTapEvent)
@@ -70,7 +51,7 @@ final class BlockEditViewModelTest: XCTestCase {
     
     func test_edit_is_success() {
         // Arrange
-        let EditSuccessExpectation = XCTestExpectation(description: "edit_is_success_test")
+        let expectation = XCTestExpectation(description: "edit_is_success_test")
         let changeTitle = "changeTitle"
         let testDivideCount = 4
         
@@ -78,9 +59,8 @@ final class BlockEditViewModelTest: XCTestCase {
         
         editViewModelOutput.isEditSuccess
             .subscribe(onNext: { isEditSuccess in
-                if isEditSuccess {
-                    EditSuccessExpectation.fulfill()
-                }
+                XCTAssertTrue(isEditSuccess)
+                expectation.fulfill()
             }).disposed(by: disposeBag)
         
         // Act
@@ -89,7 +69,7 @@ final class BlockEditViewModelTest: XCTestCase {
         completeButtonTapEvent.onNext(())
         
         // Assert
-        wait(for: [EditSuccessExpectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(repositoryMock.blockModel?.title, changeTitle)
     }
 }
