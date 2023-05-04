@@ -21,7 +21,6 @@ final class DailyInfoCreateViewModelTest: XCTestCase {
     var dailyInfoCreateViewModelInput: DailyInfoCreateViewModel.Input!
     var dailyInfoCreateViewModelOutput: DailyInfoCreateViewModel.Output!
 
-    
     override func setUpWithError() throws {
         dailyInfoCreateViewModel = .init()
         disposeBag = .init()

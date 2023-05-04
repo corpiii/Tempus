@@ -8,7 +8,7 @@
 final class FetchRefreshMock: FetchRefreshDelegate {
     func refresh() {
         #if DEBUG
-        print("BlockListVIewModelMock: refresh() called")
+        print("FetchRefreshDelegateMock: refresh() called")
         #endif
     }
 }
