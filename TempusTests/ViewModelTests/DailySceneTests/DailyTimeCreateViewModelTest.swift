@@ -57,13 +57,13 @@ final class DailyTimeCreateViewModelTest: XCTestCase {
         let testRepeatCount = 4
         var resultValue = false
         
+        // Act
         dailyTimeCreateViewModelOutput.isCreateSuccess
             .subscribe(onNext: { isSuccess in
                 resultValue = isSuccess
                 expectation.fulfill()
             }).disposed(by: disposeBag)
         
-        // Act
         startTime.onNext(testStartTime)
         repeatCount.onNext(testRepeatCount)
         completeButtonTapEvent.onNext(.completeWithoutStart)

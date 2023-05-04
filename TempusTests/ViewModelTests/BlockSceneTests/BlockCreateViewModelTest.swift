@@ -46,13 +46,13 @@ final class BlockCreateViewModelTest: XCTestCase {
         let testTitle = "testTitle"
         let testDivideCount = 4
         
+        // Act
         blockCreateViewModelOutput.isCreateSuccess
             .subscribe(onNext: { isSuccess in
                 XCTAssertTrue(isSuccess)
                 expectation.fulfill()
             }).disposed(by: disposeBag)
         
-        // Act
         modelTitle.onNext(testTitle)
         divideCount.onNext(testDivideCount)
         completeButtonTapEvent.onNext(.completeWithoutStart)
