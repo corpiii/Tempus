@@ -1,5 +1,5 @@
 //
-//  DailyTimeCreateViewModel.swift
+//  DailyTimeDurationCreateViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/02.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
-final class DailyTimeCreateViewModel {
+final class DailyTimeDurationCreateViewModel {
     struct Input {
         let startTime: Observable<Double>
         let repeatCount: Observable<Int>
@@ -69,7 +69,7 @@ final class DailyTimeCreateViewModel {
     // func finish() {}
 }
 
-private extension DailyTimeCreateViewModel {
+private extension DailyTimeDurationCreateViewModel {
     func bindStartTime(_ startTime: Observable<Double>, _ disposeBag: DisposeBag) {
         startTime
             .subscribe(onNext: { [weak self] startTime in
