@@ -27,9 +27,9 @@ final class TimerStartUseCase: ModeStartUseCase {
     private var timer: Timer?
     private let originModel: TimerModel
     
-    init(model: TimerModel) {
-        self.originModel = model
-        self.remainTime = Time(second: model.wasteTime)
+    init(originModel: TimerModel) {
+        self.originModel = originModel
+        self.remainTime = Time(second: originModel.wasteTime)
         self.modeState = .focusTime
     }
     
@@ -64,7 +64,7 @@ private extension TimerStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
 
-        let interval = 0.1
+        let interval = 1.0
         self.modeState = .focusTime
         
         remainTime = Time(second: originModel.wasteTime)

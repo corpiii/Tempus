@@ -23,7 +23,6 @@ extension TimerEntity {
     
     var toModel: TimerModel {
         return TimerModel(id: uuid,
-                          title: title,
                           wasteTime: wasteTime)
     }
 }
