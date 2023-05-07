@@ -7,29 +7,49 @@
 
 import XCTest
 
+import RxSwift
+
 final class TimerStartViewModelTest: XCTestCase {
-
+    var timerStartViewModel: TimerStartViewModel!
+    var disposeBag: DisposeBag!
+    
+    var modelWasteTime: PublishSubject<Double>!
+    var startButtonTapEvent: PublishSubject<Void>!
+    
+    var input: TimerStartViewModel.Input!
+    var output: TimerStartViewModel.Output!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        timerStartViewModel = .init()
+        disposeBag = .init()
+        
+        modelWasteTime = .init()
+        startButtonTapEvent = .init()
+        
+        input = .init(modelWasteTime: modelWasteTime, startButtonTapEvent: startButtonTapEvent)
+        output = timerStartViewModel.transform(input: input, disposeBag: disposeBag)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_start_is_success() {
+        // Arrange
+        let expectation = XCTestExpectation(description: "start_is_success")
+        let testWasteTime = 3.0 * 60 * 60
+        var result = false
+        
+        // Act
+        output.isStartSuccess
+            .subscribe(onNext: { isStartSuccess in
+                print("??")
+                result = isStartSuccess
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        modelWasteTime.onNext(testWasteTime)
+        startButtonTapEvent.onNext(())
+        
+        // Assert
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertTrue(result)
     }
 
 }
