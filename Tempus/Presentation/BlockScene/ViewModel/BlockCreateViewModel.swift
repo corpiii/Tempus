@@ -14,7 +14,7 @@ final class BlockCreateViewModel {
     struct Input {
         let completeButtonTapEvent: Observable<CompleteAlert>
         let modelTitle: Observable<String>
-        let divideCount: Observable<Int>
+        let modelDivideCount: Observable<Int>
     }
     
     struct Output {
@@ -44,7 +44,7 @@ final class BlockCreateViewModel {
                           to: output.isCreateSuccess,
                           disposeBag)
         bindModelTitle(input.modelTitle, disposeBag)
-        bindDivideCount(input.divideCount, disposeBag)
+        bindDivideCount(input.modelDivideCount, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
         
         return output

@@ -10,8 +10,8 @@ import RxSwift
 
 final class DailyInfoCreateViewModel {
     struct Input {
-        let cancelButtonEvent: Observable<Void>
-        let nextButtonEvent: Observable<Void>
+        let cancelButtonTapEvent: Observable<Void>
+        let nextButtonTapEvent: Observable<Void>
         
         let modelTitle: Observable<String>
         let modelFocusTime: Observable<Double>
@@ -33,8 +33,8 @@ final class DailyInfoCreateViewModel {
         bindModelFocusTime(input.modelFocusTime, disposeBag)
         bindModelBreakTime(input.modelBreakTime, disposeBag)
         
-        bindNextButtonEvent(input.nextButtonEvent, to: output.isFillAllInfo, disposeBag)
-        bindCancelButtonTapEvent(input.cancelButtonEvent, disposeBag)
+        bindNextButtonEvent(input.nextButtonTapEvent, to: output.isFillAllInfo, disposeBag)
+        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
         
         return output
     }

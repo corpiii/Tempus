@@ -1,5 +1,5 @@
 //
-//  DailyTimeCreateViewModel.swift
+//  DailyTimeDurationCreateViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/02.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
-final class DailyTimeCreateViewModel {
+final class DailyTimeDurationCreateViewModel {
     struct Input {
         let startTime: Observable<Double>
         let repeatCount: Observable<Int>
@@ -69,20 +69,18 @@ final class DailyTimeCreateViewModel {
     // func finish() {}
 }
 
-private extension DailyTimeCreateViewModel {
+private extension DailyTimeDurationCreateViewModel {
     func bindStartTime(_ startTime: Observable<Double>, _ disposeBag: DisposeBag) {
         startTime
             .subscribe(onNext: { [weak self] startTime in
-                guard let self = self else { return }
-                self.startTime = startTime
+                self?.startTime = startTime
             }).disposed(by: disposeBag)
     }
     
     func bindRepeatCount(_ repeatCount: Observable<Int>, _ disposeBag: DisposeBag) {
         repeatCount
             .subscribe(onNext: { [weak self] repeatCount in
-                guard let self = self else { return }
-                self.repeatCount = repeatCount
+                self?.repeatCount = repeatCount
             }).disposed(by: disposeBag)
     }
     
@@ -90,7 +88,6 @@ private extension DailyTimeCreateViewModel {
                                 _ disposeBag: DisposeBag) {
         backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
                 // coordinator pop
             }).disposed(by: disposeBag)
     }
@@ -99,8 +96,8 @@ private extension DailyTimeCreateViewModel {
                            _ disposeBag: DisposeBag) {
         completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
-                guard let self = self else { return }
-                guard let startTime = self.startTime,
+                guard let self = self,
+                      let startTime = self.startTime,
                       let repeatCount = self.repeatCount else { return }
                 
                 let model = DailyModel(id: UUID(),
