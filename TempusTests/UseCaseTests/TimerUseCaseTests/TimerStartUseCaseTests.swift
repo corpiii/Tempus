@@ -10,9 +10,7 @@ import XCTest
 import RxSwift
 
 final class TimerStartUseCaseTests: XCTestCase {
-    var timerModel: TimerModel = .init(id: UUID(),
-                                       title: "testTitle",
-                                       wasteTime: 3.0)
+    var timerModel: TimerModel = .init(id: UUID(), wasteTime: 3.0)
     var timerStartUseCase: TimerStartUseCase!
     var disposeBag: DisposeBag!
     var input: TimerStartUseCase.Input!
@@ -22,7 +20,7 @@ final class TimerStartUseCaseTests: XCTestCase {
     var modeStopEvent: PublishSubject<Void> = .init()
     
     override func setUpWithError() throws {
-        timerStartUseCase = TimerStartUseCase(model: timerModel)
+        timerStartUseCase = TimerStartUseCase(originModel: timerModel)
         disposeBag = DisposeBag()
         input = .init(modeStartEvent: modeStartEvent, modeStopEvent: modeStopEvent)
         output = timerStartUseCase.transform(input: input, disposeBag: disposeBag)
@@ -34,7 +32,7 @@ final class TimerStartUseCaseTests: XCTestCase {
         var resultValues: [Double] = []
         let expectation = XCTestExpectation(description: "timer completed")
 
-        for i in stride(from: timerModel.wasteTime, to: 0, by: -0.1) {
+        for i in stride(from: timerModel.wasteTime, to: 0, by: -1) {
             let value = abs(round(i * 10)) / 10
             expectValues.append(value)
         }

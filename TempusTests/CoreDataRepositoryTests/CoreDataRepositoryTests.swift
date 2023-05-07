@@ -108,7 +108,7 @@ extension CoreDataRepositoryTests {
         let uuid = UUID()
         let testTitle = "testTitle"
         let time = 10
-        let model = TimerModel(id: uuid, title: testTitle, wasteTime: Double(time))
+        let model = TimerModel(id: uuid, wasteTime: Double(time))
         
         try! repository.create(model)
         
