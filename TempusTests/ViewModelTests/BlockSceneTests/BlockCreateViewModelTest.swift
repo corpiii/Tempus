@@ -35,7 +35,7 @@ final class BlockCreateViewModelTest: XCTestCase {
                                      fetchRefreshDelegate: fetchRefreshMock)
         blockCreateViewModelInput = .init(completeButtonTapEvent: completeButtonTapEvent,
                                           modelTitle: modelTitle,
-                                          divideCount: divideCount)
+                                          modelDivideCount: divideCount)
         blockCreateViewModelOutput = blockCreateViewModel.transform(input: blockCreateViewModelInput,
                                                                     disposeBag: disposeBag)
     }

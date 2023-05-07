@@ -7,19 +7,32 @@
 
 import XCTest
 
+import RxSwift
+
 final class DailyEditUseCaseTest: XCTestCase {
-    var dailyCreateUseCase: DailyCreateUseCase!
-    var dailyEditUseCase: DailyEditUseCase!
     var coreDataRepositoryMock: DataManagerRepositoryMock!
+    var disposeBag: DisposeBag!
+    
+    var dailyEditUseCase: DailyEditUseCase!
+    
+    var editEvent: PublishSubject<DailyModel>!
+    var input: DailyEditUseCase.Input!
+    var output: DailyEditUseCase.Output!
     
     override func setUpWithError() throws {
         coreDataRepositoryMock = DataManagerRepositoryMock()
-        dailyEditUseCase = DailyEditUseCase(repository: coreDataRepositoryMock)
-        dailyCreateUseCase = DailyCreateUseCase(repository: coreDataRepositoryMock)
+        disposeBag = .init()
+        
+        dailyEditUseCase = .init(repository: coreDataRepositoryMock)
+
+        editEvent = .init()
+        input = .init(modelEditEvent: editEvent)
+        output = dailyEditUseCase.transform(input: input, disposeBag: disposeBag)
     }
 
     func test_Daily_edit_is_success() {
         // Arrange
+        let expectation = XCTestExpectation(description: "edit_is_success")
         let id = UUID()
         let title = "testTitle"
         let changeTitle = "changeTitle"
@@ -33,15 +46,20 @@ final class DailyEditUseCaseTest: XCTestCase {
                                repeatCount: repeatCount,
                                focusTime: focusTime,
                                breakTime: breakTime)
-        try! dailyCreateUseCase.execute(model: model) {}
         
-        // Act, Assert
+        try! coreDataRepositoryMock.create(model)
+        
+        // Act
+        output.isEditSuccess
+            .subscribe(onNext: { isSuccess in
+                XCTAssertTrue(isSuccess)
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
         model.title = changeTitle
-        do {
-            try dailyCreateUseCase.execute(model: model) {}
-            XCTAssertEqual(coreDataRepositoryMock.dailyModel?.title, changeTitle)
-        } catch {
-            XCTFail()
-        }
+        editEvent.onNext(model)
+        
+        // Assert
+        XCTAssertEqual(coreDataRepositoryMock.dailyModel?.title, changeTitle)
     }
 }

@@ -30,8 +30,8 @@ final class DailyInfoCreateViewModelTest: XCTestCase {
         modelBreakTime = .init()
         nextButtonTapEvent = .init()
         
-        dailyInfoCreateViewModelInput = DailyInfoCreateViewModel.Input(cancelButtonEvent: PublishSubject<Void>(),
-                                                                       nextButtonEvent: nextButtonTapEvent,
+        dailyInfoCreateViewModelInput = DailyInfoCreateViewModel.Input(cancelButtonTapEvent: PublishSubject<Void>(),
+                                                                       nextButtonTapEvent: nextButtonTapEvent,
                                                                        modelTitle: modelTitle,
                                                                        modelFocusTime: modelFocusTime,
                                                                        modelBreakTime: modelBreakTime)

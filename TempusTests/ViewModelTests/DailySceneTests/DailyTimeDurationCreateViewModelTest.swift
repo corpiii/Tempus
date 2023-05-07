@@ -1,5 +1,5 @@
 //
-//  DailyTimeCreateViewModelTest.swift
+//  DailyTimeDurationCreateViewModelTest.swift
 //  TempusTests
 //
 //  Created by 이정민 on 2023/05/02.
@@ -9,7 +9,7 @@ import XCTest
 
 import RxSwift
 
-final class DailyTimeCreateViewModelTest: XCTestCase {
+final class DailyTimeDurationCreateViewModelTest: XCTestCase {
     var repositoryMock: DataManagerRepositoryMock!
     var disposeBag: DisposeBag!
     var fetchRefreshMock: FetchRefreshMock!
@@ -18,9 +18,9 @@ final class DailyTimeCreateViewModelTest: XCTestCase {
     var repeatCount: PublishSubject<Int>!
     var completeButtonTapEvent: PublishSubject<CompleteAlert>!
     
-    var dailyTimeCreateViewModel: DailyTimeCreateViewModel!
-    var dailyTimeCreateViewModelInput: DailyTimeCreateViewModel.Input!
-    var dailyTimeCreateViewModelOutput: DailyTimeCreateViewModel.Output!
+    var dailyTimeCreateViewModel: DailyTimeDurationCreateViewModel!
+    var dailyTimeCreateViewModelInput: DailyTimeDurationCreateViewModel.Input!
+    var dailyTimeCreateViewModelOutput: DailyTimeDurationCreateViewModel.Output!
     
     override func setUpWithError() throws {
         repositoryMock = .init()
