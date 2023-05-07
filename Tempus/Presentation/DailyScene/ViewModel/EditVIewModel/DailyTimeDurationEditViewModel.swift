@@ -44,7 +44,6 @@ final class DailyTimeDurationEditViewModel {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        
         let editUseCaseInput = DailyEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent)
         let editUseCaseOutput = editUseCase.transform(input: editUseCaseInput,
                                                       disposeBag: disposeBag)
@@ -64,16 +63,14 @@ private extension DailyTimeDurationEditViewModel {
     func bindStartTime(_ startTime: Observable<Double>, _ disposeBag: DisposeBag) {
         startTime
             .subscribe(onNext: { [weak self] startTime in
-                guard let self else { return }
-                self.startTime = startTime
+                self?.startTime = startTime
             }).disposed(by: disposeBag)
     }
     
     func bindRepeatCount(_ repeatCount: Observable<Int>, _ disposeBag: DisposeBag) {
         repeatCount
             .subscribe(onNext: { [weak self] repeatCount in
-                guard let self else { return }
-                self.repeatCount = repeatCount
+                self?.repeatCount = repeatCount
             }).disposed(by: disposeBag)
     }
     
@@ -97,8 +94,6 @@ private extension DailyTimeDurationEditViewModel {
     func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                
                 // coordinator pop
             })
             .disposed(by: disposeBag)
