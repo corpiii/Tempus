@@ -79,7 +79,7 @@ extension CoreDataRepositoryTests {
         
         // Act, Assert
         do {
-            try repository.create(model: model)
+            try repository.create(model)
         } catch {
             XCTFail()
         }
@@ -94,7 +94,7 @@ extension CoreDataRepositoryTests {
         
         // Act, Assert
         do {
-            try repository.create(model: model)
+            try repository.create(model)
         } catch {
             XCTFail()
         }
@@ -110,7 +110,7 @@ extension CoreDataRepositoryTests {
         let time = 10
         let model = TimerModel(id: uuid, title: testTitle, wasteTime: Double(time))
         
-        try! repository.create(model: model)
+        try! repository.create(model)
         
         // Act, Assert
         do {
