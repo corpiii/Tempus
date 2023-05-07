@@ -85,6 +85,7 @@ private extension DailyInfoEditViewModel {
                 self.originModel.focusTime = modelFocusTime
                 self.originModel.breakTime = modelBreakTime
                 
+                isFillAllInfo.onNext(true)
                 // coordinator push
             }).disposed(by: disposeBag)
     }
