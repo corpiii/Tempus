@@ -5,8 +5,6 @@
 //  Created by 이정민 on 2023/05/07.
 //
 
-import Foundation
-
 import RxSwift
 
 final class TimerStartViewModel {
@@ -50,5 +48,4 @@ private extension TimerStartViewModel {
                 // coordinator push with startUseCase
             }).disposed(by: disposeBag)
     }
-    
 }
