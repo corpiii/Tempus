@@ -12,10 +12,14 @@ import RxSwift
 import SnapKit
 
 class BlockListViewController: UIViewController {
+    private enum Section {
+        case main
+    }
+    
     var viewModel: BlockListViewModel?
     private let disposeBag: DisposeBag = .init()
     
-    private var tableViewDataSource: UITableViewDiffableDataSource<Int, BlockModel>
+    private var tableViewDataSource: UITableViewDiffableDataSource<Section, BlockModel>
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
@@ -26,7 +30,7 @@ class BlockListViewController: UIViewController {
     }()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        tableViewDataSource = UITableViewDiffableDataSource<Int, BlockModel>(tableView: tableView) { (tableView, indexPath, model) -> UITableViewCell? in
+        tableViewDataSource = UITableViewDiffableDataSource<Section, BlockModel>(tableView: tableView) { (tableView, indexPath, model) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "BlockTableViewCell", for: indexPath)
             cell.textLabel?.text = model.title
             
@@ -61,6 +65,10 @@ private extension BlockListViewController {
         }
         
         tableView.dataSource = tableViewDataSource
+        
+        var snapShot = NSDiffableDataSourceSnapshot<Section, BlockModel>()
+        snapShot.appendSections([.main])
+        tableViewDataSource.apply(snapShot)
     }
 }
 
@@ -77,7 +85,11 @@ private extension BlockListViewController {
         
         output.blockModelArray
             .subscribe(onNext: { models in
-                // tableView snapshot update
+                var snapshot = NSDiffableDataSourceSnapshot<Section, BlockModel>()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(models)
+                
+                self.tableViewDataSource.apply(snapshot)
             }).disposed(by: disposeBag)
         
         output.isDeleteSuccess
