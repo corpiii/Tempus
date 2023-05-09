@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimerModel: Mode {
+struct TimerModel: Mode, Hashable {
     let id: UUID
     var wasteTime: Double
 }

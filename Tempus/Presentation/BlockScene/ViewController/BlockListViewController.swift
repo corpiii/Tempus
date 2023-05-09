@@ -15,21 +15,38 @@ class BlockListViewController: UIViewController {
     var viewModel: BlockListViewModel?
     private let disposeBag: DisposeBag = .init()
     
-    private let blockCollectionView: UICollectionView = {
+    private var tableViewDataSource: UITableViewDiffableDataSource<Int, BlockModel>
+    private let tableView: UITableView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let tableView = UITableView(frame: .zero)
+        tableView.backgroundColor = .systemBackground
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BlockTableViewCell")
         
-        return collectionView
+        return tableView
     }()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        tableViewDataSource = UITableViewDiffableDataSource<Int, BlockModel>(tableView: tableView) { (tableView, indexPath, model) -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BlockTableViewCell", for: indexPath)
+            cell.textLabel?.text = model.title
+            
+            return cell
+        }
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureUI()
         bindViewModel()
     }
@@ -37,8 +54,9 @@ class BlockListViewController: UIViewController {
 
 private extension BlockListViewController {
     func configureUI() {
-        // blockCollectionView edge to safeArea
-        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     func bindViewModel() {
@@ -52,7 +70,7 @@ private extension BlockListViewController {
         
         output.blockModelArray
             .subscribe(onNext: { models in
-                // collectionView update
+                // tableView snapshot update
             }).disposed(by: disposeBag)
             
         output.isDeleteSuccess
