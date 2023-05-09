@@ -17,10 +17,6 @@ class BlockListViewController: UIViewController {
     
     private var tableViewDataSource: UITableViewDiffableDataSource<Int, BlockModel>
     private let tableView: UITableView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,13 +48,24 @@ class BlockListViewController: UIViewController {
     }
 }
 
+
+// MARK: - ConfigureUI
 private extension BlockListViewController {
     func configureUI() {
+        configureTableView()
+    }
+    
+    func configureTableView() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        tableView.dataSource = tableViewDataSource
     }
-    
+}
+
+// MARK: - BindViewModel
+private extension BlockListViewController {
     func bindViewModel() {
         let input = BlockListViewModel.Input(addButtonEvent: PublishSubject<Void>(),
                                              modelDeleteEvent: PublishSubject<BlockModel>(),
@@ -72,7 +79,7 @@ private extension BlockListViewController {
             .subscribe(onNext: { models in
                 // tableView snapshot update
             }).disposed(by: disposeBag)
-            
+        
         output.isDeleteSuccess
             .subscribe(onNext: { isDeleteSuccess in
                 // Alert
