@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BlockModel: Mode {
+struct BlockModel: Mode, Hashable {
     let id: UUID
     var title: String
     var divideCount: Int

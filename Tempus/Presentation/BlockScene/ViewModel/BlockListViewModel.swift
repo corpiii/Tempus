@@ -13,18 +13,19 @@ final class BlockListViewModel {
     struct Input {
         let addButtonEvent: Observable<Void>
         let modelDeleteEvent: Observable<BlockModel>
-        let modelFetchEvent: PublishSubject<Void>
+        let modelFetchEvent: Observable<Void>
+        let modelTapEvent: Observable<BlockModel>
     }
     
     struct Output {
         let blockModelArray: BehaviorSubject<[BlockModel]> = .init(value: [])
-        let isDeleteSuccess: PublishRelay<Bool> = .init()
+        let isDeleteSuccess: PublishRelay<Result<BlockModel, DataManageError>> = .init()
     }
     
     private var blockFetchUseCase: BlockFetchUseCase
     private var blockDeleteUseCase: BlockDeleteUseCase
     
-    private var modelFetchEvent: PublishSubject<Void>!
+    private var modelFetchEvent: PublishSubject<Void> = .init()
     
     init(repository: DataManagerRepository) {
         self.blockFetchUseCase = .init(repository: repository)
@@ -33,9 +34,8 @@ final class BlockListViewModel {
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
-        self.modelFetchEvent = input.modelFetchEvent
         
-        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: input.modelFetchEvent)
+        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: modelFetchEvent)
         let fetchUseCaseOutput = blockFetchUseCase.transform(input: fetchUseCaseInput,
                                                              disposeBag: disposeBag)
         
@@ -47,23 +47,26 @@ final class BlockListViewModel {
             .bind(to: output.blockModelArray)
             .disposed(by: disposeBag)
         
-        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
+        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
+        bindModelFetchEvent(input.modelFetchEvent, disposeBag: disposeBag)
+        bindModelTapButton(input.modelTapEvent, disposeBag: disposeBag)
         
         return output
     }
 }
 
 private extension BlockListViewModel {
-    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Bool>, to isDeleteSuccess: PublishRelay<Bool>, _ disposeBag: DisposeBag) {
+    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Result<BlockModel, DataManageError>>, to isDeleteSuccess: PublishRelay<Result<BlockModel, DataManageError>>, _ disposeBag: DisposeBag) {
         deleteEvent
-            .subscribe(onNext: { [weak self] isSuccess in
+            .subscribe(onNext: { [weak self] result in
                 guard let self = self else { return }
-                if isSuccess {
+                
+                isDeleteSuccess.accept(result)
+                
+                if case .success = result {
                     self.refresh()
                 }
-                
-                isDeleteSuccess.accept(isSuccess)
             }).disposed(by: disposeBag)
     }
     
@@ -71,6 +74,21 @@ private extension BlockListViewModel {
         addButtonEvent
             .subscribe(onNext: {
                 // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindModelFetchEvent(_ modelFetchEvent: Observable<Void>, disposeBag: DisposeBag) {
+        modelFetchEvent
+            .subscribe(onNext: { [weak self] in
+                self?.refresh()
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindModelTapButton(_ modelTapEvent: Observable<BlockModel>, disposeBag: DisposeBag) {
+        modelTapEvent
+            .subscribe(onNext: { [weak self] model in
+                // coordinator push to detailViewModel
+                // by 'push(fetchRefreshDelegate: self, model: model)' function
             }).disposed(by: disposeBag)
     }
 }

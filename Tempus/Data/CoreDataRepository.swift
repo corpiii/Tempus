@@ -256,7 +256,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.deleteFailure
@@ -280,7 +280,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.deleteFailure
@@ -304,7 +304,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.deleteFailure
