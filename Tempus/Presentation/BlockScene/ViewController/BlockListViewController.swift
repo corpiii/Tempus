@@ -29,8 +29,11 @@ class BlockListViewController: UIViewController {
         return tableView
     }()
     
+    private let addButton: UIBarButtonItem = .init(systemItem: .add)
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        tableViewDataSource = UITableViewDiffableDataSource<Section, BlockModel>(tableView: tableView) { (tableView, indexPath, model) -> UITableViewCell? in
+        tableViewDataSource = UITableViewDiffableDataSource<Section, BlockModel>(tableView: tableView)
+        { (tableView, indexPath, model) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "BlockTableViewCell", for: indexPath)
             cell.textLabel?.text = model.title
             
@@ -56,18 +59,39 @@ class BlockListViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension BlockListViewController {
     func configureUI() {
+        configureNavigationBar()
         configureTableView()
     }
     
+    func configureNavigationBar() {
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationItem.title = "일상모드"
+        
+        self.navigationItem.rightBarButtonItem = addButton
+    }
+    
     func configureTableView() {
+        self.view.addSubview(tableView)
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
+        tableView.delegate = self
         tableView.dataSource = tableViewDataSource
         
         var snapShot = NSDiffableDataSourceSnapshot<Section, BlockModel>()
         snapShot.appendSections([.main])
+        //
+        var models: [BlockModel] = []
+        
+        for i in 1...10 {
+            let model = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
+            models.append(model)
+        }
+        
+        snapShot.appendItems(models)
+        //
         tableViewDataSource.apply(snapShot)
     }
 }
@@ -75,7 +99,7 @@ private extension BlockListViewController {
 // MARK: - BindViewModel
 private extension BlockListViewController {
     func bindViewModel() {
-        let input = BlockListViewModel.Input(addButtonEvent: PublishSubject<Void>(),
+        let input = BlockListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
                                              modelDeleteEvent: PublishSubject<BlockModel>(),
                                              modelFetchEvent: PublishSubject<Void>())
         
@@ -96,5 +120,19 @@ private extension BlockListViewController {
             .subscribe(onNext: { isDeleteSuccess in
                 // Alert
             }).disposed(by: disposeBag)
+    }
+}
+
+extension BlockListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let snapShot = tableViewDataSource.snapshot()
+        let model = snapShot.itemIdentifiers[indexPath.row]
+        
     }
 }
