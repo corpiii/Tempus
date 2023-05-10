@@ -18,7 +18,7 @@ final class BlockListViewModel {
     
     struct Output {
         let blockModelArray: BehaviorSubject<[BlockModel]> = .init(value: [])
-        let isDeleteSuccess: PublishRelay<Bool> = .init()
+        let isDeleteSuccess: PublishRelay<Result<BlockModel, DataManageError>> = .init()
     }
     
     private var blockFetchUseCase: BlockFetchUseCase
@@ -55,15 +55,16 @@ final class BlockListViewModel {
 }
 
 private extension BlockListViewModel {
-    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Bool>, to isDeleteSuccess: PublishRelay<Bool>, _ disposeBag: DisposeBag) {
+    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Result<BlockModel, DataManageError>>, to isDeleteSuccess: PublishRelay<Result<BlockModel, DataManageError>>, _ disposeBag: DisposeBag) {
         deleteEvent
-            .subscribe(onNext: { [weak self] isSuccess in
+            .subscribe(onNext: { [weak self] result in
                 guard let self = self else { return }
-                if isSuccess {
+                
+                if case .success = result {
                     self.refresh()
                 }
                 
-                isDeleteSuccess.accept(isSuccess)
+                isDeleteSuccess.accept(result)
             }).disposed(by: disposeBag)
     }
     

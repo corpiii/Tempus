@@ -30,6 +30,7 @@ class BlockListViewController: UIViewController {
     }()
     
     private let addButton: UIBarButtonItem = .init(systemItem: .add)
+    private let modelDeleteEvent: PublishSubject<BlockModel> = .init()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         tableViewDataSource = UITableViewDiffableDataSource<Section, BlockModel>(tableView: tableView)
@@ -82,16 +83,6 @@ private extension BlockListViewController {
         
         var snapShot = NSDiffableDataSourceSnapshot<Section, BlockModel>()
         snapShot.appendSections([.main])
-        //
-        var models: [BlockModel] = []
-        
-        for i in 1...10 {
-            let model = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
-            models.append(model)
-        }
-        
-        snapShot.appendItems(models)
-        //
         tableViewDataSource.apply(snapShot)
     }
 }
@@ -100,7 +91,7 @@ private extension BlockListViewController {
 private extension BlockListViewController {
     func bindViewModel() {
         let input = BlockListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
-                                             modelDeleteEvent: PublishSubject<BlockModel>(),
+                                             modelDeleteEvent: modelDeleteEvent,
                                              modelFetchEvent: PublishSubject<Void>())
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
@@ -117,8 +108,24 @@ private extension BlockListViewController {
             }).disposed(by: disposeBag)
         
         output.isDeleteSuccess
-            .subscribe(onNext: { isDeleteSuccess in
-                // Alert
+            .subscribe(onNext: { [weak self] result in
+                guard let self else { return }
+                if case .success(let model) = result {
+                    var snapshot = self.tableViewDataSource.snapshot()
+                    snapshot.deleteItems([model])
+                    
+                    self.tableViewDataSource.apply(snapshot)
+                } else if case .failure(let error) = result {
+                    let alertController = UIAlertController(title: "알림",
+                                                            message: error.errorDescription,
+                                                            preferredStyle: .alert)
+                    
+                    let confirmAction = UIAlertAction(title: "확인", style: .default)
+                    alertController.addAction(confirmAction)
+                    
+                    self.present(alertController, animated: true)
+                }
+                
             }).disposed(by: disposeBag)
     }
 }
@@ -133,6 +140,19 @@ extension BlockListViewController: UITableViewDelegate {
         
         let snapShot = tableViewDataSource.snapshot()
         let model = snapShot.itemIdentifiers[indexPath.row]
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
+            guard let self else { return }
+            
+            let snapshot = self.tableViewDataSource.snapshot()
+            let model = snapshot.itemIdentifiers[indexPath.row]
+            
+            self.modelDeleteEvent.onNext(model)
+            success(true)
+        }
         
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
