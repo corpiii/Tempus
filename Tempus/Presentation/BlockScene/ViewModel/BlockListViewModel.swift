@@ -13,7 +13,8 @@ final class BlockListViewModel {
     struct Input {
         let addButtonEvent: Observable<Void>
         let modelDeleteEvent: Observable<BlockModel>
-        let modelFetchEvent: PublishSubject<Void>
+        let modelFetchEvent: Observable<Void>
+        let modelTapEvent: Observable<BlockModel>
     }
     
     struct Output {
@@ -24,7 +25,7 @@ final class BlockListViewModel {
     private var blockFetchUseCase: BlockFetchUseCase
     private var blockDeleteUseCase: BlockDeleteUseCase
     
-    private var modelFetchEvent: PublishSubject<Void>!
+    private var modelFetchEvent: PublishSubject<Void> = .init()
     
     init(repository: DataManagerRepository) {
         self.blockFetchUseCase = .init(repository: repository)
@@ -33,9 +34,8 @@ final class BlockListViewModel {
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
-        self.modelFetchEvent = input.modelFetchEvent
         
-        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: input.modelFetchEvent)
+        let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: modelFetchEvent)
         let fetchUseCaseOutput = blockFetchUseCase.transform(input: fetchUseCaseInput,
                                                              disposeBag: disposeBag)
         
@@ -72,6 +72,21 @@ private extension BlockListViewModel {
         addButtonEvent
             .subscribe(onNext: {
                 // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindModelFetchEvent(_ modelFetchEvent: Observable<Void>, disposeBag: DisposeBag) {
+        modelFetchEvent
+            .subscribe(onNext: { [weak self] in
+                self?.refresh()
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindModelTapButton(_ modelTapEvent: Observable<BlockModel>, disposeBag: DisposeBag) {
+        modelTapEvent
+            .subscribe(onNext: { [weak self] model in
+                // coordinator push to detailViewModel
+                // by 'push(fetchRefreshDelegate: self, model: model)' function
             }).disposed(by: disposeBag)
     }
 }

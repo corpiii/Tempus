@@ -31,6 +31,8 @@ class BlockListViewController: UIViewController {
     
     private let addButton: UIBarButtonItem = .init(systemItem: .add)
     private let modelDeleteEvent: PublishSubject<BlockModel> = .init()
+    private let modelTapEvent: PublishSubject<BlockModel> = .init()
+    private let modelFechEvent: PublishSubject<Void> = .init()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         tableViewDataSource = UITableViewDiffableDataSource<Section, BlockModel>(tableView: tableView)
@@ -53,6 +55,7 @@ class BlockListViewController: UIViewController {
         
         configureUI()
         bindViewModel()
+        modelFechEvent.onNext(())
     }
 }
 
@@ -65,7 +68,6 @@ private extension BlockListViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationController?.hidesBarsOnSwipe = true
         self.navigationItem.title = "일상모드"
         
         self.navigationItem.rightBarButtonItem = addButton
@@ -92,13 +94,19 @@ private extension BlockListViewController {
     func bindViewModel() {
         let input = BlockListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
                                              modelDeleteEvent: modelDeleteEvent,
-                                             modelFetchEvent: PublishSubject<Void>())
+                                             modelFetchEvent: modelFechEvent,
+                                             modelTapEvent: modelTapEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             return
         }
         
-        output.blockModelArray
+        bindBlockModelArray(output.blockModelArray)
+        bindDeleteResult(output.isDeleteSuccess)
+    }
+    
+    func bindBlockModelArray(_ blockModelArray: Observable<[BlockModel]>) {
+        blockModelArray
             .subscribe(onNext: { models in
                 var snapshot = NSDiffableDataSourceSnapshot<Section, BlockModel>()
                 snapshot.appendSections([.main])
@@ -106,8 +114,10 @@ private extension BlockListViewController {
                 
                 self.tableViewDataSource.apply(snapshot)
             }).disposed(by: disposeBag)
-        
-        output.isDeleteSuccess
+    }
+    
+    func bindDeleteResult(_ isDeleteSuccess: PublishRelay<Result<BlockModel, DataManageError>>) {
+        isDeleteSuccess
             .subscribe(onNext: { [weak self] result in
                 guard let self else { return }
                 if case .success(let model) = result {
@@ -140,6 +150,8 @@ extension BlockListViewController: UITableViewDelegate {
         
         let snapShot = tableViewDataSource.snapshot()
         let model = snapShot.itemIdentifiers[indexPath.row]
+        
+        modelTapEvent.onNext(model)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
