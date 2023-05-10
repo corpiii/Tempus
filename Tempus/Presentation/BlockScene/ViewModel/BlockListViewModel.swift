@@ -47,8 +47,10 @@ final class BlockListViewModel {
             .bind(to: output.blockModelArray)
             .disposed(by: disposeBag)
         
-        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
+        bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
+        bindModelFetchEvent(input.modelFetchEvent, disposeBag: disposeBag)
+        bindModelTapButton(input.modelTapEvent, disposeBag: disposeBag)
         
         return output
     }
@@ -60,11 +62,11 @@ private extension BlockListViewModel {
             .subscribe(onNext: { [weak self] result in
                 guard let self = self else { return }
                 
+                isDeleteSuccess.accept(result)
+                
                 if case .success = result {
                     self.refresh()
                 }
-                
-                isDeleteSuccess.accept(result)
             }).disposed(by: disposeBag)
     }
     
