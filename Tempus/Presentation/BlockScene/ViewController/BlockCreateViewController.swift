@@ -58,7 +58,42 @@ class BlockCreateViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension BlockCreateViewController {
     func configureUI() {
+        self.view.backgroundColor = .systemBackground
+        configureNavigationBar()
+    }
+    
+    func configureNavigationBar() {
+        self.navigationItem.title = "새로 만들기"
+        self.navigationItem.rightBarButtonItem = completeButton
+        completeButton.target = self
+        completeButton.action = #selector(completeButtonTapped)
+    }
+    
+    @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "생성 완료",
+                                      message: "타이머를 바로 시작하시겠습니까?",
+                                      preferredStyle: .alert)
         
+        let completeWithStartAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+            self?.completeEvent.onNext(.completeWithStart)
+        }
+        let completeWithoutStartAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
+            let alert = UIAlertController(title: "저장",
+                                          message: "저장되었습니다",
+                                          preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+                self?.completeEvent.onNext(.completeWithoutStart)
+            }
+            
+            alert.addAction(confirmAction)
+            
+            self?.present(alert, animated: true)
+        }
+        
+        alert.addAction(completeWithStartAction)
+        alert.addAction(completeWithoutStartAction)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
