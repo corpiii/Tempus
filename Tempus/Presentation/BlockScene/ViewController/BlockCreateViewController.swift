@@ -14,7 +14,7 @@ import SnapKit
 class BlockCreateViewController: UIViewController {
     private enum Constant {
         static let outerMagins: CGFloat = 20
-        static let entireStackSpacing: CGFloat = 12
+        static let entireStackSpacing: CGFloat = 40
         static let divideCountStackSpacing: CGFloat = 40
         static let pickerViewWidth: CGFloat = 100
     }
@@ -156,7 +156,7 @@ private extension BlockCreateViewController {
         entireStackView.addArrangedSubview(divideCountStackView)
         entireStackView.addArrangedSubview(emptyView)
         
-        entireStackView.backgroundColor = .systemRed
+//        entireStackView.backgroundColor = .systemRed
         entireStackView.spacing = Constant.entireStackSpacing
         
         entireStackView.snp.makeConstraints { make in
@@ -184,8 +184,6 @@ private extension BlockCreateViewController {
         leftDividerView.snp.remakeConstraints { make in
             make.width.equalTo(targetSize)
         }
-        
-        divideCountStackView.backgroundColor = .systemGray6
 
         divideCountStackView.snp.makeConstraints { make in
             make.height.equalTo(titleTextField.intrinsicContentSize.height)
