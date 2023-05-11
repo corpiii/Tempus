@@ -15,10 +15,19 @@ class BlockCreateViewController: UIViewController {
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
     private let completeEvent: PublishSubject<CompleteAlert> = .init()
     
+    private let entireStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        return stackView
+    }()
+    
     private let titleTextField: UITextField = {
         let titleTextField = UITextField()
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.placeholder = "제목"
+        titleTextField.borderStyle = .roundedRect
         
         return titleTextField
     }()
@@ -60,6 +69,7 @@ private extension BlockCreateViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         configureNavigationBar()
+        configureEntireStackView()
     }
     
     func configureNavigationBar() {
@@ -94,6 +104,22 @@ private extension BlockCreateViewController {
         alert.addAction(completeWithoutStartAction)
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func configureEntireStackView() {
+        let safeArea = self.view.safeAreaLayoutGuide
+
+        self.view.addSubview(entireStackView)
+        entireStackView.addArrangedSubview(titleTextField)
+        
+        entireStackView.backgroundColor = .systemRed
+        
+        entireStackView.snp.makeConstraints { make in
+            make.leading.equalTo(safeArea.snp.leading).offset(20)
+            make.trailing.equalTo(safeArea.snp.trailing).offset(-20)
+            make.top.equalTo(safeArea.snp.top).offset(20)
+            make.bottom.equalTo(safeArea.snp.bottom).offset(-20)
+        }
     }
 }
 
