@@ -12,6 +12,12 @@ import RxSwift
 import SnapKit
 
 class BlockCreateViewController: UIViewController {
+    private enum Constant {
+        static let outerMagins: CGFloat = 20
+        static let entireStackSpacing: CGFloat = 12
+        static let divideCountStackSpacing: CGFloat = 40
+        static let pickerViewWidth: CGFloat = 100
+    }
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
     private let completeEvent: PublishSubject<CompleteAlert> = .init()
     
@@ -19,6 +25,15 @@ class BlockCreateViewController: UIViewController {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
+        
+        return stackView
+    }()
+    
+    private let divideCountStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = Constant.divideCountStackSpacing
         
         return stackView
     }()
@@ -62,6 +77,26 @@ class BlockCreateViewController: UIViewController {
         configureUI()
         bindViewModel()
     }
+    
+    private func makeHeightDividerView() -> UIView {
+        let emptyView = UIView()
+        
+        emptyView.snp.makeConstraints { make in
+            make.height.greaterThanOrEqualTo(1)
+        }
+        
+        return emptyView
+    }
+    
+    private func makeWidthDividerView() -> UIView {
+        let emptyView = UIView()
+        
+        emptyView.snp.makeConstraints { make in
+            make.width.greaterThanOrEqualTo(1)
+        }
+        
+        return emptyView
+    }
 }
 
 // MARK: - ConfigureUI
@@ -69,7 +104,12 @@ private extension BlockCreateViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         configureNavigationBar()
+        configureDivideCountPickerView()
         configureEntireStackView()
+        configureDivideCountStackView()
+        
+//        configureTitleTextField()
+//        configureSplittedClockView()
     }
     
     func configureNavigationBar() {
@@ -108,17 +148,55 @@ private extension BlockCreateViewController {
     
     func configureEntireStackView() {
         let safeArea = self.view.safeAreaLayoutGuide
-
+        let emptyView = makeHeightDividerView()
+        
         self.view.addSubview(entireStackView)
         entireStackView.addArrangedSubview(titleTextField)
+        entireStackView.addArrangedSubview(divideCountStackView)
+        entireStackView.addArrangedSubview(emptyView)
         
         entireStackView.backgroundColor = .systemRed
+        entireStackView.spacing = Constant.entireStackSpacing
         
         entireStackView.snp.makeConstraints { make in
-            make.leading.equalTo(safeArea.snp.leading).offset(20)
-            make.trailing.equalTo(safeArea.snp.trailing).offset(-20)
-            make.top.equalTo(safeArea.snp.top).offset(20)
-            make.bottom.equalTo(safeArea.snp.bottom).offset(-20)
+            make.leading.equalTo(safeArea.snp.leading).offset(Constant.outerMagins)
+            make.trailing.equalTo(safeArea.snp.trailing).offset(-Constant.outerMagins)
+            make.top.equalTo(safeArea.snp.top).offset(Constant.outerMagins)
+            make.bottom.equalTo(safeArea.snp.bottom).offset(-Constant.outerMagins)
+        }
+    }
+    
+    func configureDivideCountStackView() {
+        let leftDividerView = makeWidthDividerView()
+        let rightDividerView = makeWidthDividerView()
+        
+        divideCountStackView.addArrangedSubview(leftDividerView)
+        divideCountStackView.addArrangedSubview(divideCountLabel)
+        divideCountStackView.addArrangedSubview(divideCountPickerView)
+        divideCountStackView.addArrangedSubview(rightDividerView)
+        
+        let stackWidthSize = self.view.frame.width - Constant.outerMagins * 2
+        let allSpacing = 3 * Constant.divideCountStackSpacing
+        let mainSize = Constant.pickerViewWidth + divideCountLabel.intrinsicContentSize.width + allSpacing
+        let targetSize = (stackWidthSize - mainSize) / 2
+        
+        leftDividerView.snp.remakeConstraints { make in
+            make.width.equalTo(targetSize)
+        }
+        
+        divideCountStackView.backgroundColor = .systemGray6
+
+        divideCountStackView.snp.makeConstraints { make in
+            make.height.equalTo(titleTextField.intrinsicContentSize.height)
+        }
+    }
+    
+    func configureTitleTextField() {
+    }
+    
+    func configureDivideCountPickerView() {
+        divideCountPickerView.snp.makeConstraints { make in
+            make.width.equalTo(Constant.pickerViewWidth)
         }
     }
 }
@@ -134,4 +212,15 @@ private extension BlockCreateViewController {
             return
         }
     }
+}
+
+extension BlockCreateViewController: UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+
 }
