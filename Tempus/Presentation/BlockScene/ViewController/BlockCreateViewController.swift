@@ -104,12 +104,12 @@ private extension BlockCreateViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         configureNavigationBar()
-        configureDivideCountPickerView()
         configureEntireStackView()
         configureDivideCountStackView()
         
 //        configureTitleTextField()
-//        configureSplittedClockView()
+        configureSplittedClockView()
+        configureDivideCountPickerView()
     }
     
     func configureNavigationBar() {
@@ -152,6 +152,7 @@ private extension BlockCreateViewController {
         
         self.view.addSubview(entireStackView)
         entireStackView.addArrangedSubview(titleTextField)
+        entireStackView.addArrangedSubview(splittedClockView)
         entireStackView.addArrangedSubview(divideCountStackView)
         entireStackView.addArrangedSubview(emptyView)
         
@@ -192,6 +193,13 @@ private extension BlockCreateViewController {
     }
     
     func configureTitleTextField() {
+    }
+    
+    func configureSplittedClockView() {
+        splittedClockView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(splittedClockView.snp.width)
+        }
     }
     
     func configureDivideCountPickerView() {
