@@ -27,9 +27,6 @@ class SplittedClockView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupBaseLine()
-        setupDots()
-        
-        layer.addSublayer(splitLayer)
     }
     
     func splitClock(by count: String) {
@@ -68,6 +65,12 @@ class SplittedClockView: UIView {
 
 private extension SplittedClockView {
     func setupBaseLine() {
+        setCircleLayer()
+        setCircleCenterDotLayer()
+        setClockNumber()
+    }
+    
+    func setCircleLayer() {
         let circleLayer = CAShapeLayer()
         let circlePath = UIBezierPath(arcCenter: circleCenter, radius: radius,
                                       startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
@@ -77,11 +80,25 @@ private extension SplittedClockView {
         
         circleLayer.lineWidth = Constant.lineWidth
         circleLayer.path = circlePath.cgPath
-        
+                
         layer.addSublayer(circleLayer)
     }
     
-    func setupDots() {
+    func setCircleCenterDotLayer() {
+        let circleCenterDotLayer = CAShapeLayer()
+        let circleCenterDotPath = UIBezierPath(arcCenter: circleCenter, radius: 1.0,
+                                         startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+                
+        circleCenterDotLayer.strokeColor = Constant.lineColor
+        circleCenterDotLayer.fillColor = Constant.clockBackgroundColor
+                
+        circleCenterDotLayer.lineWidth = Constant.lineWidth
+        circleCenterDotLayer.path = circleCenterDotPath.cgPath
+
+        layer.addSublayer(circleCenterDotLayer)
+    }
+    
+    func setClockNumber() {
         let dotCount = 24
         let angleInterval = CGFloat.pi * 2 / CGFloat(dotCount)
         
