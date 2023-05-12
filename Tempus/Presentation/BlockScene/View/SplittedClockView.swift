@@ -38,10 +38,10 @@ class SplittedClockView: UIView {
         
         guard let count = Int(count) else { return }
         
-        splitLayer = CALayer()
-        
         let startAngle = -90 * CGFloat.pi / 180
         let angleInterval = CGFloat.pi * 2 / CGFloat(count)
+        
+        splitLayer = CALayer()
         
         for i in 0..<count {
             let angle = startAngle + CGFloat(i) * angleInterval
@@ -57,7 +57,6 @@ class SplittedClockView: UIView {
 
             arkLayer.lineWidth = 2.0
             arkLayer.strokeColor = UIColor.red.cgColor
-            
             arkLayer.fillColor = Constant.splittedBackGroundColor
 
             splitLayer.addSublayer(arkLayer)
