@@ -17,6 +17,7 @@ class BlockCreateViewController: UIViewController {
         static let entireStackSpacing: CGFloat = 40
         static let divideCountStackSpacing: CGFloat = 40
         static let pickerViewWidth: CGFloat = 100
+        static let divideCountCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
     private let completeEvent: PublishSubject<CompleteAlert> = .init()
@@ -107,7 +108,7 @@ private extension BlockCreateViewController {
         configureEntireStackView()
         configureDivideCountStackView()
         
-//        configureTitleTextField()
+        configureTitleTextField()
         configureSplittedClockView()
         configureDivideCountPickerView()
     }
@@ -184,13 +185,12 @@ private extension BlockCreateViewController {
         leftDividerView.snp.remakeConstraints { make in
             make.width.equalTo(targetSize)
         }
-
-        divideCountStackView.snp.makeConstraints { make in
-            make.height.equalTo(titleTextField.intrinsicContentSize.height)
-        }
     }
     
     func configureTitleTextField() {
+        titleTextField.snp.makeConstraints { make in
+            make.height.equalTo(titleTextField.intrinsicContentSize.height)
+        }
     }
     
     func configureSplittedClockView() {
@@ -201,8 +201,12 @@ private extension BlockCreateViewController {
     }
     
     func configureDivideCountPickerView() {
+        divideCountPickerView.dataSource = self
+        divideCountPickerView.delegate = self
+        
         divideCountPickerView.snp.makeConstraints { make in
             make.width.equalTo(Constant.pickerViewWidth)
+            make.height.equalTo(100)
         }
     }
 }
@@ -220,13 +224,27 @@ private extension BlockCreateViewController {
     }
 }
 
+extension BlockCreateViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return divideCountStackView.bounds.height * 0.5
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let view = pickerView.view(forRow: row, forComponent: component)
+        view?.backgroundColor = .clear
+    }
+}
+
 extension BlockCreateViewController: UIPickerViewDataSource {
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Constant.divideCountCandidates.count
     }
-
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return Constant.divideCountCandidates[row]
+    }
 }
