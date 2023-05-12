@@ -121,6 +121,15 @@ private extension BlockCreateViewController {
     }
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
+        if let title = self.titleTextField.text, title.isEmpty == false,
+           1 <= self.divideCountPickerView.selectedRow(inComponent: 0) {
+            alertSuccess()
+        } else {
+            alertFailure()
+        }
+    }
+    
+    func alertSuccess() {
         let alert = UIAlertController(title: "생성 완료",
                                       message: "타이머를 바로 시작하시겠습니까?",
                                       preferredStyle: .alert)
@@ -145,6 +154,17 @@ private extension BlockCreateViewController {
         alert.addAction(completeWithoutStartAction)
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func alertFailure() {
+        let alert = UIAlertController(title: "실패",
+                                      message: "빈 값이 있는지 확인해주세요",
+                                      preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        
+        alert.addAction(confirmAction)
+        
+        self.present(alert, animated: true)
     }
     
     func configureEntireStackView() {
