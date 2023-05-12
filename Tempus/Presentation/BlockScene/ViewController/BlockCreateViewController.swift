@@ -206,7 +206,6 @@ private extension BlockCreateViewController {
         
         divideCountPickerView.snp.makeConstraints { make in
             make.width.equalTo(Constant.pickerViewWidth)
-            make.height.equalTo(100)
         }
     }
 }
@@ -230,8 +229,7 @@ extension BlockCreateViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let view = pickerView.view(forRow: row, forComponent: component)
-        view?.backgroundColor = .clear
+        splittedClockView.splitClock(by: Constant.divideCountCandidates[row])
     }
 }
 

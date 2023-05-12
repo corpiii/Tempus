@@ -14,44 +14,75 @@ class SplittedClockView: UIView {
         static let clockBackgroundColor: CGColor = UIColor.systemGray6.cgColor
         static let startAngle: CGFloat = -75 * CGFloat.pi / 180
         
+        static let splittedBackGroundColor: CGColor = UIColor(red:0.07, green:0.44, blue:0.54, alpha:0.4).cgColor
+        
         static let dotRadius: CGFloat = 3.0
     }
     
     private lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)
     private lazy var radius = bounds.width * 0.95 / 2.0
     
+    private var splitLayer = CALayer()
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupBaseLine()
         setupDots()
+        
+        layer.addSublayer(splitLayer)
     }
     
-    private func setupBaseLine() {
+    func splitClock(by count: String) {
+        splitLayer.removeFromSuperlayer()
+        layer.layoutIfNeeded()
+        
+        guard let count = Int(count) else { return }
+        
+        splitLayer = CALayer()
+        
+        let startAngle = -90 * CGFloat.pi / 180
+        let angleInterval = CGFloat.pi * 2 / CGFloat(count)
+        
+        for i in 0..<count {
+            let angle = startAngle + CGFloat(i) * angleInterval
+            let arkLayer = CAShapeLayer()
+            let arkPath = UIBezierPath()
+
+            arkPath.move(to: circleCenter)
+            arkPath.addArc(withCenter: circleCenter, radius: radius,
+                           startAngle: angle, endAngle: angle + angleInterval, clockwise: true)
+            arkPath.close()
+
+            arkLayer.path = arkPath.cgPath
+
+            arkLayer.lineWidth = 2.0
+            arkLayer.strokeColor = UIColor.red.cgColor
+            
+            arkLayer.fillColor = Constant.splittedBackGroundColor
+
+            splitLayer.addSublayer(arkLayer)
+        }
+        
+        layer.addSublayer(splitLayer)
+    }
+}
+
+private extension SplittedClockView {
+    func setupBaseLine() {
         let circleLayer = CAShapeLayer()
         let circlePath = UIBezierPath(arcCenter: circleCenter, radius: radius,
                                       startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
         
-        let circleDotLayer = CAShapeLayer()
-        let circleDotPath = UIBezierPath(arcCenter: circleCenter, radius: 1.0,
-                                         startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-        
         circleLayer.strokeColor = Constant.lineColor
         circleLayer.fillColor = Constant.clockBackgroundColor
-        
-        circleDotLayer.strokeColor = Constant.lineColor
-        circleDotLayer.fillColor = Constant.clockBackgroundColor
         
         circleLayer.lineWidth = Constant.lineWidth
         circleLayer.path = circlePath.cgPath
         
-        circleDotLayer.lineWidth = Constant.lineWidth
-        circleDotLayer.path = circleDotPath.cgPath
-        
         layer.addSublayer(circleLayer)
-        layer.addSublayer(circleDotLayer)
     }
     
-    private func setupDots() {
+    func setupDots() {
         let dotCount = 24
         let angleInterval = CGFloat.pi * 2 / CGFloat(dotCount)
         
