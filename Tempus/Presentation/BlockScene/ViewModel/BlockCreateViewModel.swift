@@ -75,7 +75,7 @@ private extension BlockCreateViewModel {
         completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
                 guard let self = self,
-                      let title = self.modelTitle,
+                      let title = self.modelTitle, title.isEmpty == false,
                       let divideCount = self.divideCount else { return }
                 
                 let model = BlockModel(id: UUID(), title: title, divideCount: divideCount)
