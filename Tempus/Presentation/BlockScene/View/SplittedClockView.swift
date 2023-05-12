@@ -15,12 +15,10 @@ class SplittedClockView: UIView {
         static let startAngle: CGFloat = -75 * CGFloat.pi / 180
         
         static let dotRadius: CGFloat = 3.0
-        static let numberSize: CGFloat = 12
-        static let distanceFromDot: CGFloat = 20
     }
     
     private lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)
-    private lazy var radius = bounds.width * 0.9 / 2.0
+    private lazy var radius = bounds.width * 0.95 / 2.0
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -30,16 +28,27 @@ class SplittedClockView: UIView {
     
     private func setupBaseLine() {
         let circleLayer = CAShapeLayer()
+        let circlePath = UIBezierPath(arcCenter: circleCenter, radius: radius,
+                                      startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+        
+        let circleDotLayer = CAShapeLayer()
+        let circleDotPath = UIBezierPath(arcCenter: circleCenter, radius: 1.0,
+                                         startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+        
         circleLayer.strokeColor = Constant.lineColor
         circleLayer.fillColor = Constant.clockBackgroundColor
         
-        let path = UIBezierPath(arcCenter: circleCenter, radius: radius,
-                                startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+        circleDotLayer.strokeColor = Constant.lineColor
+        circleDotLayer.fillColor = Constant.clockBackgroundColor
         
         circleLayer.lineWidth = Constant.lineWidth
-        circleLayer.path = path.cgPath
+        circleLayer.path = circlePath.cgPath
+        
+        circleDotLayer.lineWidth = Constant.lineWidth
+        circleDotLayer.path = circleDotPath.cgPath
         
         layer.addSublayer(circleLayer)
+        layer.addSublayer(circleDotLayer)
     }
     
     private func setupDots() {
@@ -53,23 +62,25 @@ class SplittedClockView: UIView {
             let dotCenterY = circleCenter.y + radius * sin(angle)
             let dotCenter = CGPoint(x: dotCenterX, y: dotCenterY)
             
-            let dotPath = UIBezierPath(arcCenter: dotCenter, radius: Constant.dotRadius,
-                                       startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+            let dotPath = UIBezierPath()
+            let lineCenterX = circleCenter.x + (radius * 0.95) * cos(angle)
+            let lineCenterY = circleCenter.y + (radius * 0.95) * sin(angle)
+            
+            dotPath.move(to: dotCenter)
+            dotPath.addLine(to: CGPoint(x: lineCenterX, y: lineCenterY))
             
             let dotLayer = CAShapeLayer()
+            
             dotLayer.path = dotPath.cgPath
-            dotLayer.fillColor = Constant.lineColor
+            dotLayer.strokeColor = Constant.lineColor
             layer.addSublayer(dotLayer)
             
             let numberLabel = UILabel()
             numberLabel.text = "\(i + 1)"
-            numberLabel.font = UIFont.systemFont(ofSize: Constant.numberSize)
+            numberLabel.font = UIFont.preferredFont(forTextStyle: .callout)
             numberLabel.sizeToFit()
-            numberLabel.center = CGPoint(x: dotCenterX, y: dotCenterY)
-            
-            let distanceFromDot = Constant.dotRadius - Constant.distanceFromDot
-            numberLabel.center.x += distanceFromDot * cos(angle)
-            numberLabel.center.y += distanceFromDot * sin(angle)
+            numberLabel.center.x = circleCenter.x + (radius * 0.88) * cos(angle)
+            numberLabel.center.y = circleCenter.y + (radius * 0.88) * sin(angle)
             
             addSubview(numberLabel)
         }
