@@ -7,9 +7,13 @@
 
 import UIKit
 
-class BlockDetailViewController: UIViewController {
+import SnapKit
+import RxSwift
 
-    var viewModel: BlockDetailViewModel?
+class BlockDetailViewController: UIViewController {
+    private let cancelBarButton: UIBarButtonItem = .init(systemItem: .cancel)
+    private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
+    private let startBarButton: UIBarButtonItem = .init(title: "시작")
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -20,19 +24,18 @@ class BlockDetailViewController: UIViewController {
     
     private let clockView: SplittedClockView = {
         let clockView = SplittedClockView()
-        clockView.translatesAutoresizingMaskIntoConstraints = false
         
         return clockView
     }()
     
-    private let cancelBarButton: UIBarButtonItem = .init(systemItem: .cancel)
-    private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
-    private let startBarButton: UIBarButtonItem = .init(title: "시작")
+    var viewModel: BlockDetailViewModel?
+    private let disposeBag: DisposeBag = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
+        bindViewModel()
     }
 }
 
@@ -42,11 +45,10 @@ private extension BlockDetailViewController {
         self.view.backgroundColor = .systemBackground
         configureNavigationBar()
 //        configureTitleLabel()
-//        configureClockView()
+        configureClockView()
     }
     
     func configureNavigationBar() {
-//        self.navigationItem.title = "블록"
         cancelBarButton.target = self
         cancelBarButton.action = #selector(cancelBarButtonTapped)
         
@@ -58,6 +60,15 @@ private extension BlockDetailViewController {
         
         self.navigationItem.leftBarButtonItem = cancelBarButton
         self.navigationItem.rightBarButtonItems = [startBarButton, editBarButton]
+    }
+    
+    func configureClockView() {
+        self.view.addSubview(clockView)
+        
+        clockView.snp.makeConstraints { make in
+            make.width.equalTo(300)
+            make.height.equalTo(clockView.snp.width)
+        }
     }
 }
 
@@ -73,5 +84,24 @@ private extension BlockDetailViewController {
     
     @objc func startBarButtonTapped(_ sender: UIBarButtonItem) {
         
+    }
+}
+
+// MARK: - BindViewModel
+private extension BlockDetailViewController {
+    func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+        
+        let input = BlockDetailViewModel.Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
+                                               editButtonTapEvent: editBarButton.rx.tap.asObservable(),
+                                               cancelButtonTapEvent: cancelBarButton.rx.tap.asObservable())
+        
+        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        
+        output.originModelSubject
+            .subscribe(onNext: { model in
+                self.navigationItem.title = model.title
+                self.clockView.splitClock(by: "\(model.divideCount)")
+            }).disposed(by: disposeBag)
     }
 }
