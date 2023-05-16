@@ -41,7 +41,6 @@ class BlockDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
         bindViewModel()
     }
@@ -70,15 +69,6 @@ private extension BlockDetailViewController {
     }
     
     func configureNavigationBar() {
-        cancelBarButton.target = self
-        cancelBarButton.action = #selector(cancelBarButtonTapped)
-        
-        editBarButton.target = self
-        editBarButton.action = #selector(editBarButtonTapped)
-        
-        startBarButton.target = self
-        startBarButton.action = #selector(startBarButtonTapped)
-        
         self.navigationItem.leftBarButtonItem = cancelBarButton
         self.navigationItem.rightBarButtonItems = [startBarButton, editBarButton]
     }
@@ -96,21 +86,6 @@ private extension BlockDetailViewController {
             make.height.equalTo(clockView.snp.width)
         }
         clockView.layoutIfNeeded()
-    }
-}
-
-// MARK: - ButtonTappedAction
-private extension BlockDetailViewController {
-    @objc func cancelBarButtonTapped(_ sender: UIBarButtonItem) {
-        
-    }
-    
-    @objc func editBarButtonTapped(_ sender: UIBarButtonItem) {
-        
-    }
-    
-    @objc func startBarButtonTapped(_ sender: UIBarButtonItem) {
-        
     }
 }
 
