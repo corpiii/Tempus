@@ -15,6 +15,14 @@ class BlockDetailViewController: UIViewController {
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")
     
+    private let entireStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        return stackView
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -44,8 +52,21 @@ private extension BlockDetailViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         configureNavigationBar()
-//        configureTitleLabel()
+        configureEntireStackView()
         configureClockView()
+    }
+    
+    func configureEntireStackView() {
+        self.view.addSubview(entireStackView)
+        
+        let safeArea = self.view.safeAreaLayoutGuide.snp
+        
+        entireStackView.snp.makeConstraints { make in
+            make.top.equalTo(safeArea.top)
+            make.leading.equalTo(safeArea.leading)
+            make.trailing.equalTo(safeArea.trailing)
+            make.bottom.equalTo(safeArea.bottom)
+        }
     }
     
     func configureNavigationBar() {
@@ -65,10 +86,16 @@ private extension BlockDetailViewController {
     func configureClockView() {
         self.view.addSubview(clockView)
         
+        let safeArea = self.view.safeAreaLayoutGuide.snp
+        
         clockView.snp.makeConstraints { make in
-            make.width.equalTo(300)
+            make.top.equalTo(safeArea.top).offset(self.view.frame.height * 0.1)
+            make.centerX.equalTo(safeArea.centerX)
+            
+            make.width.equalTo(safeArea.width).offset(-20)
             make.height.equalTo(clockView.snp.width)
         }
+        clockView.layoutIfNeeded()
     }
 }
 
@@ -100,8 +127,11 @@ private extension BlockDetailViewController {
         
         output.originModelSubject
             .subscribe(onNext: { model in
-                self.navigationItem.title = model.title
-                self.clockView.splitClock(by: "\(model.divideCount)")
+                DispatchQueue.main.async {
+                    self.navigationItem.title = model.title
+                    self.clockView.splitClock(by: "\(model.divideCount)")
+                }
             }).disposed(by: disposeBag)
+        
     }
 }
