@@ -15,6 +15,8 @@ final class BlockEditViewModel {
     }
     
     struct Output {
+        let title: String
+        let divideCount: Int
         let isEditSuccess: PublishSubject<Bool>
     }
     
@@ -41,7 +43,9 @@ final class BlockEditViewModel {
         let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent)
         let editUseCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
-        let output = Output(isEditSuccess: editUseCaseOutput.isEditSuccess)
+        let output = Output(title: originModel.title,
+                            divideCount: originModel.divideCount,
+                            isEditSuccess: editUseCaseOutput.isEditSuccess)
         
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.modelDivideCount, disposeBag)
