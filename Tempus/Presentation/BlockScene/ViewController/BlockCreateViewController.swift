@@ -20,7 +20,6 @@ class BlockCreateViewController: UIViewController {
         static let divideCountCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
-    private let completeEvent: PublishSubject<CompleteAlert> = .init()
     
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -71,6 +70,10 @@ class BlockCreateViewController: UIViewController {
     
     var viewModel: BlockCreateViewModel?
     private let disposeBag: DisposeBag = .init()
+    private let textFieldSubject: PublishSubject<String> = .init()
+    private let divideCountSubject: PublishSubject<Int> = .init()
+    private let completeEvent: PublishSubject<Void> = .init()
+    private let startEvent: PublishSubject<CompleteAlert> = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +124,13 @@ private extension BlockCreateViewController {
     }
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
+        let selectRow = self.divideCountPickerView.selectedRow(inComponent: 0)
+        let divideCount = Int(Constant.divideCountCandidates[selectRow]) ?? -1
+        
+        textFieldSubject.onNext(titleTextField.text ?? "")
+        divideCountSubject.onNext(divideCount)
+        completeEvent.onNext(())
+        
         if let title = self.titleTextField.text, title.isEmpty == false,
            1 <= self.divideCountPickerView.selectedRow(inComponent: 0) {
             alertSuccess()
@@ -135,14 +145,14 @@ private extension BlockCreateViewController {
                                       preferredStyle: .alert)
         
         let completeWithStartAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-            self?.completeEvent.onNext(.completeWithStart)
+            self?.startEvent.onNext(.completeWithStart)
         }
         let completeWithoutStartAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
             let alert = UIAlertController(title: "저장",
                                           message: "저장되었습니다",
                                           preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
-                self?.completeEvent.onNext(.completeWithoutStart)
+                self?.startEvent.onNext(.completeWithoutStart)
             }
             
             alert.addAction(confirmAction)
@@ -233,13 +243,26 @@ private extension BlockCreateViewController {
 // MARK: - BindViewModel
 private extension BlockCreateViewController {
     func bindViewModel() {
-        let input = BlockCreateViewModel.Input(completeButtonTapEvent: completeEvent,
-                                               modelTitle: titleTextField.rx.text.orEmpty.asObservable(),
-                                               modelDivideCount: divideCountPickerView.rx.itemSelected.map { Int(Constant.divideCountCandidates[$0.row]) ?? -1 })
+        let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
+                                               modelDivideCount:  divideCountSubject,
+                                               completeButtonTapEvent: completeEvent,
+                                               startEvent: startEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             return
         }
+        
+        bindCreateSuccess(output.isCreateSuccess)
+    }
+    
+    func bindCreateSuccess(_ isCreateSuccess: PublishRelay<Bool>) {
+        isCreateSuccess
+            .subscribe(onNext: { [weak self] isCreateSuccess in
+                guard let self else { return }
+                isCreateSuccess
+                ? self.alertSuccess()
+                : self.alertFailure()
+            }).disposed(by: disposeBag)
     }
 }
 

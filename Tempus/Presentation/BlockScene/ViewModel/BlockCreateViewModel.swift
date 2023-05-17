@@ -12,9 +12,10 @@ import RxRelay
 
 final class BlockCreateViewModel {
     struct Input {
-        let completeButtonTapEvent: Observable<CompleteAlert>
         let modelTitle: Observable<String>
         let modelDivideCount: Observable<Int>
+        let completeButtonTapEvent: Observable<Void>
+        let startEvent: Observable<CompleteAlert>
     }
     
     struct Output {
@@ -24,6 +25,7 @@ final class BlockCreateViewModel {
     private var modelTitle: String?
     private var divideCount: Int?
     private let modelCreateEvent: PublishSubject<BlockModel> = .init()
+    private var originModel: BlockModel?
     
     private let createUseCase: BlockCreateUseCase
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
@@ -46,6 +48,7 @@ final class BlockCreateViewModel {
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.modelDivideCount, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
+        bindStartEvent(input.startEvent, disposeBag)
         
         return output
     }
@@ -55,6 +58,20 @@ final class BlockCreateViewModel {
 }
 
 private extension BlockCreateViewModel {
+    func bindCreateSuccess(_ isCreateSuccess: Observable<Bool>,
+                           to isCreateSuccessRelay: PublishRelay<Bool>,
+                           _ disposeBag: DisposeBag) {
+        isCreateSuccess
+            .subscribe(onNext: { [weak self] isCreateSuccess in
+                guard let self = self else { return }
+                if isCreateSuccess {
+                    self.fetchRefreshDelegate?.refresh()
+                }
+                
+                isCreateSuccessRelay.accept(isCreateSuccess)
+            }).disposed(by: disposeBag)
+    }
+    
     func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
         modelTitle
             .subscribe(onNext: { [weak self] title in
@@ -71,7 +88,7 @@ private extension BlockCreateViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindCompleteButtonTapEvent(_ completeEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
+    func bindCompleteButtonTapEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
                 guard let self = self,
@@ -79,36 +96,27 @@ private extension BlockCreateViewModel {
                       let divideCount = self.divideCount else { return }
                 
                 let model = BlockModel(id: UUID(), title: title, divideCount: divideCount)
-                
-                switch completeAlert {
-                case .completeWithStart:
-                    let startUseCase = BlockStartUseCase(originModel: model)
-                    self.modelCreateEvent.onNext(model)
-                    
-                    /* coordinator finish and switch to ClockView with model or startUseCase */
-                    // delegate? or function?
-                    // delegate가 나을듯
-                    
-                case .completeWithoutStart:
-                    self.modelCreateEvent.onNext(model)
-                    
-                    /* coordinaotr just finish */
-                    
-                }
+                self.modelCreateEvent.onNext(model)
+                self.originModel = model
             }).disposed(by: disposeBag)
     }
     
-    func bindCreateSuccess(_ isCreateSuccess: Observable<Bool>,
-                           to isCreateSuccessRelay: PublishRelay<Bool>,
-                           _ disposeBag: DisposeBag) {
-        isCreateSuccess
-            .subscribe(onNext: { [weak self] isCreateSuccess in
-                guard let self = self else { return }
-                if isCreateSuccess {
-                    self.fetchRefreshDelegate?.refresh()
-                }
-                
-                isCreateSuccessRelay.accept(isCreateSuccess)
-            }).disposed(by: disposeBag)
+    func bindStartEvent(_ startEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
+        startEvent.subscribe(onNext: { [weak self]completeAlert in
+            guard let self,
+                  let originModel = self.originModel else { return }
+            
+            switch completeAlert {
+            case .completeWithStart:
+                let startUseCase = BlockStartUseCase(originModel: originModel)
+                /* coordinator finish and switch to ClockView with model or startUseCase */
+                // delegate? or function?
+                // delegate가 나을듯
+            case .completeWithoutStart:
+                return
+                /* coordinaotr just finish */
+            }
+        }).disposed(by: disposeBag)
     }
+   
 }
