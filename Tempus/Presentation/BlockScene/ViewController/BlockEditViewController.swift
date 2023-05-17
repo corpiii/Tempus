@@ -213,7 +213,11 @@ private extension BlockEditViewController {
             self.splittedClockView.splitClock(by: "\(output.divideCount)")
         }
         
-        output.isEditSuccess
+        bindEditSuccess(output.isEditSuccess, disposeBag)
+    }
+    
+    func bindEditSuccess(_ isEditSuccess: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
+        isEditSuccess
             .subscribe(onNext: { [weak self] isEditSuccess in
                 guard let self else { return }
                 
