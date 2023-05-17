@@ -19,8 +19,8 @@ class BlockEditViewController: UIViewController {
         static let pickerViewWidth: CGFloat = 100
         static let divideCountCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
+    
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
-//    private let pickerSelectEvent: PublishSubject<Int> = .
     
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -71,6 +71,9 @@ class BlockEditViewController: UIViewController {
     
     var viewModel: BlockEditViewModel?
     private let disposeBag: DisposeBag = .init()
+    private let textFieldSubject: PublishSubject<String> = .init()
+    private let divideCountSubject: PublishSubject<Int> = .init()
+    private let completeEvent: PublishSubject<Void> = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +124,11 @@ private extension BlockEditViewController {
     }
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
+        let divideCount = Int(Int(Constant.divideCountCandidates[divideCountPickerView.selectedRow(inComponent: 0)]) ?? -1)
+        
+        textFieldSubject.onNext(titleTextField.text ?? "")
+        divideCountSubject.onNext(divideCount)
+        completeEvent.onNext(())
     }
     
     func configureEntireStackView() {
@@ -189,9 +197,9 @@ private extension BlockEditViewController {
 // MARK: - BindViewModel
 private extension BlockEditViewController {
     func bindViewModel() {
-        let input = BlockEditViewModel.Input(modelTitle: titleTextField.rx.text.orEmpty.asObservable(),
-                                             modelDivideCount: divideCountPickerView.rx.itemSelected.map { Int(Constant.divideCountCandidates[$0.row]) ?? -1 },
-                                             completeButtonTapEvent: completeButton.rx.tap.asObservable())
+        let input = BlockEditViewModel.Input(modelTitle: textFieldSubject,
+                                             modelDivideCount: divideCountSubject,
+                                             completeButtonTapEvent: completeEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag),
               let pickerIndex = Constant.divideCountCandidates.firstIndex(of: "\(output.divideCount)") else {

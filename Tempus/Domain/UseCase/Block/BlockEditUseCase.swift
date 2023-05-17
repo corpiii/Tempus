@@ -39,7 +39,7 @@ private extension BlockEditUseCase {
                             disposeBag: DisposeBag) {
         editEvent
             .subscribe(onNext: { model in
-                if model.divideCount == -1 {
+                if model.divideCount == -1 || model.title.isEmpty {
                     return isEditSuccess.onNext(false)
                 }
                 do {
