@@ -205,6 +205,39 @@ private extension BlockEditViewController {
             self.splittedClockView.splitClock(by: "\(output.divideCount)")
         }
         
+        output.isEditSuccess
+            .subscribe(onNext: { [weak self] isEditSuccess in
+                guard let self else { return }
+                
+                if isEditSuccess {
+                    self.alertSuccess()
+                } else {
+                    self.alertFailure()
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func alertSuccess() {
+        let alert = UIAlertController(title: "수정 완료",
+                                      message: "수정되었습니다.",
+                                      preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        
+        alert.addAction(confirmAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func alertFailure() {
+        let alert = UIAlertController(title: "실패",
+                                      message: "수정이 실패했습니다. \n 빈값이 있는지 확인해주세요.",
+                                      preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        
+        alert.addAction(confirmAction)
+        
+        self.present(alert, animated: true)
     }
 }
 
