@@ -35,7 +35,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
             
             throw DataManageError.createFailure
@@ -60,7 +60,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
             
             throw DataManageError.createFailure
@@ -88,7 +88,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
             
             throw DataManageError.createFailure
@@ -111,7 +111,7 @@ extension CoreDataRepository {
             }
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.fetchFailure
@@ -131,7 +131,7 @@ extension CoreDataRepository {
             }
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.fetchFailure
@@ -151,7 +151,7 @@ extension CoreDataRepository {
             }
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.fetchFailure
@@ -178,7 +178,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.updateFailure
@@ -202,7 +202,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.updateFailure
@@ -229,7 +229,7 @@ extension CoreDataRepository {
             try context.save()
         } catch {
             #if DEBUG
-            print(error)
+            print(#file , #function, error)
             #endif
 
             throw DataManageError.updateFailure

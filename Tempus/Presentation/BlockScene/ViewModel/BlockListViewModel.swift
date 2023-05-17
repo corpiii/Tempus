@@ -4,6 +4,7 @@
 //
 //  Created by 이정민 on 2023/04/18.
 //
+import Foundation
 
 import RxCocoa
 import RxRelay
@@ -52,6 +53,8 @@ final class BlockListViewModel {
         bindModelFetchEvent(input.modelFetchEvent, disposeBag: disposeBag)
         bindModelTapButton(input.modelTapEvent, disposeBag: disposeBag)
         
+        var models: [BlockModel] = []
+        output.blockModelArray.onNext(models)
         return output
     }
 }

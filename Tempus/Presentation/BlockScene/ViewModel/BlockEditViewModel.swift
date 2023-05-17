@@ -15,12 +15,12 @@ final class BlockEditViewModel {
     }
     
     struct Output {
+        let title: String
+        let divideCount: Int
         let isEditSuccess: PublishSubject<Bool>
     }
     
     private var originModel: BlockModel
-    private var modelTitle: String?
-    private var modelDivideCount: Int?
     private let blockEditUseCase: BlockEditUseCase
     private let completeButtonTapEvent: PublishSubject<BlockModel> = .init()
     
@@ -32,6 +32,7 @@ final class BlockEditViewModel {
          fetchRefreshDelegate: FetchRefreshDelegate,
          editReflectDelegate: EditReflectDelegate) {
         self.originModel = originModel
+        
         self.blockEditUseCase = .init(repository: repository)
         self.fetchRefreshDelegate = fetchRefreshDelegate
         self.editReflectDelegate = editReflectDelegate
@@ -41,7 +42,9 @@ final class BlockEditViewModel {
         let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent)
         let editUseCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
-        let output = Output(isEditSuccess: editUseCaseOutput.isEditSuccess)
+        let output = Output(title: originModel.title,
+                            divideCount: originModel.divideCount,
+                            isEditSuccess: editUseCaseOutput.isEditSuccess)
         
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.modelDivideCount, disposeBag)
@@ -57,7 +60,7 @@ private extension BlockEditViewModel {
         modelTitle
             .subscribe(onNext: { [weak self] modelTitle in
                 guard let self else { return }
-                self.modelTitle = modelTitle
+                self.originModel.title = modelTitle
             }).disposed(by: disposeBag)
     }
     
@@ -65,7 +68,7 @@ private extension BlockEditViewModel {
         divideCount
             .subscribe(onNext: { [weak self] modelDivideCount in
                 guard let self else { return }
-                self.modelDivideCount = modelDivideCount
+                self.originModel.divideCount = modelDivideCount
             }).disposed(by: disposeBag)
     }
     
@@ -73,14 +76,6 @@ private extension BlockEditViewModel {
         completeEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                if let modelTitle = self.modelTitle {
-                    self.originModel.title = modelTitle
-                }
-                
-                if let modelDivideCount = self.modelDivideCount {
-                    self.originModel.divideCount = modelDivideCount
-                }
-                
                 self.completeButtonTapEvent.onNext(self.originModel)
             }).disposed(by: disposeBag)
     }
