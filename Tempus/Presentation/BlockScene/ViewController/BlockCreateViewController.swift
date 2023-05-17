@@ -235,7 +235,7 @@ private extension BlockCreateViewController {
     func bindViewModel() {
         let input = BlockCreateViewModel.Input(completeButtonTapEvent: completeEvent,
                                                modelTitle: titleTextField.rx.text.orEmpty.asObservable(),
-                                               modelDivideCount: divideCountPickerView.rx.itemSelected.map { $0.row })
+                                               modelDivideCount: divideCountPickerView.rx.itemSelected.map { Int(Constant.divideCountCandidates[$0.row]) ?? -1 })
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             return

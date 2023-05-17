@@ -20,7 +20,7 @@ class BlockEditViewController: UIViewController {
         static let divideCountCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
-    private let completeEvent: PublishSubject<Void> = .init()
+//    private let pickerSelectEvent: PublishSubject<Int> = .
     
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -114,7 +114,7 @@ private extension BlockEditViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationItem.title = "새로 만들기"
+        self.navigationItem.title = "수정하기"
         self.navigationItem.rightBarButtonItem = completeButton
         completeButton.target = self
         completeButton.action = #selector(completeButtonTapped)
@@ -190,8 +190,8 @@ private extension BlockEditViewController {
 private extension BlockEditViewController {
     func bindViewModel() {
         let input = BlockEditViewModel.Input(modelTitle: titleTextField.rx.text.orEmpty.asObservable(),
-                                 modelDivideCount: divideCountPickerView.rx.itemSelected.map { $0.row },
-                                 completeButtonTapEvent: completeEvent)
+                                             modelDivideCount: divideCountPickerView.rx.itemSelected.map { Int(Constant.divideCountCandidates[$0.row]) ?? -1 },
+                                             completeButtonTapEvent: completeButton.rx.tap.asObservable())
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag),
               let pickerIndex = Constant.divideCountCandidates.firstIndex(of: "\(output.divideCount)") else {

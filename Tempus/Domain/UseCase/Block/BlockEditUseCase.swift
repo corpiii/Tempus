@@ -39,6 +39,9 @@ private extension BlockEditUseCase {
                             disposeBag: DisposeBag) {
         editEvent
             .subscribe(onNext: { model in
+                if model.divideCount == -1 {
+                    return isEditSuccess.onNext(false)
+                }
                 do {
                     try self.execute(model: model) {
                         isEditSuccess.onNext(true)
