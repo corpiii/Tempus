@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 class ClockViewController: UIViewController {
@@ -20,6 +21,9 @@ class ClockViewController: UIViewController {
     
     private let countDownTimerView: CountDownTimerView = .init()
     
+    private let startEvent: PublishSubject<Void> = .init()
+    private let stopEvent: PublishSubject<Void> = .init()
+    private let disposeBag: DisposeBag = .init()
     var viewModel: ClockViewModel?
     
     override func viewDidLoad() {
@@ -27,9 +31,11 @@ class ClockViewController: UIViewController {
         
         configureSelfView()
         configureUI()
+        bindViewModel()
     }
 }
 
+// MARK: - ConfigureUI
 private extension ClockViewController {
     func configureSelfView() {
         self.view.backgroundColor = .systemBackground
@@ -54,5 +60,29 @@ private extension ClockViewController {
             make.height.equalTo(countDownTimerView.snp.width)
             make.centerY.equalTo(safeArea.snp.centerY)
         }
+    }
+}
+
+// MARK: - BindViewModel
+private extension ClockViewController {
+    func bindViewModel() {
+        let input = ClockViewModel.Input(modeStartEvent: startEvent,
+                                         modeStopEvent: stopEvent)
+        
+        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+            #if DEBUG
+            print(#file, #function, "viewModel missed")
+            #endif
+            return
+        }
+        
+        output.modeStartUseCaseOutput
+            .subscribe(onNext: { [weak self] output in
+                guard let self else { return }
+                
+                output.remainTime.subscribe(onNext: { time in
+                    // 받은 time을 뷰에다 넣기
+                }).disposed(by: self.disposeBag)
+            }).disposed(by: disposeBag)
     }
 }
