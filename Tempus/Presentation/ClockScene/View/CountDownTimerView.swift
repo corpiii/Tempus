@@ -12,7 +12,6 @@ import Lottie
 class CountDownTimerView: UIView {
 
     private let animationView: LottieAnimationView = .init(name: "progress")
-    
     private let remainTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +25,7 @@ class CountDownTimerView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupBaseLine()
+        
     }
 }
 
@@ -53,7 +53,7 @@ private extension CountDownTimerView {
     func setupCountDownLabel() {
         addSubview(remainTimeLabel)
         
-        remainTimeLabel.text = "rerere"
+        remainTimeLabel.font = .preferredFont(forTextStyle: .title1)
         
         remainTimeLabel.snp.makeConstraints { make in
             make.center.equalTo(circleCenter)
