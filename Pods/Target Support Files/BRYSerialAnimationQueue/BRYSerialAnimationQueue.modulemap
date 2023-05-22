@@ -1,0 +1,6 @@
+framework module BRYSerialAnimationQueue {
+  umbrella header "BRYSerialAnimationQueue-umbrella.h"
+
+  export *
+  module * { export * }
+}
