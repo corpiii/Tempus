@@ -23,6 +23,7 @@ final class DailyStartUseCase: ModeStartUseCase {
     
     private let timeObservable: PublishSubject<Time> = .init()
     private let modeStateObservable: PublishSubject<ModeState> = .init()
+    private let entireRunningTime: PublishSubject<Double> = .init()
     private let disposeBag: DisposeBag = .init()
     private let originModel: DailyModel
     private var timeSchedule: [Date] = []
@@ -37,7 +38,8 @@ final class DailyStartUseCase: ModeStartUseCase {
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: timeObservable,
-                            modeState: modeStateObservable)
+                            modeState: modeStateObservable,
+                            entireRunningTime: entireRunningTime)
 
         bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
         bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
@@ -90,6 +92,12 @@ private extension DailyStartUseCase {
                 
                 let now = Date().timeIntervalSince1970
                 let target = self.timeSchedule[0].timeIntervalSince1970
+                
+                if endState == .breakTime {
+                    self.entireRunningTime.onNext(self.originModel.breakTime)
+                } else if endState == .focusTime {
+                    self.entireRunningTime.onNext(self.originModel.focusTime)
+                }
                 
                 self.timeSchedule.append(addingOneDayDate)
                 self.stateSchedule.append(endState)
