@@ -84,11 +84,9 @@ private extension ClockViewController {
     }
     
     @objc func startButtonTapped() {
-        if startButton.isSelected {
-            stopEvent.onNext(())
-        } else {
-            startEvent.onNext(())
-        }
+        startButton.isSelected
+        ? stopEvent.onNext(())
+        : startEvent.onNext(())
         
         startButton.isSelected = !startButton.isSelected
     }
