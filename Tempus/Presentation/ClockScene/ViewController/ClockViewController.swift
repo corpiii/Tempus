@@ -12,10 +12,6 @@ import RxSwift
 import SnapKit
 
 class ClockViewController: UIViewController {
-    private enum Constant {
-        static let startButtonHeight: CGFloat = 45
-    }
-    
     private let startButton: SSBouncyButton = {
         let button = SSBouncyButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +59,9 @@ private extension ClockViewController {
             make.width.equalTo(safeArea.snp.width).dividedBy(1 / 0.8)
             
             make.height.equalTo(countDownTimerView.snp.width)
-            make.top.equalTo(safeArea.snp.top).inset(self.view.bounds.height * 0.05)
+            
+            let height = safeArea.layoutFrame.height
+            make.top.equalTo(safeArea.snp.top).offset(height * 0.1)
         }
     }
     
@@ -74,11 +72,14 @@ private extension ClockViewController {
         let safeArea = self.view.safeAreaLayoutGuide
         
         startButton.snp.makeConstraints { make in
-            make.top.equalTo(countDownTimerView.snp.bottom).offset(30)
+            let timerViewHeight = safeArea.layoutFrame.width * 0.8
+            make.top.equalTo(countDownTimerView.snp.bottom).offset(timerViewHeight * 0.2)
             
             make.centerX.equalTo(safeArea.snp.centerX)
-            make.width.equalTo(Constant.startButtonHeight * 2)
-            make.height.equalTo(Constant.startButtonHeight)
+            
+            let startButtonWidth = safeArea.layoutFrame.width * 0.2
+            make.width.equalTo(startButtonWidth)
+            make.height.equalTo(startButtonWidth / 2)
         }
     }
     
