@@ -87,7 +87,7 @@ private extension DailyStartUseCase {
         switch modeState {
             case .focusTime: self.entireRunningTime.onNext(self.originModel.focusTime)
             case .breakTime: self.entireRunningTime.onNext(self.originModel.breakTime)
-            case .waitingTime: self.entireRunningTime.onNext(0)
+            case .waitingTime: self.entireRunningTime.onNext(.zero)
         }
         
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in

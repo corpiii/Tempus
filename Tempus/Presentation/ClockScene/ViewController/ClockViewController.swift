@@ -22,15 +22,6 @@ class ClockViewController: UIViewController {
         return button
     }()
     
-//    private let stopButton: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("중지", for: .normal)
-//        button.setTitleColor(UIColor(displayP3Red: 0, green: 100, blue: 100, alpha: 1), for: .normal)
-//
-//        return button
-//    }()
-    
     private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,13 +44,6 @@ class ClockViewController: UIViewController {
         configureSelfView()
         configureUI()
         bindViewModel()
-        
-        let originModel = BlockModel(id: UUID(), title: "43", divideCount: 4)
-        let startUseCase = BlockStartUseCase(originModel: originModel)
-        
-        viewModel?.modeStartUseCase = startUseCase
-        
-        startEvent.onNext(())
     }
 }
 
@@ -70,11 +54,7 @@ private extension ClockViewController {
     }
     
     func configureUI() {
-        // 시계 뷰
         configureTimerView()
-        
-        // 시작버튼
-        configureButtonStackView()
         configureStartButton()
     }
     
@@ -83,30 +63,24 @@ private extension ClockViewController {
         
         let safeArea = self.view.safeAreaLayoutGuide
         countDownTimerView.snp.makeConstraints { make in
-            make.leading.equalTo(safeArea.snp.leading)
-            make.trailing.equalTo(safeArea.snp.trailing)
+            make.centerX.equalTo(safeArea.snp.centerX)
+            make.width.equalTo(safeArea.snp.width).dividedBy(1 / 0.8)
             
             make.height.equalTo(countDownTimerView.snp.width)
             make.top.equalTo(safeArea.snp.top).inset(self.view.bounds.height * 0.05)
         }
     }
     
-    func configureButtonStackView() {
-        self.view.addSubview(buttonStackView)
-        buttonStackView.addArrangedSubview(startButton)
+    func configureStartButton() {
+        self.view.addSubview(startButton)
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         
         let safeArea = self.view.safeAreaLayoutGuide
         
-        buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(countDownTimerView.snp.bottom).offset(30)
-            make.centerX.equalTo(safeArea.snp.centerX)
-        }
-    }
-    
-    func configureStartButton() {
-        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
-        
         startButton.snp.makeConstraints { make in
+            make.top.equalTo(countDownTimerView.snp.bottom).offset(30)
+            
+            make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(80)
             make.height.equalTo(40)
         }
@@ -120,8 +94,6 @@ private extension ClockViewController {
         }
         
         startButton.isSelected = !startButton.isSelected
-        
-        
     }
 }
 
@@ -143,9 +115,15 @@ private extension ClockViewController {
                 guard let self else { return }
                 
                 output.remainTime.subscribe(onNext: { time in
-                    // 받은 time을 뷰에다 넣기
-                    print(time)
+                    #if DEBUG
+                    print(time, #file, #line)
+                    #endif
+                    
                     self.countDownTimerView.setTime(time)
+                }).disposed(by: self.disposeBag)
+                
+                output.entireRunningTime.subscribe(onNext: { runningTime in
+                    self.countDownTimerView.setRunningTime(runningTime)
                 }).disposed(by: self.disposeBag)
             }).disposed(by: disposeBag)
     }
