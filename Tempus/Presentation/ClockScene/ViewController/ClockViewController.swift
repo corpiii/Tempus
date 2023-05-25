@@ -12,23 +12,19 @@ import RxSwift
 import SnapKit
 
 class ClockViewController: UIViewController {
+    private enum Constant {
+        static let startButtonHeight: CGFloat = 45
+    }
+    
     private let startButton: SSBouncyButton = {
         let button = SSBouncyButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("시작", for: .normal)
         button.setTitle("중지", for: .selected)
         button.tintColor = .systemBlue
+        button.titleLabel?.font = .preferredFont(forTextStyle: .subheadline, compatibleWith: .none)
         
         return button
-    }()
-    
-    private let buttonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 20
-        
-        return stackView
     }()
     
     private let countDownTimerView: CountDownTimerView = .init()
@@ -81,8 +77,8 @@ private extension ClockViewController {
             make.top.equalTo(countDownTimerView.snp.bottom).offset(30)
             
             make.centerX.equalTo(safeArea.snp.centerX)
-            make.width.equalTo(80)
-            make.height.equalTo(40)
+            make.width.equalTo(Constant.startButtonHeight * 2)
+            make.height.equalTo(Constant.startButtonHeight)
         }
     }
     
