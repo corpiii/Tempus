@@ -23,9 +23,10 @@ class ModeStartUseCase: ModeTransform {
     struct Output {
         let remainTime: PublishSubject<Time>
         let modeState: PublishSubject<ModeState>
+        let entireRunningTime: PublishSubject<Double>
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        return Output(remainTime: .init(), modeState: .init())
+        return Output(remainTime: .init(), modeState: .init(), entireRunningTime: .init())
     }
 }

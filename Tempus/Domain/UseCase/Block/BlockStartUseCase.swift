@@ -25,6 +25,7 @@ final class BlockStartUseCase: ModeStartUseCase {
     
     private let timeObservable: PublishSubject<Time> = .init()
     private let modeStateObservable: PublishSubject<ModeState> = .init()
+    private let entireRunningTime: PublishSubject<Double> = .init()
     private let disposeBag: DisposeBag = .init()
     private let originModel: BlockModel
     private var schedule: [Date] = []
@@ -38,7 +39,8 @@ final class BlockStartUseCase: ModeStartUseCase {
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: timeObservable,
-                            modeState: modeStateObservable)
+                            modeState: modeStateObservable,
+                            entireRunningTime: entireRunningTime)
         
         bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
         bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
@@ -74,6 +76,7 @@ private extension BlockStartUseCase {
         self.modeState = .focusTime
         
         let target = schedule[0].timeIntervalSince1970
+        entireRunningTime.onNext(Double(24 / originModel.divideCount) * 60 * 60)
         let now = Date().timeIntervalSince1970
         remainTime = Time(second: target - now)
                 

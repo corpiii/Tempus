@@ -23,6 +23,7 @@ final class DailyStartUseCase: ModeStartUseCase {
     
     private let timeObservable: PublishSubject<Time> = .init()
     private let modeStateObservable: PublishSubject<ModeState> = .init()
+    private let entireRunningTime: PublishSubject<Double> = .init()
     private let disposeBag: DisposeBag = .init()
     private let originModel: DailyModel
     private var timeSchedule: [Date] = []
@@ -37,7 +38,8 @@ final class DailyStartUseCase: ModeStartUseCase {
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: timeObservable,
-                            modeState: modeStateObservable)
+                            modeState: modeStateObservable,
+                            entireRunningTime: entireRunningTime)
 
         bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
         bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
@@ -79,6 +81,15 @@ private extension DailyStartUseCase {
         remainTime = Time(second: target - now)
         modeState = stateSchedule[0]
         
+        print(timeSchedule)
+        print(stateSchedule)
+        
+        switch modeState {
+            case .focusTime: self.entireRunningTime.onNext(self.originModel.focusTime)
+            case .breakTime: self.entireRunningTime.onNext(self.originModel.breakTime)
+            case .waitingTime: self.entireRunningTime.onNext(.zero)
+        }
+        
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self else { return }
             
@@ -90,6 +101,13 @@ private extension DailyStartUseCase {
                 
                 let now = Date().timeIntervalSince1970
                 let target = self.timeSchedule[0].timeIntervalSince1970
+                let nowState = self.stateSchedule[0]
+                
+                switch nowState {
+                    case .focusTime: self.entireRunningTime.onNext(self.originModel.focusTime)
+                    case .breakTime: self.entireRunningTime.onNext(self.originModel.breakTime)
+                    case .waitingTime: self.entireRunningTime.onNext(0)
+                }
                 
                 self.timeSchedule.append(addingOneDayDate)
                 self.stateSchedule.append(endState)
@@ -126,23 +144,23 @@ private extension DailyStartUseCase {
         var state: [ModeState] = []
         
         schedule.append(startTime)
-        state.append(.focusTime)
+        state.append(.waitingTime)
         
         (1...repeatCount).forEach({ _ in
             schedule.append(startTime.addingTimeInterval(focusTime))
-            state.append(.breakTime)
-            schedule.append(startTime.addingTimeInterval(focusTime + breakTime))
             state.append(.focusTime)
+            schedule.append(startTime.addingTimeInterval(focusTime + breakTime))
+            state.append(.breakTime)
             startTime = startTime.addingTimeInterval(oneIntervalSecond)
         })
-        
-        state.removeLast()
-        state.append(.waitingTime)
         
         while schedule.first! < now {
             let lastDate = schedule.removeFirst()
             let newDate = lastDate.addingTimeInterval(oneDaySecond)
             schedule.append(newDate)
+            
+            let lastState = state.removeFirst()
+            state.append(lastState)
         }
         
         return (schedule, state)

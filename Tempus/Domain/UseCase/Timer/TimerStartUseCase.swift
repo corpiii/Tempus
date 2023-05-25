@@ -23,6 +23,7 @@ final class TimerStartUseCase: ModeStartUseCase {
     
     private let timeObservable: PublishSubject<Time> = .init()
     private let modeStateObservable: PublishSubject<ModeState> = .init()
+    private let entireRunningTime: PublishSubject<Double> = .init()
     private let disposeBag: DisposeBag = .init()
     private var timer: Timer?
     private let originModel: TimerModel
@@ -35,7 +36,8 @@ final class TimerStartUseCase: ModeStartUseCase {
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: timeObservable,
-                            modeState: modeStateObservable)
+                            modeState: modeStateObservable,
+                            entireRunningTime: entireRunningTime)
         
         bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
         bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
@@ -66,7 +68,7 @@ private extension TimerStartUseCase {
 
         let interval = 1.0
         self.modeState = .focusTime
-        
+        entireRunningTime.onNext(originModel.wasteTime)
         remainTime = Time(second: originModel.wasteTime)
         timer = Timer(timeInterval: interval, repeats: true, block: { [self] timer in
             if remainTime.totalSecond == 0 {

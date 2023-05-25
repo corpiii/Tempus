@@ -1,0 +1,6 @@
+framework module UIImage_BetterAdditions {
+  umbrella header "UIImage+BetterAdditions-umbrella.h"
+
+  export *
+  module * { export * }
+}
