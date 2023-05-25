@@ -10,11 +10,17 @@ import UIKit
 import Lottie
 
 class CountDownTimerView: UIView {
-
+    private enum Constant {
+        static let totalFrame: Double = 900
+    }
+    
     private let animationView: LottieAnimationView = .init(name: "progress")
+    private var entireRunningTime: Double = 0
     private let remainTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textAlignment = .center
         
         return label
     }()
@@ -31,10 +37,7 @@ class CountDownTimerView: UIView {
 
 private extension CountDownTimerView {
     func setupBaseLine() {
-        // 원 레이어 추가
         setupClockCircle()
-        
-        // 라벨 레이어 추가
         setupCountDownLabel()
     }
     
@@ -46,8 +49,6 @@ private extension CountDownTimerView {
             make.width.equalTo(circleRadius * 2)
             make.height.equalTo(animationView.snp.width)
         }
-        
-        animationView.play()
     }
     
     func setupCountDownLabel() {
@@ -57,6 +58,26 @@ private extension CountDownTimerView {
         
         remainTimeLabel.snp.makeConstraints { make in
             make.center.equalTo(circleCenter)
+        }
+    }
+}
+
+extension CountDownTimerView {
+    func setRunningTime(_ runningTime: Double) {
+        self.entireRunningTime = runningTime
+    }
+    
+    func setTime(_ time: Time) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            
+            self.animationView.currentFrame = (1 - (time.totalSecond / self.entireRunningTime)) * Constant.totalFrame
+            
+            if self.entireRunningTime == .zero {
+                self.remainTimeLabel.text = "지금은 대기시간 입니다. \n \(time.hour) : \(time.minute) : \(Int(time.second))"
+            } else {
+                self.remainTimeLabel.text = "\(time.hour) : \(time.minute) : \(Int(time.second))"
+            }
         }
     }
 }
