@@ -14,7 +14,12 @@ class CountDownTimerView: UIView {
         static let totalFrame: Double = 900
     }
     
-    private let animationView: LottieAnimationView = .init(name: "progress")
+    private let animationView: LottieAnimationView = {
+        let view = LottieAnimationView(name: "progress")
+        
+        return view
+    }()
+    
     private var entireRunningTime: Double = 0
     private let remainTimeLabel: UILabel = {
         let label = UILabel()
@@ -65,13 +70,17 @@ private extension CountDownTimerView {
 extension CountDownTimerView {
     func setRunningTime(_ runningTime: Double) {
         self.entireRunningTime = runningTime
+        self.animationView.animationSpeed = 90 / entireRunningTime
     }
     
     func setTime(_ time: Time) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             
-            self.animationView.currentFrame = (1 - (time.totalSecond / self.entireRunningTime)) * Constant.totalFrame
+            let currentFrame = (1 - ((time.totalSecond + 1) / self.entireRunningTime)) * Constant.totalFrame
+            let targetFrame = (1 - (time.totalSecond / self.entireRunningTime)) * Constant.totalFrame
+            
+            self.animationView.play(fromFrame: currentFrame, toFrame: targetFrame)
             
             if self.entireRunningTime == .zero {
                 self.remainTimeLabel.text = "지금은 대기시간 입니다. \n \(time.hour) : \(time.minute) : \(Int(time.second))"
