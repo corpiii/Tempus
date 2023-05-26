@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class MainCoordinator: Coordinator {
     let tabbarController: UITabBarController
     var childCoordinators: [Coordinator] = []
@@ -22,11 +20,13 @@ class MainCoordinator: Coordinator {
         // clockViewCon
         let clockViewController = ClockViewController(nibName: nil, bundle: nil)
         let clockViewModel = ClockViewModel()
-        clockViewController.viewModel = clockViewModel
+        let clockCoordinator = ClockCoordinator(viewController: clockViewController)
         
-        /*
-         clockCoordinator and append in childCoordinators
-         */
+        clockViewController.viewModel = clockViewModel
+        clockViewModel.coordinator = clockCoordinator
+        
+        clockViewController.tabBarItem = .init(tabBarSystemItem: .downloads, tag: 0)
+        childCoordinators.append(clockCoordinator)
         
         // blockViewCon
         let blockListViewController = BlockListViewController(nibName: nil, bundle: nil)
@@ -35,7 +35,9 @@ class MainCoordinator: Coordinator {
         let blockListViewCoordinator = BlockListViewCoordinator(blockListNavigationViewController)
         
         blockListViewController.viewModel = blockListViewModel
-        blockListNavigationViewController.tabBarItem = .init(tabBarSystemItem: .bookmarks, tag: 0)
+        blockListViewModel.coordinator = blockListViewCoordinator
+        
+        blockListNavigationViewController.tabBarItem = .init(tabBarSystemItem: .bookmarks, tag: 1)
         childCoordinators.append(blockListViewCoordinator)
         
         // dailyViewCon
@@ -45,12 +47,6 @@ class MainCoordinator: Coordinator {
         tabbarController.setViewControllers([clockViewController, blockListNavigationViewController], animated: true)
     }
     
-    func start() {
-        startClockFlow()
-    }
-}
-
-private extension MainCoordinator {
     func startClockFlow() {
         tabbarController.selectedIndex = 0
     }
