@@ -50,7 +50,7 @@ class MainCoordinator: Coordinator {
     }
 }
 
-private extension DefaultMainCoordinator {
+private extension MainCoordinator {
     func startClockFlow() {
         tabbarController.selectedIndex = 0
     }
