@@ -32,7 +32,7 @@ class MainCoordinator: Coordinator {
         let blockListViewController = BlockListViewController(nibName: nil, bundle: nil)
         let blockListViewModel = BlockListViewModel(repository: repository)
         let blockListNavigationViewController = UINavigationController(rootViewController: blockListViewController)
-        let blockListViewCoordinator = BlockListViewCoordinator(blockListNavigationViewController)
+        let blockListViewCoordinator = BlockListViewCoordinator(blockListNavigationViewController, repository)
         
         blockListViewController.viewModel = blockListViewModel
         blockListViewModel.coordinator = blockListViewCoordinator

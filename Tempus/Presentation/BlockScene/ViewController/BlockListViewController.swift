@@ -68,7 +68,7 @@ private extension BlockListViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationItem.title = "일상모드"
+        self.navigationItem.title = "블록모드"
         
         self.navigationItem.rightBarButtonItem = addButton
     }

@@ -29,6 +29,7 @@ final class BlockCreateViewModel {
     
     private let createUseCase: BlockCreateUseCase
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
+    weak var coordinator: BlockCreateCoordinator?
     
     init(repository: DataManagerRepository, fetchRefreshDelegate: FetchRefreshDelegate) {
         self.createUseCase = .init(repository: repository)

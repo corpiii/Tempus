@@ -55,8 +55,7 @@ final class BlockListViewModel {
         bindModelFetchEvent(input.modelFetchEvent, disposeBag: disposeBag)
         bindModelTapButton(input.modelTapEvent, disposeBag: disposeBag)
         
-        var models: [BlockModel] = []
-        output.blockModelArray.onNext(models)
+        output.blockModelArray.onNext([])
         return output
     }
 }
