@@ -84,6 +84,11 @@ private extension ClockViewController {
     }
     
     @objc func startButtonTapped() {
+        guard (viewModel?.modeStartUseCase) != nil else {
+            alertUseCaseEmpty()
+            return
+        }
+        
         startButton.isSelected
         ? stopEvent.onNext(())
         : startEvent.onNext(())
@@ -121,5 +126,17 @@ private extension ClockViewController {
                     self.countDownTimerView.setRunningTime(runningTime)
                 }).disposed(by: self.disposeBag)
             }).disposed(by: disposeBag)
+    }
+}
+
+// MARK: - alert
+private extension ClockViewController {
+    func alertUseCaseEmpty() {
+        let alertController = UIAlertController(title: "알림", message: "모드가 비었습니다", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        
+        alertController.addAction(confirmAction)
+        
+        self.present(alertController, animated: true)
     }
 }
