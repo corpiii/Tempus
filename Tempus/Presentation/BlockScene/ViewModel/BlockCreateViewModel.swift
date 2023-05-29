@@ -120,12 +120,9 @@ private extension BlockCreateViewModel {
             switch completeAlert {
             case .completeWithStart:
                 let startUseCase = BlockStartUseCase(originModel: originModel)
-                /* coordinator finish and switch to ClockView with model or startUseCase */
-                // delegate? or function?
-                // delegate가 나을듯
+                self.coordinator?.finish(with: startUseCase)
             case .completeWithoutStart:
-                return
-                /* coordinaotr just finish */
+                self.coordinator?.finish()
             }
         }).disposed(by: disposeBag)
     }

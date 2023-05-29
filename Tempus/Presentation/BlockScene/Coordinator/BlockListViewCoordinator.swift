@@ -15,13 +15,15 @@ class BlockListViewCoordinator: Coordinator {
     private let blockListViewController: BlockListViewController
     private let blockListViewModel: BlockListViewModel
     let navigationController: UINavigationController
+    private weak var startModeDelegate: StartModeDelegate?
     
-    init(repository: DataManagerRepository) {
+    init(repository: DataManagerRepository, startModeDelegate: StartModeDelegate) {
         self.repository = repository
         
         self.blockListViewController = BlockListViewController(nibName: nil, bundle: nil)
         self.blockListViewModel = BlockListViewModel(repository: repository)
         self.navigationController = UINavigationController(rootViewController: blockListViewController)
+        self.startModeDelegate = startModeDelegate
         self.navigationController.tabBarItem = .init(tabBarSystemItem: .bookmarks, tag: 1)
     }
     
@@ -34,7 +36,8 @@ class BlockListViewCoordinator: Coordinator {
         let blockCreateCoordinator = BlockCreateCoordinator(navigationController: navigationController,
                                                             repository: self.repository,
                                                             fetchRefreshDelegate: self.blockListViewModel,
-                                                            finishDelegate: self)
+                                                            finishDelegate: self,
+                                                            startModeDelegate: startModeDelegate)
         blockCreateCoordinator.start()
         childCoordinators.append(blockCreateCoordinator)
     }

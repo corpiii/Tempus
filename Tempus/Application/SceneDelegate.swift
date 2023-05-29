@@ -38,10 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
-        
-        if let mainCoordinator {
-            mainCoordinator.startClockFlow()
-        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

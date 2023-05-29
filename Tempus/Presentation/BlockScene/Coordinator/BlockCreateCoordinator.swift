@@ -17,16 +17,20 @@ class BlockCreateCoordinator: Coordinator {
     private let blockCreateViewController: BlockCreateViewController
     private let blockCreateViewModel: BlockCreateViewModel
     
+    private weak var startModeDelegate: StartModeDelegate?
+    
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
          fetchRefreshDelegate: FetchRefreshDelegate,
-         finishDelegate: FinishDelegate) {
+         finishDelegate: FinishDelegate,
+         startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
         self.repository = repository
         self.blockCreateViewModel = BlockCreateViewModel(repository: self.repository,
                                                         fetchRefreshDelegate: fetchRefreshDelegate)
         blockCreateViewController = BlockCreateViewController(nibName: nil, bundle: nil)
         self.finishDelegate = finishDelegate
+        self.startModeDelegate = startModeDelegate
     }
     
     func start() {
@@ -35,7 +39,11 @@ class BlockCreateCoordinator: Coordinator {
         navigationController.pushViewController(self.blockCreateViewController, animated: true)
     }
     
-    func finish() {
+    func finish(with startUseCase: BlockStartUseCase? = nil) {
+        if let startUseCase {
+            startModeDelegate?.startWith(startUseCase)
+        }
+        
         finishDelegate?.finish(childCoordinator: self)
     }
 }

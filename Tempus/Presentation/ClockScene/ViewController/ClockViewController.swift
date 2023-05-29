@@ -114,6 +114,7 @@ private extension ClockViewController {
             .subscribe(onNext: { [weak self] output in
                 guard let self else { return }
                 
+                
                 output.remainTime.subscribe(onNext: { time in
                     #if DEBUG
                     print(time, #file, #line)
@@ -125,6 +126,9 @@ private extension ClockViewController {
                 output.entireRunningTime.subscribe(onNext: { runningTime in
                     self.countDownTimerView.setRunningTime(runningTime)
                 }).disposed(by: self.disposeBag)
+                
+                self.startEvent.onNext(())
+                self.startButton.isSelected = true
             }).disposed(by: disposeBag)
     }
 }

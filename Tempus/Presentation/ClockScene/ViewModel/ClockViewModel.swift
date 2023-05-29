@@ -50,3 +50,9 @@ final class ClockViewModel {
         return output
     }
 }
+
+extension ClockViewModel: StartModeDelegate {
+    func startWith(_ startUseCase: ModeStartUseCase) {
+        self.modeStartUseCase = startUseCase
+    }
+}
