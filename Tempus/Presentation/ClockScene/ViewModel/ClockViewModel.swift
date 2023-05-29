@@ -54,5 +54,6 @@ final class ClockViewModel {
 extension ClockViewModel: StartModeDelegate {
     func startWith(_ startUseCase: ModeStartUseCase) {
         self.modeStartUseCase = startUseCase
+        self.coordinator?.startTimer()
     }
 }

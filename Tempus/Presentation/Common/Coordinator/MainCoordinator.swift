@@ -20,12 +20,13 @@ class MainCoordinator: Coordinator {
         self.repository = repository
         
         // clockViewCon
-        let clockCoordinator = ClockCoordinator()
+        let clockCoordinator = ClockCoordinator(startApplyDelegate: self)
         clockCoordinator.start()
         childCoordinators.append(clockCoordinator)
         
         // blockViewCon
-        let blockListViewCoordinator = BlockListViewCoordinator(repository: repository)
+        let blockListViewCoordinator = BlockListViewCoordinator(repository: repository,
+                                                                startModeDelegate: clockCoordinator.clockViewModel)
         blockListViewCoordinator.start()
         childCoordinators.append(blockListViewCoordinator)
         
@@ -36,12 +37,10 @@ class MainCoordinator: Coordinator {
         tabBarController.setViewControllers([clockCoordinator.clockViewController,
                                              blockListViewCoordinator.navigationController], animated: true)
     }
-    
-    func startClockFlow() {
+}
+
+extension MainCoordinator: StartApplyDelegate {
+    func transitionToClock() {
         tabBarController.selectedIndex = 0
-    }
-    
-    func startBlockFlow() {
-        tabBarController.selectedIndex = 1
     }
 }
