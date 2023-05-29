@@ -136,13 +136,6 @@ private extension BlockCreateViewController {
         textFieldSubject.onNext(titleTextField.text ?? "")
         divideCountSubject.onNext(divideCount)
         completeEvent.onNext(())
-        
-        if let title = self.titleTextField.text, title.isEmpty == false,
-           1 <= self.divideCountPickerView.selectedRow(inComponent: 0) {
-            alertSuccess()
-        } else {
-            alertFailure()
-        }
     }
     
     func alertSuccess() {

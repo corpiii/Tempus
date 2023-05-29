@@ -24,7 +24,7 @@ class BlockListViewController: UIViewController {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BlockTableViewCell")
+        tableView.register(BlockCell.self, forCellReuseIdentifier: BlockCell.identifier)
         
         return tableView
     }()
@@ -37,10 +37,12 @@ class BlockListViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         tableViewDataSource = UITableViewDiffableDataSource<Section, BlockModel>(tableView: tableView)
         { (tableView, indexPath, model) -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BlockTableViewCell", for: indexPath)
-            cell.textLabel?.text = model.title
-            
-            return cell
+            if let cell = tableView.dequeueReusableCell(withIdentifier: BlockCell.identifier, for: indexPath) as? BlockCell {
+                cell.modelTitleLabel.text = model.title
+                return cell
+            } else {
+                return UITableViewCell()
+            }
         }
         
         super.init(nibName: nil, bundle: nil)

@@ -53,6 +53,7 @@ extension CoreDataRepository {
         let newObject = NSManagedObject(entity: entity, insertInto: context)
         
         newObject.setValue(model.id, forKey: "uuid")
+        newObject.setValue(model.title, forKey: "title")
         newObject.setValue(model.divideCount, forKey: "divideCount")
         newObject.setValue(Date().timeIntervalSince1970, forKey: "createdAt")
         
@@ -78,6 +79,7 @@ extension CoreDataRepository {
         let newObject = NSManagedObject(entity: entity, insertInto: context)
         
         newObject.setValue(model.id, forKey: "uuid")
+        newObject.setValue(model.title, forKey: "title")
         newObject.setValue(model.startTime, forKey: "startTime")
         newObject.setValue(model.repeatCount, forKey: "repeatCount")
         newObject.setValue(model.focusTime, forKey: "focusTime")
