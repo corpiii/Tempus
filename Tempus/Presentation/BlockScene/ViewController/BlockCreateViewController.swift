@@ -68,12 +68,18 @@ class BlockCreateViewController: UIViewController {
         return pickerView
     }()
     
-    var viewModel: BlockCreateViewModel?
+    weak var viewModel: BlockCreateViewModel?
     private let disposeBag: DisposeBag = .init()
     private let textFieldSubject: PublishSubject<String> = .init()
     private let divideCountSubject: PublishSubject<Int> = .init()
     private let completeEvent: PublishSubject<Void> = .init()
     private let startEvent: PublishSubject<CompleteAlert> = .init()
+    private let backButtonEvent: PublishSubject<Void> = .init()
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        backButtonEvent.onNext(())
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -246,6 +252,7 @@ private extension BlockCreateViewController {
         let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
                                                modelDivideCount:  divideCountSubject,
                                                completeButtonTapEvent: completeEvent,
+                                               backButtonEvent: backButtonEvent,
                                                startEvent: startEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {

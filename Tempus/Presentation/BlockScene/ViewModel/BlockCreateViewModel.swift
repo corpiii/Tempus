@@ -15,6 +15,7 @@ final class BlockCreateViewModel {
         let modelTitle: Observable<String>
         let modelDivideCount: Observable<Int>
         let completeButtonTapEvent: Observable<Void>
+        let backButtonEvent: Observable<Void>
         let startEvent: Observable<CompleteAlert>
     }
     
@@ -49,6 +50,7 @@ final class BlockCreateViewModel {
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.modelDivideCount, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
+        bindBackButtonEvent(input.backButtonEvent, disposeBag)
         bindStartEvent(input.startEvent, disposeBag)
         
         return output
@@ -100,6 +102,10 @@ private extension BlockCreateViewModel {
                 self.modelCreateEvent.onNext(model)
                 self.originModel = model
             }).disposed(by: disposeBag)
+    }
+    
+    func bindBackButtonEvent(_ backButtonEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        self.coordinator?.finish()
     }
     
     func bindStartEvent(_ startEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
