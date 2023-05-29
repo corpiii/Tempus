@@ -76,8 +76,9 @@ private extension BlockListViewModel {
     
     func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
         addButtonEvent
-            .subscribe(onNext: {
-                // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.coordinator?.pushCreateViewController(self)
             }).disposed(by: disposeBag)
     }
     

@@ -9,23 +9,40 @@ import UIKit
 
 class BlockListViewCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
-    private let navigationController: UINavigationController
-    private let repository: DataManagerRepository
+    var type: CoordinatorType { return .blockList }
     
-    init(_ navigationController: UINavigationController, _ repostiroy: DataManagerRepository) {
-        self.navigationController = navigationController
-        self.repository = repostiroy
+    private let repository: DataManagerRepository
+    private let blockListViewController: BlockListViewController
+    private let blockListViewModel: BlockListViewModel
+    let navigationController: UINavigationController
+    
+    init(repository: DataManagerRepository) {
+        self.repository = repository
+        
+        self.blockListViewController = BlockListViewController(nibName: nil, bundle: nil)
+        self.blockListViewModel = BlockListViewModel(repository: repository)
+        self.navigationController = UINavigationController(rootViewController: blockListViewController)
+        self.navigationController.tabBarItem = .init(tabBarSystemItem: .bookmarks, tag: 1)
+    }
+    
+    func start() {
+        self.blockListViewModel.coordinator = self
+        blockListViewController.viewModel = self.blockListViewModel
     }
     
     func pushCreateViewController(_ fetchRefreshDelegate: FetchRefreshDelegate) {
-        let blockCreateViewController = BlockCreateViewController(nibName: nil, bundle: nil)
-        let blockCreateViewModel = BlockCreateViewModel(repository: repository,
-                                                        fetchRefreshDelegate: fetchRefreshDelegate)
-        let blockCreateCoordinator = BlockCreateCoordinator()
-        
-        blockCreateViewController.viewModel = blockCreateViewModel
-        blockCreateViewModel.coordinator = blockCreateCoordinator
+        let blockCreateCoordinator = BlockCreateCoordinator(navigationController: navigationController,
+                                                            repository: self.repository,
+                                                            fetchRefreshDelegate: self.blockListViewModel,
+                                                            finishDelegate: self)
+        blockCreateCoordinator.start()
         childCoordinators.append(blockCreateCoordinator)
-        self.navigationController.pushViewController(blockCreateViewController, animated: true)
+    }
+}
+
+extension BlockListViewCoordinator: FinishDelegate {
+    func finish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
+        self.navigationController.popToRootViewController(animated: true)
     }
 }

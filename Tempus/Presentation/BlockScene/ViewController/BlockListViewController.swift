@@ -16,7 +16,7 @@ class BlockListViewController: UIViewController {
         case main
     }
     
-    var viewModel: BlockListViewModel?
+    weak var viewModel: BlockListViewModel?
     private let disposeBag: DisposeBag = .init()
     
     private var tableViewDataSource: UITableViewDiffableDataSource<Section, BlockModel>
