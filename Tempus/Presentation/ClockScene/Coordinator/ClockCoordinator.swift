@@ -9,9 +9,15 @@ import UIKit
 
 class ClockCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
-    let viewController: UIViewController
+    var type: CoordinatorType { return .clock }
+    let clockViewController: ClockViewController
     
-    init(viewController: UIViewController) {
-        self.viewController = viewController
+    init() {
+        self.clockViewController = ClockViewController(nibName: nil, bundle: nil)
+        self.clockViewController.tabBarItem = .init(tabBarSystemItem: .downloads, tag: 0)
+        self.clockViewController.viewModel = ClockViewModel()
+    }
+    
+    func start() {
     }
 }
