@@ -105,7 +105,11 @@ private extension BlockCreateViewModel {
     }
     
     func bindBackButtonEvent(_ backButtonEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        self.coordinator?.finish()
+        backButtonEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.coordinator?.finish()
+            }).disposed(by: disposeBag)
     }
     
     func bindStartEvent(_ startEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
