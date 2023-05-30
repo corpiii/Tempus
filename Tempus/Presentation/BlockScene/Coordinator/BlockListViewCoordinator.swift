@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlockListViewCoordinator: Coordinator {
+class BlockListViewCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .blockList }
     
@@ -33,19 +33,23 @@ class BlockListViewCoordinator: Coordinator {
     }
     
     func pushCreateViewController(_ fetchRefreshDelegate: FetchRefreshDelegate) {
-        let blockCreateCoordinator = BlockCreateCoordinator(navigationController: navigationController,
+        let blockCreateCoordinator = BlockCreateCoordinator(navigationController: self.navigationController,
                                                             repository: self.repository,
                                                             fetchRefreshDelegate: self.blockListViewModel,
                                                             finishDelegate: self,
-                                                            startModeDelegate: startModeDelegate)
+                                                            startModeDelegate: self.startModeDelegate)
         blockCreateCoordinator.start()
         childCoordinators.append(blockCreateCoordinator)
     }
-}
-
-extension BlockListViewCoordinator: FinishDelegate {
-    func finish(childCoordinator: Coordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
-        self.navigationController.popToRootViewController(animated: true)
+    
+    func pushDetailViewController(with model: BlockModel) {
+        let blockDetailCoordinator = BlockDetailCoordinator(navigationController: self.navigationController,
+                                                            repository: self.repository,
+                                                            originModel: model,
+                                                            fetchRefreshDelegate: self.blockListViewModel,
+                                                            finishDelegate: self,
+                                                            startModeDelegate: self.startModeDelegate)
+        blockDetailCoordinator.start()
+        childCoordinators.append(blockDetailCoordinator)
     }
 }
