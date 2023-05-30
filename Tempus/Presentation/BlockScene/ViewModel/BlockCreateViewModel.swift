@@ -94,10 +94,10 @@ private extension BlockCreateViewModel {
     func bindCompleteButtonTapEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
-                guard let self = self,
-                      let title = self.modelTitle, title.isEmpty == false,
-                      let divideCount = self.divideCount else { return }
+                guard let self else { return }
                 
+                let title = self.modelTitle ?? ""
+                let divideCount = self.divideCount ?? -1
                 let model = BlockModel(id: UUID(), title: title, divideCount: divideCount)
                 self.modelCreateEvent.onNext(model)
                 self.originModel = model

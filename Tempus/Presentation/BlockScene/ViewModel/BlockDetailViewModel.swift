@@ -44,6 +44,7 @@ private extension BlockDetailViewModel {
                       let originModel = try? self.originModelSubject.value() else { return }
                 
                 let startUseCase = BlockStartUseCase(originModel: originModel)
+                self.coordinator?.finish(with: startUseCase)
                 // coordinator push with startUseCase
             }).disposed(by: disposeBag)
     }
@@ -59,7 +60,9 @@ private extension BlockDetailViewModel {
     
     func bindCancelButtonTapEvent(_ cancelEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         cancelEvent
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                self.coordinator?.finish()
                 // coordinator finish
             }).disposed(by: disposeBag)
     }

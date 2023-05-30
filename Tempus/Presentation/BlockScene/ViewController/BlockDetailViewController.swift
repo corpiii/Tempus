@@ -104,7 +104,7 @@ private extension BlockDetailViewController {
             .subscribe(onNext: { model in
                 DispatchQueue.main.async {
                     self.navigationItem.title = model.title
-                    self.clockView.splitClock(by: "\(model.divideCount)")
+                    self.clockView.splitClock(by: "\(24 / model.divideCount)")
                 }
             }).disposed(by: disposeBag)
         

@@ -20,6 +20,7 @@ class BlockDetailCoordinator: Coordinator, FinishDelegate {
     
     let blockDetailViewController: BlockDetailViewController
     let blockDetailViewModel: BlockDetailViewModel
+    let blockDetailNavigationController: UINavigationController
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
@@ -35,15 +36,14 @@ class BlockDetailCoordinator: Coordinator, FinishDelegate {
         self.startModeDelegate = startModeDelegate
         self.blockDetailViewController = .init(nibName: nil, bundle: nil)
         self.blockDetailViewModel = .init(originModel: originModel)
+        self.blockDetailNavigationController = .init(rootViewController: self.blockDetailViewController)
     }
     
     func start() {
-        let navigationController = UINavigationController(rootViewController: blockDetailViewController)
-        
         self.blockDetailViewController.viewModel = self.blockDetailViewModel
         self.blockDetailViewModel.coordinator = self
-        navigationController.modalPresentationStyle = .fullScreen
-        self.navigationController.present(navigationController, animated: true)
+        blockDetailNavigationController.modalPresentationStyle = .fullScreen
+        self.navigationController.present(blockDetailNavigationController, animated: true)
     }
     
     func finish(with startUseCase: BlockStartUseCase? = nil) {
@@ -51,6 +51,7 @@ class BlockDetailCoordinator: Coordinator, FinishDelegate {
             startModeDelegate?.startWith(startUseCase)
         }
         
+        self.blockDetailNavigationController.dismiss(animated: true)
         finishDelegate?.finish(childCoordinator: self)
     }
     
