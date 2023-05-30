@@ -53,10 +53,10 @@ class BlockCreateViewController: UIViewController {
         return clockView
     }()
     
-    private let divideCountLabel: UILabel = {
+    private let timeIntervalLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "단위 시간"
+        label.text = "시간 간격"
         
         return label
     }()
@@ -71,7 +71,7 @@ class BlockCreateViewController: UIViewController {
     weak var viewModel: BlockCreateViewModel?
     private let disposeBag: DisposeBag = .init()
     private let textFieldSubject: PublishSubject<String> = .init()
-    private let divideCountSubject: PublishSubject<Int> = .init()
+    private let timeIntervalSubject: PublishSubject<Int> = .init()
     private let completeEvent: PublishSubject<Void> = .init()
     private let startEvent: PublishSubject<CompleteAlert> = .init()
     private let backButtonEvent: PublishSubject<Void> = .init()
@@ -131,10 +131,10 @@ private extension BlockCreateViewController {
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
         let selectRow = self.divideCountPickerView.selectedRow(inComponent: 0)
-        let divideCount = Int(Constant.divideCountCandidates[selectRow]) ?? -1
+        let timeInterval = Int(Constant.divideCountCandidates[selectRow]) ?? -1
         
         textFieldSubject.onNext(titleTextField.text ?? "")
-        divideCountSubject.onNext(divideCount)
+        timeIntervalSubject.onNext(timeInterval)
         completeEvent.onNext(())
     }
     
@@ -202,13 +202,13 @@ private extension BlockCreateViewController {
         let rightDividerView = makeWidthDividerView()
         
         divideCountStackView.addArrangedSubview(leftDividerView)
-        divideCountStackView.addArrangedSubview(divideCountLabel)
+        divideCountStackView.addArrangedSubview(timeIntervalLabel)
         divideCountStackView.addArrangedSubview(divideCountPickerView)
         divideCountStackView.addArrangedSubview(rightDividerView)
         
         let stackWidthSize = self.view.frame.width - Constant.outerMagins * 2
         let allSpacing = 3 * Constant.divideCountStackSpacing
-        let mainSize = Constant.pickerViewWidth + divideCountLabel.intrinsicContentSize.width + allSpacing
+        let mainSize = Constant.pickerViewWidth + timeIntervalLabel.intrinsicContentSize.width + allSpacing
         let targetSize = (stackWidthSize - mainSize) / 2
         
         leftDividerView.snp.remakeConstraints { make in
@@ -243,7 +243,7 @@ private extension BlockCreateViewController {
 private extension BlockCreateViewController {
     func bindViewModel() {
         let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
-                                               modelDivideCount:  divideCountSubject,
+                                               modelDivideCount:  timeIntervalSubject,
                                                completeButtonTapEvent: completeEvent,
                                                backButtonEvent: backButtonEvent,
                                                startEvent: startEvent)

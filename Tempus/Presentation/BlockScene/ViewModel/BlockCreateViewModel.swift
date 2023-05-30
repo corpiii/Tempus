@@ -85,9 +85,9 @@ private extension BlockCreateViewModel {
     
     func bindDivideCount(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
         divideCount
-            .subscribe(onNext: { [weak self] divideCount in
+            .subscribe(onNext: { [weak self] timeInterval in
                 guard let self else { return }
-                self.divideCount = divideCount
+                self.divideCount = 24 / timeInterval
             }).disposed(by: disposeBag)
     }
     
