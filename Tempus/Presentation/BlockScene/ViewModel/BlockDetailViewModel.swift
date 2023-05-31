@@ -53,8 +53,7 @@ private extension BlockDetailViewModel {
         editEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                // coordinator push with originModel
-                // and push with self and refresh with edited Data
+                self.coordinator?.pushBlockEditViewController()
             }).disposed(by: disposeBag)
     }
     

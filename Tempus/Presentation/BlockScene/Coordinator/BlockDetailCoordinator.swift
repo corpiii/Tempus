@@ -56,6 +56,13 @@ class BlockDetailCoordinator: Coordinator, FinishDelegate {
     }
     
     func pushBlockEditViewController() {
-        // TODO
+        let blockEditCoordinator = BlockEditCoordinator(navigationController: self.blockDetailNavigationController,
+                                                        repository: self.repository,
+                                                        originModel: self.originModel,
+                                                        fetchRefreshDelegate: self.fetchRefreshDelegate,
+                                                        finishDelegate: self,
+                                                        editReflectDelegate: self.blockDetailViewModel)
+        blockEditCoordinator.start()
+        self.childCoordinators.append(blockEditCoordinator)
     }
 }
