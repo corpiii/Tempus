@@ -21,20 +21,21 @@ class SplittedClockView: UIView {
     
     private lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)
     private lazy var radius = bounds.width * 0.95 / 2.0
-    
+    private var ClockInterval: String = ""
     private var splitLayer = CALayer()
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupBaseLine()
+        splitClock(by: ClockInterval)
     }
     
     func splitClock(by interval: String) {
         splitLayer.removeFromSuperlayer()
         layer.layoutIfNeeded()
         
+        self.ClockInterval = interval
         guard let interval = Int(interval) else { return }
-        
         let divideCount = 24 / interval
         let startAngle = -90 * CGFloat.pi / 180
         let angleInterval = CGFloat.pi * 2 / CGFloat(divideCount)
