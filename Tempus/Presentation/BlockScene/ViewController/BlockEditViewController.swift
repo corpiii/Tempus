@@ -69,7 +69,7 @@ class BlockEditViewController: UIViewController {
         return pickerView
     }()
     
-    var viewModel: BlockEditViewModel?
+    weak var viewModel: BlockEditViewModel?
     private let disposeBag: DisposeBag = .init()
     private let textFieldSubject: PublishSubject<String> = .init()
     private let divideCountSubject: PublishSubject<Int> = .init()

@@ -36,7 +36,7 @@ class BlockDetailViewController: UIViewController {
         return clockView
     }()
     
-    var viewModel: BlockDetailViewModel?
+    weak var viewModel: BlockDetailViewModel?
     private let disposeBag: DisposeBag = .init()
     
     override func viewDidLoad() {
