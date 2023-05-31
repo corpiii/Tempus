@@ -20,7 +20,7 @@ class BlockEditViewController: UIViewController {
         static let divideCountCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
     
-    private let completeButton: UIBarButtonItem = .init(systemItem: .done)
+    private let doneButton: UIBarButtonItem = .init(systemItem: .done)
     
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -57,7 +57,7 @@ class BlockEditViewController: UIViewController {
     private let divideCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "단위 시간"
+        label.text = "시간 간격"
         
         return label
     }()
@@ -73,7 +73,8 @@ class BlockEditViewController: UIViewController {
     private let disposeBag: DisposeBag = .init()
     private let textFieldSubject: PublishSubject<String> = .init()
     private let divideCountSubject: PublishSubject<Int> = .init()
-    private let completeEvent: PublishSubject<Void> = .init()
+    private let doneButtonTapEvent: PublishSubject<Void> = .init()
+    private let finishEvent: PublishSubject<Void> = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,17 +119,17 @@ private extension BlockEditViewController {
     
     func configureNavigationBar() {
         self.navigationItem.title = "수정하기"
-        self.navigationItem.rightBarButtonItem = completeButton
-        completeButton.target = self
-        completeButton.action = #selector(completeButtonTapped)
+        self.navigationItem.rightBarButtonItem = doneButton
+        doneButton.target = self
+        doneButton.action = #selector(completeButtonTapped)
     }
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
-        let divideCount = Int(Int(Constant.divideCountCandidates[divideCountPickerView.selectedRow(inComponent: 0)]) ?? -1)
+        let timeInterval = Int(Constant.divideCountCandidates[divideCountPickerView.selectedRow(inComponent: 0)]) ?? -1
         
         textFieldSubject.onNext(titleTextField.text ?? "")
-        divideCountSubject.onNext(divideCount)
-        completeEvent.onNext(())
+        divideCountSubject.onNext(24 / timeInterval)
+        doneButtonTapEvent.onNext(())
     }
     
     func configureEntireStackView() {
@@ -199,10 +200,11 @@ private extension BlockEditViewController {
     func bindViewModel() {
         let input = BlockEditViewModel.Input(modelTitle: textFieldSubject,
                                              modelDivideCount: divideCountSubject,
-                                             completeButtonTapEvent: completeEvent)
+                                             doneButtonTapEvent: doneButtonTapEvent,
+                                             finishEvent: finishEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag),
-              let pickerIndex = Constant.divideCountCandidates.firstIndex(of: "\(output.divideCount)") else {
+              let pickerIndex = Constant.divideCountCandidates.firstIndex(of: "\(24 / output.divideCount)") else {
             return
         }
         
@@ -210,7 +212,7 @@ private extension BlockEditViewController {
         self.divideCountPickerView.selectRow(pickerIndex, inComponent: 0, animated: true)
         
         DispatchQueue.main.async {
-            self.splittedClockView.splitClock(by: "\(output.divideCount)")
+            self.splittedClockView.splitClock(by: "\(24 / output.divideCount)")
         }
         
         bindEditSuccess(output.isEditSuccess, disposeBag)
@@ -221,9 +223,10 @@ private extension BlockEditViewController {
             .subscribe(onNext: { [weak self] isEditSuccess in
                 guard let self else { return }
                 
-                if isEditSuccess == false {
-                    self.alertFailure()
-                }
+                isEditSuccess
+                ? self.finishEvent.onNext(())
+                : self.alertFailure()
+                
             }).disposed(by: disposeBag)
     }
     
