@@ -7,13 +7,12 @@
 
 import UIKit
 
-class BlockDetailCoordinator: Coordinator, FinishDelegate {
+class BlockDetailCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .blockDetail }
     let navigationController: UINavigationController
     let repository: DataManagerRepository
-    let originModel: BlockModel
     weak var fetchRefreshDelegate: FetchRefreshDelegate?
     weak var startModeDelegate: StartModeDelegate?
     weak var finishDelegate: FinishDelegate?
@@ -30,7 +29,6 @@ class BlockDetailCoordinator: Coordinator, FinishDelegate {
          startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
         self.repository = repository
-        self.originModel = originModel
         self.fetchRefreshDelegate = fetchRefreshDelegate
         self.finishDelegate = finishDelegate
         self.startModeDelegate = startModeDelegate
@@ -55,14 +53,21 @@ class BlockDetailCoordinator: Coordinator, FinishDelegate {
         finishDelegate?.finish(childCoordinator: self)
     }
     
-    func pushBlockEditViewController() {
+    func pushBlockEditViewController(with originModel: BlockModel) {
         let blockEditCoordinator = BlockEditCoordinator(navigationController: self.blockDetailNavigationController,
                                                         repository: self.repository,
-                                                        originModel: self.originModel,
+                                                        originModel: originModel,
                                                         fetchRefreshDelegate: self.fetchRefreshDelegate,
                                                         finishDelegate: self,
                                                         editReflectDelegate: self.blockDetailViewModel)
         blockEditCoordinator.start()
         self.childCoordinators.append(blockEditCoordinator)
+    }
+}
+
+extension BlockDetailCoordinator: FinishDelegate {
+    func finish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
+        self.blockDetailNavigationController.popToRootViewController(animated: true)
     }
 }
