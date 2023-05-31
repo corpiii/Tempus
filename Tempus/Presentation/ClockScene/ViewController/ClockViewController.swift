@@ -84,6 +84,11 @@ private extension ClockViewController {
     }
     
     @objc func startButtonTapped() {
+        guard (viewModel?.modeStartUseCase) != nil else {
+            alertUseCaseEmpty()
+            return
+        }
+        
         startButton.isSelected
         ? stopEvent.onNext(())
         : startEvent.onNext(())
@@ -109,6 +114,7 @@ private extension ClockViewController {
             .subscribe(onNext: { [weak self] output in
                 guard let self else { return }
                 
+                
                 output.remainTime.subscribe(onNext: { time in
                     #if DEBUG
                     print(time, #file, #line)
@@ -120,6 +126,21 @@ private extension ClockViewController {
                 output.entireRunningTime.subscribe(onNext: { runningTime in
                     self.countDownTimerView.setRunningTime(runningTime)
                 }).disposed(by: self.disposeBag)
+                
+                self.startEvent.onNext(())
+                self.startButton.isSelected = true
             }).disposed(by: disposeBag)
+    }
+}
+
+// MARK: - alert
+private extension ClockViewController {
+    func alertUseCaseEmpty() {
+        let alertController = UIAlertController(title: "알림", message: "모드가 비었습니다", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        
+        alertController.addAction(confirmAction)
+        
+        self.present(alertController, animated: true)
     }
 }

@@ -15,6 +15,7 @@ final class BlockCreateViewModel {
         let modelTitle: Observable<String>
         let modelDivideCount: Observable<Int>
         let completeButtonTapEvent: Observable<Void>
+        let backButtonEvent: Observable<Void>
         let startEvent: Observable<CompleteAlert>
     }
     
@@ -29,6 +30,7 @@ final class BlockCreateViewModel {
     
     private let createUseCase: BlockCreateUseCase
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
+    weak var coordinator: BlockCreateCoordinator?
     
     init(repository: DataManagerRepository, fetchRefreshDelegate: FetchRefreshDelegate) {
         self.createUseCase = .init(repository: repository)
@@ -48,13 +50,12 @@ final class BlockCreateViewModel {
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.modelDivideCount, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
+        bindBackButtonEvent(input.backButtonEvent, disposeBag)
         bindStartEvent(input.startEvent, disposeBag)
         
         return output
     }
     
-    /* finish function by coordinator */
-    // func finish() {}
 }
 
 private extension BlockCreateViewModel {
@@ -82,22 +83,30 @@ private extension BlockCreateViewModel {
     
     func bindDivideCount(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
         divideCount
-            .subscribe(onNext: { [weak self] divideCount in
+            .subscribe(onNext: { [weak self] timeInterval in
                 guard let self else { return }
-                self.divideCount = divideCount
+                self.divideCount = 24 / timeInterval
             }).disposed(by: disposeBag)
     }
     
     func bindCompleteButtonTapEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         completeEvent
             .subscribe(onNext: { [weak self] completeAlert in
-                guard let self = self,
-                      let title = self.modelTitle, title.isEmpty == false,
-                      let divideCount = self.divideCount else { return }
+                guard let self else { return }
                 
+                let title = self.modelTitle ?? ""
+                let divideCount = self.divideCount ?? -1
                 let model = BlockModel(id: UUID(), title: title, divideCount: divideCount)
                 self.modelCreateEvent.onNext(model)
                 self.originModel = model
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindBackButtonEvent(_ backButtonEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        backButtonEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
     
@@ -109,12 +118,9 @@ private extension BlockCreateViewModel {
             switch completeAlert {
             case .completeWithStart:
                 let startUseCase = BlockStartUseCase(originModel: originModel)
-                /* coordinator finish and switch to ClockView with model or startUseCase */
-                // delegate? or function?
-                // delegate가 나을듯
+                self.coordinator?.finish(with: startUseCase)
             case .completeWithoutStart:
-                return
-                /* coordinaotr just finish */
+                self.coordinator?.finish()
             }
         }).disposed(by: disposeBag)
     }

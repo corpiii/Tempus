@@ -19,6 +19,7 @@ final class BlockDetailViewModel {
     }
     
     private let originModelSubject: BehaviorSubject<BlockModel>
+    weak var coordinator: BlockDetailCoordinator?
     
     init(originModel: BlockModel) {
         self.originModelSubject = .init(value: originModel)
@@ -43,23 +44,24 @@ private extension BlockDetailViewModel {
                       let originModel = try? self.originModelSubject.value() else { return }
                 
                 let startUseCase = BlockStartUseCase(originModel: originModel)
-                // coordinator push with startUseCase
+                self.coordinator?.finish(with: startUseCase)
             }).disposed(by: disposeBag)
     }
     
     func bindEditButtonTapEvent(_ editEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         editEvent
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                // coordinator push with originModel
-                // and push with self and refresh with edited Data
+                guard let self,
+                      let originModel = try? self.originModelSubject.value() else { return }
+                self.coordinator?.pushBlockEditViewController(with: originModel)
             }).disposed(by: disposeBag)
     }
     
     func bindCancelButtonTapEvent(_ cancelEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         cancelEvent
-            .subscribe(onNext: {
-                // coordinator finish
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                self.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
 }

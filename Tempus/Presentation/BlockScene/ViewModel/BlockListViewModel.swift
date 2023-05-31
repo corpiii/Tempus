@@ -28,6 +28,8 @@ final class BlockListViewModel {
     
     private var modelFetchEvent: PublishSubject<Void> = .init()
     
+    weak var coordinator: BlockListViewCoordinator?
+    
     init(repository: DataManagerRepository) {
         self.blockFetchUseCase = .init(repository: repository)
         self.blockDeleteUseCase = .init(repository: repository)
@@ -53,8 +55,7 @@ final class BlockListViewModel {
         bindModelFetchEvent(input.modelFetchEvent, disposeBag: disposeBag)
         bindModelTapButton(input.modelTapEvent, disposeBag: disposeBag)
         
-        var models: [BlockModel] = []
-        output.blockModelArray.onNext(models)
+        output.blockModelArray.onNext([])
         return output
     }
 }
@@ -75,8 +76,9 @@ private extension BlockListViewModel {
     
     func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
         addButtonEvent
-            .subscribe(onNext: {
-                // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.coordinator?.pushCreateViewController(self)
             }).disposed(by: disposeBag)
     }
     
@@ -90,8 +92,8 @@ private extension BlockListViewModel {
     func bindModelTapButton(_ modelTapEvent: Observable<BlockModel>, disposeBag: DisposeBag) {
         modelTapEvent
             .subscribe(onNext: { [weak self] model in
-                // coordinator push to detailViewModel
-                // by 'push(fetchRefreshDelegate: self, model: model)' function
+                guard let self else { return }
+                self.coordinator?.pushDetailViewController(with: model)
             }).disposed(by: disposeBag)
     }
 }

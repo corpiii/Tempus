@@ -101,7 +101,7 @@
 /* Begin PBXFileReference section */
 		01B4F0588A69C8F0BDE265C4CB045E02 /* BRYSerialAnimationQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BRYSerialAnimationQueue.h; path = Classes/BRYSerialAnimationQueue.h; sourceTree = "<group>"; };
 		0CE8AB1959BDBB25B8EA3C8804F122AA /* Pods-Tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tempus.release.xcconfig"; sourceTree = "<group>"; };
-		0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage+BetterAdditions */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "UIImage+BetterAdditions"; path = UIImage_BetterAdditions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage_BetterAdditions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIImage_BetterAdditions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		144AACB4D4A03015735AD120DA6AA1D1 /* UIColor-Hex-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor-Hex-umbrella.h"; sourceTree = "<group>"; };
 		14553D3873AF69E36BB8F23DA17BE837 /* SSBouncyButton-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SSBouncyButton-Info.plist"; sourceTree = "<group>"; };
 		21390C1CF6EB4DB74BB23FF0787420F7 /* UIImage+BetterAdditions-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+BetterAdditions-prefix.pch"; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		70B50DA36893BE9FEA6722D446F9F1C8 /* UIColor-Hex-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Hex-dummy.m"; sourceTree = "<group>"; };
 		71F5187746C777652F0FE7BF0067BB8F /* UIImage+BetterAdditions-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+BetterAdditions-umbrella.h"; sourceTree = "<group>"; };
 		72B5844F5EA69406F97706BD10AB52B2 /* Pods-TempusTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TempusTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		7ABDA89BE7087B891A63506044D97334 /* UIColor-Hex */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "UIColor-Hex"; path = UIColor_Hex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ABDA89BE7087B891A63506044D97334 /* UIColor_Hex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIColor_Hex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B1B42165CDFC673D5C4542DC334C780 /* UIImage+BetterAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+BetterAdditions.h"; sourceTree = "<group>"; };
 		8709D051D72D65C3EB5F6283A79208AC /* Pods-TempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TempusTests.release.xcconfig"; sourceTree = "<group>"; };
 		88BAA1AADC14116349A39E86609051FE /* UIColor-Hex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIColor-Hex.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,12 +136,12 @@
 		968D1C39B42F88E8C661B2635D838FB6 /* SSBouncyButton.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SSBouncyButton.debug.xcconfig; sourceTree = "<group>"; };
 		9973B0C76F0324E2E44C568FEE6D9FF8 /* Pods-Tempus-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tempus-frameworks.sh"; sourceTree = "<group>"; };
 		999621F1706861A50EBF4F8E5B32737F /* UIColor-Hex-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor-Hex-prefix.pch"; sourceTree = "<group>"; };
-		9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BRYSerialAnimationQueue; path = BRYSerialAnimationQueue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BRYSerialAnimationQueue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		A365B15A1576EDDC9E1FE31AEF05B6A5 /* Pods-Tempus-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tempus-Info.plist"; sourceTree = "<group>"; };
 		A4A004DE6D2DFE6973BE011AB2565F2B /* BRYSerialAnimationQueue-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BRYSerialAnimationQueue-prefix.pch"; sourceTree = "<group>"; };
-		A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SSBouncyButton; path = SSBouncyButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SSBouncyButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8F352A7DAE35AF2E2F0DA6BC129AC04 /* SSBouncyButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SSBouncyButton-dummy.m"; sourceTree = "<group>"; };
 		B1254FACAAEF1FE48A950CBD01D777FE /* Pods-TempusTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TempusTests.modulemap"; sourceTree = "<group>"; };
 		B15738673B2296FB9971201CF83F4659 /* BRYSerialAnimationQueue-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BRYSerialAnimationQueue-umbrella.h"; sourceTree = "<group>"; };
@@ -251,7 +251,6 @@
 				8F588129469A60875A4CD33BCF3F428F /* UIColor+Hex.m */,
 				52159D15C05B29D938A2EB25982920D8 /* Support Files */,
 			);
-			name = "UIColor-Hex";
 			path = "UIColor-Hex";
 			sourceTree = "<group>";
 		};
@@ -262,7 +261,6 @@
 				F92A916280BB582BE7D28369D863D175 /* BRYSerialAnimationQueue.m */,
 				FBCEFA57C9885CA05479DEDB22AB5FAB /* Support Files */,
 			);
-			name = BRYSerialAnimationQueue;
 			path = BRYSerialAnimationQueue;
 			sourceTree = "<group>";
 		};
@@ -282,7 +280,6 @@
 				407AA2F3B95689890B8F42DCA50D3998 /* UIImage+BetterAdditions.m */,
 				875BE537F5A5E1C0EA48A052C6F93016 /* Support Files */,
 			);
-			name = "UIImage+BetterAdditions";
 			path = "UIImage+BetterAdditions";
 			sourceTree = "<group>";
 		};
@@ -308,7 +305,6 @@
 				3CCD93C1F8D433011260B3AE56A63082 /* SSBouncyButton.m */,
 				DF7852EB7A5BCD2ADBBA2F24446407D3 /* Support Files */,
 			);
-			name = SSBouncyButton;
 			path = SSBouncyButton;
 			sourceTree = "<group>";
 		};
@@ -394,12 +390,12 @@
 		F7704FE30EC4134E12AC6E72316E6CC6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue */,
+				9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue.framework */,
 				FF380E04BC0F3553B8EBF52AFBF0A633 /* Pods-Tempus */,
 				5D36CB83F99EEA2E22BC215BC0B57230 /* Pods-TempusTests */,
-				A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton */,
-				7ABDA89BE7087B891A63506044D97334 /* UIColor-Hex */,
-				0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage+BetterAdditions */,
+				A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton.framework */,
+				7ABDA89BE7087B891A63506044D97334 /* UIColor_Hex.framework */,
+				0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage_BetterAdditions.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -492,7 +488,7 @@
 			);
 			name = "UIImage+BetterAdditions";
 			productName = UIImage_BetterAdditions;
-			productReference = 0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage+BetterAdditions */;
+			productReference = 0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage_BetterAdditions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		50BF2150400A5C6A706C51570CDA7E92 /* SSBouncyButton */ = {
@@ -513,7 +509,7 @@
 			);
 			name = SSBouncyButton;
 			productName = SSBouncyButton;
-			productReference = A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton */;
+			productReference = A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		9EE6304522E8774FC6803D6905A792CA /* UIColor-Hex */ = {
@@ -531,7 +527,7 @@
 			);
 			name = "UIColor-Hex";
 			productName = UIColor_Hex;
-			productReference = 7ABDA89BE7087B891A63506044D97334 /* UIColor-Hex */;
+			productReference = 7ABDA89BE7087B891A63506044D97334 /* UIColor_Hex.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		F9734FECA428682C99C0AEF07113B978 /* Pods-TempusTests */ = {
@@ -590,7 +586,7 @@
 			);
 			name = BRYSerialAnimationQueue;
 			productName = BRYSerialAnimationQueue;
-			productReference = 9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue */;
+			productReference = 9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -600,7 +596,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1420;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -850,6 +846,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -934,7 +931,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -968,7 +965,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/UIColor-Hex/UIColor-Hex-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/UIColor-Hex/UIColor-Hex-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1023,6 +1020,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1065,7 +1063,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SSBouncyButton/SSBouncyButton-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SSBouncyButton/SSBouncyButton-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1100,7 +1098,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/UIColor-Hex/UIColor-Hex-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/UIColor-Hex/UIColor-Hex-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1134,7 +1132,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1206,7 +1204,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1241,7 +1239,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SSBouncyButton/SSBouncyButton-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SSBouncyButton/SSBouncyButton-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1312,7 +1310,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

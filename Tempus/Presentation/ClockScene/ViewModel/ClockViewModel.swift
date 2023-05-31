@@ -38,6 +38,7 @@ final class ClockViewModel {
     private var disposeBag: DisposeBag = .init()
     
     private let modeStartUseCaseOutput: PublishSubject<ModeStartUseCase.Output> = .init()
+    weak var coordinator: ClockCoordinator?
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(modeStartUseCaseOutput: modeStartUseCaseOutput)
@@ -47,5 +48,12 @@ final class ClockViewModel {
         self.disposeBag = disposeBag
         
         return output
+    }
+}
+
+extension ClockViewModel: StartModeDelegate {
+    func startWith(_ startUseCase: ModeStartUseCase) {
+        self.modeStartUseCase = startUseCase
+        self.coordinator?.startTimer()
     }
 }

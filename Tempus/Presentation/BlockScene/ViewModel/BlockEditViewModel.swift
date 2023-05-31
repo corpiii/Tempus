@@ -11,7 +11,8 @@ final class BlockEditViewModel {
     struct Input {
         let modelTitle: Observable<String>
         let modelDivideCount: Observable<Int>
-        let completeButtonTapEvent: Observable<Void>
+        let doneButtonTapEvent: Observable<Void>
+        let finishEvent: Observable<Void>
     }
     
     struct Output {
@@ -22,14 +23,15 @@ final class BlockEditViewModel {
     
     private var originModel: BlockModel
     private let blockEditUseCase: BlockEditUseCase
-    private let completeButtonTapEvent: PublishSubject<BlockModel> = .init()
+    private let doneButtonTapEvent: PublishSubject<BlockModel> = .init()
     
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
     private weak var editReflectDelegate: EditReflectDelegate?
+    weak var coordinator: BlockEditCoordinator?
     
     init(originModel: BlockModel,
          repository: DataManagerRepository,
-         fetchRefreshDelegate: FetchRefreshDelegate,
+         fetchRefreshDelegate: FetchRefreshDelegate?,
          editReflectDelegate: EditReflectDelegate) {
         self.originModel = originModel
         
@@ -39,7 +41,7 @@ final class BlockEditViewModel {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent)
+        let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.doneButtonTapEvent)
         let editUseCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
         let output = Output(title: originModel.title,
@@ -48,7 +50,8 @@ final class BlockEditViewModel {
         
         bindModelTitle(input.modelTitle, disposeBag)
         bindDivideCount(input.modelDivideCount, disposeBag)
-        bindCompleteEvent(input.completeButtonTapEvent, disposeBag)
+        bindDoneButtonTapEvent(input.doneButtonTapEvent, disposeBag)
+        bindFinishEvent(input.finishEvent, disposeBag)
         bindEditSuccess(editUseCaseOutput.isEditSuccess, disposeBag)
         
         return output
@@ -72,11 +75,20 @@ private extension BlockEditViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindCompleteEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        completeEvent
+    func bindDoneButtonTapEvent(_ doneButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        doneButtonTapEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                self.completeButtonTapEvent.onNext(self.originModel)
+                self.doneButtonTapEvent.onNext(self.originModel)
+                dump(self.originModel)
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindFinishEvent(_ finishEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        finishEvent
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                self.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
     
