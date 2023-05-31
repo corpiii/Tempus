@@ -199,6 +199,7 @@ extension CoreDataRepository {
                 throw DataManageError.updateFailure
             }
             
+            foundedObject.setValue(model.title, forKey: "title")
             foundedObject.setValue(model.divideCount, forKey: "divideCount")
             
             try context.save()
@@ -223,6 +224,7 @@ extension CoreDataRepository {
                 throw DataManageError.updateFailure
             }
             
+            foundedObject.setValue(model.title, forKey: "title")
             foundedObject.setValue(model.startTime, forKey: "startTime")
             foundedObject.setValue(model.repeatCount, forKey: "repeatCount")
             foundedObject.setValue(model.focusTime, forKey: "focusTime")
