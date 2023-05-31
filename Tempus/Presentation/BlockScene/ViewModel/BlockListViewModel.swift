@@ -94,8 +94,6 @@ private extension BlockListViewModel {
             .subscribe(onNext: { [weak self] model in
                 guard let self else { return }
                 self.coordinator?.pushDetailViewController(with: model)
-                // coordinator push to detailViewModel
-                // by 'push(fetchRefreshDelegate: self, model: model)' function
             }).disposed(by: disposeBag)
     }
 }

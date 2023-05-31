@@ -45,7 +45,6 @@ private extension BlockDetailViewModel {
                 
                 let startUseCase = BlockStartUseCase(originModel: originModel)
                 self.coordinator?.finish(with: startUseCase)
-                // coordinator push with startUseCase
             }).disposed(by: disposeBag)
     }
     
@@ -63,7 +62,6 @@ private extension BlockDetailViewModel {
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 self.coordinator?.finish()
-                // coordinator finish
             }).disposed(by: disposeBag)
     }
 }

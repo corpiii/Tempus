@@ -56,8 +56,6 @@ final class BlockCreateViewModel {
         return output
     }
     
-    /* finish function by coordinator */
-    // func finish() {}
 }
 
 private extension BlockCreateViewModel {

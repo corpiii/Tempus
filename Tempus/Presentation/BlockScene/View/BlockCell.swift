@@ -36,7 +36,6 @@ private extension BlockCell {
         modelTitleLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading).inset(30)
             make.trailing.equalTo(self.snp.trailing).inset(30)
-//            make.centerX.equalTo(self.snp.centerX)
             
             make.top.equalTo(self.snp.top)
             make.bottom.equalTo(self.snp.bottom)
