@@ -10,14 +10,14 @@ import RxSwift
 final class BlockEditViewModel {
     struct Input {
         let modelTitle: Observable<String>
-        let modelDivideCount: Observable<Int>
+        let modelBlockTime: Observable<Int>
         let doneButtonTapEvent: Observable<Void>
         let finishEvent: Observable<Void>
     }
     
     struct Output {
         let title: String
-        let divideCount: Int
+        let blockTime: Int
         let isEditSuccess: PublishSubject<Bool>
     }
     
@@ -45,11 +45,11 @@ final class BlockEditViewModel {
         let editUseCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
         let output = Output(title: originModel.title,
-                            divideCount: originModel.divideCount,
+                            blockTime: originModel.blockTime,
                             isEditSuccess: editUseCaseOutput.isEditSuccess)
         
         bindModelTitle(input.modelTitle, disposeBag)
-        bindDivideCount(input.modelDivideCount, disposeBag)
+        bindBlockTime(input.modelBlockTime, disposeBag)
         bindDoneButtonTapEvent(input.doneButtonTapEvent, disposeBag)
         bindFinishEvent(input.finishEvent, disposeBag)
         bindEditSuccess(editUseCaseOutput.isEditSuccess, disposeBag)
@@ -67,11 +67,11 @@ private extension BlockEditViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindDivideCount(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
+    func bindBlockTime(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
         divideCount
-            .subscribe(onNext: { [weak self] modelDivideCount in
+            .subscribe(onNext: { [weak self] blockTime in
                 guard let self else { return }
-                self.originModel.divideCount = modelDivideCount
+                self.originModel.blockTime = blockTime
             }).disposed(by: disposeBag)
     }
     

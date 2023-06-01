@@ -54,7 +54,7 @@ extension CoreDataRepository {
         
         newObject.setValue(model.id, forKey: "uuid")
         newObject.setValue(model.title, forKey: "title")
-        newObject.setValue(model.divideCount, forKey: "divideCount")
+        newObject.setValue(model.blockTime, forKey: "blockTime")
         newObject.setValue(Date().timeIntervalSince1970, forKey: "createdAt")
         
         do {
@@ -200,7 +200,7 @@ extension CoreDataRepository {
             }
             
             foundedObject.setValue(model.title, forKey: "title")
-            foundedObject.setValue(model.divideCount, forKey: "divideCount")
+            foundedObject.setValue(model.blockTime, forKey: "blockTime")
             
             try context.save()
         } catch {
