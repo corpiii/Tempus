@@ -22,8 +22,8 @@ class BlockListViewCoordinator: Coordinator, FinishDelegate {
         
         self.blockListViewController = BlockListViewController(nibName: nil, bundle: nil)
         self.blockListViewModel = BlockListViewModel(repository: repository)
-        self.navigationController = UINavigationController(rootViewController: blockListViewController)
         self.startModeDelegate = startModeDelegate
+        self.navigationController = UINavigationController(rootViewController: blockListViewController)
         self.navigationController.tabBarItem = .init(tabBarSystemItem: .bookmarks, tag: 1)
     }
     

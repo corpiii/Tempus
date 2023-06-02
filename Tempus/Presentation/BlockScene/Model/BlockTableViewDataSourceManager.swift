@@ -1,5 +1,5 @@
 //
-//  BlockTableViewManager.swift
+//  BlockTableViewDataSourceManager.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/06/01.
@@ -18,7 +18,7 @@ protocol TableViewManager {
     func fetch(index: Int) -> Model
 }
 
-struct BlockTableViewManager: TableViewManager {
+struct BlockTableViewDataSourceManager: TableViewManager {
     typealias Model = BlockModel
     
     enum Section {

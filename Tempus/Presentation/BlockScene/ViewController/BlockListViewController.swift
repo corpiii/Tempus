@@ -19,7 +19,7 @@ class BlockListViewController: UIViewController {
     weak var viewModel: BlockListViewModel?
     private let disposeBag: DisposeBag = .init()
     
-    private let tableViewManager: BlockTableViewManager
+    private let tableViewDataSourceManager: BlockTableViewDataSourceManager
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
@@ -35,7 +35,7 @@ class BlockListViewController: UIViewController {
     private let modelFechEvent: PublishSubject<Void> = .init()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        tableViewManager = BlockTableViewManager(tableView: tableView)
+        tableViewDataSourceManager = BlockTableViewDataSourceManager(tableView: tableView)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -96,7 +96,7 @@ private extension BlockListViewController {
     func bindBlockModelArray(_ blockModelArray: Observable<[BlockModel]>) {
         blockModelArray
             .subscribe(onNext: { [weak self] models in
-                self?.tableViewManager.apply(section: .main, models: models)
+                self?.tableViewDataSourceManager.apply(section: .main, models: models)
             }).disposed(by: disposeBag)
     }
     
@@ -104,7 +104,7 @@ private extension BlockListViewController {
         isDeleteSuccess
             .subscribe(onNext: { [weak self] result in
                 if case .success(let model) = result {
-                    self?.tableViewManager.delete(model: model)
+                    self?.tableViewDataSourceManager.delete(model: model)
                 } else if case .failure(let error) = result {
                     let alertController = UIAlertController(title: "알림",
                                                             message: error.errorDescription,
@@ -127,7 +127,7 @@ extension BlockListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let model = tableViewManager.fetch(index: indexPath.row)
+        let model = tableViewDataSourceManager.fetch(index: indexPath.row)
         
         modelTapEvent.onNext(model)
     }
@@ -135,7 +135,7 @@ extension BlockListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
             guard let self else { return }
-            let model = self.tableViewManager.fetch(index: indexPath.row)
+            let model = self.tableViewDataSourceManager.fetch(index: indexPath.row)
             
             self.modelDeleteEvent.onNext(model)
             success(true)
