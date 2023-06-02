@@ -89,6 +89,12 @@ private extension ClockViewController {
             return
         }
         
+        if startButton.isSelected {
+            stopEvent.onNext(())
+            countDownTimerView.setEmpty()
+        } else {
+            startEvent.onNext(())
+        }
         startButton.isSelected
         ? stopEvent.onNext(())
         : startEvent.onNext(())
