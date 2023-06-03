@@ -14,11 +14,12 @@ final class DailyListViewModel {
         let addButtonEvent: Observable<Void>
         let modelDeleteEvent: Observable<DailyModel>
         let modelFetchEvent: PublishSubject<Void>
+        let modelTapEvent: PublishSubject<DailyModel>
     }
     
     struct Output {
         let dailyModelArray: BehaviorSubject<[DailyModel]> = .init(value: [])
-        let isDeleteSuccess: PublishRelay<Bool> = .init()
+        let isDeleteSuccess: PublishRelay<Result<DailyModel, DataManageError>> = .init()
     }
     
     private var dailyFetchUseCase: DailyFetchUseCase
@@ -54,15 +55,16 @@ final class DailyListViewModel {
 }
 
 private extension DailyListViewModel {
-    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Bool>, to isDeleteSuccess: PublishRelay<Bool>, _ disposeBag: DisposeBag) {
+    func bindDeleteSuccess(_ deleteEvent: PublishSubject<Result<DailyModel, DataManageError>>, to isDeleteSuccess: PublishRelay<Result<DailyModel, DataManageError>>, _ disposeBag: DisposeBag) {
         deleteEvent
-            .subscribe(onNext: { [weak self] isSuccess in
+            .subscribe(onNext: { [weak self] result in
                 guard let self = self else { return }
-                if isSuccess {
+                
+                isDeleteSuccess.accept(result)
+                
+                if case .success = result {
                     self.refresh()
                 }
-                
-                isDeleteSuccess.accept(isSuccess)
             }).disposed(by: disposeBag)
     }
     
