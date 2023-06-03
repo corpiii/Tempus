@@ -72,11 +72,11 @@ private extension BlockStartUseCase {
         /* Noti enroll */
         
         let interval = 1.0
-        self.schedule = generateSchedule(divideCount: originModel.divideCount)
+        self.schedule = generateSchedule(blockTime: originModel.blockTime)
         self.modeState = .focusTime
         
         let target = schedule[0].timeIntervalSince1970
-        entireRunningTime.onNext(Double(24 / originModel.divideCount) * 60 * 60)
+        entireRunningTime.onNext(Double(originModel.blockTime) * 60 * 60)
         let now = Date().timeIntervalSince1970
         remainTime = Time(second: target - now)
                 
@@ -105,10 +105,10 @@ private extension BlockStartUseCase {
         timer = nil
     }
     
-    func generateSchedule(divideCount: Int) -> [Date] {
+    func generateSchedule(blockTime: Int) -> [Date] {
         let calendar = Calendar.current
         let now = Date()
-        let interval = Double(24 / divideCount)
+        let interval = Double(blockTime)
         let oneDaySecond = 24.0 * 60.0 * 60.0
         let oneHourSecond = 60.0 * 60.0
         

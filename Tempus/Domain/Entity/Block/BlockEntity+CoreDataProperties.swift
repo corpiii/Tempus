@@ -16,7 +16,7 @@ extension BlockEntity {
         return NSFetchRequest<BlockEntity>(entityName: "BlockEntity")
     }
 
-    @NSManaged public var divideCount: Int16
+    @NSManaged public var blockTime: Int16
     @NSManaged public var createdAt: Double
     @NSManaged public var uuid: UUID
     @NSManaged public var title: String
@@ -24,7 +24,7 @@ extension BlockEntity {
     var toModel: BlockModel {
         return BlockModel(id: uuid,
                           title: title,
-                          divideCount: Int(divideCount))
+                          blockTime: Int(blockTime))
     }
 }
 

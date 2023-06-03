@@ -13,7 +13,7 @@ import RxRelay
 final class BlockCreateViewModel {
     struct Input {
         let modelTitle: Observable<String>
-        let modelDivideCount: Observable<Int>
+        let modelBlockTime: Observable<Int>
         let completeButtonTapEvent: Observable<Void>
         let backButtonEvent: Observable<Void>
         let startEvent: Observable<CompleteAlert>
@@ -24,7 +24,7 @@ final class BlockCreateViewModel {
     }
     
     private var modelTitle: String?
-    private var divideCount: Int?
+    private var modelBlockTime: Int?
     private let modelCreateEvent: PublishSubject<BlockModel> = .init()
     private var originModel: BlockModel?
     
@@ -48,7 +48,7 @@ final class BlockCreateViewModel {
                           to: output.isCreateSuccess,
                           disposeBag)
         bindModelTitle(input.modelTitle, disposeBag)
-        bindDivideCount(input.modelDivideCount, disposeBag)
+        bindBlockTime(input.modelBlockTime, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
         bindBackButtonEvent(input.backButtonEvent, disposeBag)
         bindStartEvent(input.startEvent, disposeBag)
@@ -81,11 +81,11 @@ private extension BlockCreateViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindDivideCount(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
+    func bindBlockTime(_ divideCount: Observable<Int>, _ disposeBag: DisposeBag) {
         divideCount
-            .subscribe(onNext: { [weak self] timeInterval in
+            .subscribe(onNext: { [weak self] blockTime in
                 guard let self else { return }
-                self.divideCount = 24 / timeInterval
+                self.modelBlockTime = blockTime
             }).disposed(by: disposeBag)
     }
     
@@ -95,8 +95,8 @@ private extension BlockCreateViewModel {
                 guard let self else { return }
                 
                 let title = self.modelTitle ?? ""
-                let divideCount = self.divideCount ?? -1
-                let model = BlockModel(id: UUID(), title: title, divideCount: divideCount)
+                let blockTime = self.modelBlockTime ?? -1
+                let model = BlockModel(id: UUID(), title: title, blockTime: blockTime)
                 self.modelCreateEvent.onNext(model)
                 self.originModel = model
             }).disposed(by: disposeBag)

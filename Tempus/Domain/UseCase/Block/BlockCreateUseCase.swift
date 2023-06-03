@@ -40,7 +40,7 @@ private extension BlockCreateUseCase {
         modelCreate
             .subscribe(onNext: { [weak self] model in
                 guard let self else { return }
-                if model.divideCount == -1 || model.title.isEmpty {
+                if model.blockTime == -1 || model.title.isEmpty {
                     return isCreateSuccess.onNext(false)
                 }
                 

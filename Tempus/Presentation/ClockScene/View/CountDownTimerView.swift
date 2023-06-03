@@ -68,6 +68,12 @@ private extension CountDownTimerView {
 }
 
 extension CountDownTimerView {
+    func setEmpty() {
+        animationView.currentFrame = 0
+        setRunningTime(0)
+        self.remainTimeLabel.text = ""
+    }
+    
     func setRunningTime(_ runningTime: Double) {
         self.entireRunningTime = runningTime
         self.animationView.animationSpeed = 90 / entireRunningTime

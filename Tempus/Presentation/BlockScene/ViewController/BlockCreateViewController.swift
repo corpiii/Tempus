@@ -17,7 +17,7 @@ class BlockCreateViewController: UIViewController {
         static let entireStackSpacing: CGFloat = 40
         static let divideCountStackSpacing: CGFloat = 40
         static let pickerViewWidth: CGFloat = 100
-        static let divideCountCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
+        static let blockTimeCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
     
@@ -131,7 +131,7 @@ private extension BlockCreateViewController {
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
         let selectRow = self.divideCountPickerView.selectedRow(inComponent: 0)
-        let timeInterval = Int(Constant.divideCountCandidates[selectRow]) ?? -1
+        let timeInterval = Int(Constant.blockTimeCandidates[selectRow]) ?? -1
         
         textFieldSubject.onNext(titleTextField.text ?? "")
         timeIntervalSubject.onNext(timeInterval)
@@ -243,7 +243,7 @@ private extension BlockCreateViewController {
 private extension BlockCreateViewController {
     func bindViewModel() {
         let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
-                                               modelDivideCount:  timeIntervalSubject,
+                                               modelBlockTime: timeIntervalSubject,
                                                completeButtonTapEvent: completeEvent,
                                                backButtonEvent: backButtonEvent,
                                                startEvent: startEvent)
@@ -272,7 +272,7 @@ extension BlockCreateViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        splittedClockView.splitClock(by: Constant.divideCountCandidates[row])
+        splittedClockView.splitClock(by: Constant.blockTimeCandidates[row])
     }
 }
 
@@ -282,10 +282,10 @@ extension BlockCreateViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Constant.divideCountCandidates.count
+        return Constant.blockTimeCandidates.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Constant.divideCountCandidates[row]
+        return Constant.blockTimeCandidates[row]
     }
 }

@@ -17,7 +17,7 @@ class BlockEditViewController: UIViewController {
         static let entireStackSpacing: CGFloat = 40
         static let divideCountStackSpacing: CGFloat = 40
         static let pickerViewWidth: CGFloat = 100
-        static let divideCountCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
+        static let blockTimeCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
     
     private let doneButton: UIBarButtonItem = .init(systemItem: .done)
@@ -72,7 +72,7 @@ class BlockEditViewController: UIViewController {
     weak var viewModel: BlockEditViewModel?
     private let disposeBag: DisposeBag = .init()
     private let textFieldSubject: PublishSubject<String> = .init()
-    private let divideCountSubject: PublishSubject<Int> = .init()
+    private let blockTimeSubject: PublishSubject<Int> = .init()
     private let doneButtonTapEvent: PublishSubject<Void> = .init()
     private let finishEvent: PublishSubject<Void> = .init()
     
@@ -125,10 +125,10 @@ private extension BlockEditViewController {
     }
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
-        let timeInterval = Int(Constant.divideCountCandidates[divideCountPickerView.selectedRow(inComponent: 0)]) ?? -1
+        let blockTime = Int(Constant.blockTimeCandidates[divideCountPickerView.selectedRow(inComponent: 0)]) ?? -1
         
         textFieldSubject.onNext(titleTextField.text ?? "")
-        divideCountSubject.onNext(24 / timeInterval)
+        blockTimeSubject.onNext(blockTime)
         doneButtonTapEvent.onNext(())
     }
     
@@ -199,12 +199,12 @@ private extension BlockEditViewController {
 private extension BlockEditViewController {
     func bindViewModel() {
         let input = BlockEditViewModel.Input(modelTitle: textFieldSubject,
-                                             modelDivideCount: divideCountSubject,
+                                             modelBlockTime: blockTimeSubject,
                                              doneButtonTapEvent: doneButtonTapEvent,
                                              finishEvent: finishEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag),
-              let pickerIndex = Constant.divideCountCandidates.firstIndex(of: "\(24 / output.divideCount)") else {
+              let pickerIndex = Constant.blockTimeCandidates.firstIndex(of: "\(output.blockTime)") else {
             return
         }
         
@@ -212,7 +212,7 @@ private extension BlockEditViewController {
         self.divideCountPickerView.selectRow(pickerIndex, inComponent: 0, animated: true)
         
         DispatchQueue.main.async {
-            self.splittedClockView.splitClock(by: "\(24 / output.divideCount)")
+            self.splittedClockView.splitClock(by: "\(output.blockTime)")
         }
         
         bindEditSuccess(output.isEditSuccess, disposeBag)
@@ -248,7 +248,7 @@ extension BlockEditViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        splittedClockView.splitClock(by: Constant.divideCountCandidates[row])
+        splittedClockView.splitClock(by: Constant.blockTimeCandidates[row])
     }
 }
 
@@ -258,10 +258,10 @@ extension BlockEditViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Constant.divideCountCandidates.count
+        return Constant.blockTimeCandidates.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Constant.divideCountCandidates[row]
+        return Constant.blockTimeCandidates[row]
     }
 }
