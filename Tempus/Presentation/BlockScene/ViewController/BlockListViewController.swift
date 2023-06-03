@@ -24,7 +24,6 @@ class BlockListViewController: UIViewController {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(BlockCell.self, forCellReuseIdentifier: BlockCell.identifier)
         
         return tableView
     }()

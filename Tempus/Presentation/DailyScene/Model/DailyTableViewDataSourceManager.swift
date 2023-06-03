@@ -28,7 +28,8 @@ struct DailyTableViewDataSourceManager: TableViewDataSourceManager {
         
         dataSource.defaultRowAnimation = .none
         tableView.dataSource = dataSource
-
+        tableView.register(DailyCell.self, forCellReuseIdentifier: DailyCell.identifier)
+        
         var snapShot = NSDiffableDataSourceSnapshot<Section, Model>()
         snapShot.appendSections([.main])
         dataSource.apply(snapShot)

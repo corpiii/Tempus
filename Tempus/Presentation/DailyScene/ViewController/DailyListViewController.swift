@@ -18,6 +18,7 @@ class DailyListViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
+        tableView.backgroundColor = .systemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView

@@ -27,6 +27,7 @@ struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
         })
         dataSource.defaultRowAnimation = .none
         tableView.dataSource = dataSource
+        tableView.register(BlockCell.self, forCellReuseIdentifier: BlockCell.identifier)
 
         var snapShot = NSDiffableDataSourceSnapshot<Section, Model>()
         snapShot.appendSections([.main])
