@@ -13,7 +13,7 @@ final class DailyDeleteUseCase {
     }
     
     struct Output {
-        let isDeleteSuccess: PublishSubject<Bool> = .init()
+        let isDeleteSuccess: PublishSubject<Result<DailyModel, DataManageError>> = .init()
     }
     
     private let repository: DataManagerRepository
@@ -32,16 +32,16 @@ final class DailyDeleteUseCase {
 }
 
 private extension DailyDeleteUseCase {
-    func bindModelDeleteEvent(_ modelDeleteEvent: Observable<DailyModel>, to isDeleteSuccess: PublishSubject<Bool>, disposeBag: DisposeBag) {
+    func bindModelDeleteEvent(_ modelDeleteEvent: Observable<DailyModel>, to isDeleteSuccess: PublishSubject<Result<DailyModel, DataManageError>>, disposeBag: DisposeBag) {
         modelDeleteEvent
             .subscribe(onNext: { [weak self] model in
                 guard let self else { return }
                 do {
                     try self.execute(model: model) {
-                        isDeleteSuccess.onNext(true)
+                        isDeleteSuccess.onNext(.success(model))
                     }
                 } catch {
-                    isDeleteSuccess.onNext(false)
+                    isDeleteSuccess.onNext(.failure(.deleteFailure))
                 }
             }).disposed(by: disposeBag)
     }

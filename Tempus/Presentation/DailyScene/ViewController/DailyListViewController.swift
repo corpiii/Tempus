@@ -1,8 +1,8 @@
 //
-//  BlockListViewController.swift
+//  DailyListViewController.swift
 //  Tempus
 //
-//  Created by 이정민 on 2023/05/09.
+//  Created by 이정민 on 2023/06/03.
 //
 
 import UIKit
@@ -11,15 +11,11 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class BlockListViewController: UIViewController {
-    private enum Section {
-        case main
-    }
+class DailyListViewController: UIViewController {
     
-    weak var viewModel: BlockListViewModel?
-    private let disposeBag: DisposeBag = .init()
+    private weak var viewModel: DailyListViewModel?
+    private let disposeBag: DisposeBag
     
-    private let tableViewDataSourceManager: BlockTableViewDataSourceManager
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
@@ -28,13 +24,17 @@ class BlockListViewController: UIViewController {
         return tableView
     }()
     
+    private let tableViewDataSourceManager: DailyTableViewDataSourceManager
     private let addButton: UIBarButtonItem = .init(systemItem: .add)
-    private let modelDeleteEvent: PublishSubject<BlockModel> = .init()
-    private let modelTapEvent: PublishSubject<BlockModel> = .init()
+    private let modelDeleteEvent: PublishSubject<DailyModel> = .init()
+    private let modelTapEvent: PublishSubject<DailyModel> = .init()
     private let modelFetchEvent: PublishSubject<Void> = .init()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        tableViewDataSourceManager = BlockTableViewDataSourceManager(tableView: tableView)
+    init(viewModel: DailyListViewModel) {
+        self.viewModel = viewModel
+        self.disposeBag = .init()
+        self.tableViewDataSourceManager = .init(tableView: tableView)
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,23 +44,22 @@ class BlockListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureUI()
         bindViewModel()
         modelFetchEvent.onNext(())
     }
 }
 
-
 // MARK: - ConfigureUI
-private extension BlockListViewController {
+private extension DailyListViewController {
     func configureUI() {
         configureNavigationBar()
         configureTableView()
     }
     
     func configureNavigationBar() {
-        self.navigationItem.title = "블록모드"
+        self.navigationItem.title = "일상모드"
         
         self.navigationItem.rightBarButtonItem = addButton
     }
@@ -77,9 +76,9 @@ private extension BlockListViewController {
 }
 
 // MARK: - BindViewModel
-private extension BlockListViewController {
+private extension DailyListViewController {
     func bindViewModel() {
-        let input = BlockListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
+        let input = DailyListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
                                              modelDeleteEvent: modelDeleteEvent,
                                              modelFetchEvent: modelFetchEvent,
                                              modelTapEvent: modelTapEvent)
@@ -88,18 +87,18 @@ private extension BlockListViewController {
             return
         }
         
-        bindBlockModelArray(output.blockModelArray)
+        bindBlockModelArray(output.dailyModelArray)
         bindDeleteResult(output.isDeleteSuccess)
     }
     
-    func bindBlockModelArray(_ blockModelArray: Observable<[BlockModel]>) {
+    func bindBlockModelArray(_ blockModelArray: Observable<[DailyModel]>) {
         blockModelArray
             .subscribe(onNext: { [weak self] models in
                 self?.tableViewDataSourceManager.append(section: .main, models: models)
             }).disposed(by: disposeBag)
     }
     
-    func bindDeleteResult(_ isDeleteSuccess: PublishRelay<Result<BlockModel, DataManageError>>) {
+    func bindDeleteResult(_ isDeleteSuccess: PublishRelay<Result<DailyModel, DataManageError>>) {
         isDeleteSuccess
             .subscribe(onNext: { [weak self] result in
                 if case .success(let model) = result {
@@ -119,7 +118,7 @@ private extension BlockListViewController {
     }
 }
 
-extension BlockListViewController: UITableViewDelegate {
+extension DailyListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }

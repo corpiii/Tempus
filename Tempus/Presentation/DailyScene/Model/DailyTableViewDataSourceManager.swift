@@ -1,14 +1,14 @@
 //
-//  BlockTableViewDataSourceManager.swift
+//  DailyTableViewDataSourceManager.swift
 //  Tempus
 //
-//  Created by 이정민 on 2023/06/01.
+//  Created by 이정민 on 2023/06/03.
 //
 
 import UIKit
 
-struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
-    typealias Model = BlockModel
+struct DailyTableViewDataSourceManager: TableViewDataSourceManager {
+    typealias Model = DailyModel
     
     enum Section {
         case main
@@ -18,17 +18,18 @@ struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
 
     init(tableView: UITableView) {
         dataSource = .init(tableView: tableView, cellProvider: { tableView, indexPath, model in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: BlockCell.identifier, for: indexPath) as? BlockCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: DailyCell.identifier, for: indexPath) as? DailyCell else {
                 return UITableViewCell()
             }
 
-            cell.modelTitleLabel.text = model.title
+//            cell.modelTitleLabel.text = model.title
             return cell
         })
+        
         dataSource.defaultRowAnimation = .none
         tableView.dataSource = dataSource
-        tableView.register(BlockCell.self, forCellReuseIdentifier: BlockCell.identifier)
-
+        tableView.register(DailyCell.self, forCellReuseIdentifier: DailyCell.identifier)
+        
         var snapShot = NSDiffableDataSourceSnapshot<Section, Model>()
         snapShot.appendSections([.main])
         dataSource.apply(snapShot)
@@ -37,7 +38,7 @@ struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
     func append(section: Section, models: [Model]) {
         var snapShot = self.dataSource.snapshot()
         snapShot.appendItems(models)
-        
+
         dataSource.apply(snapShot)
     }
 

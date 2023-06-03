@@ -19,7 +19,7 @@ extension DailyEntity {
     @NSManaged public var title: String
     @NSManaged public var uuid: UUID
     @NSManaged public var startTime: Double
-    @NSManaged public var repeatCount: Int
+    @NSManaged public var repeatCount: Int16
     @NSManaged public var focusTime: Double
     @NSManaged public var breakTime: Double
     @NSManaged public var createdAt: Double
@@ -28,7 +28,7 @@ extension DailyEntity {
         return DailyModel(id: uuid,
                           title: title,
                           startTime: startTime,
-                          repeatCount: repeatCount,
+                          repeatCount: Int(repeatCount),
                           focusTime: focusTime,
                           breakTime: breakTime)
     }
