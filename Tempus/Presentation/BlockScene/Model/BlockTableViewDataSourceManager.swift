@@ -7,18 +7,7 @@
 
 import UIKit
 
-protocol TableViewManager {
-    associatedtype Section: Hashable
-    associatedtype Model: Hashable
-    
-    var dataSource: UITableViewDiffableDataSource<Section, Model> { get set }
-    
-    func apply(section: Section, models: [Model])
-    func delete(model: Model)
-    func fetch(index: Int) -> Model
-}
-
-struct BlockTableViewDataSourceManager: TableViewManager {
+struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
     typealias Model = BlockModel
     
     enum Section {
