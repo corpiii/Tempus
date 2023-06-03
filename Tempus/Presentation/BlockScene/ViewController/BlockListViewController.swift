@@ -32,7 +32,7 @@ class BlockListViewController: UIViewController {
     private let addButton: UIBarButtonItem = .init(systemItem: .add)
     private let modelDeleteEvent: PublishSubject<BlockModel> = .init()
     private let modelTapEvent: PublishSubject<BlockModel> = .init()
-    private let modelFechEvent: PublishSubject<Void> = .init()
+    private let modelFetchEvent: PublishSubject<Void> = .init()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         tableViewDataSourceManager = BlockTableViewDataSourceManager(tableView: tableView)
@@ -48,7 +48,7 @@ class BlockListViewController: UIViewController {
         
         configureUI()
         bindViewModel()
-        modelFechEvent.onNext(())
+        modelFetchEvent.onNext(())
     }
 }
 
@@ -82,7 +82,7 @@ private extension BlockListViewController {
     func bindViewModel() {
         let input = BlockListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
                                              modelDeleteEvent: modelDeleteEvent,
-                                             modelFetchEvent: modelFechEvent,
+                                             modelFetchEvent: modelFetchEvent,
                                              modelTapEvent: modelTapEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
