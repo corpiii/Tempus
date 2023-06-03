@@ -5,13 +5,15 @@
 //  Created by 이정민 on 2023/06/03.
 //
 
+import UIKit
+
 protocol TableViewDataSourceManager {
     associatedtype Section: Hashable
     associatedtype Model: Hashable
     
     var dataSource: UITableViewDiffableDataSource<Section, Model> { get set }
     
-    func apply(section: Section, models: [Model])
+    func append(section: Section, models: [Model])
     func delete(model: Model)
     func fetch(index: Int) -> Model
 }

@@ -96,7 +96,7 @@ private extension BlockListViewController {
     func bindBlockModelArray(_ blockModelArray: Observable<[BlockModel]>) {
         blockModelArray
             .subscribe(onNext: { [weak self] models in
-                self?.tableViewDataSourceManager.apply(section: .main, models: models)
+                self?.tableViewDataSourceManager.append(section: .main, models: models)
             }).disposed(by: disposeBag)
     }
     

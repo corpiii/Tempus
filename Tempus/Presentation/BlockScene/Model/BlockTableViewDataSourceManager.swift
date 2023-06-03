@@ -14,7 +14,7 @@ struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
         case main
     }
 
-    var dataSource: UITableViewDiffableDataSource<Section, BlockModel>
+    var dataSource: UITableViewDiffableDataSource<Section, Model>
 
     init(tableView: UITableView) {
         dataSource = .init(tableView: tableView, cellProvider: { tableView, indexPath, model in
@@ -25,32 +25,30 @@ struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
             cell.modelTitleLabel.text = model.title
             return cell
         })
-
+        dataSource.defaultRowAnimation = .none
         tableView.dataSource = dataSource
 
-        var snapShot = NSDiffableDataSourceSnapshot<Section, BlockModel>()
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Model>()
         snapShot.appendSections([.main])
         dataSource.apply(snapShot)
-
     }
 
-    func apply(section: Section, models: [BlockModel]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, BlockModel>()
-        snapShot.appendSections([section])
+    func append(section: Section, models: [Model]) {
+        var snapShot = self.dataSource.snapshot()
         snapShot.appendItems(models)
-
+        
         dataSource.apply(snapShot)
     }
 
-    func delete(model: BlockModel) {
+    func delete(model: Model) {
         var snapshot = self.dataSource.snapshot()
         snapshot.deleteItems([model])
 
         self.dataSource.apply(snapshot)
     }
 
-    func fetch(index: Int) -> BlockModel {
-        let snapShot = dataSource.snapshot()
+    func fetch(index: Int) -> Model {
+        let snapShot = self.dataSource.snapshot()
         let model = snapShot.itemIdentifiers[index]
 
         return model
