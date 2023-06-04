@@ -36,8 +36,17 @@ class BlockDetailViewController: UIViewController {
         return clockView
     }()
     
-    weak var viewModel: BlockDetailViewModel?
+    private weak var viewModel: BlockDetailViewModel?
     private let disposeBag: DisposeBag = .init()
+    
+    init(viewModel: BlockDetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

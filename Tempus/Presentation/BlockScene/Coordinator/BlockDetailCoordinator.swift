@@ -17,9 +17,9 @@ class BlockDetailCoordinator: Coordinator {
     weak var startModeDelegate: StartModeDelegate?
     weak var finishDelegate: FinishDelegate?
     
-    let blockDetailViewController: BlockDetailViewController
-    let blockDetailViewModel: BlockDetailViewModel
-    let blockDetailNavigationController: UINavigationController
+    private let blockDetailViewModel: BlockDetailViewModel
+    private let blockDetailViewController: BlockDetailViewController
+    private let blockDetailNavigationController: UINavigationController
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
@@ -32,13 +32,12 @@ class BlockDetailCoordinator: Coordinator {
         self.fetchRefreshDelegate = fetchRefreshDelegate
         self.finishDelegate = finishDelegate
         self.startModeDelegate = startModeDelegate
-        self.blockDetailViewController = .init(nibName: nil, bundle: nil)
         self.blockDetailViewModel = .init(originModel: originModel)
+        self.blockDetailViewController = .init(viewModel: self.blockDetailViewModel)
         self.blockDetailNavigationController = .init(rootViewController: self.blockDetailViewController)
     }
     
     func start() {
-        self.blockDetailViewController.viewModel = self.blockDetailViewModel
         self.blockDetailViewModel.coordinator = self
         blockDetailNavigationController.modalPresentationStyle = .fullScreen
         self.navigationController.present(blockDetailNavigationController, animated: true)

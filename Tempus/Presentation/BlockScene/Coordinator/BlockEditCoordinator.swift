@@ -13,9 +13,8 @@ class BlockEditCoordinator: Coordinator {
     let navigationController: UINavigationController
     private let repository: DataManagerRepository
     private weak var finishDelegate: FinishDelegate?
-    
-    private let blockEditViewController: BlockEditViewController
     private let blockEditViewModel: BlockEditViewModel
+    private let blockEditViewController: BlockEditViewController
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
@@ -26,15 +25,14 @@ class BlockEditCoordinator: Coordinator {
         self.navigationController = navigationController
         self.repository = repository
         self.finishDelegate = finishDelegate
-        self.blockEditViewController = .init(nibName: nil, bundle: nil)
         self.blockEditViewModel = .init(originModel: originModel,
                                         repository: repository,
                                         fetchRefreshDelegate: fetchRefreshDelegate,
                                         editReflectDelegate: editReflectDelegate)
+        self.blockEditViewController = .init(viewModel: self.blockEditViewModel)
     }
     
     func start() {
-        blockEditViewController.viewModel = blockEditViewModel
         blockEditViewModel.coordinator = self
         navigationController.pushViewController(blockEditViewController, animated: true)
     }

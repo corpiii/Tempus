@@ -69,12 +69,21 @@ class BlockEditViewController: UIViewController {
         return pickerView
     }()
     
-    weak var viewModel: BlockEditViewModel?
+    private weak var viewModel: BlockEditViewModel?
     private let disposeBag: DisposeBag = .init()
     private let textFieldSubject: PublishSubject<String> = .init()
     private let blockTimeSubject: PublishSubject<Int> = .init()
     private let doneButtonTapEvent: PublishSubject<Void> = .init()
     private let finishEvent: PublishSubject<Void> = .init()
+    
+    init(viewModel: BlockEditViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
