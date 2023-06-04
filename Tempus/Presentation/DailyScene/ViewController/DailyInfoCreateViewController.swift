@@ -90,16 +90,16 @@ private extension DailyInfoCreateViewController {
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = nextButton
         
-        cancelButton.target = self
-        cancelButton.action = #selector(cancelBarButtonTapped)
+//        cancelButton.target = self
+//        cancelButton.action = #selector(cancelBarButtonTapped)
         
         nextButton.target = self
         nextButton.action = #selector(nextBarButtonTapped)
     }
     
-    @objc func cancelBarButtonTapped(_ sender: UIBarButtonItem) {
-        print("cancel Button tapped")
-    }
+//    @objc func cancelBarButtonTapped(_ sender: UIBarButtonItem) {
+//        print("cancel Button tapped")
+//    }
     
     @objc func nextBarButtonTapped(_ sender: UIBarButtonItem) {
         print("next Button tapped")
@@ -109,7 +109,7 @@ private extension DailyInfoCreateViewController {
 // MARK: - BindViewModel
 private extension DailyInfoCreateViewController {
     func bindViewModel() {
-        let input = DailyInfoEditViewModel.Input(nextButtonTapEvent: nextButton.rx.tap.asObservable(),
+        let input = DailyInfoEditViewModel.Input(nextButtonTapEvent: nextButtonTappedEvent,
                                                  cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
                                                  modelTitle: modelTitleSubject,
                                                  modelFocusTime: modelFocusTimeSubject,
