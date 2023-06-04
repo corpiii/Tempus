@@ -14,7 +14,7 @@ import SnapKit
 class DailyListViewController: UIViewController {
     
     private weak var viewModel: DailyListViewModel?
-    private let disposeBag: DisposeBag
+    private let disposeBag: DisposeBag = .init()
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -32,7 +32,6 @@ class DailyListViewController: UIViewController {
     
     init(viewModel: DailyListViewModel) {
         self.viewModel = viewModel
-        self.disposeBag = .init()
         self.tableViewDataSourceManager = .init(tableView: tableView)
         
         super.init(nibName: nil, bundle: nil)

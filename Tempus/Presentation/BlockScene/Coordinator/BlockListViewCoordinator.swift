@@ -14,14 +14,14 @@ class BlockListViewCoordinator: Coordinator, FinishDelegate {
     private let repository: DataManagerRepository
     private let blockListViewController: BlockListViewController
     private let blockListViewModel: BlockListViewModel
-    let navigationController: UINavigationController
     private weak var startModeDelegate: StartModeDelegate?
+    let navigationController: UINavigationController
     
     init(repository: DataManagerRepository, startModeDelegate: StartModeDelegate) {
         self.repository = repository
         
-        self.blockListViewController = BlockListViewController(nibName: nil, bundle: nil)
         self.blockListViewModel = BlockListViewModel(repository: repository)
+        self.blockListViewController = BlockListViewController(viewModel: blockListViewModel)
         self.startModeDelegate = startModeDelegate
         self.navigationController = UINavigationController(rootViewController: blockListViewController)
         self.navigationController.tabBarItem = .init(tabBarSystemItem: .bookmarks, tag: 1)
@@ -29,7 +29,6 @@ class BlockListViewCoordinator: Coordinator, FinishDelegate {
     
     func start() {
         self.blockListViewModel.coordinator = self
-        blockListViewController.viewModel = self.blockListViewModel
     }
     
     func pushCreateViewController(_ fetchRefreshDelegate: FetchRefreshDelegate) {

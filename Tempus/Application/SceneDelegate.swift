@@ -34,6 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let repository = CoreDataRepository(container: persistentContainer)
         
         mainCoordinator = MainCoordinator(tabBarController, repository)
+        mainCoordinator?.start()
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = tabBarController

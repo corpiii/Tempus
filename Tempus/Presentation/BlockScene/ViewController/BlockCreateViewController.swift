@@ -68,7 +68,7 @@ class BlockCreateViewController: UIViewController {
         return pickerView
     }()
     
-    weak var viewModel: BlockCreateViewModel?
+    private weak var viewModel: BlockCreateViewModel?
     private let disposeBag: DisposeBag = .init()
     private let textFieldSubject: PublishSubject<String> = .init()
     private let timeIntervalSubject: PublishSubject<Int> = .init()
@@ -76,9 +76,13 @@ class BlockCreateViewController: UIViewController {
     private let startEvent: PublishSubject<CompleteAlert> = .init()
     private let backButtonEvent: PublishSubject<Void> = .init()
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        backButtonEvent.onNext(())
+    init(viewModel: BlockCreateViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -86,6 +90,11 @@ class BlockCreateViewController: UIViewController {
         
         configureUI()
         bindViewModel()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        backButtonEvent.onNext(())
     }
     
     private func makeHeightDividerView() -> UIView {
