@@ -16,7 +16,7 @@ class BlockListViewController: UIViewController {
         case main
     }
     
-    weak var viewModel: BlockListViewModel?
+    private weak var viewModel: BlockListViewModel?
     private let disposeBag: DisposeBag = .init()
     
     private let tableViewDataSourceManager: BlockTableViewDataSourceManager
@@ -33,8 +33,10 @@ class BlockListViewController: UIViewController {
     private let modelTapEvent: PublishSubject<BlockModel> = .init()
     private let modelFetchEvent: PublishSubject<Void> = .init()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    init(viewModel: BlockListViewModel) {
+        self.viewModel = viewModel
         tableViewDataSourceManager = BlockTableViewDataSourceManager(tableView: tableView)
+        
         super.init(nibName: nil, bundle: nil)
     }
     
