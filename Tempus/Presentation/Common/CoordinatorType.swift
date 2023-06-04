@@ -9,4 +9,5 @@ enum CoordinatorType {
     case main
     case clock
     case blockList, blockCreate, blockEdit, blockDetail
+    case dailyList, dailyInfoCreate, dailyTimeDurationCreate, dailyEdit, dailyDetail
 }

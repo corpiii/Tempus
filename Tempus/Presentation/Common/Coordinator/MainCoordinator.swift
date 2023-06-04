@@ -8,6 +8,7 @@
 import UIKit
 
 class MainCoordinator: Coordinator {
+    
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .main }
 
@@ -21,21 +22,30 @@ class MainCoordinator: Coordinator {
         
         // clockViewCon
         let clockCoordinator = ClockCoordinator(startApplyDelegate: self)
-        clockCoordinator.start()
         childCoordinators.append(clockCoordinator)
         
         // blockViewCon
         let blockListViewCoordinator = BlockListViewCoordinator(repository: repository,
                                                                 startModeDelegate: clockCoordinator.clockViewModel)
-        blockListViewCoordinator.start()
         childCoordinators.append(blockListViewCoordinator)
         
         // dailyViewCon
+        let dailyListViewCoordinator = DailyListViewCoordinator(repository: repository,
+                                                                startModeDelegate: clockCoordinator.clockViewModel)
+        childCoordinators.append(dailyListViewCoordinator)
         
         // timerViewCon
         
+        
         tabBarController.setViewControllers([clockCoordinator.clockViewController,
-                                             blockListViewCoordinator.navigationController], animated: true)
+                                             blockListViewCoordinator.navigationController,
+                                             dailyListViewCoordinator.navigationController], animated: true)
+    }
+    
+    func start() {
+        childCoordinators.forEach { coordinator in
+            coordinator.start()
+        }
     }
 }
 

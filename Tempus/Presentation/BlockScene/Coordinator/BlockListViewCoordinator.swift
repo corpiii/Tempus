@@ -14,8 +14,8 @@ class BlockListViewCoordinator: Coordinator, FinishDelegate {
     private let repository: DataManagerRepository
     private let blockListViewController: BlockListViewController
     private let blockListViewModel: BlockListViewModel
-    let navigationController: UINavigationController
     private weak var startModeDelegate: StartModeDelegate?
+    let navigationController: UINavigationController
     
     init(repository: DataManagerRepository, startModeDelegate: StartModeDelegate) {
         self.repository = repository

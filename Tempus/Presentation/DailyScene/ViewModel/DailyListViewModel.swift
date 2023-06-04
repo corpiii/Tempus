@@ -26,6 +26,7 @@ final class DailyListViewModel {
     private var dailyDeleteUseCase: DailyDeleteUseCase
     
     private var modelFetchEvent: PublishSubject<Void>!
+    weak var coordinator: DailyListViewCoordinator?
     
     init(repository: DataManagerRepository) {
         self.dailyFetchUseCase = .init(repository: repository)
