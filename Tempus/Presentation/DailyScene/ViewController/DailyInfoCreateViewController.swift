@@ -11,6 +11,10 @@ import RxSwift
 
 class DailyInfoCreateViewController: UIViewController {
 
+    private enum Constant {
+        static let titleTextFieldInset: CGFloat = 20
+    }
+    
     private let cancelButton: UIBarButtonItem = .init(systemItem: .cancel)
     private let nextButton: UIBarButtonItem = .init()
     
@@ -18,6 +22,7 @@ class DailyInfoCreateViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "제목"
+        textField.borderStyle = .roundedRect
         
         return textField
     }()
@@ -72,7 +77,7 @@ class DailyInfoCreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = .systemBackground
         configureUI()
         bindViewModel()
     }
@@ -83,6 +88,7 @@ class DailyInfoCreateViewController: UIViewController {
 private extension DailyInfoCreateViewController {
     func configureUI() {
         configureNavigationBar()
+        configureTitleTextField()
     }
     
     func configureNavigationBar() {
@@ -93,6 +99,7 @@ private extension DailyInfoCreateViewController {
 //        cancelButton.target = self
 //        cancelButton.action = #selector(cancelBarButtonTapped)
         
+        nextButton.title = "다음"
         nextButton.target = self
         nextButton.action = #selector(nextBarButtonTapped)
     }
@@ -103,6 +110,21 @@ private extension DailyInfoCreateViewController {
     
     @objc func nextBarButtonTapped(_ sender: UIBarButtonItem) {
         print("next Button tapped")
+    }
+    
+    func configureTitleTextField() {
+        self.view.addSubview(titleTextField)
+        
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        titleTextField.snp.makeConstraints { make in
+            let inset = Constant.titleTextFieldInset
+            
+            make.leading.equalTo(safeArea.snp.leading).inset(inset)
+            make.trailing.equalTo(safeArea.snp.trailing).inset(inset)
+            make.top.equalTo(safeArea.snp.top).inset(inset * 2)
+            make.height.equalTo(titleTextField.intrinsicContentSize.height)
+        }
     }
 }
 
