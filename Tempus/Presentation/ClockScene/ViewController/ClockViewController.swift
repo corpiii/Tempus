@@ -56,7 +56,7 @@ private extension ClockViewController {
         let safeArea = self.view.safeAreaLayoutGuide
         countDownTimerView.snp.makeConstraints { make in
             make.centerX.equalTo(safeArea.snp.centerX)
-            make.width.equalTo(safeArea.snp.width).dividedBy(1 / 0.8)
+            make.width.equalTo(safeArea.snp.width).multipliedBy(0.8)
             
             make.height.equalTo(countDownTimerView.snp.width)
             
