@@ -86,16 +86,16 @@ class DailyInfoCreateViewController: UIViewController {
         return button
     }()
     
-    private weak var viewModel: DailyInfoEditViewModel?
+    private weak var viewModel: DailyInfoCreateViewModel?
     private let disposeBag: DisposeBag = .init()
     
     private let modelTitleSubject: PublishSubject<String> = .init()
-    private let modelFocusTimeSubject: PublishSubject<Double> = .init()
-    private let modelBreakTimeSubject: PublishSubject<Double> = .init()
+    private let modelFocusTimeSubject: PublishSubject<String> = .init()
+    private let modelBreakTimeSubject: PublishSubject<String> = .init()
     private let nextButtonTappedEvent: PublishSubject<Void> = .init()
     private let cancelButtonTappedEvent: PublishSubject<Void> = .init()
     
-    init(viewModel: DailyInfoEditViewModel) {
+    init(viewModel: DailyInfoCreateViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -148,7 +148,10 @@ private extension DailyInfoCreateViewController {
 //    }
     
     @objc func nextBarButtonTapped(_ sender: UIBarButtonItem) {
-        print("next Button tapped")
+        modelTitleSubject.onNext(titleTextField.text ?? "")
+        modelFocusTimeSubject.onNext(focusTimeButton.currentTitle ?? "")
+        modelBreakTimeSubject.onNext(breakTimeButton.currentTitle ?? "")
+        nextButtonTappedEvent.onNext(())
     }
     
     func configureTitleTextField() {
@@ -247,11 +250,11 @@ private extension DailyInfoCreateViewController {
 // MARK: - BindViewModel
 private extension DailyInfoCreateViewController {
     func bindViewModel() {
-        let input = DailyInfoEditViewModel.Input(nextButtonTapEvent: nextButtonTappedEvent,
-                                                 cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
-                                                 modelTitle: modelTitleSubject,
-                                                 modelFocusTime: modelFocusTimeSubject,
-                                                 modelBreakTime: modelBreakTimeSubject)
+        let input = DailyInfoCreateViewModel.Input(cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
+                                                   nextButtonTapEvent: nextButtonTappedEvent,
+                                                   modelTitle: modelTitleSubject,
+                                                   modelFocusTime: modelFocusTimeSubject,
+                                                   modelBreakTime: modelBreakTimeSubject)
         
         guard let output = viewModel?.transform(input: input, disposeBag: self.disposeBag) else {
             return

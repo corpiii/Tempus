@@ -14,8 +14,8 @@ final class DailyInfoCreateViewModel {
         let nextButtonTapEvent: Observable<Void>
         
         let modelTitle: Observable<String>
-        let modelFocusTime: Observable<Double>
-        let modelBreakTime: Observable<Double>
+        let modelFocusTime: Observable<String>
+        let modelBreakTime: Observable<String>
     }
     
     struct Output {
@@ -52,19 +52,19 @@ private extension DailyInfoCreateViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindModelFocusTime(_ modelFocusTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindModelFocusTime(_ modelFocusTime: Observable<String>, _ disposeBag: DisposeBag) {
         modelFocusTime
             .subscribe(onNext: { [weak self] focusTime in
-                guard let self = self else { return }
-                self.modelFocusTime = focusTime
+                guard let self else { return }
+                self.modelFocusTime = Double(focusTime)
             }).disposed(by: disposeBag)
     }
     
-    func bindModelBreakTime(_ modelBreakTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindModelBreakTime(_ modelBreakTime: Observable<String>, _ disposeBag: DisposeBag) {
         modelBreakTime
             .subscribe(onNext: { [weak self] breakTime in
-                guard let self = self else { return }
-                self.modelBreakTime = breakTime
+                guard let self else { return }
+                self.modelBreakTime = Double(breakTime)
             }).disposed(by: disposeBag)
     }
     
