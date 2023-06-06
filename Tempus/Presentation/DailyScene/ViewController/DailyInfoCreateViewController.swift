@@ -10,9 +10,8 @@ import UIKit
 import RxSwift
 
 class DailyInfoCreateViewController: UIViewController {
-
     private enum Constant {
-        static let outerMargin: CGFloat = 30
+        static let outerMargin: CGFloat = 20
     }
     
     private let cancelButton: UIBarButtonItem = .init(systemItem: .cancel)
@@ -39,7 +38,7 @@ class DailyInfoCreateViewController: UIViewController {
     private let focusTimeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         
         return stackView
     }()
@@ -53,18 +52,18 @@ class DailyInfoCreateViewController: UIViewController {
         return label
     }()
     
-    private let focusTimeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("선택", for: .normal)
+    private let focusTimePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.datePickerMode = .countDownTimer
         
-        return button
+        return datePicker
     }()
     
     private let breakTimeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         
         return stackView
     }()
@@ -78,20 +77,20 @@ class DailyInfoCreateViewController: UIViewController {
         return label
     }()
     
-    private let breakTimeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("선택", for: .normal)
+    private let breakTimePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.datePickerMode = .countDownTimer
         
-        return button
+        return datePicker
     }()
     
     private weak var viewModel: DailyInfoCreateViewModel?
     private let disposeBag: DisposeBag = .init()
     
     private let modelTitleSubject: PublishSubject<String> = .init()
-    private let modelFocusTimeSubject: PublishSubject<String> = .init()
-    private let modelBreakTimeSubject: PublishSubject<String> = .init()
+    private let modelFocusTimeSubject: PublishSubject<Date> = .init()
+    private let modelBreakTimeSubject: PublishSubject<Date> = .init()
     private let nextButtonTappedEvent: PublishSubject<Void> = .init()
     private let cancelButtonTappedEvent: PublishSubject<Void> = .init()
     
@@ -110,16 +109,6 @@ class DailyInfoCreateViewController: UIViewController {
         configureUI()
         bindViewModel()
     }
-    
-    private func makeWidthDividerView() -> UIView {
-        let emptyView = UIView()
-        
-        emptyView.snp.makeConstraints { make in
-            make.width.greaterThanOrEqualTo(1)
-        }
-        
-        return emptyView
-    }
 }
 
 // MARK: - ConfigureUI
@@ -135,22 +124,17 @@ private extension DailyInfoCreateViewController {
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = nextButton
         
-//        cancelButton.target = self
-//        cancelButton.action = #selector(cancelBarButtonTapped)
-        
         nextButton.title = "다음"
         nextButton.target = self
         nextButton.action = #selector(nextBarButtonTapped)
     }
     
-//    @objc func cancelBarButtonTapped(_ sender: UIBarButtonItem) {
-//        print("cancel Button tapped")
-//    }
-    
     @objc func nextBarButtonTapped(_ sender: UIBarButtonItem) {
+        print(focusTimePicker.calendar.identifier)
+        
         modelTitleSubject.onNext(titleTextField.text ?? "")
-        modelFocusTimeSubject.onNext(focusTimeButton.currentTitle ?? "")
-        modelBreakTimeSubject.onNext(breakTimeButton.currentTitle ?? "")
+        modelFocusTimeSubject.onNext(focusTimePicker.date)
+        modelBreakTimeSubject.onNext(breakTimePicker.date)
         nextButtonTappedEvent.onNext(())
     }
     
@@ -171,14 +155,14 @@ private extension DailyInfoCreateViewController {
     
     func configureTimeInfoStackView() {
         let safeArea = self.view.safeAreaLayoutGuide
+        let spacing = safeArea.layoutFrame.height * 0.05
         
         self.view.addSubview(TimeInfoStackView)
         self.TimeInfoStackView.addArrangedSubview(focusTimeStackView)
         self.TimeInfoStackView.addArrangedSubview(breakTimeStackView)
-        self.TimeInfoStackView.spacing = safeArea.layoutFrame.height * 0.08
+        self.TimeInfoStackView.spacing = spacing
         configureFocusTimeStackView()
         configureBreakTimeStackView()
-        
         
         self.TimeInfoStackView.snp.makeConstraints { make in
             let inset = Constant.outerMargin
@@ -186,65 +170,20 @@ private extension DailyInfoCreateViewController {
             make.leading.equalTo(safeArea.snp.leading).inset(inset)
             make.trailing.equalTo(safeArea.snp.trailing).inset(inset)
             
-            make.top.equalTo(titleTextField.snp.bottom).offset(safeArea.layoutFrame.height * 0.1)
+            make.top.equalTo(titleTextField.snp.bottom).offset(spacing)
         }
     }
     
     func configureFocusTimeStackView() {
-        let safeArea = self.view.safeAreaLayoutGuide
-        let leftDividerView = makeWidthDividerView()
-        
-        self.focusTimeStackView.addArrangedSubview(leftDividerView)
         self.focusTimeStackView.addArrangedSubview(focusTimeLabel)
-        self.focusTimeStackView.addArrangedSubview(focusTimeButton)
-        self.focusTimeStackView.addArrangedSubview(makeWidthDividerView())
-        configureFocusTimeButton()
-        
-        self.focusTimeStackView.spacing = safeArea.layoutFrame.width * 0.1
-        
-        let stackWidthSize = self.view.frame.width - Constant.outerMargin * 2
-        let allSpacing: CGFloat = 3 * self.focusTimeStackView.spacing
-        let mainSize = focusTimeLabel.intrinsicContentSize.width + focusTimeButton.intrinsicContentSize.width + allSpacing
-        let targetSize = (stackWidthSize - mainSize) / 2
-        
-        leftDividerView.snp.remakeConstraints { make in
-            make.width.equalTo(targetSize)
-        }
-    }
-    
-    func configureFocusTimeButton() {
-        self.focusTimeButton.snp.makeConstraints { make in
-            make.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.15)
-        }
+        self.focusTimeStackView.addArrangedSubview(focusTimePicker)
     }
     
     func configureBreakTimeStackView() {
-        let safeArea = self.view.safeAreaLayoutGuide
-        let leftDividerView = makeWidthDividerView()
-        
-        self.breakTimeStackView.addArrangedSubview(leftDividerView)
         self.breakTimeStackView.addArrangedSubview(breakTimeLabel)
-        self.breakTimeStackView.addArrangedSubview(breakTimeButton)
-        self.breakTimeStackView.addArrangedSubview(makeWidthDividerView())
-        configureBreakTimeButton()
-        
-        self.breakTimeStackView.spacing = safeArea.layoutFrame.width * 0.1
-        
-        let stackWidthSize = self.view.frame.width - Constant.outerMargin * 2
-        let allSpacing: CGFloat = 3 * self.breakTimeStackView.spacing
-        let mainSize = breakTimeLabel.intrinsicContentSize.width + breakTimeButton.intrinsicContentSize.width + allSpacing
-        let targetSize = (stackWidthSize - mainSize) / 2
-        
-        leftDividerView.snp.remakeConstraints { make in
-            make.width.equalTo(targetSize)
-        }
+        self.breakTimeStackView.addArrangedSubview(breakTimePicker)
     }
-    
-    func configureBreakTimeButton() {
-        self.breakTimeButton.snp.makeConstraints { make in
-            make.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.15)
-        }
-    }
+
 }
 
 // MARK: - BindViewModel
