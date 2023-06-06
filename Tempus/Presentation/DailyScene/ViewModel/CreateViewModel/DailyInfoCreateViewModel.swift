@@ -95,9 +95,7 @@ private extension DailyInfoCreateViewModel {
         nextButtonTapEvent
             .subscribe(onNext: { [weak self] in
                 guard let self = self,
-                      self.modelTitle != nil,
-                      self.modelFocusTime != nil,
-                      self.modelBreakTime != nil else {
+                      self.modelTitle?.isEmpty == false else {
                           return isFillAllInfo.onNext(false)
                 }
                 
