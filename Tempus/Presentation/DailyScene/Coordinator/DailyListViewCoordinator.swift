@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DailyListViewCoordinator: Coordinator {
+final class DailyListViewCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .dailyList }

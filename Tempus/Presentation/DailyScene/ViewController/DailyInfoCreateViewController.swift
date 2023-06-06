@@ -9,7 +9,7 @@ import UIKit
 
 import RxSwift
 
-class DailyInfoCreateViewController: UIViewController {
+final class DailyInfoCreateViewController: UIViewController {
     private enum Constant {
         static let outerMargin: CGFloat = 20
     }

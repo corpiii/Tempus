@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SplittedClockView: UIView {
+final class SplittedClockView: UIView {
     private enum Constant {
         static let lineColor: CGColor = UIColor.black.cgColor
         static let lineWidth: CGFloat = 2.0

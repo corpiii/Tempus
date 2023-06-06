@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DailyCell: UITableViewCell {
+final class DailyCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

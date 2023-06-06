@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class BlockCell: UITableViewCell {
+final class BlockCell: UITableViewCell {
     let modelTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
