@@ -10,19 +10,18 @@ import UIKit
 class ClockCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .clock }
-    let clockViewController: ClockViewController
     let clockViewModel: ClockViewModel
+    let clockViewController: ClockViewController
     private weak var startApplyDelegate: StartApplyDelegate?
     
     init(startApplyDelegate: StartApplyDelegate) {
-        self.clockViewController = ClockViewController(nibName: nil, bundle: nil)
-        self.clockViewController.tabBarItem = .init(tabBarSystemItem: .downloads, tag: 0)
         self.clockViewModel = ClockViewModel()
+        self.clockViewController = ClockViewController(viewModel: self.clockViewModel)
+        self.clockViewController.tabBarItem = .init(tabBarSystemItem: .downloads, tag: 0)
         self.startApplyDelegate = startApplyDelegate
     }
     
     func start() {
-        self.clockViewController.viewModel = clockViewModel
         clockViewModel.coordinator = self
     }
     
