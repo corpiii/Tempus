@@ -47,7 +47,7 @@ final class BlockCreateViewController: UIViewController {
         return titleTextField
     }()
     
-    private let splittedClockView: BlockClockView = {
+    private let blockClockView: BlockClockView = {
         let clockView = BlockClockView()
         
         return clockView
@@ -127,7 +127,7 @@ private extension BlockCreateViewController {
         configureDivideCountStackView()
         
         configureTitleTextField()
-        configureSplittedClockView()
+        configureBlockClockView()
         configureDivideCountPickerView()
     }
     
@@ -191,7 +191,7 @@ private extension BlockCreateViewController {
         
         self.view.addSubview(entireStackView)
         entireStackView.addArrangedSubview(titleTextField)
-        entireStackView.addArrangedSubview(splittedClockView)
+        entireStackView.addArrangedSubview(blockClockView)
         entireStackView.addArrangedSubview(divideCountStackView)
         entireStackView.addArrangedSubview(emptyView)
         
@@ -231,10 +231,10 @@ private extension BlockCreateViewController {
         }
     }
     
-    func configureSplittedClockView() {
-        splittedClockView.snp.makeConstraints { make in
+    func configureBlockClockView() {
+        blockClockView.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(splittedClockView.snp.width)
+            make.height.equalTo(blockClockView.snp.width)
         }
     }
     
@@ -281,7 +281,7 @@ extension BlockCreateViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        splittedClockView.splitClock(by: Constant.blockTimeCandidates[row])
+        blockClockView.splitClock(by: Constant.blockTimeCandidates[row])
     }
 }
 
