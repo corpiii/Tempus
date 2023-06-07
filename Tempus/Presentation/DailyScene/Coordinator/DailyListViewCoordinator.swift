@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DailyListViewCoordinator: Coordinator {
+final class DailyListViewCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .dailyList }
@@ -29,5 +29,14 @@ class DailyListViewCoordinator: Coordinator {
     
     func start() {
         dailyListViewModel.coordinator = self
+    }
+    
+    func pushInfoCreateViewController(fetchRefreshDelegate: FetchRefreshDelegate) {
+        let dailyInfoCreateCoordinator = DailyInfoCreateCoordinator(navigationController: self.navigationController,
+                                                                    repository: repository,
+                                                                    finishDelegate: self,
+                                                                    fetchRefreshDelegate: fetchRefreshDelegate)
+        dailyInfoCreateCoordinator.start()
+        childCoordinators.append(dailyInfoCreateCoordinator)
     }
 }

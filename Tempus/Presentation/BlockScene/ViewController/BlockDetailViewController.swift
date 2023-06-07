@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class BlockDetailViewController: UIViewController {
+final class BlockDetailViewController: UIViewController {
     private let cancelBarButton: UIBarButtonItem = .init(systemItem: .cancel)
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")

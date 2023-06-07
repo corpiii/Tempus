@@ -28,7 +28,16 @@ class ClockViewController: UIViewController {
     private let startEvent: PublishSubject<Void> = .init()
     private let stopEvent: PublishSubject<Void> = .init()
     private let disposeBag: DisposeBag = .init()
-    var viewModel: ClockViewModel?
+    private weak var viewModel: ClockViewModel?
+    
+    init(viewModel: ClockViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +65,7 @@ private extension ClockViewController {
         let safeArea = self.view.safeAreaLayoutGuide
         countDownTimerView.snp.makeConstraints { make in
             make.centerX.equalTo(safeArea.snp.centerX)
-            make.width.equalTo(safeArea.snp.width).dividedBy(1 / 0.8)
+            make.width.equalTo(safeArea.snp.width).multipliedBy(0.8)
             
             make.height.equalTo(countDownTimerView.snp.width)
             
@@ -111,7 +120,7 @@ private extension ClockViewController {
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             #if DEBUG
-            print(#file, #function, "viewModel missed")
+            print(#file, #function, #line, "viewModel missed")
             #endif
             return
         }

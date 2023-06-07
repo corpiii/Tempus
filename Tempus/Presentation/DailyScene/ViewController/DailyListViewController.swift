@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class DailyListViewController: UIViewController {
+final class DailyListViewController: UIViewController {
     
     private weak var viewModel: DailyListViewModel?
     private let disposeBag: DisposeBag = .init()

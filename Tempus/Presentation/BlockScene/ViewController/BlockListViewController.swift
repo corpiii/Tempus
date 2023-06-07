@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class BlockListViewController: UIViewController {
+final class BlockListViewController: UIViewController {
     private enum Section {
         case main
     }

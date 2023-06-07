@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class BlockEditViewController: UIViewController {
+final class BlockEditViewController: UIViewController {
     private enum Constant {
         static let outerMagins: CGFloat = 20
         static let entireStackSpacing: CGFloat = 40

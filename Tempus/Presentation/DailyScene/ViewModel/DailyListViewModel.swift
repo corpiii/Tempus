@@ -73,6 +73,7 @@ private extension DailyListViewModel {
         addButtonEvent
             .subscribe(onNext: {
                 // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
+                self.coordinator?.pushInfoCreateViewController(fetchRefreshDelegate: self)
             }).disposed(by: disposeBag)
     }
 }
