@@ -48,8 +48,8 @@ final class BlockEditViewController: UIViewController {
         return titleTextField
     }()
     
-    private let splittedClockView: SplittedClockView = {
-        let clockView = SplittedClockView()
+    private let splittedClockView: BlockClockView = {
+        let clockView = BlockClockView()
         
         return clockView
     }()

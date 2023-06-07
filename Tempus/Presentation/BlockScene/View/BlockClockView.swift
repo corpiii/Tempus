@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SplittedClockView: ClockView {
+final class BlockClockView: ClockView {
     private var ClockInterval: String = ""
     private var splitLayer = CALayer()
     
