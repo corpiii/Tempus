@@ -11,6 +11,7 @@ final class DailyTimeDurationViewController: UIViewController {
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
     // TODO: clockView
+    private let clockView: DailyClockVIew = DailyClockVIew()
  
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
