@@ -21,7 +21,6 @@ class ClockView: UIView {
     
     lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)
     lazy var radius = bounds.width * 0.95 / 2.0
-    private var splitLayer = CALayer()
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
