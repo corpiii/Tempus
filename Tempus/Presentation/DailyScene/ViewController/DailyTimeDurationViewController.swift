@@ -13,7 +13,7 @@ final class DailyTimeDurationViewController: UIViewController {
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
     // TODO: clockView
-    private let blockClockView: DailyClockView = DailyClockView()
+    private let dailyClockView: DailyClockView = DailyClockView()
  
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -118,7 +118,7 @@ private extension DailyTimeDurationViewController {
     func configureEntireStackView() {
         self.view.addSubview(entireStackView)
         
-        entireStackView.addArrangedSubview(blockClockView)
+        entireStackView.addArrangedSubview(dailyClockView)
         entireStackView.addArrangedSubview(startTimeStackView)
         entireStackView.addArrangedSubview(repeatCountStackView)
         
@@ -151,7 +151,7 @@ private extension DailyTimeDurationViewController {
     }
     
     @objc func datePickerValueChanged(_ sender: UIDatePicker) {
-        blockClockView.setStartTime(sender.date)
+        dailyClockView.setStartTime(sender.date)
     }
     
     func configureRepeatCountStackView() {
@@ -169,7 +169,7 @@ private extension DailyTimeDurationViewController {
     }
     
     @objc func stepperTapped(_ sender: UIStepper) {
-        blockClockView.setRepeatCount(Int(sender.value))
+        dailyClockView.setRepeatCount(Int(sender.value))
     }
 }
 
