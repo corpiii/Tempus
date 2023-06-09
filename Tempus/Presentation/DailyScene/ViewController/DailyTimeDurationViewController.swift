@@ -7,11 +7,13 @@
 
 import UIKit
 
+import SnapKit
+
 final class DailyTimeDurationViewController: UIViewController {
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
     // TODO: clockView
-    private let clockView: DailyClockVIew = DailyClockVIew()
+    private let clockView: DailyClockView = DailyClockView()
  
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -32,6 +34,7 @@ final class DailyTimeDurationViewController: UIViewController {
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "시작 시간"
         
         return label
     }()
@@ -39,6 +42,9 @@ final class DailyTimeDurationViewController: UIViewController {
     private let startTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.datePickerMode = .time
+        picker.preferredDatePickerStyle = .wheels
+        picker.minuteInterval = 5
         
         return picker
     }()
@@ -54,6 +60,7 @@ final class DailyTimeDurationViewController: UIViewController {
     private let repeatCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "반복 횟수"
         
         return label
     }()
@@ -65,9 +72,9 @@ final class DailyTimeDurationViewController: UIViewController {
         return stepper
     }()
     
-    private weak var viewModel: DailyTimeDurationEditViewModel?
+    private weak var viewModel: DailyTimeDurationCreateViewModel?
     
-    init(viewModel: DailyTimeDurationEditViewModel) {
+    init(viewModel: DailyTimeDurationCreateViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -78,7 +85,75 @@ final class DailyTimeDurationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureUI()
+        bindViewModel()
+    }
+}
 
-        // Do any additional setup after loading the view.
+// MARK: - ConfigureUI
+private extension DailyTimeDurationViewController {
+    func configureUI() {
+        self.view.backgroundColor = .systemBackground
+        
+        configureNavigationBar()
+        configureEntireStackView()
+        configureBlockClockView()
+    }
+    
+    func configureNavigationBar() {
+        self.navigationItem.title = "새로 만들기"
+        
+        self.navigationItem.rightBarButtonItem = doneBarButton
+        doneBarButton.target = self
+        doneBarButton.action = #selector(doneBarButtonTapped)
+    }
+    
+    @objc func doneBarButtonTapped(_ sender: UIBarButtonItem) {
+        // TODO: create event to viewModel
+    }
+    
+    func configureEntireStackView() {
+        
+        self.view.addSubview(entireStackView)
+        
+        entireStackView.addArrangedSubview(clockView)
+        entireStackView.addArrangedSubview(startTimeStackView)
+        entireStackView.addArrangedSubview(repeatCountStackView)
+        
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        entireStackView.snp.makeConstraints { make in
+            make.edges.equalTo(safeArea.snp.edges).inset(30)
+        }
+        
+        configureStartTimeStackView()
+        configureRepeatCountStackView()
+    }
+    
+    func configureStartTimeStackView() {
+        startTimeStackView.addArrangedSubview(startTimeLabel)
+        startTimeStackView.addArrangedSubview(startTimePicker)
+        
+        // spacing?
+    }
+    
+    func configureRepeatCountStackView() {
+        repeatCountStackView.addArrangedSubview(repeatCountLabel)
+        repeatCountStackView.addArrangedSubview(repeatCountStepper)
+        
+        // spacing?
+    }
+    
+    func configureBlockClockView() {
+        
+    }
+}
+
+
+// MARK: - BindViewModel
+private extension DailyTimeDurationViewController {
+    func bindViewModel() {
+        
     }
 }
