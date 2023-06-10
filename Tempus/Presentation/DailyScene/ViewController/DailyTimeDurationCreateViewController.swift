@@ -1,5 +1,5 @@
 //
-//  DailyTimeDurationViewController.swift
+//  DailyTimeDurationCreateViewController.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/06/07.
@@ -7,9 +7,10 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
-final class DailyTimeDurationViewController: UIViewController {
+final class DailyTimeDurationCreateViewController: UIViewController {
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
     // TODO: clockView
@@ -75,6 +76,11 @@ final class DailyTimeDurationViewController: UIViewController {
     }()
     
     private weak var viewModel: DailyTimeDurationCreateViewModel?
+    private let startTimeSubject: PublishSubject<Double> = .init()
+    private let repeatCountSubject: PublishSubject<Int> = .init()
+    private let backButtonTapEvent: PublishSubject<Void> = .init()
+    private let doneButtonTapEvent: PublishSubject<CompleteAlert> = .init()
+    private let disposeBag: DisposeBag = .init()
     
     init(viewModel: DailyTimeDurationCreateViewModel, focusTime: Double, breakTime: Double) {
         self.viewModel = viewModel
@@ -95,7 +101,7 @@ final class DailyTimeDurationViewController: UIViewController {
 }
 
 // MARK: - ConfigureUI
-private extension DailyTimeDurationViewController {
+private extension DailyTimeDurationCreateViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         
@@ -176,8 +182,18 @@ private extension DailyTimeDurationViewController {
 
 
 // MARK: - BindViewModel
-private extension DailyTimeDurationViewController {
+private extension DailyTimeDurationCreateViewController {
     func bindViewModel() {
+        let input = DailyTimeDurationCreateViewModel.Input(startTime: startTimeSubject,
+                                                           repeatCount: repeatCountSubject,
+                                                           backButtonTapEvent: backButtonTapEvent,
+                                                           completeButtonTapEvent: doneButtonTapEvent)
         
+        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else { return }
+        
+        output.isCreateSuccess
+            .subscribe(onNext: { isCreateSuccess in
+                // alert
+            }).disposed(by: disposeBag)
     }
 }
