@@ -13,7 +13,7 @@ final class DailyTimeDurationViewController: UIViewController {
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
     // TODO: clockView
-    private let dailyClockView: DailyClockView = DailyClockView()
+    private let dailyClockView: DailyClockView
  
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -76,8 +76,9 @@ final class DailyTimeDurationViewController: UIViewController {
     
     private weak var viewModel: DailyTimeDurationCreateViewModel?
     
-    init(viewModel: DailyTimeDurationCreateViewModel) {
+    init(viewModel: DailyTimeDurationCreateViewModel, focusTime: Double, breakTime: Double) {
         self.viewModel = viewModel
+        self.dailyClockView = .init(focusTime: focusTime, breakTime: breakTime)
         super.init(nibName: nil, bundle: nil)
     }
     
