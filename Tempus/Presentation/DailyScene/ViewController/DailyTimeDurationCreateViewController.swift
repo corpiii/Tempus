@@ -98,6 +98,10 @@ final class DailyTimeDurationCreateViewController: UIViewController {
         configureUI()
         bindViewModel()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        dailyClockView.setStartTime(startTimePicker.date)
+    }
 }
 
 // MARK: - ConfigureUI
@@ -107,7 +111,6 @@ private extension DailyTimeDurationCreateViewController {
         
         configureNavigationBar()
         configureEntireStackView()
-        configureBlockClockView()
     }
     
     func configureNavigationBar() {
@@ -138,10 +141,6 @@ private extension DailyTimeDurationCreateViewController {
         
         configureStartTimeStackView()
         configureRepeatCountStackView()
-    }
-    
-    func configureBlockClockView() {
-        
     }
     
     func configureStartTimeStackView() {
