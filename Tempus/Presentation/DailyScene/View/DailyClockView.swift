@@ -72,7 +72,7 @@ class DailyClockView: ClockView {
     func setRepeatCount(_ repeatCount: Int) {
         let endAngle = startAngle + CGFloat(repeatCount) * (focusTimeAngle + breakTimeAngle)
         
-        if endAngle - startAngle >= 2 * CGFloat.pi {
+        if endAngle - startAngle > 2 * CGFloat.pi {
             alertDelegate?.alertRepeatCountOver()
         } else {
             self.repeatCount = repeatCount
