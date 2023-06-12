@@ -5,7 +5,7 @@
 //  Created by 이정민 on 2023/06/07.
 //
 
-import Foundation
+import UIKit
 
 class DailyClockView: ClockView {
     private enum Constant {
@@ -14,11 +14,20 @@ class DailyClockView: ClockView {
     }
     
     private let focusTime: Double
+    private var focusTimeAngle: CGFloat {
+        convertToRadian(from: focusTime)
+    }
+    
     private let breakTime: Double
+    private var breakTimeAngle: CGFloat {
+        convertToRadian(from: breakTime)
+    }
     
     private var startTime: Date?
     private var startAngle: CGFloat = Constant.topAngle
     private var repeatCount: Int = 1
+    
+    private var splitLayer = CALayer()
     
     init(focusTime: Double, breakTime: Double) {
         self.focusTime = focusTime
@@ -35,6 +44,13 @@ class DailyClockView: ClockView {
         drawClockLine()
     }
     
+    private func convertToRadian(from time: Double) -> CGFloat {
+        let ratio = round(time / 3600 / 24 * 360) // 24시 표기 시계의 몇도인가
+        let radian = ratio * .pi / 180
+        
+        return radian
+    }
+    
     func setStartTime(_ startTime: Date) {
         self.startTime = startTime
         
@@ -46,20 +62,50 @@ class DailyClockView: ClockView {
         
         self.startAngle = Constant.topAngle + totalMinutes * .pi / 180
         
-        // draw
         drawClockLine()
     }
     
     func setRepeatCount(_ repeatCount: Int) {
         self.repeatCount = repeatCount
         
-        // draw
         drawClockLine()
     }
 }
 
 private extension DailyClockView {
     func drawClockLine() {
-        print("draw")
+        splitLayer.removeFromSuperlayer()
+        splitLayer = CAShapeLayer()
+        layer.layoutIfNeeded()
+        
+        for i in 1...repeatCount {
+            let startTimeAngle = startAngle + CGFloat(i - 1) * (focusTimeAngle + breakTimeAngle)
+
+            let focusTimeEndAngle = startTimeAngle + focusTimeAngle
+            let breakTimeEndAngle = focusTimeEndAngle + breakTimeAngle
+
+            let focusTimeLayer = generateTimeLineLayer(startAngle: startTimeAngle, endAngle: focusTimeEndAngle, color: .red)
+            splitLayer.addSublayer(focusTimeLayer)
+
+            let breakTimeLayer = generateTimeLineLayer(startAngle: focusTimeEndAngle, endAngle: breakTimeEndAngle, color: .blue)
+            splitLayer.addSublayer(breakTimeLayer)
+        }
+        
+        layer.addSublayer(splitLayer)
+    }
+    
+    func generateTimeLineLayer(startAngle: CGFloat, endAngle: CGFloat, color: UIColor) -> CAShapeLayer {
+        let timeLayer = CAShapeLayer()
+        let arkPath = UIBezierPath()
+        
+        arkPath.move(to: circleCenter)
+        arkPath.addArc(withCenter: circleCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        
+        timeLayer.path = arkPath.cgPath
+        
+        timeLayer.lineWidth = 2.0
+        timeLayer.fillColor = color.cgColor
+        
+        return timeLayer
     }
 }
