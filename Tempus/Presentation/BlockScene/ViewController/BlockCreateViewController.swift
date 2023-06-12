@@ -148,7 +148,7 @@ private extension BlockCreateViewController {
     }
     
     func alertSuccess() {
-        let alert = UIAlertController(title: "생성 완료",
+        let alertController = UIAlertController(title: "생성 완료",
                                       message: "타이머를 바로 시작하시겠습니까?",
                                       preferredStyle: .alert)
         
@@ -156,22 +156,22 @@ private extension BlockCreateViewController {
             self?.startEvent.onNext(.completeWithStart)
         }
         let completeWithoutStartAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
-            let alert = UIAlertController(title: "저장",
+            let alertController = UIAlertController(title: "저장",
                                           message: "저장되었습니다",
                                           preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
                 self?.startEvent.onNext(.completeWithoutStart)
             }
             
-            alert.addAction(confirmAction)
+            alertController.addAction(confirmAction)
             
-            self?.present(alert, animated: true)
+            self?.present(alertController, animated: true)
         }
         
-        alert.addAction(completeWithStartAction)
-        alert.addAction(completeWithoutStartAction)
+        alertController.addAction(completeWithStartAction)
+        alertController.addAction(completeWithoutStartAction)
         
-        self.present(alert, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func alertFailure() {
