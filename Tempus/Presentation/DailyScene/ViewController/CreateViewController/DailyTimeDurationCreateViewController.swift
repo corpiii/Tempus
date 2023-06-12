@@ -97,6 +97,7 @@ final class DailyTimeDurationCreateViewController: UIViewController {
         
         configureUI()
         bindViewModel()
+        dailyClockView.alertDelegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -194,5 +195,17 @@ private extension DailyTimeDurationCreateViewController {
             .subscribe(onNext: { isCreateSuccess in
                 // alert
             }).disposed(by: disposeBag)
+    }
+}
+
+extension DailyTimeDurationCreateViewController: AlertRepeatCountOverDelegate {
+    func alertRepeatCountOver() {
+        repeatCountStepper.value -= 1
+        
+        let alertController = UIAlertController(title: "실패", message: "횟수가 너무 많아요", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true)
     }
 }

@@ -29,6 +29,8 @@ class DailyClockView: ClockView {
     
     private var splitLayer = CALayer()
     
+    weak var alertDelegate: AlertRepeatCountOverDelegate?
+    
     init(focusTime: Double, breakTime: Double) {
         self.focusTime = focusTime
         self.breakTime = breakTime
