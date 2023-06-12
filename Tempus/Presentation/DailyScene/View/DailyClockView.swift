@@ -11,6 +11,8 @@ class DailyClockView: ClockView {
     private enum Constant {
         static let degree: Double = 0.25
         static let topAngle: CGFloat = -90 * .pi / 180
+        static let focusTimeColor: UIColor = .init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        static let breakTimeColor: UIColor = .init(red: 0.23, green: 0.23, blue: 0.23, alpha: 0.5)
     }
     
     private let focusTime: Double
@@ -47,7 +49,7 @@ class DailyClockView: ClockView {
     }
     
     private func convertToRadian(from time: Double) -> CGFloat {
-        let ratio = round(time / 3600 / 24 * 360) // 24시 표기 시계의 몇도인가
+        let ratio = time / 3600 / 24 * 360 // 24시 표기 시계의 몇도인가
         let radian = ratio * .pi / 180
         
         return radian
@@ -68,9 +70,14 @@ class DailyClockView: ClockView {
     }
     
     func setRepeatCount(_ repeatCount: Int) {
-        self.repeatCount = repeatCount
+        let endAngle = startAngle + CGFloat(repeatCount) * (focusTimeAngle + breakTimeAngle)
         
-        drawClockLine()
+        if endAngle - startAngle >= 2 * CGFloat.pi {
+            alertDelegate?.alertRepeatCountOver()
+        } else {
+            self.repeatCount = repeatCount
+            drawClockLine()
+        }
     }
 }
 
@@ -86,10 +93,10 @@ private extension DailyClockView {
             let focusTimeEndAngle = startTimeAngle + focusTimeAngle
             let breakTimeEndAngle = focusTimeEndAngle + breakTimeAngle
 
-            let focusTimeLayer = generateTimeLineLayer(startAngle: startTimeAngle, endAngle: focusTimeEndAngle, color: .red)
+            let focusTimeLayer = generateTimeLineLayer(startAngle: startTimeAngle, endAngle: focusTimeEndAngle, color: Constant.focusTimeColor)
             splitLayer.addSublayer(focusTimeLayer)
 
-            let breakTimeLayer = generateTimeLineLayer(startAngle: focusTimeEndAngle, endAngle: breakTimeEndAngle, color: .blue)
+            let breakTimeLayer = generateTimeLineLayer(startAngle: focusTimeEndAngle, endAngle: breakTimeEndAngle, color: Constant.breakTimeColor)
             splitLayer.addSublayer(breakTimeLayer)
         }
         
