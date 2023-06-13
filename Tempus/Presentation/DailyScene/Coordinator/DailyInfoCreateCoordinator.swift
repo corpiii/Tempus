@@ -33,4 +33,19 @@ final class DailyInfoCreateCoordinator: Coordinator {
         self.dailyInfoCreateViewModel.coordinator = self
         self.navigationController.pushViewController(dailyInfoCreateViewController, animated: true)
     }
+    
+    func pushTimeDurationCreateViewController(modelTitle: String,
+                                              focusTime: Double,
+                                              breakTime: Double,
+                                              fetchRefreshDelegate: FetchRefreshDelegate) {
+        let dailyTimeDurationCreateCoordinator = DailyTimeDurationCreateCoordinator(navigationController: UINavigationController
+                                                                                    modelTitle: modelTitle,
+                                                                                    focusTime: focusTime,
+                                                                                    breakTime: breakTime,
+                                                                                    repository: self.repository,
+                                                                                    FetchRefreshDelegate: fetchRefreshDelegate)
+        
+        dailyTimeDurationCreateCoordinator.start()
+        childCoordinators.append(dailyTimeDurationCreateCoordinator)
+    }
 }
