@@ -39,7 +39,7 @@ final class DailyTimeDurationCreateViewModel {
          focusTime: Double,
          breakTime: Double,
          repository: DataManagerRepository,
-         fetchRefreshDelgate: FetchRefreshDelegate) {
+         fetchRefreshDelgate: FetchRefreshDelegate?) {
         self.modelTitle = modelTitle
         self.focusTime = focusTime
         self.breakTime = breakTime

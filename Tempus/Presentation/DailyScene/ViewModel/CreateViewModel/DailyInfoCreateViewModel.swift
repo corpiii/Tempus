@@ -95,13 +95,15 @@ private extension DailyInfoCreateViewModel {
     func bindNextButtonEvent(_ nextButtonTapEvent: Observable<Void>, to isFillAllInfo: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
         nextButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let self = self,
-                      self.modelTitle?.isEmpty == false else {
+                guard let modelTitle = self?.modelTitle,
+                      let modelFocusTime = self?.modelFocusTime,
+                      let modelBreakTime = self?.modelBreakTime,
+                      modelTitle.isEmpty == false else {
                           return isFillAllInfo.onNext(false)
                 }
-                
-                isFillAllInfo.onNext(true)
-                // coordinator push
+                self?.coordinator?.pushTimeDurationCreateViewController(modelTitle: modelTitle,
+                                                                  focusTime: modelFocusTime,
+                                                                  breakTime: modelBreakTime)
             }).disposed(by: disposeBag)
     }
     

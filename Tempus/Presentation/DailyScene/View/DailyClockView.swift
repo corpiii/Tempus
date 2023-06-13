@@ -33,9 +33,18 @@ class DailyClockView: ClockView {
     
     weak var alertDelegate: AlertRepeatCountOverDelegate?
     
-    init(focusTime: Double, breakTime: Double) {
+    init(startTime: Date, focusTime: Double, breakTime: Double) {
         self.focusTime = focusTime
         self.breakTime = breakTime
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: startTime)
+        let hour = Double(components.hour ?? 0)
+        let minute = Double(components.minute ?? 0)
+        let totalMinutes = (hour * 60 + minute) * Constant.degree
+        
+        self.startAngle = Constant.topAngle + totalMinutes * .pi / 180
+        
         super.init(frame: .zero)
     }
     
@@ -56,8 +65,6 @@ class DailyClockView: ClockView {
     }
     
     func setStartTime(_ startTime: Date) {
-        self.startTime = startTime
-        
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute], from: startTime)
         let hour = Double(components.hour ?? 0)
@@ -85,7 +92,6 @@ private extension DailyClockView {
     func drawClockLine() {
         splitLayer.removeFromSuperlayer()
         splitLayer = CAShapeLayer()
-        layer.layoutIfNeeded()
         
         for i in 1...repeatCount {
             let startTimeAngle = startAngle + CGFloat(i - 1) * (focusTimeAngle + breakTimeAngle)

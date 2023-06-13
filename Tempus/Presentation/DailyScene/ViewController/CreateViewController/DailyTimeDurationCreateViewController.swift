@@ -84,7 +84,7 @@ final class DailyTimeDurationCreateViewController: UIViewController {
     
     init(viewModel: DailyTimeDurationCreateViewModel, focusTime: Double, breakTime: Double) {
         self.viewModel = viewModel
-        self.dailyClockView = .init(focusTime: focusTime, breakTime: breakTime)
+        self.dailyClockView = .init(startTime: startTimePicker.date, focusTime: focusTime, breakTime: breakTime)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -98,10 +98,6 @@ final class DailyTimeDurationCreateViewController: UIViewController {
         configureUI()
         bindViewModel()
         dailyClockView.alertDelegate = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        dailyClockView.setStartTime(startTimePicker.date)
     }
 }
 
@@ -171,8 +167,16 @@ private extension DailyTimeDurationCreateViewController {
             make.edges.equalTo(safeArea.snp.edges).inset(20)
         }
         
+        configureDailyClockView()
         configureStartTimeStackView()
         configureRepeatCountStackView()
+    }
+    
+    func configureDailyClockView() {
+        dailyClockView.snp.makeConstraints { make in
+            make.width.equalTo(entireStackView.snp.width)
+            make.height.equalTo(dailyClockView.snp.width)
+        }
     }
     
     func configureStartTimeStackView() {
