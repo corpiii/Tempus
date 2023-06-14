@@ -74,7 +74,7 @@ final class BlockCreateViewController: UIViewController {
     private let timeIntervalSubject: PublishSubject<Int> = .init()
     private let completeEvent: PublishSubject<Void> = .init()
     private let startEvent: PublishSubject<CompleteAlert> = .init()
-    private let backButtonEvent: PublishSubject<Void> = .init()
+    private let disappearEvent: PublishSubject<Void> = .init()
     
     init(viewModel: BlockCreateViewModel) {
         self.viewModel = viewModel
@@ -94,7 +94,7 @@ final class BlockCreateViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        backButtonEvent.onNext(())
+        disappearEvent.onNext(())
     }
     
     private func makeHeightDividerView() -> UIView {
@@ -195,7 +195,6 @@ private extension BlockCreateViewController {
         entireStackView.addArrangedSubview(divideCountStackView)
         entireStackView.addArrangedSubview(emptyView)
         
-//        entireStackView.backgroundColor = .systemRed
         entireStackView.spacing = Constant.entireStackSpacing
         
         entireStackView.snp.makeConstraints { make in
@@ -254,7 +253,7 @@ private extension BlockCreateViewController {
         let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
                                                modelBlockTime: timeIntervalSubject,
                                                completeButtonTapEvent: completeEvent,
-                                               backButtonEvent: backButtonEvent,
+                                               disappearEvent: disappearEvent,
                                                startEvent: startEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
