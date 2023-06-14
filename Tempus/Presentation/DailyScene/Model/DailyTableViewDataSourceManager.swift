@@ -22,7 +22,7 @@ struct DailyTableViewDataSourceManager: TableViewDataSourceManager {
                 return UITableViewCell()
             }
 
-//            cell.modelTitleLabel.text = model.title
+            cell.modelTitleLabel.text = model.title
             return cell
         })
         

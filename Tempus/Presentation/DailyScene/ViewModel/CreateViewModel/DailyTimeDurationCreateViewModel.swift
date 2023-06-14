@@ -12,8 +12,8 @@ import RxSwift
 
 final class DailyTimeDurationCreateViewModel {
     struct Input {
-        let startTime: Observable<Double>
-        let repeatCount: Observable<Int>
+        let startTime: Observable<Date>
+        let repeatCount: Observable<Double>
         
         let backButtonTapEvent: Observable<Void>
         let completeButtonTapEvent: Observable<CompleteAlert>
@@ -33,12 +33,13 @@ final class DailyTimeDurationCreateViewModel {
     
     private let createUseCase: DailyCreateUseCase
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
+    weak var coordinator: DailyTimeDurationCreateCoordinator?
     
     init(modelTitle: String,
          focusTime: Double,
          breakTime: Double,
          repository: DataManagerRepository,
-         fetchRefreshDelgate: FetchRefreshDelegate) {
+         fetchRefreshDelgate: FetchRefreshDelegate?) {
         self.modelTitle = modelTitle
         self.focusTime = focusTime
         self.breakTime = breakTime
@@ -58,29 +59,31 @@ final class DailyTimeDurationCreateViewModel {
         bindRepeatCount(input.repeatCount, disposeBag)
         bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
-        bindCreateSuccess(createUseCaseOutput.isCreateSuccess,
-                          to: output.isCreateSuccess,
-                          disposeBag)
+        bindCreateSuccess(createUseCaseOutput.isCreateSuccess, to: output.isCreateSuccess, disposeBag)
         
         return output
     }
-    
-    /* finish function by coordinator */
-    // func finish() {}
 }
 
 private extension DailyTimeDurationCreateViewModel {
-    func bindStartTime(_ startTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindStartTime(_ startTime: Observable<Date>, _ disposeBag: DisposeBag) {
         startTime
             .subscribe(onNext: { [weak self] startTime in
-                self?.startTime = startTime
+                let calendar = Calendar.current
+                let components = calendar.dateComponents([.hour, .minute], from: startTime)
+                
+                if let hour = components.hour,
+                   let minute = components.minute {
+                    let startTime = Double(hour * 60 * 60 + minute * 60)
+                    self?.startTime = startTime
+                }
             }).disposed(by: disposeBag)
     }
     
-    func bindRepeatCount(_ repeatCount: Observable<Int>, _ disposeBag: DisposeBag) {
+    func bindRepeatCount(_ repeatCount: Observable<Double>, _ disposeBag: DisposeBag) {
         repeatCount
             .subscribe(onNext: { [weak self] repeatCount in
-                self?.repeatCount = repeatCount
+                self?.repeatCount = Int(repeatCount)
             }).disposed(by: disposeBag)
     }
     
@@ -88,7 +91,7 @@ private extension DailyTimeDurationCreateViewModel {
                                 _ disposeBag: DisposeBag) {
         backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                // coordinator pop
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
     
@@ -106,15 +109,16 @@ private extension DailyTimeDurationCreateViewModel {
                                        repeatCount: repeatCount,
                                        focusTime: self.focusTime,
                                        breakTime: self.breakTime)
-
+                
                 self.modelCreateEvent.onNext(model)
                 
                 switch completeAlert {
                 case .completeWithStart:
-                    // coordinator finish with start
+                    let startUseCase = DailyStartUseCase(originModel: model)
+                    self.coordinator?.finish(with: startUseCase)
                     break
                 case .completeWithoutStart:
-                    // coordinator just finish
+                    self.coordinator?.finish()
                     break
                 }
             }).disposed(by: disposeBag)

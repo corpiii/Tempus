@@ -30,8 +30,8 @@ final class BlockDetailViewController: UIViewController {
         return label
     }()
     
-    private let clockView: SplittedClockView = {
-        let clockView = SplittedClockView()
+    private let clockView: BlockClockView = {
+        let clockView = BlockClockView()
         
         return clockView
     }()

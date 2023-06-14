@@ -130,8 +130,6 @@ private extension DailyInfoCreateViewController {
     }
     
     @objc func nextBarButtonTapped(_ sender: UIBarButtonItem) {
-        print(focusTimePicker.calendar.identifier)
-        
         modelTitleSubject.onNext(titleTextField.text ?? "")
         modelFocusTimeSubject.onNext(focusTimePicker.date)
         modelBreakTimeSubject.onNext(breakTimePicker.date)

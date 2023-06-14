@@ -80,7 +80,6 @@ private extension BlockEditViewModel {
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 self.doneButtonTapEvent.onNext(self.originModel)
-                dump(self.originModel)
             }).disposed(by: disposeBag)
     }
     

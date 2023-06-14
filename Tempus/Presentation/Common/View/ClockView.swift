@@ -1,14 +1,14 @@
 //
-//  SplittedClockView.swift
+//  ClockView.swift
 //  Tempus
 //
-//  Created by 이정민 on 2023/05/10.
+//  Created by 이정민 on 2023/06/07.
 //
 
 import UIKit
 
-final class SplittedClockView: UIView {
-    private enum Constant {
+class ClockView: UIView {
+    enum Constant {
         static let lineColor: CGColor = UIColor.black.cgColor
         static let lineWidth: CGFloat = 2.0
         static let clockBackgroundColor: CGColor = UIColor.systemGray6.cgColor
@@ -19,53 +19,16 @@ final class SplittedClockView: UIView {
         static let dotRadius: CGFloat = 3.0
     }
     
-    private lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)
-    private lazy var radius = bounds.width * 0.95 / 2.0
-    private var ClockInterval: String = ""
-    private var splitLayer = CALayer()
+    lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)
+    lazy var radius = bounds.width * 0.95 / 2.0
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupBaseLine()
-        splitClock(by: ClockInterval)
-    }
-    
-    func splitClock(by interval: String) {
-        splitLayer.removeFromSuperlayer()
-        layer.layoutIfNeeded()
-        
-        self.ClockInterval = interval
-        guard let interval = Int(interval) else { return }
-        let divideCount = 24 / interval
-        let startAngle = -90 * CGFloat.pi / 180
-        let angleInterval = CGFloat.pi * 2 / CGFloat(divideCount)
-        
-        splitLayer = CALayer()
-        
-        for i in 0..<divideCount {
-            let angle = startAngle + CGFloat(i) * angleInterval
-            let arkLayer = CAShapeLayer()
-            let arkPath = UIBezierPath()
-
-            arkPath.move(to: circleCenter)
-            arkPath.addArc(withCenter: circleCenter, radius: radius,
-                           startAngle: angle, endAngle: angle + angleInterval, clockwise: true)
-            arkPath.close()
-
-            arkLayer.path = arkPath.cgPath
-
-            arkLayer.lineWidth = 2.0
-            arkLayer.strokeColor = UIColor.red.cgColor
-            arkLayer.fillColor = Constant.splittedBackGroundColor
-
-            splitLayer.addSublayer(arkLayer)
-        }
-        
-        layer.addSublayer(splitLayer)
     }
 }
 
-private extension SplittedClockView {
+private extension ClockView {
     func setupBaseLine() {
         setCircleLayer()
         setCircleCenterDotLayer()
