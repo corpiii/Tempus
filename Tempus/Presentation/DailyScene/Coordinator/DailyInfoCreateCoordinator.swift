@@ -17,16 +17,19 @@ final class DailyInfoCreateCoordinator: Coordinator {
     private let repository: DataManagerRepository
     private weak var finishDelegate: FinishDelegate?
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
+    private weak var startModeDelegate: StartModeDelegate?
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
          finishDelegate: FinishDelegate,
-         fetchRefreshDelegate: FetchRefreshDelegate?) {
+         fetchRefreshDelegate: FetchRefreshDelegate?,
+         startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
         self.dailyInfoCreateViewModel = DailyInfoCreateViewModel()
         self.dailyInfoCreateViewController = DailyInfoCreateViewController(viewModel: dailyInfoCreateViewModel)
         self.repository = repository
         self.finishDelegate = finishDelegate
+        self.startModeDelegate = startModeDelegate
     }
     
     func start() {
@@ -42,9 +45,21 @@ final class DailyInfoCreateCoordinator: Coordinator {
                                                                                     focusTime: focusTime,
                                                                                     breakTime: breakTime,
                                                                                     repository: self.repository,
-                                                                                    fetchRefreshDelegate: fetchRefreshDelegate)
-        
+                                                                                    fetchRefreshDelegate: fetchRefreshDelegate,
+                                                                                    finishDelegate: self,
+                                                                                    startModeDelegate: startModeDelegate)
         dailyTimeDurationCreateCoordinator.start()
         childCoordinators.append(dailyTimeDurationCreateCoordinator)
+    }
+    
+    func finish() {
+        finishDelegate?.finish(childCoordinator: self)
+    }
+}
+
+extension DailyInfoCreateCoordinator: FinishDelegate {
+    func finish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
+        self.navigationController.popToRootViewController(animated: true)
     }
 }

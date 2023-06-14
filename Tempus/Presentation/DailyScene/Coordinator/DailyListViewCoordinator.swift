@@ -35,7 +35,8 @@ final class DailyListViewCoordinator: Coordinator, FinishDelegate {
         let dailyInfoCreateCoordinator = DailyInfoCreateCoordinator(navigationController: self.navigationController,
                                                                     repository: repository,
                                                                     finishDelegate: self,
-                                                                    fetchRefreshDelegate: fetchRefreshDelegate)
+                                                                    fetchRefreshDelegate: fetchRefreshDelegate,
+                                                                    startModeDelegate: self.startModeDelegate)
         dailyInfoCreateCoordinator.start()
         childCoordinators.append(dailyInfoCreateCoordinator)
     }

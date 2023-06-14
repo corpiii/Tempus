@@ -17,6 +17,6 @@ protocol FinishDelegate: AnyObject {
 extension FinishDelegate {
     func finish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
-        self.navigationController.popToRootViewController(animated: true)
+        self.navigationController.popViewController(animated: true)
     }
 }

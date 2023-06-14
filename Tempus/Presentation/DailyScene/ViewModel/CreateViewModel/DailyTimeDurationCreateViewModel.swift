@@ -91,7 +91,7 @@ private extension DailyTimeDurationCreateViewModel {
                                 _ disposeBag: DisposeBag) {
         backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                // coordinator pop
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
     
@@ -114,10 +114,11 @@ private extension DailyTimeDurationCreateViewModel {
                 
                 switch completeAlert {
                 case .completeWithStart:
-                    // coordinator finish with start
+                    let startUseCase = DailyStartUseCase(originModel: model)
+                    self.coordinator?.finish(with: startUseCase)
                     break
                 case .completeWithoutStart:
-                    // coordinator just finish
+                    self.coordinator?.finish()
                     break
                 }
             }).disposed(by: disposeBag)

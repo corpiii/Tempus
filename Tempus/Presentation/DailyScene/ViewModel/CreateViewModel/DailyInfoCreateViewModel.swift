@@ -102,17 +102,15 @@ private extension DailyInfoCreateViewModel {
                           return isFillAllInfo.onNext(false)
                 }
                 self?.coordinator?.pushTimeDurationCreateViewController(modelTitle: modelTitle,
-                                                                  focusTime: modelFocusTime,
-                                                                  breakTime: modelBreakTime)
+                                                                        focusTime: modelFocusTime,
+                                                                        breakTime: modelBreakTime)
             }).disposed(by: disposeBag)
     }
     
     func bindCancelButtonTapEvent(_ cancelButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         cancelButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                
-                // coordinator finish createScene
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
 

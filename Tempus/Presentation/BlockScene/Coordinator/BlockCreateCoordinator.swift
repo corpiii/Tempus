@@ -27,7 +27,7 @@ class BlockCreateCoordinator: Coordinator, FinishDelegate {
         self.navigationController = navigationController
         self.repository = repository
         self.blockCreateViewModel = BlockCreateViewModel(repository: self.repository,
-                                                        fetchRefreshDelegate: fetchRefreshDelegate)
+                                                         fetchRefreshDelegate: fetchRefreshDelegate)
         self.blockCreateViewController = BlockCreateViewController(viewModel: self.blockCreateViewModel)
         self.finishDelegate = finishDelegate
         self.startModeDelegate = startModeDelegate

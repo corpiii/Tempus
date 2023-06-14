@@ -99,6 +99,11 @@ final class DailyTimeDurationCreateViewController: UIViewController {
         bindViewModel()
         dailyClockView.alertDelegate = self
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        backButtonTapEvent.onNext(())
+    }
 }
 
 // MARK: - ConfigureUI
