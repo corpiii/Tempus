@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlockEditCoordinator: Coordinator {
+final class BlockEditCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .blockEdit }
     let navigationController: UINavigationController

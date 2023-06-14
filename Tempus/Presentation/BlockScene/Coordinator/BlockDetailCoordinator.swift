@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlockDetailCoordinator: Coordinator {
+final class BlockDetailCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .blockDetail }
@@ -61,12 +61,5 @@ class BlockDetailCoordinator: Coordinator {
                                                         editReflectDelegate: self.blockDetailViewModel)
         blockEditCoordinator.start()
         self.childCoordinators.append(blockEditCoordinator)
-    }
-}
-
-extension BlockDetailCoordinator: FinishDelegate {
-    func finish(childCoordinator: Coordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
-        self.blockDetailNavigationController.popToRootViewController(animated: true)
     }
 }

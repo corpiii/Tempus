@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlockCreateCoordinator: Coordinator, FinishDelegate {
+final class BlockCreateCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .blockCreate }
     let navigationController: UINavigationController
