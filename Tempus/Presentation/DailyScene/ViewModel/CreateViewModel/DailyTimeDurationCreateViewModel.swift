@@ -115,10 +115,10 @@ private extension DailyTimeDurationCreateViewModel {
                 switch completeAlert {
                 case .completeWithStart:
                     let startUseCase = DailyStartUseCase(originModel: model)
-                    self.coordinator?.finish(with: startUseCase)
+                    self.coordinator?.completeFinish(with: startUseCase)
                     break
                 case .completeWithoutStart:
-                    self.coordinator?.finish()
+                    self.coordinator?.completeFinish()
                     break
                 }
             }).disposed(by: disposeBag)

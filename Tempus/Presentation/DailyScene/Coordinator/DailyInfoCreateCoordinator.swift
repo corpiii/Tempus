@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DailyInfoCreateCoordinator: Coordinator, FinishDelegate {
+final class DailyInfoCreateCoordinator: Coordinator {
     let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .dailyInfoCreate }
@@ -20,7 +20,6 @@ final class DailyInfoCreateCoordinator: Coordinator, FinishDelegate {
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
     private weak var startModeDelegate: StartModeDelegate?
     
-    
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
          finishDelegate: FinishDelegate,
@@ -32,6 +31,7 @@ final class DailyInfoCreateCoordinator: Coordinator, FinishDelegate {
         self.dailyInfoCreateNavigationController = UINavigationController(rootViewController: dailyInfoCreateViewController)
         self.repository = repository
         self.finishDelegate = finishDelegate
+        self.fetchRefreshDelegate = fetchRefreshDelegate
         self.startModeDelegate = startModeDelegate
     }
     
@@ -59,5 +59,12 @@ final class DailyInfoCreateCoordinator: Coordinator, FinishDelegate {
     func finish() {
         self.dailyInfoCreateNavigationController.dismiss(animated: true)
         finishDelegate?.finish(childCoordinator: self)
+    }
+}
+
+extension DailyInfoCreateCoordinator: DailyFinishDelegate {
+    func completeFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
+        self.finish()
     }
 }
