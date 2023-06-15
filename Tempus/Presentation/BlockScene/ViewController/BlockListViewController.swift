@@ -7,15 +7,11 @@
 
 import UIKit
 
-import RxCocoa
+import RxRelay
 import RxSwift
 import SnapKit
 
-final class BlockListViewController: UIViewController {
-    private enum Section {
-        case main
-    }
-    
+final class BlockListViewController: UIViewController {    
     private weak var viewModel: BlockListViewModel?
     private let disposeBag: DisposeBag = .init()
     
@@ -35,7 +31,7 @@ final class BlockListViewController: UIViewController {
     
     init(viewModel: BlockListViewModel) {
         self.viewModel = viewModel
-        tableViewDataSourceManager = BlockTableViewDataSourceManager(tableView: tableView)
+        tableViewDataSourceManager = .init(tableView: tableView)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -97,7 +93,7 @@ private extension BlockListViewController {
     func bindBlockModelArray(_ blockModelArray: Observable<[BlockModel]>) {
         blockModelArray
             .subscribe(onNext: { [weak self] models in
-                self?.tableViewDataSourceManager.append(section: .main, models: models)
+                self?.tableViewDataSourceManager.apply(section: .main, models: models)
             }).disposed(by: disposeBag)
     }
     

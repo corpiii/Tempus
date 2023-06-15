@@ -7,15 +7,15 @@
 
 import UIKit
 
-import RxCocoa
+import RxRelay
 import RxSwift
 import SnapKit
 
 final class DailyListViewController: UIViewController {
-    
     private weak var viewModel: DailyListViewModel?
     private let disposeBag: DisposeBag = .init()
     
+    private let tableViewDataSourceManager: DailyTableViewDataSourceManager
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
@@ -24,7 +24,6 @@ final class DailyListViewController: UIViewController {
         return tableView
     }()
     
-    private let tableViewDataSourceManager: DailyTableViewDataSourceManager
     private let addButton: UIBarButtonItem = .init(systemItem: .add)
     private let modelDeleteEvent: PublishSubject<DailyModel> = .init()
     private let modelTapEvent: PublishSubject<DailyModel> = .init()
@@ -86,14 +85,14 @@ private extension DailyListViewController {
             return
         }
         
-        bindBlockModelArray(output.dailyModelArray)
+        bindDailyModelArray(output.dailyModelArray)
         bindDeleteResult(output.isDeleteSuccess)
     }
     
-    func bindBlockModelArray(_ blockModelArray: Observable<[DailyModel]>) {
+    func bindDailyModelArray(_ blockModelArray: Observable<[DailyModel]>) {
         blockModelArray
             .subscribe(onNext: { [weak self] models in
-                self?.tableViewDataSourceManager.append(section: .main, models: models)
+                self?.tableViewDataSourceManager.apply(section: .main, models: models)
             }).disposed(by: disposeBag)
     }
     
