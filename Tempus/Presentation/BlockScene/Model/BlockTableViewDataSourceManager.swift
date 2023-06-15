@@ -25,6 +25,7 @@ struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
             cell.modelTitleLabel.text = model.title
             return cell
         })
+        
         dataSource.defaultRowAnimation = .none
         tableView.dataSource = dataSource
         tableView.register(BlockCell.self, forCellReuseIdentifier: BlockCell.identifier)
@@ -34,8 +35,9 @@ struct BlockTableViewDataSourceManager: TableViewDataSourceManager {
         dataSource.apply(snapShot)
     }
 
-    func append(section: Section, models: [Model]) {
-        var snapShot = self.dataSource.snapshot()
+    func apply(section: Section, models: [Model]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Model>()
+        snapShot.appendSections([.main])
         snapShot.appendItems(models)
         
         dataSource.apply(snapShot)

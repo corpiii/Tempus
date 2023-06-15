@@ -13,7 +13,7 @@ protocol TableViewDataSourceManager {
     
     var dataSource: UITableViewDiffableDataSource<Section, Model> { get set }
     
-    func append(section: Section, models: [Model])
+    func apply(section: Section, models: [Model])
     func delete(model: Model)
     func fetch(index: Int) -> Model
 }
