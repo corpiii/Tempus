@@ -7,7 +7,6 @@
 
 import UIKit
 
-import RxCocoa
 import RxSwift
 import SnapKit
 
@@ -20,6 +19,7 @@ final class BlockEditViewController: UIViewController {
         static let blockTimeCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
     
+    private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let doneButton: UIBarButtonItem = .init(systemItem: .done)
     
     private let entireStackView: UIStackView = {
@@ -127,10 +127,18 @@ private extension BlockEditViewController {
     }
     
     func configureNavigationBar() {
+        backBarButton.target = self
+        backBarButton.action = #selector(backBarButtonTapped)
+        self.navigationItem.leftBarButtonItem = backBarButton
+        
         self.navigationItem.title = "수정하기"
         self.navigationItem.rightBarButtonItem = doneButton
         doneButton.target = self
         doneButton.action = #selector(completeButtonTapped)
+    }
+    
+    @objc func backBarButtonTapped(_ sender: UIBarButtonItem) {
+        self.finishEvent.onNext(())
     }
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
@@ -151,7 +159,6 @@ private extension BlockEditViewController {
         entireStackView.addArrangedSubview(divideCountStackView)
         entireStackView.addArrangedSubview(emptyView)
         
-//        entireStackView.backgroundColor = .systemRed
         entireStackView.spacing = Constant.entireStackSpacing
         
         entireStackView.snp.makeConstraints { make in

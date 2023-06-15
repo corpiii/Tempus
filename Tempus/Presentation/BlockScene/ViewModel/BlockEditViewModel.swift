@@ -86,8 +86,7 @@ private extension BlockEditViewModel {
     func bindFinishEvent(_ finishEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         finishEvent
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                self.coordinator?.finish()
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
     
