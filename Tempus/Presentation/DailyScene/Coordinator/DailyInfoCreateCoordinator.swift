@@ -7,17 +7,19 @@
 
 import UIKit
 
-final class DailyInfoCreateCoordinator: Coordinator {
+final class DailyInfoCreateCoordinator: Coordinator, FinishDelegate {
     let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .dailyInfoCreate }
     
-    private let dailyInfoCreateViewController: DailyInfoCreateViewController
     private let dailyInfoCreateViewModel: DailyInfoCreateViewModel
+    private let dailyInfoCreateViewController: DailyInfoCreateViewController
+    private let dailyInfoCreateNavigationController: UINavigationController
     private let repository: DataManagerRepository
     private weak var finishDelegate: FinishDelegate?
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
     private weak var startModeDelegate: StartModeDelegate?
+    
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
@@ -27,6 +29,7 @@ final class DailyInfoCreateCoordinator: Coordinator {
         self.navigationController = navigationController
         self.dailyInfoCreateViewModel = DailyInfoCreateViewModel()
         self.dailyInfoCreateViewController = DailyInfoCreateViewController(viewModel: dailyInfoCreateViewModel)
+        self.dailyInfoCreateNavigationController = UINavigationController(rootViewController: dailyInfoCreateViewController)
         self.repository = repository
         self.finishDelegate = finishDelegate
         self.startModeDelegate = startModeDelegate
@@ -34,7 +37,8 @@ final class DailyInfoCreateCoordinator: Coordinator {
     
     func start() {
         self.dailyInfoCreateViewModel.coordinator = self
-        self.navigationController.pushViewController(dailyInfoCreateViewController, animated: true)
+        self.dailyInfoCreateNavigationController.modalPresentationStyle = .fullScreen
+        self.navigationController.present(self.dailyInfoCreateNavigationController, animated: true)
     }
     
     func pushTimeDurationCreateViewController(modelTitle: String,
@@ -53,13 +57,7 @@ final class DailyInfoCreateCoordinator: Coordinator {
     }
     
     func finish() {
+        self.dailyInfoCreateNavigationController.dismiss(animated: true)
         finishDelegate?.finish(childCoordinator: self)
-    }
-}
-
-extension DailyInfoCreateCoordinator: FinishDelegate {
-    func finish(childCoordinator: Coordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
-        self.navigationController.popToRootViewController(animated: true)
     }
 }
