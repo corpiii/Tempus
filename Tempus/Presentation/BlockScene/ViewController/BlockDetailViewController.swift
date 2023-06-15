@@ -7,11 +7,10 @@
 
 import UIKit
 
-import SnapKit
 import RxSwift
+import SnapKit
 
 final class BlockDetailViewController: UIViewController {
-    private let cancelBarButton: UIBarButtonItem = .init(systemItem: .cancel)
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")
     
@@ -37,6 +36,7 @@ final class BlockDetailViewController: UIViewController {
     }()
     
     private weak var viewModel: BlockDetailViewModel?
+    private let disappearEvent: PublishSubject<Void> = .init()
     private let disposeBag: DisposeBag = .init()
     
     init(viewModel: BlockDetailViewModel) {
@@ -52,6 +52,11 @@ final class BlockDetailViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         bindViewModel()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disappearEvent.onNext(())
     }
 }
 
@@ -78,7 +83,6 @@ private extension BlockDetailViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationItem.leftBarButtonItem = cancelBarButton
         self.navigationItem.rightBarButtonItems = [startBarButton, editBarButton]
     }
     
@@ -105,7 +109,7 @@ private extension BlockDetailViewController {
         
         let input = BlockDetailViewModel.Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
                                                editButtonTapEvent: editBarButton.rx.tap.asObservable(),
-                                               cancelButtonTapEvent: cancelBarButton.rx.tap.asObservable())
+                                               disappearEvent: disappearEvent)
         
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
