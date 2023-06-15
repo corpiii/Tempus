@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 
 final class DailyTimeDurationCreateViewController: UIViewController {
+    private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
     // TODO: clockView
@@ -78,7 +79,6 @@ final class DailyTimeDurationCreateViewController: UIViewController {
     private weak var viewModel: DailyTimeDurationCreateViewModel?
     private let startTimeSubject: PublishSubject<Date> = .init()
     private let repeatCountSubject: PublishSubject<Double> = .init()
-    private let backButtonTapEvent: PublishSubject<Void> = .init()
     private let doneButtonTapEvent: PublishSubject<CompleteAlert> = .init()
     private let disposeBag: DisposeBag = .init()
     
@@ -99,11 +99,6 @@ final class DailyTimeDurationCreateViewController: UIViewController {
         bindViewModel()
         dailyClockView.alertDelegate = self
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        backButtonTapEvent.onNext(())
-    }
 }
 
 // MARK: - ConfigureUI
@@ -116,6 +111,7 @@ private extension DailyTimeDurationCreateViewController {
     }
     
     func configureNavigationBar() {
+        self.navigationItem.leftBarButtonItem = backBarButton
         self.navigationItem.title = "새로 만들기"
         
         self.navigationItem.rightBarButtonItem = doneBarButton
@@ -188,8 +184,6 @@ private extension DailyTimeDurationCreateViewController {
         startTimeStackView.addArrangedSubview(startTimeLabel)
         startTimeStackView.addArrangedSubview(startTimePicker)
         
-        // spacing?
-        
         configureStartTimePicker()
     }
     
@@ -226,7 +220,7 @@ private extension DailyTimeDurationCreateViewController {
     func bindViewModel() {
         let input = DailyTimeDurationCreateViewModel.Input(startTime: startTimeSubject,
                                                            repeatCount: repeatCountSubject,
-                                                           backButtonTapEvent: backButtonTapEvent,
+                                                           backButtonTapEvent: backBarButton.rx.tap.asObservable(),
                                                            completeButtonTapEvent: doneButtonTapEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else { return }

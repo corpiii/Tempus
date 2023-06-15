@@ -49,6 +49,7 @@ final class DailyTimeDurationCreateCoordinator: Coordinator {
             startModeDelegate?.startWith(startUseCase)
         }
         
+        self.navigationController.popViewController(animated: true)
         finishDelegate?.finish(childCoordinator: self)
     }
 }

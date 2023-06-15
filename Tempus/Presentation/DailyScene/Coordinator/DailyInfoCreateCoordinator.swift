@@ -44,7 +44,7 @@ final class DailyInfoCreateCoordinator: Coordinator, FinishDelegate {
     func pushTimeDurationCreateViewController(modelTitle: String,
                                               focusTime: Double,
                                               breakTime: Double) {
-        let dailyTimeDurationCreateCoordinator = DailyTimeDurationCreateCoordinator(navigationController: self.navigationController,
+        let dailyTimeDurationCreateCoordinator = DailyTimeDurationCreateCoordinator(navigationController: self.dailyInfoCreateNavigationController,
                                                                                     modelTitle: modelTitle,
                                                                                     focusTime: focusTime,
                                                                                     breakTime: breakTime,
