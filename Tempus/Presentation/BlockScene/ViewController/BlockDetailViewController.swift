@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 
 final class BlockDetailViewController: UIViewController {
+    private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")
     
@@ -53,11 +54,6 @@ final class BlockDetailViewController: UIViewController {
         configureUI()
         bindViewModel()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        disappearEvent.onNext(())
-    }
 }
 
 // MARK: - ConfigureUI
@@ -83,7 +79,14 @@ private extension BlockDetailViewController {
     }
     
     func configureNavigationBar() {
+        backBarButton.target = self
+        backBarButton.action = #selector(backBarButtonTapped)
+        self.navigationItem.leftBarButtonItem = backBarButton
         self.navigationItem.rightBarButtonItems = [startBarButton, editBarButton]
+    }
+    
+    @objc func backBarButtonTapped() {
+        disappearEvent.onNext(())
     }
     
     func configureClockView() {
@@ -98,7 +101,6 @@ private extension BlockDetailViewController {
             make.width.equalTo(safeArea.width).offset(-20)
             make.height.equalTo(clockView.snp.width)
         }
-        clockView.layoutIfNeeded()
     }
 }
 
@@ -120,6 +122,5 @@ private extension BlockDetailViewController {
                     self.clockView.splitClock(by: "\(model.blockTime)")
                 }
             }).disposed(by: disposeBag)
-        
     }
 }

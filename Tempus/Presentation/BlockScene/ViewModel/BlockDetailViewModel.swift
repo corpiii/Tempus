@@ -51,9 +51,8 @@ private extension BlockDetailViewModel {
     func bindEditButtonTapEvent(_ editEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         editEvent
             .subscribe(onNext: { [weak self] in
-                guard let self,
-                      let originModel = try? self.originModelSubject.value() else { return }
-                self.coordinator?.pushBlockEditViewController(with: originModel)
+                guard let originModel = try? self?.originModelSubject.value() else { return }
+                self?.coordinator?.pushBlockEditViewController(with: originModel)
             }).disposed(by: disposeBag)
     }
     

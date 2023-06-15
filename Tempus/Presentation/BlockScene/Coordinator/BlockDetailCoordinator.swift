@@ -39,6 +39,7 @@ final class BlockDetailCoordinator: Coordinator, FinishDelegate {
         self.blockDetailViewModel.coordinator = self
         self.navigationController.pushViewController(blockDetailViewController, animated: true)
     }
+
     
     func finish(with startUseCase: BlockStartUseCase? = nil) {
         if let startUseCase {

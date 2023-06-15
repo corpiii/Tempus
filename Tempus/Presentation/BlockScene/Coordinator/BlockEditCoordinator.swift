@@ -34,10 +34,11 @@ final class BlockEditCoordinator: Coordinator {
     
     func start() {
         blockEditViewModel.coordinator = self
-        navigationController.pushViewController(blockEditViewController, animated: true)
+        self.navigationController.pushViewController(blockEditViewController, animated: true)
     }
     
     func finish() {
+        self.navigationController.popViewController(animated: true)
         finishDelegate?.finish(childCoordinator: self)
     }
 }
