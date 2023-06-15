@@ -19,6 +19,8 @@ final class BlockCreateViewController: UIViewController {
         static let pickerViewWidth: CGFloat = 100
         static let blockTimeCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
+    
+    private let cancelButton: UIBarButtonItem = .init(systemItem: .cancel)
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
     
     private let entireStackView: UIStackView = {
@@ -132,6 +134,8 @@ private extension BlockCreateViewController {
     }
     
     func configureNavigationBar() {
+        self.navigationItem.leftBarButtonItem = cancelButton
+        
         self.navigationItem.title = "새로 만들기"
         self.navigationItem.rightBarButtonItem = completeButton
         completeButton.target = self
@@ -253,7 +257,7 @@ private extension BlockCreateViewController {
         let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
                                                modelBlockTime: timeIntervalSubject,
                                                completeButtonTapEvent: completeEvent,
-                                               disappearEvent: disappearEvent,
+                                               cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
                                                startEvent: startEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {

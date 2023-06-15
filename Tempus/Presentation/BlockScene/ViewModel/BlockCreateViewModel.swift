@@ -15,7 +15,7 @@ final class BlockCreateViewModel {
         let modelTitle: Observable<String>
         let modelBlockTime: Observable<Int>
         let completeButtonTapEvent: Observable<Void>
-        let disappearEvent: Observable<Void>
+        let cancelButtonTapEvent: Observable<Void>
         let startEvent: Observable<CompleteAlert>
     }
     
@@ -50,7 +50,7 @@ final class BlockCreateViewModel {
         bindModelTitle(input.modelTitle, disposeBag)
         bindBlockTime(input.modelBlockTime, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
-        bindDisappearEvent(input.disappearEvent, disposeBag)
+        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
         bindStartEvent(input.startEvent, disposeBag)
         
         return output
@@ -102,11 +102,10 @@ private extension BlockCreateViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindDisappearEvent(_ disappearEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        disappearEvent
+    func bindCancelButtonTapEvent(_ cancelButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        cancelButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.coordinator?.finish()
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
     

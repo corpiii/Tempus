@@ -37,7 +37,8 @@ final class BlockCreateCoordinator: Coordinator, FinishDelegate {
     
     func start() {
         self.blockCreateViewModel.coordinator = self
-        self.navigationController.present(blockCreateNavigationController, animated: true)
+        self.blockCreateNavigationController.modalPresentationStyle = .fullScreen
+        self.navigationController.present(self.blockCreateNavigationController, animated: true)
     }
     
     func finish(with startUseCase: BlockStartUseCase? = nil) {
