@@ -11,7 +11,7 @@ final class BlockDetailViewModel {
     struct Input {
         let startButtonTapEvent: Observable<Void>
         let editButtonTapEvent: Observable<Void>
-        let cancelButtonTapEvent: Observable<Void>
+        let disappearEvent: Observable<Void>
     }
     
     struct Output {
@@ -30,7 +30,7 @@ final class BlockDetailViewModel {
         
         bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
         bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
-        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
+        bindDisappearEvent(input.disappearEvent, disposeBag)
         
         return output
     }
@@ -51,14 +51,13 @@ private extension BlockDetailViewModel {
     func bindEditButtonTapEvent(_ editEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         editEvent
             .subscribe(onNext: { [weak self] in
-                guard let self,
-                      let originModel = try? self.originModelSubject.value() else { return }
-                self.coordinator?.pushBlockEditViewController(with: originModel)
+                guard let originModel = try? self?.originModelSubject.value() else { return }
+                self?.coordinator?.pushBlockEditViewController(with: originModel)
             }).disposed(by: disposeBag)
     }
     
-    func bindCancelButtonTapEvent(_ cancelEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        cancelEvent
+    func bindDisappearEvent(_ disappearEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        disappearEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 self.coordinator?.finish()

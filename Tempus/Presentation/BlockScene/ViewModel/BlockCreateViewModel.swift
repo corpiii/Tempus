@@ -15,7 +15,7 @@ final class BlockCreateViewModel {
         let modelTitle: Observable<String>
         let modelBlockTime: Observable<Int>
         let completeButtonTapEvent: Observable<Void>
-        let backButtonEvent: Observable<Void>
+        let cancelButtonTapEvent: Observable<Void>
         let startEvent: Observable<CompleteAlert>
     }
     
@@ -50,7 +50,7 @@ final class BlockCreateViewModel {
         bindModelTitle(input.modelTitle, disposeBag)
         bindBlockTime(input.modelBlockTime, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
-        bindBackButtonEvent(input.backButtonEvent, disposeBag)
+        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
         bindStartEvent(input.startEvent, disposeBag)
         
         return output
@@ -91,7 +91,7 @@ private extension BlockCreateViewModel {
     
     func bindCompleteButtonTapEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         completeEvent
-            .subscribe(onNext: { [weak self] completeAlert in
+            .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 
                 let title = self.modelTitle ?? ""
@@ -102,16 +102,15 @@ private extension BlockCreateViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindBackButtonEvent(_ backButtonEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        backButtonEvent
+    func bindCancelButtonTapEvent(_ cancelButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        cancelButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
-                guard let self else { return }
-                self.coordinator?.finish()
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
     
     func bindStartEvent(_ startEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
-        startEvent.subscribe(onNext: { [weak self]completeAlert in
+        startEvent.subscribe(onNext: { [weak self] completeAlert in
             guard let self,
                   let originModel = self.originModel else { return }
             

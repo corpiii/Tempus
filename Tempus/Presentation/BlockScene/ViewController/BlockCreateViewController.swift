@@ -19,6 +19,8 @@ final class BlockCreateViewController: UIViewController {
         static let pickerViewWidth: CGFloat = 100
         static let blockTimeCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
     }
+    
+    private let cancelButton: UIBarButtonItem = .init(systemItem: .cancel)
     private let completeButton: UIBarButtonItem = .init(systemItem: .done)
     
     private let entireStackView: UIStackView = {
@@ -74,7 +76,7 @@ final class BlockCreateViewController: UIViewController {
     private let timeIntervalSubject: PublishSubject<Int> = .init()
     private let completeEvent: PublishSubject<Void> = .init()
     private let startEvent: PublishSubject<CompleteAlert> = .init()
-    private let backButtonEvent: PublishSubject<Void> = .init()
+    private let disappearEvent: PublishSubject<Void> = .init()
     
     init(viewModel: BlockCreateViewModel) {
         self.viewModel = viewModel
@@ -94,7 +96,7 @@ final class BlockCreateViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        backButtonEvent.onNext(())
+        disappearEvent.onNext(())
     }
     
     private func makeHeightDividerView() -> UIView {
@@ -132,6 +134,8 @@ private extension BlockCreateViewController {
     }
     
     func configureNavigationBar() {
+        self.navigationItem.leftBarButtonItem = cancelButton
+        
         self.navigationItem.title = "새로 만들기"
         self.navigationItem.rightBarButtonItem = completeButton
         completeButton.target = self
@@ -195,7 +199,6 @@ private extension BlockCreateViewController {
         entireStackView.addArrangedSubview(divideCountStackView)
         entireStackView.addArrangedSubview(emptyView)
         
-//        entireStackView.backgroundColor = .systemRed
         entireStackView.spacing = Constant.entireStackSpacing
         
         entireStackView.snp.makeConstraints { make in
@@ -254,7 +257,7 @@ private extension BlockCreateViewController {
         let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
                                                modelBlockTime: timeIntervalSubject,
                                                completeButtonTapEvent: completeEvent,
-                                               backButtonEvent: backButtonEvent,
+                                               cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
                                                startEvent: startEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {

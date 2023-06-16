@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 
 final class DailyTimeDurationCreateViewController: UIViewController {
+    private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
     // TODO: clockView
@@ -78,8 +79,8 @@ final class DailyTimeDurationCreateViewController: UIViewController {
     private weak var viewModel: DailyTimeDurationCreateViewModel?
     private let startTimeSubject: PublishSubject<Date> = .init()
     private let repeatCountSubject: PublishSubject<Double> = .init()
-    private let backButtonTapEvent: PublishSubject<Void> = .init()
-    private let doneButtonTapEvent: PublishSubject<CompleteAlert> = .init()
+    private let doneButtonTapEvent: PublishSubject<Void> = .init()
+    private let startEvent: PublishSubject<CompleteAlert> = .init()
     private let disposeBag: DisposeBag = .init()
     
     init(viewModel: DailyTimeDurationCreateViewModel, focusTime: Double, breakTime: Double) {
@@ -99,11 +100,6 @@ final class DailyTimeDurationCreateViewController: UIViewController {
         bindViewModel()
         dailyClockView.alertDelegate = self
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        backButtonTapEvent.onNext(())
-    }
 }
 
 // MARK: - ConfigureUI
@@ -116,6 +112,7 @@ private extension DailyTimeDurationCreateViewController {
     }
     
     func configureNavigationBar() {
+        self.navigationItem.leftBarButtonItem = backBarButton
         self.navigationItem.title = "새로 만들기"
         
         self.navigationItem.rightBarButtonItem = doneBarButton
@@ -124,38 +121,9 @@ private extension DailyTimeDurationCreateViewController {
     }
     
     @objc func doneBarButtonTapped(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "생성 완료",
-                                      message: "타이머를 바로 시작하시겠습니까?",
-                                      preferredStyle: .alert)
-        
-        let completeWithStartAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-            guard let self else { return }
-            
-            self.startTimeSubject.onNext(self.startTimePicker.date)
-            self.repeatCountSubject.onNext(self.repeatCountStepper.value)
-            self.doneButtonTapEvent.onNext(.completeWithStart)
-        }
-        let completeWithoutStartAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
-            let alertController = UIAlertController(title: "저장",
-                                          message: "저장되었습니다",
-                                          preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
-                guard let self else { return }
-                
-                self.startTimeSubject.onNext(self.startTimePicker.date)
-                self.repeatCountSubject.onNext(self.repeatCountStepper.value)
-                self.doneButtonTapEvent.onNext(.completeWithoutStart)
-            }
-            
-            alertController.addAction(confirmAction)
-            
-            self?.present(alertController, animated: true)
-        }
-        
-        alertController.addAction(completeWithStartAction)
-        alertController.addAction(completeWithoutStartAction)
-        
-        self.present(alertController, animated: true, completion: nil)
+        self.startTimeSubject.onNext(self.startTimePicker.date)
+        self.repeatCountSubject.onNext(self.repeatCountStepper.value)
+        self.doneButtonTapEvent.onNext(())
     }
     
     func configureEntireStackView() {
@@ -187,8 +155,6 @@ private extension DailyTimeDurationCreateViewController {
     func configureStartTimeStackView() {
         startTimeStackView.addArrangedSubview(startTimeLabel)
         startTimeStackView.addArrangedSubview(startTimePicker)
-        
-        // spacing?
         
         configureStartTimePicker()
     }
@@ -226,17 +192,45 @@ private extension DailyTimeDurationCreateViewController {
     func bindViewModel() {
         let input = DailyTimeDurationCreateViewModel.Input(startTime: startTimeSubject,
                                                            repeatCount: repeatCountSubject,
-                                                           backButtonTapEvent: backButtonTapEvent,
-                                                           completeButtonTapEvent: doneButtonTapEvent)
+                                                           backButtonTapEvent: backBarButton.rx.tap.asObservable(),
+                                                           completeButtonTapEvent: doneButtonTapEvent, startEvent: startEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else { return }
         
         output.isCreateSuccess
             .subscribe(onNext: { [weak self] isCreateSuccess in
-                if isCreateSuccess == false {
-                    self?.alertCreateFail()
-                }
+                isCreateSuccess
+                ? self?.alertSuccess()
+                : self?.alertCreateFail()
             }).disposed(by: disposeBag)
+    }
+    
+    func alertSuccess() {
+        let alertController = UIAlertController(title: "생성 완료",
+                                      message: "타이머를 바로 시작하시겠습니까?",
+                                      preferredStyle: .alert)
+        
+        let completeWithStartAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+            self?.startEvent.onNext(.completeWithStart)
+        }
+        
+        let completeWithoutStartAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
+            let alertController = UIAlertController(title: "저장",
+                                          message: "저장되었습니다",
+                                          preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+                self?.startEvent.onNext(.completeWithoutStart)
+            }
+            
+            alertController.addAction(confirmAction)
+            
+            self?.present(alertController, animated: true)
+        }
+        
+        alertController.addAction(completeWithStartAction)
+        alertController.addAction(completeWithoutStartAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func alertCreateFail() {

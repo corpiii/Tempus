@@ -64,7 +64,7 @@ private extension DailyInfoCreateViewModel {
                     let secondTime = Double(hour) * 60 * 60 + Double(minute) * 60
                     
                     if secondTime == 0 {
-                        self.modelFocusTime = 1.0
+                        self.modelFocusTime = 1.0 * 60
                     } else {
                         self.modelFocusTime = secondTime
                     }
@@ -84,7 +84,7 @@ private extension DailyInfoCreateViewModel {
                     let secondTime = Double(hour) * 60 * 60 + Double(minute) * 60
                     
                     if secondTime == 0 {
-                        self.modelBreakTime = 1.0
+                        self.modelBreakTime = 1.0 * 60
                     } else {
                         self.modelBreakTime = secondTime
                     }

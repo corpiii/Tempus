@@ -7,11 +7,11 @@
 
 import UIKit
 
-import SnapKit
 import RxSwift
+import SnapKit
 
 final class BlockDetailViewController: UIViewController {
-    private let cancelBarButton: UIBarButtonItem = .init(systemItem: .cancel)
+    private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")
     
@@ -37,6 +37,7 @@ final class BlockDetailViewController: UIViewController {
     }()
     
     private weak var viewModel: BlockDetailViewModel?
+    private let disappearEvent: PublishSubject<Void> = .init()
     private let disposeBag: DisposeBag = .init()
     
     init(viewModel: BlockDetailViewModel) {
@@ -78,8 +79,14 @@ private extension BlockDetailViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationItem.leftBarButtonItem = cancelBarButton
+        backBarButton.target = self
+        backBarButton.action = #selector(backBarButtonTapped)
+        self.navigationItem.leftBarButtonItem = backBarButton
         self.navigationItem.rightBarButtonItems = [startBarButton, editBarButton]
+    }
+    
+    @objc func backBarButtonTapped() {
+        disappearEvent.onNext(())
     }
     
     func configureClockView() {
@@ -94,7 +101,6 @@ private extension BlockDetailViewController {
             make.width.equalTo(safeArea.width).offset(-20)
             make.height.equalTo(clockView.snp.width)
         }
-        clockView.layoutIfNeeded()
     }
 }
 
@@ -105,7 +111,7 @@ private extension BlockDetailViewController {
         
         let input = BlockDetailViewModel.Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
                                                editButtonTapEvent: editBarButton.rx.tap.asObservable(),
-                                               cancelButtonTapEvent: cancelBarButton.rx.tap.asObservable())
+                                               disappearEvent: disappearEvent)
         
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
@@ -116,6 +122,5 @@ private extension BlockDetailViewController {
                     self.clockView.splitClock(by: "\(model.blockTime)")
                 }
             }).disposed(by: disposeBag)
-        
     }
 }

@@ -15,7 +15,7 @@ final class DailyTimeDurationCreateCoordinator: Coordinator {
     let dailyTimeDurationCreateViewModel: DailyTimeDurationCreateViewModel
     
     private let navigationController: UINavigationController
-    private weak var finishDelegate: FinishDelegate?
+    private weak var finishDelegate: DailyFinishDelegate?
     private weak var startModeDelegate: StartModeDelegate?
     
     init(navigationController: UINavigationController,
@@ -24,7 +24,7 @@ final class DailyTimeDurationCreateCoordinator: Coordinator {
          breakTime: Double,
          repository: DataManagerRepository,
          fetchRefreshDelegate: FetchRefreshDelegate?,
-         finishDelegate: FinishDelegate?,
+         finishDelegate: DailyFinishDelegate?,
          startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
         dailyTimeDurationCreateViewModel = .init(modelTitle: modelTitle,
@@ -44,11 +44,16 @@ final class DailyTimeDurationCreateCoordinator: Coordinator {
         navigationController.pushViewController(dailyTimeDurationCreateViewController, animated: true)
     }
     
-    func finish(with startUseCase: DailyStartUseCase? = nil) {
+    func finish() {
+        self.navigationController.popViewController(animated: true)
+        finishDelegate?.finish(childCoordinator: self)
+    }
+    
+    func completeFinish(with startUseCase: DailyStartUseCase? = nil) {
         if let startUseCase {
             startModeDelegate?.startWith(startUseCase)
         }
         
-        finishDelegate?.finish(childCoordinator: self)
+        finishDelegate?.completeFinish(childCoordinator: self)
     }
 }
