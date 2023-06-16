@@ -91,7 +91,7 @@ private extension BlockCreateViewModel {
     
     func bindCompleteButtonTapEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         completeEvent
-            .subscribe(onNext: { [weak self] completeAlert in
+            .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 
                 let title = self.modelTitle ?? ""
@@ -110,7 +110,7 @@ private extension BlockCreateViewModel {
     }
     
     func bindStartEvent(_ startEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
-        startEvent.subscribe(onNext: { [weak self]completeAlert in
+        startEvent.subscribe(onNext: { [weak self] completeAlert in
             guard let self,
                   let originModel = self.originModel else { return }
             

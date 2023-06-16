@@ -16,7 +16,8 @@ final class DailyTimeDurationCreateViewModel {
         let repeatCount: Observable<Double>
         
         let backButtonTapEvent: Observable<Void>
-        let completeButtonTapEvent: Observable<CompleteAlert>
+        let completeButtonTapEvent: Observable<Void>
+        let startEvent: Observable<CompleteAlert>
     }
     
     struct Output {
@@ -28,6 +29,7 @@ final class DailyTimeDurationCreateViewModel {
     private let breakTime: Double
     private var startTime: Double?
     private var repeatCount: Int?
+    private var originModel: DailyModel?
     
     private let modelCreateEvent: PublishSubject<DailyModel> = .init()
     
@@ -55,11 +57,12 @@ final class DailyTimeDurationCreateViewModel {
         let createUseCaseOutput = createUseCase.transform(input: createUseCaseInput,
                                                           disposeBag: disposeBag)
         
+        bindCreateSuccess(createUseCaseOutput.isCreateSuccess, to: output.isCreateSuccess, disposeBag)
         bindStartTime(input.startTime, disposeBag)
         bindRepeatCount(input.repeatCount, disposeBag)
         bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
-        bindCreateSuccess(createUseCaseOutput.isCreateSuccess, to: output.isCreateSuccess, disposeBag)
+        bindStartEvent(input.startEvent, disposeBag)
         
         return output
     }
@@ -95,10 +98,10 @@ private extension DailyTimeDurationCreateViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindCompleteButtonTapEvent(_ completeEvent: Observable<CompleteAlert>,
+    func bindCompleteButtonTapEvent(_ completeEvent: Observable<Void>,
                            _ disposeBag: DisposeBag) {
         completeEvent
-            .subscribe(onNext: { [weak self] completeAlert in
+            .subscribe(onNext: { [weak self] in
                 guard let self = self,
                       let startTime = self.startTime,
                       let repeatCount = self.repeatCount else { return }
@@ -111,17 +114,26 @@ private extension DailyTimeDurationCreateViewModel {
                                        breakTime: self.breakTime)
                 
                 self.modelCreateEvent.onNext(model)
+                self.originModel = model
                 
-                switch completeAlert {
-                case .completeWithStart:
-                    let startUseCase = DailyStartUseCase(originModel: model)
-                    self.coordinator?.completeFinish(with: startUseCase)
-                    break
-                case .completeWithoutStart:
-                    self.coordinator?.completeFinish()
-                    break
-                }
             }).disposed(by: disposeBag)
+    }
+    
+    func bindStartEvent(_ startEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
+        startEvent.subscribe(onNext: { [weak self] completeAlert in
+            guard let self,
+                  let originModel = self.originModel else { return }
+            
+            switch completeAlert {
+            case .completeWithStart:
+                let startUseCase = DailyStartUseCase(originModel: originModel)
+                self.coordinator?.completeFinish(with: startUseCase)
+                break
+            case .completeWithoutStart:
+                self.coordinator?.completeFinish()
+                break
+            }
+        }).disposed(by: disposeBag)
     }
     
     func bindCreateSuccess(_ createSuccessEvent: Observable<Bool>,
