@@ -44,7 +44,7 @@ private extension DailyDetailViewModel {
                       let originModel = try? self.originModelSubject.value() else { return }
                 
                 let startUseCase = DailyStartUseCase(originModel: originModel)
-                // coordinator push with startUseCase
+                self.coordinator?.finish(with: startUseCase)
             }).disposed(by: disposeBag)
     }
     
@@ -59,7 +59,8 @@ private extension DailyDetailViewModel {
     
     func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         backButtonTapEvent
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.finish()
                 // coordinator finish
             }).disposed(by: disposeBag)
     }

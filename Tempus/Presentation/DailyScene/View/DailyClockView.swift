@@ -80,9 +80,11 @@ class DailyClockView: ClockView {
         drawClockLine()
     }
     
-    func setStats(_ startTime: Date, _ focusTime: Double, _ breakTime: Double, _ repeatCount: Int) {
+    func setStats(_ startTime: Double, _ focusTime: Double, _ breakTime: Double, _ repeatCount: Int) {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour, .minute], from: startTime)
+        let startDate = calendar.startOfDay(for: Date()).addingTimeInterval(startTime)
+        
+        let components = calendar.dateComponents([.hour, .minute], from: startDate)
         let hour = Double(components.hour ?? 0)
         let minute = Double(components.minute ?? 0)
         let totalMinutes = (hour * 60 + minute) * Constant.degree

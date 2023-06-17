@@ -82,7 +82,7 @@ private extension DailyDetailViewController {
         modelSubject
             .subscribe(onNext: { [weak self] model in
                 self?.navigationItem.title = model.title
-                self?.dailyClockView.setStats(Date(timeIntervalSince1970: model.startTime),
+                self?.dailyClockView.setStats(model.startTime,
                                               model.focusTime,
                                               model.breakTime,
                                               model.repeatCount)
