@@ -25,14 +25,14 @@ final class DailyDetailCoordinator: Coordinator, FinishDelegate {
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
          originModel: DailyModel,
-         fetchRefreshDelegate: FetchRefreshDelegate,
          finishDelegate: FinishDelegate,
+         fetchRefreshDelegate: FetchRefreshDelegate,
          startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
         self.repository = repository
         
-        self.fetchRefreshDelegate = fetchRefreshDelegate
         self.finishDelegate = finishDelegate
+        self.fetchRefreshDelegate = fetchRefreshDelegate
         self.startModeDelegate = startModeDelegate
         self.dailyDetailViewModel = .init(originModel: originModel)
         self.dailyDetailViewController = .init(viewModel: dailyDetailViewModel)

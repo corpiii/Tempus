@@ -53,7 +53,7 @@ final class BlockListViewModel {
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
         bindModelFetchEvent(input.modelFetchEvent, disposeBag: disposeBag)
-        bindModelTapButton(input.modelTapEvent, disposeBag: disposeBag)
+        bindModelTapEvent(input.modelTapEvent, disposeBag: disposeBag)
         
         output.blockModelArray.onNext([])
         return output
@@ -89,7 +89,7 @@ private extension BlockListViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindModelTapButton(_ modelTapEvent: Observable<BlockModel>, disposeBag: DisposeBag) {
+    func bindModelTapEvent(_ modelTapEvent: Observable<BlockModel>, disposeBag: DisposeBag) {
         modelTapEvent
             .subscribe(onNext: { [weak self] model in
                 guard let self else { return }

@@ -33,11 +33,22 @@ final class DailyListViewCoordinator: Coordinator, FinishDelegate {
     
     func pushInfoCreateViewController(fetchRefreshDelegate: FetchRefreshDelegate) {
         let dailyInfoCreateCoordinator = DailyInfoCreateCoordinator(navigationController: self.navigationController,
-                                                                    repository: repository,
+                                                                    repository: self.repository,
                                                                     finishDelegate: self,
                                                                     fetchRefreshDelegate: fetchRefreshDelegate,
                                                                     startModeDelegate: self.startModeDelegate)
         dailyInfoCreateCoordinator.start()
         childCoordinators.append(dailyInfoCreateCoordinator)
+    }
+    
+    func pushDetailViewController(originModel: DailyModel, fetchRefreshDelegate: FetchRefreshDelegate) {
+        let dailyDetailCoordinator = DailyDetailCoordinator(navigationController: self.navigationController,
+                                                            repository: self.repository,
+                                                            originModel: originModel,
+                                                            finishDelegate: self,
+                                                            fetchRefreshDelegate: fetchRefreshDelegate,
+                                                            startModeDelegate: self.startModeDelegate)
+        dailyDetailCoordinator.start()
+        childCoordinators.append(dailyDetailCoordinator)
     }
 }
