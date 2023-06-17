@@ -11,7 +11,7 @@ final class DailyDetailViewModel {
     struct Input {
         let startButtonTapEvent: Observable<Void>
         let editButtonTapEvent: Observable<Void>
-        let cancelButtonTapEvent: Observable<Void>
+        let backButtonTapEvent: Observable<Void>
     }
     
     struct Output {
@@ -19,6 +19,7 @@ final class DailyDetailViewModel {
     }
     
     private let originModelSubject: BehaviorSubject<DailyModel>
+    weak var coordinator: DailyDetailCoordinator?
     
     init(originModel: DailyModel) {
         self.originModelSubject = .init(value: originModel)
@@ -27,7 +28,7 @@ final class DailyDetailViewModel {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(originModelSubject: originModelSubject)
         
-        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
+        bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
         bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
                 
@@ -43,7 +44,7 @@ private extension DailyDetailViewModel {
                       let originModel = try? self.originModelSubject.value() else { return }
                 
                 let startUseCase = DailyStartUseCase(originModel: originModel)
-                // coordinator push with startUseCase
+                self.coordinator?.finish(with: startUseCase)
             }).disposed(by: disposeBag)
     }
     
@@ -56,9 +57,10 @@ private extension DailyDetailViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindCancelButtonTapEvent(_ cancelEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        cancelEvent
-            .subscribe(onNext: {
+    func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        backButtonTapEvent
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.finish()
                 // coordinator finish
             }).disposed(by: disposeBag)
     }

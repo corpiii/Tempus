@@ -8,10 +8,10 @@
 import UIKit
 
 final class DailyInfoCreateCoordinator: Coordinator {
-    let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .dailyInfoCreate }
     
+    private let navigationController: UINavigationController
     private let dailyInfoCreateViewModel: DailyInfoCreateViewModel
     private let dailyInfoCreateViewController: DailyInfoCreateViewController
     private let dailyInfoCreateNavigationController: UINavigationController

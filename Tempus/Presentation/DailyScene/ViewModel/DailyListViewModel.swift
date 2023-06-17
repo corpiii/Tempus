@@ -50,6 +50,7 @@ final class DailyListViewModel {
         
         bindDeleteSuccess(deleteUseCaseOutput.isDeleteSuccess, to: output.isDeleteSuccess, disposeBag)
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
+        bindModelTapEvent(input.modelTapEvent, disposeBag: disposeBag)
         
         return output
     }
@@ -72,8 +73,15 @@ private extension DailyListViewModel {
     func bindAddButton(_ addButtonEvent: Observable<Void>, disposeBag: DisposeBag) {
         addButtonEvent
             .subscribe(onNext: {
-                // coordinator push to createViewModel by 'push(fetchRefreshDelegate: self)' function
                 self.coordinator?.pushInfoCreateViewController(fetchRefreshDelegate: self)
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindModelTapEvent(_ modelTapEvent: PublishSubject<DailyModel>, disposeBag: DisposeBag) {
+        modelTapEvent
+            .subscribe(onNext: { [weak self] model in
+                guard let self else { return }
+                self.coordinator?.pushDetailViewController(originModel: model, fetchRefreshDelegate: self)
             }).disposed(by: disposeBag)
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 final class BlockEditCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .blockEdit }
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     private let repository: DataManagerRepository
     private weak var finishDelegate: FinishDelegate?
     private let blockEditViewModel: BlockEditViewModel

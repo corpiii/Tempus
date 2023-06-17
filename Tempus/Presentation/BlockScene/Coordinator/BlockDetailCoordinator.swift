@@ -11,11 +11,11 @@ final class BlockDetailCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .blockDetail }
-    let navigationController: UINavigationController
-    let repository: DataManagerRepository
-    weak var fetchRefreshDelegate: FetchRefreshDelegate?
-    weak var startModeDelegate: StartModeDelegate?
-    weak var finishDelegate: FinishDelegate?
+    private let navigationController: UINavigationController
+    private let repository: DataManagerRepository
+    private weak var fetchRefreshDelegate: FetchRefreshDelegate?
+    private weak var startModeDelegate: StartModeDelegate?
+    private weak var finishDelegate: FinishDelegate?
     
     private let blockDetailViewModel: BlockDetailViewModel
     private let blockDetailViewController: BlockDetailViewController
