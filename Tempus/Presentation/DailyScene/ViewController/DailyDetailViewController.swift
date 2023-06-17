@@ -9,7 +9,7 @@ import UIKit
 
 import RxSwift
 
-class DailyDetailViewController: UIViewController {
+final class DailyDetailViewController: UIViewController {
     private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")

@@ -19,6 +19,7 @@ final class DailyDetailViewModel {
     }
     
     private let originModelSubject: BehaviorSubject<DailyModel>
+    weak var coordinator: DailyDetailCoordinator?
     
     init(originModel: DailyModel) {
         self.originModelSubject = .init(value: originModel)
