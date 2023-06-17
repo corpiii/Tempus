@@ -15,14 +15,6 @@ final class BlockDetailViewController: UIViewController {
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")
     
-    private let entireStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        
-        return stackView
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,21 +53,7 @@ private extension BlockDetailViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         configureNavigationBar()
-        configureEntireStackView()
         configureClockView()
-    }
-    
-    func configureEntireStackView() {
-        self.view.addSubview(entireStackView)
-        
-        let safeArea = self.view.safeAreaLayoutGuide.snp
-        
-        entireStackView.snp.makeConstraints { make in
-            make.top.equalTo(safeArea.top)
-            make.leading.equalTo(safeArea.leading)
-            make.trailing.equalTo(safeArea.trailing)
-            make.bottom.equalTo(safeArea.bottom)
-        }
     }
     
     func configureNavigationBar() {
