@@ -11,8 +11,8 @@ final class DailyTimeDurationCreateCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .dailyTimeDurationCreate }
     
-    let dailyTimeDurationCreateViewController: DailyTimeDurationCreateViewController
-    let dailyTimeDurationCreateViewModel: DailyTimeDurationCreateViewModel
+    private let dailyTimeDurationCreateViewController: DailyTimeDurationCreateViewController
+    private let dailyTimeDurationCreateViewModel: DailyTimeDurationCreateViewModel
     
     private let navigationController: UINavigationController
     private weak var finishDelegate: DailyFinishDelegate?

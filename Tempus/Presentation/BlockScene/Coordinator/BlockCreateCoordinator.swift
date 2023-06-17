@@ -10,14 +10,14 @@ import UIKit
 final class BlockCreateCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .blockCreate }
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     private let repository: DataManagerRepository
 
     private let blockCreateViewModel: BlockCreateViewModel
     private let blockCreateViewController: BlockCreateViewController
     private let blockCreateNavigationController: UINavigationController
     
-    weak var finishDelegate: FinishDelegate?
+    private weak var finishDelegate: FinishDelegate?
     private weak var startModeDelegate: StartModeDelegate?
     
     init(navigationController: UINavigationController,
