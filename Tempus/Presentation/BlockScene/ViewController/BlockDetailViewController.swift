@@ -29,7 +29,6 @@ final class BlockDetailViewController: UIViewController {
     }()
     
     private weak var viewModel: BlockDetailViewModel?
-    private let disappearEvent: PublishSubject<Void> = .init()
     private let disposeBag: DisposeBag = .init()
     
     init(viewModel: BlockDetailViewModel) {
@@ -57,14 +56,8 @@ private extension BlockDetailViewController {
     }
     
     func configureNavigationBar() {
-        backBarButton.target = self
-        backBarButton.action = #selector(backBarButtonTapped)
         self.navigationItem.leftBarButtonItem = backBarButton
         self.navigationItem.rightBarButtonItems = [startBarButton, editBarButton]
-    }
-    
-    @objc func backBarButtonTapped() {
-        disappearEvent.onNext(())
     }
     
     func configureClockView() {
@@ -89,7 +82,7 @@ private extension BlockDetailViewController {
         
         let input = BlockDetailViewModel.Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
                                                editButtonTapEvent: editBarButton.rx.tap.asObservable(),
-                                               disappearEvent: disappearEvent)
+                                               disappearEvent: backBarButton.rx.tap.asObservable())
         
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
