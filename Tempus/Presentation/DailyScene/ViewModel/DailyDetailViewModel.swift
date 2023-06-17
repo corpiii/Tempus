@@ -11,7 +11,7 @@ final class DailyDetailViewModel {
     struct Input {
         let startButtonTapEvent: Observable<Void>
         let editButtonTapEvent: Observable<Void>
-        let cancelButtonTapEvent: Observable<Void>
+        let backButtonTapEvent: Observable<Void>
     }
     
     struct Output {
@@ -27,7 +27,7 @@ final class DailyDetailViewModel {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(originModelSubject: originModelSubject)
         
-        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
+        bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
         bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
                 
@@ -56,8 +56,8 @@ private extension DailyDetailViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindCancelButtonTapEvent(_ cancelEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        cancelEvent
+    func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        backButtonTapEvent
             .subscribe(onNext: {
                 // coordinator finish
             }).disposed(by: disposeBag)

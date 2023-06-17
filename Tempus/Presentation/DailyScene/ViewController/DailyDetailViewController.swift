@@ -14,28 +14,12 @@ class DailyDetailViewController: UIViewController {
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
     private let startBarButton: UIBarButtonItem = .init(title: "시작")
     
-    private let entireStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        
-        return stackView
-    }()
-
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    private let dailyClockView: DailyClockView
+    private let dailyClockView: DailyClockView = .init()
     private weak var viewModel: DailyDetailViewModel?
     private let disposeBag: DisposeBag = .init()
     
-    init(viewModel: DailyDetailViewModel, startTime: Date, focusTime: Double, breakTime: Double) {
+    init(viewModel: DailyDetailViewModel) {
         self.viewModel = viewModel
-        self.dailyClockView = .init(startTime: startTime, focusTime: focusTime, breakTime: breakTime)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,6 +39,27 @@ class DailyDetailViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension DailyDetailViewController {
     func configureUI() {
+        configureNavigationBar()
+        configureClockView()
+    }
+    
+    func configureNavigationBar() {
+        self.navigationItem.leftBarButtonItem = backBarButton
+        self.navigationItem.rightBarButtonItems = [startBarButton, editBarButton]
+    }
+    
+    func configureClockView() {
+        self.view.addSubview(dailyClockView)
+        
+        let safeArea = self.view.safeAreaLayoutGuide.snp
+        
+        dailyClockView.snp.makeConstraints { make in
+            make.top.equalTo(safeArea.top).offset(self.view.frame.height * 0.1)
+            make.centerX.equalTo(safeArea.centerX)
+            
+            make.width.equalTo(safeArea.width).offset(-20)
+            make.height.equalTo(dailyClockView.snp.width)
+        }
     }
 }
 
@@ -62,6 +67,25 @@ private extension DailyDetailViewController {
 // MARK: - BindViewModel
 private extension DailyDetailViewController {
     func bindViewModel() {
+        guard let viewModel = viewModel else { return }
         
+        let input = DailyDetailViewModel.Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
+                                               editButtonTapEvent: editBarButton.rx.tap.asObservable(),
+                                               backButtonTapEvent: backBarButton.rx.tap.asObservable())
+        
+        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        
+        bindOriginModelSubject(output.originModelSubject, disposeBag)
+    }
+    
+    func bindOriginModelSubject(_ modelSubject: BehaviorSubject<DailyModel>, _ disposeBag: DisposeBag) {
+        modelSubject
+            .subscribe(onNext: { [weak self] model in
+                self?.navigationItem.title = model.title
+                self?.dailyClockView.setStats(Date(timeIntervalSince1970: model.startTime),
+                                              model.focusTime,
+                                              model.breakTime,
+                                              model.repeatCount)
+            }).disposed(by: disposeBag)
     }
 }

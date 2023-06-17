@@ -15,14 +15,16 @@ class DailyClockView: ClockView {
         static let breakTimeColor: UIColor = .init(red: CGFloat(69) / 255 , green: CGFloat(130) / 255, blue: CGFloat(219) / 255, alpha: CGFloat(80) / 100)
     }
     
-    private let focusTime: Double
+    private var focusTime: Double?
     private var focusTimeAngle: CGFloat {
-        convertToRadian(from: focusTime)
+        guard let focusTime else { return 0 }
+        return convertToRadian(from: focusTime)
     }
     
-    private let breakTime: Double
+    private var breakTime: Double?
     private var breakTimeAngle: CGFloat {
-        convertToRadian(from: breakTime)
+        guard let breakTime else { return 0 }
+        return convertToRadian(from: breakTime)
     }
     
     private var startTime: Date?
@@ -33,17 +35,19 @@ class DailyClockView: ClockView {
     
     weak var alertDelegate: AlertRepeatCountOverDelegate?
     
-    init(startTime: Date, focusTime: Double, breakTime: Double) {
+    init(startTime: Date? = nil, focusTime: Double? = nil, breakTime: Double? = nil) {
         self.focusTime = focusTime
         self.breakTime = breakTime
         
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour, .minute], from: startTime)
-        let hour = Double(components.hour ?? 0)
-        let minute = Double(components.minute ?? 0)
-        let totalMinutes = (hour * 60 + minute) * Constant.degree
-        
-        self.startAngle = Constant.topAngle + totalMinutes * .pi / 180
+        if let startTime {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.hour, .minute], from: startTime)
+            let hour = Double(components.hour ?? 0)
+            let minute = Double(components.minute ?? 0)
+            let totalMinutes = (hour * 60 + minute) * Constant.degree
+            
+            self.startAngle = Constant.topAngle + totalMinutes * .pi / 180
+        }
         
         super.init(frame: .zero)
     }
@@ -74,6 +78,20 @@ class DailyClockView: ClockView {
         self.startAngle = Constant.topAngle + totalMinutes * .pi / 180
         
         drawClockLine()
+    }
+    
+    func setStats(_ startTime: Date, _ focusTime: Double, _ breakTime: Double, _ repeatCount: Int) {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: startTime)
+        let hour = Double(components.hour ?? 0)
+        let minute = Double(components.minute ?? 0)
+        let totalMinutes = (hour * 60 + minute) * Constant.degree
+        
+        self.startAngle = Constant.topAngle + totalMinutes * .pi / 180
+        
+        self.focusTime = focusTime
+        self.breakTime = breakTime
+        self.repeatCount = repeatCount
     }
     
     func setRepeatCount(_ repeatCount: Int) {
