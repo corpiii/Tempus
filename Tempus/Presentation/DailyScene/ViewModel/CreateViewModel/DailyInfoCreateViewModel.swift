@@ -47,8 +47,7 @@ private extension DailyInfoCreateViewModel {
     func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
         modelTitle
             .subscribe(onNext: { [weak self] title in
-                guard let self = self else { return }
-                self.modelTitle = title
+                self?.modelTitle = title
             }).disposed(by: disposeBag)
     }
     

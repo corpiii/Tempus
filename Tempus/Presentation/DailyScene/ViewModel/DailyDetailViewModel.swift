@@ -51,7 +51,6 @@ private extension DailyDetailViewModel {
     func bindEditButtonTapEvent(_ editEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         editEvent
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
                 // coordinator push with originModel
                 // and push with self and refresh with edited Data
             }).disposed(by: disposeBag)
