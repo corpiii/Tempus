@@ -55,8 +55,6 @@ private extension DailyInfoCreateViewModel {
     func bindModelFocusTime(_ modelFocusTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelFocusTime
             .subscribe(onNext: { [weak self] focusTime in
-                guard let self else { return }
-                
                 let calendar = Calendar.init(identifier: .gregorian)
                 let date = calendar.dateComponents([.hour, .minute], from: focusTime)
                 
@@ -64,9 +62,9 @@ private extension DailyInfoCreateViewModel {
                     let secondTime = Double(hour) * 60 * 60 + Double(minute) * 60
                     
                     if secondTime == 0 {
-                        self.modelFocusTime = 1.0 * 60
+                        self?.modelFocusTime = 1.0 * 60
                     } else {
-                        self.modelFocusTime = secondTime
+                        self?.modelFocusTime = secondTime
                     }
                 }
             }).disposed(by: disposeBag)
@@ -75,8 +73,6 @@ private extension DailyInfoCreateViewModel {
     func bindModelBreakTime(_ modelBreakTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelBreakTime
             .subscribe(onNext: { [weak self] breakTime in
-                guard let self else { return }
-                
                 let calendar = Calendar.init(identifier: .gregorian)
                 let date = calendar.dateComponents([.hour, .minute], from: breakTime)
                 
@@ -84,9 +80,9 @@ private extension DailyInfoCreateViewModel {
                     let secondTime = Double(hour) * 60 * 60 + Double(minute) * 60
                     
                     if secondTime == 0 {
-                        self.modelBreakTime = 1.0 * 60
+                        self?.modelBreakTime = 1.0 * 60
                     } else {
-                        self.modelBreakTime = secondTime
+                        self?.modelBreakTime = secondTime
                     }
                 }
             }).disposed(by: disposeBag)
