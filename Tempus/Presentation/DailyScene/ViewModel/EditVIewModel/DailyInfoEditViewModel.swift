@@ -11,15 +11,18 @@ import RxSwift
 
 final class DailyInfoEditViewModel {
     struct Input {
-        let nextButtonTapEvent: Observable<Void>
         let cancelButtonTapEvent: Observable<Void>
+        let nextButtonTapEvent: Observable<Void>
         
         let modelTitle: Observable<String>
-        let modelFocusTime: Observable<Double>
-        let modelBreakTime: Observable<Double>
+        let modelFocusTime: Observable<Date>
+        let modelBreakTime: Observable<Date>
     }
     
     struct Output {
+        let modelTitle: String
+        let modelFocusTime: Date
+        let modelBreakTime: Date
         let isFillAllInfo: PublishSubject<Bool> = .init()
     }
     
@@ -34,7 +37,11 @@ final class DailyInfoEditViewModel {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
+        let startDay = -9.0 * 60 * 60 // Date의 시작시간은 09시
+        let focusTime = Date(timeIntervalSince1970: startDay + originModel.focusTime)
+        let breakTime = Date(timeIntervalSince1970: startDay + originModel.breakTime)
+        
+        let output = Output(modelTitle: originModel.title, modelFocusTime: focusTime, modelBreakTime: breakTime)
         
         bindModelTitle(input.modelTitle, disposeBag)
         bindModelFocusTime(input.modelFocusTime, disposeBag)
@@ -55,17 +62,17 @@ private extension DailyInfoEditViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindModelFocusTime(_ modelFocusTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindModelFocusTime(_ modelFocusTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelFocusTime
             .subscribe(onNext: { [weak self] focusTime in
-                self?.modelFocusTime = focusTime
+//                self?.modelFocusTime = focusTime
             }).disposed(by: disposeBag)
     }
     
-    func bindModelBreakTime(_ modelBreakTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindModelBreakTime(_ modelBreakTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelBreakTime
             .subscribe(onNext: { [weak self] breakTime in
-                self?.modelBreakTime = breakTime
+//                self?.modelBreakTime = breakTime
             }).disposed(by: disposeBag)
     }
     
