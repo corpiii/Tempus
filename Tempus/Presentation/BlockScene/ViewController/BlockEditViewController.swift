@@ -74,7 +74,7 @@ final class BlockEditViewController: UIViewController {
     private let textFieldSubject: PublishSubject<String> = .init()
     private let blockTimeSubject: PublishSubject<Int> = .init()
     private let doneButtonTapEvent: PublishSubject<Void> = .init()
-    private let finishEvent: PublishSubject<Void> = .init()
+    private let completeEvent: PublishSubject<Void> = .init()
     
     init(viewModel: BlockEditViewModel) {
         self.viewModel = viewModel
@@ -211,7 +211,8 @@ private extension BlockEditViewController {
         let input = BlockEditViewModel.Input(modelTitle: textFieldSubject,
                                              modelBlockTime: blockTimeSubject,
                                              doneButtonTapEvent: doneButtonTapEvent,
-                                             backButtonTapEvent: backBarButton.rx.tap.asObservable())
+                                             backButtonTapEvent: backBarButton.rx.tap.asObservable(),
+                                             completeEvent: completeEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag),
               let pickerIndex = Constant.blockTimeCandidates.firstIndex(of: "\(output.blockTime)") else {
@@ -234,7 +235,7 @@ private extension BlockEditViewController {
                 guard let self else { return }
                 
                 isEditSuccess
-                ? self.finishEvent.onNext(())
+                ? self.completeEvent.onNext(())
                 : self.alertFailure()
                 
             }).disposed(by: disposeBag)

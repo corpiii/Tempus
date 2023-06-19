@@ -12,11 +12,12 @@ import RxSwift
 
 final class DailyTimeDurationEditViewModel {
     struct Input {
-        let startTime: Observable<Double>
-        let repeatCount: Observable<Int>
+        let startTime: Observable<Date>
+        let repeatCount: Observable<Double>
         
         let backButtonTapEvent: Observable<Void>
-        let completeButtonTapEvent: Observable<Void>
+        let doneButtonTapEvent: Observable<Void>
+        let completeEvent: Observable<Void>
     }
     
     struct Output {
@@ -53,29 +54,29 @@ final class DailyTimeDurationEditViewModel {
         bindStartTime(input.startTime, disposeBag)
         bindRepeatCount(input.repeatCount, disposeBag)
         bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
-        bindCompleteButtonTapEvent(input.completeButtonTapEvent, disposeBag)
+        bindDoneButtonTapEvent(input.doneButtonTapEvent, disposeBag)
         
         return output
     }
 }
 
 private extension DailyTimeDurationEditViewModel {
-    func bindStartTime(_ startTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindStartTime(_ startTime: Observable<Date>, _ disposeBag: DisposeBag) {
         startTime
             .subscribe(onNext: { [weak self] startTime in
-                self?.startTime = startTime
+                // self?.startTime = startTime
             }).disposed(by: disposeBag)
     }
     
-    func bindRepeatCount(_ repeatCount: Observable<Int>, _ disposeBag: DisposeBag) {
+    func bindRepeatCount(_ repeatCount: Observable<Double>, _ disposeBag: DisposeBag) {
         repeatCount
             .subscribe(onNext: { [weak self] repeatCount in
-                self?.repeatCount = repeatCount
+                self?.repeatCount = Int(repeatCount)
             }).disposed(by: disposeBag)
     }
     
-    func bindCompleteButtonTapEvent(_ completeButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        completeButtonTapEvent
+    func bindDoneButtonTapEvent(_ doneButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        doneButtonTapEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 

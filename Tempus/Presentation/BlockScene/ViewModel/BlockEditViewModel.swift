@@ -13,6 +13,7 @@ final class BlockEditViewModel {
         let modelBlockTime: Observable<Int>
         let doneButtonTapEvent: Observable<Void>
         let backButtonTapEvent: Observable<Void>
+        let completeEvent: Observable<Void>
     }
     
     struct Output {
@@ -52,6 +53,7 @@ final class BlockEditViewModel {
         bindBlockTime(input.modelBlockTime, disposeBag)
         bindDoneButtonTapEvent(input.doneButtonTapEvent, disposeBag)
         bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
+        bindCompleteEvent(input.completeEvent, disposeBag)
         bindEditSuccess(editUseCaseOutput.isEditSuccess, disposeBag)
         
         return output
@@ -85,6 +87,13 @@ private extension BlockEditViewModel {
     
     func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         backButtonTapEvent
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.finish()
+            }).disposed(by: disposeBag)
+    }
+    
+    func bindCompleteEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        completeEvent
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.finish()
             }).disposed(by: disposeBag)
