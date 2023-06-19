@@ -43,6 +43,7 @@ final class DailyInfoEditCoordinator: Coordinator {
     }
     
     func finish() {
+        self.navigationController.popViewController(animated: true)
         finishDelegate?.finish(childCoordinator: self)
     }
 }

@@ -11,7 +11,7 @@ import RxSwift
 
 final class DailyInfoEditViewModel {
     struct Input {
-        let cancelButtonTapEvent: Observable<Void>
+        let backButtonTapEvent: Observable<Void>
         let nextButtonTapEvent: Observable<Void>
         
         let modelTitle: Observable<String>
@@ -49,7 +49,7 @@ final class DailyInfoEditViewModel {
         bindModelBreakTime(input.modelBreakTime, disposeBag)
         
         bindNextButtonTapEvent(input.nextButtonTapEvent, to: output.isFillAllInfo, disposeBag)
-        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
+        bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         
         return output
     }
@@ -120,11 +120,10 @@ private extension DailyInfoEditViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindCancelButtonTapEvent(_ cancelButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        cancelButtonTapEvent
+    func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                
-                // coordinator pop
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
 

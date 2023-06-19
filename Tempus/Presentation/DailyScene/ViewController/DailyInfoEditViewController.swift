@@ -14,7 +14,7 @@ final class DailyInfoEditViewController: UIViewController {
         static let outerMargin: CGFloat = 20
     }
     
-    private let cancelButton: UIBarButtonItem = .init(systemItem: .cancel)
+    private let backButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let nextButton: UIBarButtonItem = .init()
     
     private let titleTextField: UITextField = {
@@ -120,8 +120,8 @@ private extension DailyInfoEditViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationItem.title = "새로 만들기"
-        self.navigationItem.leftBarButtonItem = cancelButton
+        self.navigationItem.title = "수정하기"
+        self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.rightBarButtonItem = nextButton
         
         nextButton.title = "다음"
@@ -187,11 +187,11 @@ private extension DailyInfoEditViewController {
 // MARK: - BindViewModel
 private extension DailyInfoEditViewController {
     func bindViewModel() {
-        let input = DailyInfoEditViewModel.Input(cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
-                                                   nextButtonTapEvent: nextButtonTappedEvent,
-                                                   modelTitle: modelTitleSubject,
-                                                   modelFocusTime: modelFocusTimeSubject,
-                                                   modelBreakTime: modelBreakTimeSubject)
+        let input = DailyInfoEditViewModel.Input(backButtonTapEvent: backButton.rx.tap.asObservable(),
+                                                 nextButtonTapEvent: nextButtonTappedEvent,
+                                                 modelTitle: modelTitleSubject,
+                                                 modelFocusTime: modelFocusTimeSubject,
+                                                 modelBreakTime: modelBreakTimeSubject)
         
         guard let output = viewModel?.transform(input: input, disposeBag: self.disposeBag) else {
             return
