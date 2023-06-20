@@ -17,6 +17,7 @@ final class TimerViewModel {
     }
     
     private var wasteTime: Double?
+    weak var coordinator: TimerCoordinator?
     
     func bind(input: Input, disposeBag: DisposeBag) {
         bindModelWasteTime(input.modelWasteTime, disposeBag)
@@ -48,7 +49,7 @@ private extension TimerViewModel {
                 let originModel = TimerModel(id: UUID(), wasteTime: wasteTime)
                 let startUseCase = TimerStartUseCase(originModel: originModel)
 
-                // coordinator push with startUseCase
+                self?.coordinator?.modeStart(startUseCase)
             }).disposed(by: disposeBag)
     }
     
