@@ -97,7 +97,7 @@ private extension DailyTimeDurationEditViewModel {
     func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                // coordinator pop
+                self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
     }

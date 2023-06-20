@@ -49,11 +49,19 @@ final class DailyInfoEditCoordinator: Coordinator {
     
     func pushDailyTimeDurationEditViewController(originModel: DailyModel) {
         let dailyTimeDurationEditCoordinator = DailyTimeDurationEditCoordinator(navigationController: self.navigationController,
-                                                                                   repository: self.repository,
-                                                                                   originModel: originModel,
-                                                                                   fetchRefreshDelegate: self.fetchRefreshDelegate,
-                                                                                   editReflectDelegate: self.editReflectDelegate)
+                                                                                repository: self.repository,
+                                                                                finishDelegate: self,
+                                                                                originModel: originModel,
+                                                                                fetchRefreshDelegate: self.fetchRefreshDelegate,
+                                                                                editReflectDelegate: self.editReflectDelegate)
         dailyTimeDurationEditCoordinator.start()
         self.childCoordinators.append(dailyTimeDurationEditCoordinator)
+    }
+}
+
+extension DailyInfoEditCoordinator: DailyFinishDelegate {
+    func completeFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
+        self.finish()
     }
 }

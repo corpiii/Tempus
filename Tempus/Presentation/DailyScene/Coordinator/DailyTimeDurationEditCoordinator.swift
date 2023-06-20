@@ -18,14 +18,17 @@ final class DailyTimeDurationEditCoordinator: Coordinator {
     private let dailyTimeDurationEditViewModel: DailyTimeDurationEditViewModel
     
     private weak var editReflectDelegate: EditReflectDelegate?
+    private weak var finishDelegate: DailyFinishDelegate?
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
+         finishDelegate: DailyFinishDelegate?,
          originModel: DailyModel,
          fetchRefreshDelegate: FetchRefreshDelegate?,
          editReflectDelegate: EditReflectDelegate?) {
         self.navigationController = navigationController
         self.repository = repository
+        self.finishDelegate = finishDelegate
         dailyTimeDurationEditViewModel = .init(originModel: originModel,
                                                repository: repository,
                                                fetchRefreshDelegate: fetchRefreshDelegate,
@@ -38,5 +41,10 @@ final class DailyTimeDurationEditCoordinator: Coordinator {
     func start() {
         dailyTimeDurationEditViewModel.coordinator = self
         navigationController.pushViewController(dailyTimeDurationEditViewController, animated: true)
+    }
+    
+    func finish() {
+        navigationController.popViewController(animated: true)
+        finishDelegate?.finish(childCoordinator: self)
     }
 }
