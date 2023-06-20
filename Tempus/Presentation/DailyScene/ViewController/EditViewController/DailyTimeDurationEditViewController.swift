@@ -203,6 +203,7 @@ private extension DailyTimeDurationEditViewController {
     func bindOriginModelSubject(_ originModelSubject: BehaviorSubject<DailyModel>, _ disposeBag: DisposeBag) {
         originModelSubject
             .subscribe(onNext: { [weak self] model in
+                self?.repeatCountStepper.value = Double(model.repeatCount)
                 self?.dailyClockView.setStats(model.startTime, model.focusTime, model.breakTime, model.repeatCount)
             }).disposed(by: disposeBag)
     }

@@ -54,8 +54,8 @@ final class DailyTimeDurationEditViewModel {
         let editUseCaseOutput = editUseCase.transform(input: editUseCaseInput,
                                                       disposeBag: disposeBag)
         
-        let calendar = Calendar.current
-        let startDate = calendar.startOfDay(for: Date()).addingTimeInterval(originModel.startTime)
+        adjustModel(&originModel)
+        let startDate = convertToDate(from: originModel.startTime)
         
         let output = Output(originModelSubject: .init(value: self.originModel),
                             startTime: startDate,
@@ -68,6 +68,22 @@ final class DailyTimeDurationEditViewModel {
         bindCompleteEvent(input.completeEvent, disposeBag)
         
         return output
+    }
+    
+    private func adjustModel(_ model: inout DailyModel) {
+        let totalRunningTime = Int(model.focusTime + model.breakTime) * model.repeatCount
+        let oneDay = 24 * 60 * 60
+        
+        if totalRunningTime > oneDay {
+            model.repeatCount = oneDay / Int(model.focusTime + model.breakTime)
+        }
+    }
+    
+    private func convertToDate(from startTime: Double) -> Date {
+        let calendar = Calendar.current
+        let startDate = calendar.startOfDay(for: Date()).addingTimeInterval(originModel.startTime)
+        
+        return startDate
     }
 }
 
