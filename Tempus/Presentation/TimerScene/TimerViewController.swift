@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxSwift
 import SSBouncyButton
 
 class TimerViewController: UIViewController {
@@ -22,7 +23,7 @@ class TimerViewController: UIViewController {
         return stackView
     }()
     
-    private let focusTimePicker: UIDatePicker = {
+    private let wasteTimePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.datePickerMode = .countDownTimer
@@ -40,10 +41,16 @@ class TimerViewController: UIViewController {
         return button
     }()
     
+    private weak var viewModel: TimerViewModel?
+    private let disposeBag: DisposeBag = .init()
+    private let wasteTimeSubject: PublishSubject<Date> = .init()
+    private let startButtonTapEvent: PublishSubject<Void> = .init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
         configureUI()
+        bindViewModel()
     }
 }
 
@@ -58,7 +65,7 @@ private extension TimerViewController {
         let spacing = safeArea.layoutFrame.height * 0.1
         
         self.view.addSubview(entireStackView)
-        self.entireStackView.addArrangedSubview(focusTimePicker)
+        self.entireStackView.addArrangedSubview(wasteTimePicker)
         self.entireStackView.addArrangedSubview(startButton)
         
         self.entireStackView.spacing = spacing
@@ -74,13 +81,26 @@ private extension TimerViewController {
     }
     
     func configureStartButton() {
+        self.startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         self.startButton.isSelected = true
         
         let safeArea = self.view.safeAreaLayoutGuide
-        
         self.startButton.snp.makeConstraints { make in
             make.height.equalTo(safeArea.snp.height).multipliedBy(0.05)
         }
     }
 
+    @objc private func startButtonTapped() {
+        wasteTimeSubject.onNext(wasteTimePicker.date)
+        startButtonTapEvent.onNext(())
+    }
+}
+
+private extension TimerViewController {
+    func bindViewModel() {
+        let input = TimerViewModel.Input(modelWasteTime: wasteTimeSubject,
+                                         startButtonTapEvent: startButtonTapEvent)
+        
+        viewModel?.bind(input: input, disposeBag: disposeBag)
+    }
 }

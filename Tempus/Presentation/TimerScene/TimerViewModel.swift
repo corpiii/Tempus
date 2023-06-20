@@ -11,7 +11,7 @@ import RxSwift
 
 final class TimerViewModel {
     struct Input {
-        let modelWasteTime: Observable<Double>
+        let modelWasteTime: Observable<Date>
         
         let startButtonTapEvent: Observable<Void>
     }
@@ -25,10 +25,17 @@ final class TimerViewModel {
 }
 
 private extension TimerViewModel {
-    func bindModelWasteTime(_ modelWasteTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindModelWasteTime(_ modelWasteTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelWasteTime
             .subscribe(onNext: { [weak self] wasteTime in
-                self?.wasteTime = wasteTime
+                let calendar = Calendar.current
+                let components = calendar.dateComponents([.hour, .minute], from: wasteTime)
+                
+                if let hour = components.hour,
+                   let minute = components.minute {
+                    let wasteTime = Double(hour * 60 * 60 + minute * 60)
+                    self?.wasteTime = wasteTime
+                }
             }).disposed(by: disposeBag)
     }
     
