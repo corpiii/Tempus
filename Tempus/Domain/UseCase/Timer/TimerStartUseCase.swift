@@ -70,12 +70,14 @@ private extension TimerStartUseCase {
         self.modeState = .focusTime
         entireRunningTime.onNext(originModel.wasteTime)
         remainTime = Time(second: originModel.wasteTime)
-        timer = Timer(timeInterval: interval, repeats: true, block: { [self] timer in
-            if remainTime.totalSecond == 0 {
+        timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
+            guard let self else { return }
+            
+            if self.remainTime.totalSecond == 0 {
                 /* Noti */
-                remainTime = Time(second: originModel.wasteTime)
+                self.remainTime = Time(second: self.originModel.wasteTime)
             } else {
-                remainTime.flow(second: interval)
+                self.remainTime.flow(second: interval)
             }
         })
         
