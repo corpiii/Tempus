@@ -35,11 +35,13 @@ class MainCoordinator: Coordinator {
         childCoordinators.append(dailyListViewCoordinator)
         
         // timerViewCon
-        
+        let timerCoordinator = TimerCoordinator(startModeDelegate: clockCoordinator.clockViewModel)
+        childCoordinators.append(timerCoordinator)
         
         tabBarController.setViewControllers([clockCoordinator.clockViewController,
                                              blockListViewCoordinator.navigationController,
-                                             dailyListViewCoordinator.navigationController], animated: true)
+                                             dailyListViewCoordinator.navigationController,
+                                             timerCoordinator.navigationController], animated: true)
     }
     
     func start() {
