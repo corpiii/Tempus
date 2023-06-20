@@ -66,7 +66,7 @@ private extension BlockDetailViewModel {
 }
 
 extension BlockDetailViewModel: EditReflectDelegate {
-    func reflect(_ model: Mode) {
+    func reflect(_ model: Model) {
         if let model = model as? BlockModel {
             self.originModelSubject.onNext(model)
         }

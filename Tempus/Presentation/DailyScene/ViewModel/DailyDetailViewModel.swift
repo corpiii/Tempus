@@ -68,7 +68,7 @@ private extension DailyDetailViewModel {
 }
 
 extension DailyDetailViewModel: EditReflectDelegate {
-    func reflect(_ model: Mode) {
+    func reflect(_ model: Model) {
         if let model = model as? DailyModel {
             self.originModelSubject.onNext(model)
         }
