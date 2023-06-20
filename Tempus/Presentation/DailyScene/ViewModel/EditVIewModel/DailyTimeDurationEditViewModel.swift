@@ -139,6 +139,7 @@ private extension DailyTimeDurationEditViewModel {
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 self.editReflectDelegate?.reflect(self.originModel)
+                self.fetchRefreshDelegate?.refresh()
                 self.coordinator?.completeFinish()
             }).disposed(by: disposeBag)
     }
