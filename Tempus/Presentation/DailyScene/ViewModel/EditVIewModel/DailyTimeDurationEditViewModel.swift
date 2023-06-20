@@ -21,6 +21,8 @@ final class DailyTimeDurationEditViewModel {
     }
     
     struct Output {
+        let originModelSubject: BehaviorSubject<DailyModel>
+        let startTime: Date
         let isEditSuccess: PublishSubject<Bool>
     }
     
@@ -33,6 +35,7 @@ final class DailyTimeDurationEditViewModel {
     private weak var editReflectDelegate: EditReflectDelegate?
     
     private let completeButtonTapEvent: PublishSubject<DailyModel> = .init()
+    private let startTimeSubject: PublishSubject<Date> = .init()
     
     weak var coordinator: DailyTimeDurationEditCoordinator?
     
@@ -51,7 +54,12 @@ final class DailyTimeDurationEditViewModel {
         let editUseCaseOutput = editUseCase.transform(input: editUseCaseInput,
                                                       disposeBag: disposeBag)
         
-        let output = Output(isEditSuccess: editUseCaseOutput.isEditSuccess)
+        let calendar = Calendar.current
+        let startDate = calendar.startOfDay(for: Date()).addingTimeInterval(originModel.startTime)
+        
+        let output = Output(originModelSubject: .init(value: self.originModel),
+                            startTime: startDate,
+                            isEditSuccess: editUseCaseOutput.isEditSuccess)
         
         bindStartTime(input.startTime, disposeBag)
         bindRepeatCount(input.repeatCount, disposeBag)

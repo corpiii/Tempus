@@ -33,9 +33,7 @@ final class DailyTimeDurationEditCoordinator: Coordinator {
                                                repository: repository,
                                                fetchRefreshDelegate: fetchRefreshDelegate,
                                                editReflectDelegate: editReflectDelegate)
-        dailyTimeDurationEditViewController = .init(viewModel: dailyTimeDurationEditViewModel,
-                                                    focusTime: originModel.focusTime,
-                                                    breakTime: originModel.breakTime)
+        dailyTimeDurationEditViewController = .init(viewModel: dailyTimeDurationEditViewModel)
     }
     
     func start() {

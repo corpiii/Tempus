@@ -13,7 +13,7 @@ class DailyTimeDurationEditViewController: UIViewController {
     private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
-    private let dailyClockView: DailyClockView
+    private let dailyClockView: DailyClockView = .init()
  
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
@@ -81,9 +81,8 @@ class DailyTimeDurationEditViewController: UIViewController {
     private let completeEvent: PublishSubject<Void> = .init()
     private let disposeBag: DisposeBag = .init()
     
-    init(viewModel: DailyTimeDurationEditViewModel, focusTime: Double, breakTime: Double) {
+    init(viewModel: DailyTimeDurationEditViewModel) {
         self.viewModel = viewModel
-        self.dailyClockView = .init(startTime: startTimePicker.date, focusTime: focusTime, breakTime: breakTime)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -196,7 +195,16 @@ private extension DailyTimeDurationEditViewController {
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else { return }
         
+        self.startTimePicker.date = output.startTime
+        bindOriginModelSubject(output.originModelSubject, disposeBag)
         bindEditSuccess(output.isEditSuccess, disposeBag)
+    }
+    
+    func bindOriginModelSubject(_ originModelSubject: BehaviorSubject<DailyModel>, _ disposeBag: DisposeBag) {
+        originModelSubject
+            .subscribe(onNext: { [weak self] model in
+                self?.dailyClockView.setStats(model.startTime, model.focusTime, model.breakTime, model.repeatCount)
+            }).disposed(by: disposeBag)
     }
     
     func bindEditSuccess(_ isEditSuccess: PublishSubject<Bool>, _ disposeBag: DisposeBag) {
