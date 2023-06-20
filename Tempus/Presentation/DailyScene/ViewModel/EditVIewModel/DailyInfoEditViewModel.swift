@@ -116,7 +116,7 @@ private extension DailyInfoEditViewModel {
                 self.originModel.breakTime = modelBreakTime
                 
                 isFillAllInfo.onNext(true)
-                // coordinator push
+                self.coordinator?.pushDailyTimeDurationEditViewController(originModel: self.originModel)
             }).disposed(by: disposeBag)
     }
     

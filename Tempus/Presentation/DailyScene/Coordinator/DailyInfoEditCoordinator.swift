@@ -46,4 +46,14 @@ final class DailyInfoEditCoordinator: Coordinator {
         self.navigationController.popViewController(animated: true)
         finishDelegate?.finish(childCoordinator: self)
     }
+    
+    func pushDailyTimeDurationEditViewController(originModel: DailyModel) {
+        let dailyTimeDurationEditCoordinator = DailyTimeDurationEditCoordinator(navigationController: self.navigationController,
+                                                                                   repository: self.repository,
+                                                                                   originModel: originModel,
+                                                                                   fetchRefreshDelegate: self.fetchRefreshDelegate,
+                                                                                   editReflectDelegate: self.editReflectDelegate)
+        dailyTimeDurationEditCoordinator.start()
+        self.childCoordinators.append(dailyTimeDurationEditCoordinator)
+    }
 }

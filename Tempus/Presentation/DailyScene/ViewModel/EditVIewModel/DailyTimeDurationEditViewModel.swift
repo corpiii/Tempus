@@ -38,8 +38,8 @@ final class DailyTimeDurationEditViewModel {
     
     init(originModel: DailyModel,
          repository: DataManagerRepository,
-         fetchRefreshDelegate: FetchRefreshDelegate,
-         editReflectDelegate: EditReflectDelegate) {
+         fetchRefreshDelegate: FetchRefreshDelegate?,
+         editReflectDelegate: EditReflectDelegate?) {
         self.originModel = originModel
         self.editUseCase = .init(repository: repository)
         self.fetchRefreshDelegate = fetchRefreshDelegate

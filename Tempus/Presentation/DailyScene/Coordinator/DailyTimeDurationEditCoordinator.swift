@@ -22,8 +22,8 @@ final class DailyTimeDurationEditCoordinator: Coordinator {
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
          originModel: DailyModel,
-         fetchRefreshDelegate: FetchRefreshDelegate,
-         editReflectDelegate: EditReflectDelegate) {
+         fetchRefreshDelegate: FetchRefreshDelegate?,
+         editReflectDelegate: EditReflectDelegate?) {
         self.navigationController = navigationController
         self.repository = repository
         dailyTimeDurationEditViewModel = .init(originModel: originModel,
