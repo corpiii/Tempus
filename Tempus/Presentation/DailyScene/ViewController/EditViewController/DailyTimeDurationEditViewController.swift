@@ -1,5 +1,5 @@
 //
-//  DailyTimeDurationViewController.swift
+//  DailyTimeDurationEditViewController.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/06/19.
@@ -9,7 +9,7 @@ import UIKit
 
 import RxSwift
 
-class DailyTimeDurationViewController: UIViewController {
+class DailyTimeDurationEditViewController: UIViewController {
     private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let doneBarButton: UIBarButtonItem = .init(systemItem: .done)
     
@@ -101,7 +101,7 @@ class DailyTimeDurationViewController: UIViewController {
 }
 
 // MARK: - ConfigureUI
-private extension DailyTimeDurationViewController {
+private extension DailyTimeDurationEditViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         
@@ -186,7 +186,7 @@ private extension DailyTimeDurationViewController {
 
 
 // MARK: - BindViewModel
-private extension DailyTimeDurationViewController {
+private extension DailyTimeDurationEditViewController {
     func bindViewModel() {
         let input = DailyTimeDurationEditViewModel.Input(startTime: startTimeSubject,
                                                          repeatCount: repeatCountSubject,
@@ -223,7 +223,7 @@ private extension DailyTimeDurationViewController {
     }
 }
 
-extension DailyTimeDurationViewController: AlertRepeatCountOverDelegate {
+extension DailyTimeDurationEditViewController: AlertRepeatCountOverDelegate {
     func alertRepeatCountOver() {
         repeatCountStepper.value -= 1
         

@@ -34,6 +34,8 @@ final class DailyTimeDurationEditViewModel {
     
     private let completeButtonTapEvent: PublishSubject<DailyModel> = .init()
     
+    weak var coordinator: DailyTimeDurationEditCoordinator?
+    
     init(originModel: DailyModel,
          repository: DataManagerRepository,
          fetchRefreshDelegate: FetchRefreshDelegate,
