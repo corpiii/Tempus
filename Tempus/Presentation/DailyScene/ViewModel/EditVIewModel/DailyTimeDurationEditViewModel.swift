@@ -63,8 +63,9 @@ final class DailyTimeDurationEditViewModel {
         
         bindStartTime(input.startTime, disposeBag)
         bindRepeatCount(input.repeatCount, disposeBag)
-        bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         bindDoneButtonTapEvent(input.doneButtonTapEvent, disposeBag)
+        bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
+        bindCompleteEvent(input.completeEvent, disposeBag)
         
         return output
     }
@@ -74,7 +75,14 @@ private extension DailyTimeDurationEditViewModel {
     func bindStartTime(_ startTime: Observable<Date>, _ disposeBag: DisposeBag) {
         startTime
             .subscribe(onNext: { [weak self] startTime in
-                // self?.startTime = startTime
+                let calendar = Calendar.current
+                let components = calendar.dateComponents([.hour, .minute], from: startTime)
+                
+                if let hour = components.hour,
+                   let minute = components.minute {
+                    let startTime = Double(hour * 60 * 60 + minute * 60)
+                    self?.startTime = startTime
+                }
             }).disposed(by: disposeBag)
     }
     
@@ -108,5 +116,14 @@ private extension DailyTimeDurationEditViewModel {
                 self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
+    }
+    
+    func bindCompleteEvent(_ completeEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        completeEvent
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                self.editReflectDelegate?.reflect(self.originModel)
+                self.coordinator?.completeFinish()
+            }).disposed(by: disposeBag)
     }
 }

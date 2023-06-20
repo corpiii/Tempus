@@ -45,4 +45,8 @@ final class DailyTimeDurationEditCoordinator: Coordinator {
         navigationController.popViewController(animated: true)
         finishDelegate?.finish(childCoordinator: self)
     }
+    
+    func completeFinish() {
+        finishDelegate?.completeFinish(childCoordinator: self)
+    }
 }

@@ -19,14 +19,14 @@ final class DailyInfoEditCoordinator: Coordinator {
     private let dailyInfoEditViewModel: DailyInfoEditViewModel
     
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
-    private weak var finishDelegate: FinishDelegate?
+    private weak var finishDelegate: DailyFinishDelegate?
     private weak var editReflectDelegate: EditReflectDelegate?
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,
          originModel: DailyModel,
          fetchRefreshDelegate: FetchRefreshDelegate?,
-         finishDelegate: FinishDelegate,
+         finishDelegate: DailyFinishDelegate,
          editReflectDelegate: EditReflectDelegate) {
         self.navigationController = navigationController
         self.repository = repository
@@ -62,6 +62,6 @@ final class DailyInfoEditCoordinator: Coordinator {
 extension DailyInfoEditCoordinator: DailyFinishDelegate {
     func completeFinish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
-        self.finish()
+        self.finishDelegate?.completeFinish(childCoordinator: self)
     }
 }
