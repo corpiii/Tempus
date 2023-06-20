@@ -1,5 +1,5 @@
 //
-//  TimerStartViewModel.swift
+//  TimerViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/07.
@@ -9,30 +9,22 @@ import Foundation
 
 import RxSwift
 
-final class TimerStartViewModel {
+final class TimerViewModel {
     struct Input {
         let modelWasteTime: Observable<Double>
         
         let startButtonTapEvent: Observable<Void>
     }
     
-    struct Output {
-        let isStartSuccess: PublishSubject<Bool> = .init()
-    }
-    
     private var wasteTime: Double?
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-        
+    func bind(input: Input, disposeBag: DisposeBag) {
         bindModelWasteTime(input.modelWasteTime, disposeBag)
-        bindStartButtonTapEvent(input.startButtonTapEvent, to: output.isStartSuccess, disposeBag)
-        
-        return output
+        bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
     }
 }
 
-private extension TimerStartViewModel {
+private extension TimerViewModel {
     func bindModelWasteTime(_ modelWasteTime: Observable<Double>, _ disposeBag: DisposeBag) {
         modelWasteTime
             .subscribe(onNext: { [weak self] wasteTime in
@@ -41,18 +33,14 @@ private extension TimerStartViewModel {
     }
     
     func bindStartButtonTapEvent(_ startButtonTapEvent: Observable<Void>,
-                                 to isStartSuccess: PublishSubject<Bool>,
                                  _ disposeBag: DisposeBag) {
         startButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                guard let wasteTime = self?.wasteTime else {
-                    return isStartSuccess.onNext(false)
-                }
+                guard let wasteTime = self?.wasteTime else { return }
                 
                 let originModel = TimerModel(id: UUID(), wasteTime: wasteTime)
                 let startUseCase = TimerStartUseCase(originModel: originModel)
-                
-                isStartSuccess.onNext(true)
+
                 // coordinator push with startUseCase
             }).disposed(by: disposeBag)
     }
