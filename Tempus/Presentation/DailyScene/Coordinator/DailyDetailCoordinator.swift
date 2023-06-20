@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DailyDetailCoordinator: Coordinator, FinishDelegate {
+final class DailyDetailCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .dailyDetail }
@@ -50,5 +50,23 @@ final class DailyDetailCoordinator: Coordinator, FinishDelegate {
         
         self.navigationController.popViewController(animated: true)
         finishDelegate?.finish(childCoordinator: self)
+    }
+    
+    func pushDailyInfoEditViewController(originModel: DailyModel) {
+        let dailyInfoEditCoordinator = DailyInfoEditCoordinator(navigationController: self.navigationController,
+                                                                repository: self.repository,
+                                                                originModel: originModel,
+                                                                fetchRefreshDelegate: fetchRefreshDelegate,
+                                                                finishDelegate: self,
+                                                                editReflectDelegate: dailyDetailViewModel)
+        dailyInfoEditCoordinator.start()
+        childCoordinators.append(dailyInfoEditCoordinator)
+    }
+}
+
+extension DailyDetailCoordinator: DailyFinishDelegate {
+    func completeFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
+        self.navigationController.popToViewController(dailyDetailViewController, animated: true)
     }
 }

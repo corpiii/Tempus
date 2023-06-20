@@ -121,16 +121,15 @@ private extension DailyTimeDurationCreateViewModel {
     
     func bindStartEvent(_ startEvent: Observable<CompleteAlert>, _ disposeBag: DisposeBag) {
         startEvent.subscribe(onNext: { [weak self] completeAlert in
-            guard let self,
-                  let originModel = self.originModel else { return }
+            guard let originModel = self?.originModel else { return }
             
             switch completeAlert {
             case .completeWithStart:
                 let startUseCase = DailyStartUseCase(originModel: originModel)
-                self.coordinator?.completeFinish(with: startUseCase)
+                self?.coordinator?.completeFinish(with: startUseCase)
                 break
             case .completeWithoutStart:
-                self.coordinator?.completeFinish()
+                self?.coordinator?.completeFinish()
                 break
             }
         }).disposed(by: disposeBag)
@@ -141,9 +140,8 @@ private extension DailyTimeDurationCreateViewModel {
                            _ disposeBag: DisposeBag) {
         createSuccessEvent
             .subscribe(onNext: { [weak self] isSuccess in
-                guard let self = self else { return }
                 if isSuccess {
-                    self.fetchRefreshDelegate?.refresh()
+                    self?.fetchRefreshDelegate?.refresh()
                 }
                 
                 isCreateSuccess.accept(isSuccess)

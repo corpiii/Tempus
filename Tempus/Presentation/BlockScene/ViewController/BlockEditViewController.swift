@@ -74,7 +74,7 @@ final class BlockEditViewController: UIViewController {
     private let textFieldSubject: PublishSubject<String> = .init()
     private let blockTimeSubject: PublishSubject<Int> = .init()
     private let doneButtonTapEvent: PublishSubject<Void> = .init()
-    private let finishEvent: PublishSubject<Void> = .init()
+    private let completeEvent: PublishSubject<Void> = .init()
     
     init(viewModel: BlockEditViewModel) {
         self.viewModel = viewModel
@@ -127,18 +127,12 @@ private extension BlockEditViewController {
     }
     
     func configureNavigationBar() {
-        backBarButton.target = self
-        backBarButton.action = #selector(backBarButtonTapped)
         self.navigationItem.leftBarButtonItem = backBarButton
         
         self.navigationItem.title = "수정하기"
         self.navigationItem.rightBarButtonItem = doneButton
         doneButton.target = self
         doneButton.action = #selector(completeButtonTapped)
-    }
-    
-    @objc func backBarButtonTapped(_ sender: UIBarButtonItem) {
-        self.finishEvent.onNext(())
     }
     
     @objc func completeButtonTapped(_ sender: UIBarButtonItem) {
@@ -217,7 +211,8 @@ private extension BlockEditViewController {
         let input = BlockEditViewModel.Input(modelTitle: textFieldSubject,
                                              modelBlockTime: blockTimeSubject,
                                              doneButtonTapEvent: doneButtonTapEvent,
-                                             finishEvent: finishEvent)
+                                             backButtonTapEvent: backBarButton.rx.tap.asObservable(),
+                                             completeEvent: completeEvent)
         
         guard let output = viewModel?.transform(input: input, disposeBag: disposeBag),
               let pickerIndex = Constant.blockTimeCandidates.firstIndex(of: "\(output.blockTime)") else {
@@ -240,7 +235,7 @@ private extension BlockEditViewController {
                 guard let self else { return }
                 
                 isEditSuccess
-                ? self.finishEvent.onNext(())
+                ? self.completeEvent.onNext(())
                 : self.alertFailure()
                 
             }).disposed(by: disposeBag)

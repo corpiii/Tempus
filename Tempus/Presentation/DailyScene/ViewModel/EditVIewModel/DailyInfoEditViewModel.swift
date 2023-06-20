@@ -11,15 +11,18 @@ import RxSwift
 
 final class DailyInfoEditViewModel {
     struct Input {
+        let backButtonTapEvent: Observable<Void>
         let nextButtonTapEvent: Observable<Void>
-        let cancelButtonTapEvent: Observable<Void>
         
         let modelTitle: Observable<String>
-        let modelFocusTime: Observable<Double>
-        let modelBreakTime: Observable<Double>
+        let modelFocusTime: Observable<Date>
+        let modelBreakTime: Observable<Date>
     }
     
     struct Output {
+        let modelTitle: String
+        let modelFocusTime: Date
+        let modelBreakTime: Date
         let isFillAllInfo: PublishSubject<Bool> = .init()
     }
     
@@ -28,20 +31,25 @@ final class DailyInfoEditViewModel {
     private var modelBreakTime: Double?
     
     private var originModel: DailyModel
+    weak var coordinator: DailyInfoEditCoordinator?
     
     init(originModel: DailyModel) {
         self.originModel = originModel
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
+        let startDay = -9.0 * 60 * 60 // Date의 시작시간은 09시
+        let focusTime = Date(timeIntervalSince1970: startDay + originModel.focusTime)
+        let breakTime = Date(timeIntervalSince1970: startDay + originModel.breakTime)
+        
+        let output = Output(modelTitle: originModel.title, modelFocusTime: focusTime, modelBreakTime: breakTime)
         
         bindModelTitle(input.modelTitle, disposeBag)
         bindModelFocusTime(input.modelFocusTime, disposeBag)
         bindModelBreakTime(input.modelBreakTime, disposeBag)
         
         bindNextButtonTapEvent(input.nextButtonTapEvent, to: output.isFillAllInfo, disposeBag)
-        bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
+        bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         
         return output
     }
@@ -55,17 +63,39 @@ private extension DailyInfoEditViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func bindModelFocusTime(_ modelFocusTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindModelFocusTime(_ modelFocusTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelFocusTime
             .subscribe(onNext: { [weak self] focusTime in
-                self?.modelFocusTime = focusTime
+                let calendar = Calendar.init(identifier: .gregorian)
+                let date = calendar.dateComponents([.hour, .minute], from: focusTime)
+                
+                if let hour = date.hour, let minute = date.minute {
+                    let secondTime = Double(hour) * 60 * 60 + Double(minute) * 60
+                    
+                    if secondTime == 0 {
+                        self?.modelFocusTime = 1.0 * 60
+                    } else {
+                        self?.modelFocusTime = secondTime
+                    }
+                }
             }).disposed(by: disposeBag)
     }
     
-    func bindModelBreakTime(_ modelBreakTime: Observable<Double>, _ disposeBag: DisposeBag) {
+    func bindModelBreakTime(_ modelBreakTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelBreakTime
             .subscribe(onNext: { [weak self] breakTime in
-                self?.modelBreakTime = breakTime
+                let calendar = Calendar.init(identifier: .gregorian)
+                let date = calendar.dateComponents([.hour, .minute], from: breakTime)
+                
+                if let hour = date.hour, let minute = date.minute {
+                    let secondTime = Double(hour) * 60 * 60 + Double(minute) * 60
+                    
+                    if secondTime == 0 {
+                        self?.modelBreakTime = 1.0 * 60
+                    } else {
+                        self?.modelBreakTime = secondTime
+                    }
+                }
             }).disposed(by: disposeBag)
     }
     
@@ -86,15 +116,14 @@ private extension DailyInfoEditViewModel {
                 self.originModel.breakTime = modelBreakTime
                 
                 isFillAllInfo.onNext(true)
-                // coordinator push
+                self.coordinator?.pushDailyTimeDurationEditViewController(originModel: self.originModel)
             }).disposed(by: disposeBag)
     }
     
-    func bindCancelButtonTapEvent(_ cancelButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
-        cancelButtonTapEvent
+    func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
+        backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                
-                // coordinator pop
+                self?.coordinator?.finish()
             }).disposed(by: disposeBag)
     }
 

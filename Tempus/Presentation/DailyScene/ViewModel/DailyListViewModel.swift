@@ -60,12 +60,10 @@ private extension DailyListViewModel {
     func bindDeleteSuccess(_ deleteEvent: PublishSubject<Result<DailyModel, DataManageError>>, to isDeleteSuccess: PublishRelay<Result<DailyModel, DataManageError>>, _ disposeBag: DisposeBag) {
         deleteEvent
             .subscribe(onNext: { [weak self] result in
-                guard let self = self else { return }
-                
                 isDeleteSuccess.accept(result)
                 
                 if case .success = result {
-                    self.refresh()
+                    self?.refresh()
                 }
             }).disposed(by: disposeBag)
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BlockModel: Mode, Hashable {
+struct BlockModel: Model, Hashable {
     let id: UUID
     var title: String
     var blockTime: Int
