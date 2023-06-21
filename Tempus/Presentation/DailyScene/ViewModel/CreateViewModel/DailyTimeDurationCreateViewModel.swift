@@ -78,7 +78,12 @@ private extension DailyTimeDurationCreateViewModel {
                 if let hour = components.hour,
                    let minute = components.minute {
                     let startTime = Double(hour * 60 * 60 + minute * 60)
-                    self?.startTime = startTime
+                    
+                    if startTime == 0 {
+                        self?.startTime = 1.0 * 60
+                    } else {                    
+                        self?.startTime = startTime
+                    }
                 }
             }).disposed(by: disposeBag)
     }

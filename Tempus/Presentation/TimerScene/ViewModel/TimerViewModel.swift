@@ -34,8 +34,13 @@ private extension TimerViewModel {
                 
                 if let hour = components.hour,
                    let minute = components.minute {
+                    
                     let wasteTime = Double(hour * 60 * 60 + minute * 60)
-                    self?.wasteTime = wasteTime
+                    if wasteTime == 0 {
+                        self?.wasteTime = 1.0 * 60
+                    } else {
+                        self?.wasteTime = wasteTime
+                    }
                 }
             }).disposed(by: disposeBag)
     }
