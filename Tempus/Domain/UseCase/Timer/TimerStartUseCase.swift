@@ -72,12 +72,10 @@ private extension TimerStartUseCase {
         remainTime = Time(second: originModel.wasteTime)
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self else { return }
+            self.remainTime.flow(second: interval)
             
             if self.remainTime.totalSecond == 0 {
-                /* Noti */
                 self.remainTime = Time(second: self.originModel.wasteTime)
-            } else {
-                self.remainTime.flow(second: interval)
             }
         })
         
