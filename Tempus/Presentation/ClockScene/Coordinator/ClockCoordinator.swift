@@ -26,6 +26,8 @@ class ClockCoordinator: Coordinator {
     }
     
     func startTimer() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound], completionHandler: { granted, error in
+        })
         startApplyDelegate?.transitionToClock()
     }
 }
