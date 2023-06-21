@@ -8,6 +8,7 @@
 import Foundation
 
 import RxSwift
+import UserNotifications
 
 final class TimerStartUseCase: ModeStartUseCase {
     private var remainTime: Time {
@@ -66,7 +67,9 @@ private extension TimerStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
 
-        let interval = 1.0
+        enrollNotification(originModel.wasteTime)
+        
+        let interval = 0.1
         self.modeState = .focusTime
         entireRunningTime.onNext(originModel.wasteTime)
         remainTime = Time(second: originModel.wasteTime)
@@ -74,7 +77,7 @@ private extension TimerStartUseCase {
             guard let self else { return }
             self.remainTime.flow(second: interval)
             
-            if self.remainTime.totalSecond == 0 {
+            if self.remainTime.totalSecond <= 0 {
                 self.remainTime = Time(second: self.originModel.wasteTime)
             }
         })

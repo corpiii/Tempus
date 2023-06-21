@@ -69,7 +69,7 @@ private extension DailyStartUseCase {
         guard timer == nil else { return }
         
         /* Noti enroll */
-        let interval = 1.0
+        let interval = 0.1
         let schedule = generateSchedule(originModel)
         
         timeSchedule = schedule.timeSchedule

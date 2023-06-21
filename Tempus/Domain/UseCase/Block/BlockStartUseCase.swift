@@ -71,7 +71,7 @@ private extension BlockStartUseCase {
         
         /* Noti enroll */
         
-        let interval = 1.0
+        let interval = 0.1
         self.schedule = generateSchedule(blockTime: originModel.blockTime)
         self.modeState = .focusTime
         
