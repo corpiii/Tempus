@@ -12,7 +12,7 @@ import RxSwift
 final class DailyStartUseCase: ModeStartUseCase {
     private var remainTime: Time {
         didSet {
-            timeObservable.onNext(remainTime)
+            remainTimeSubject.onNext(remainTime)
         }
     }
     private var modeState: ModeState {
@@ -21,7 +21,7 @@ final class DailyStartUseCase: ModeStartUseCase {
         }
     }
     
-    private let timeObservable: PublishSubject<Time> = .init()
+    private let remainTimeSubject: PublishSubject<Time> = .init()
     private let modeStateObservable: PublishSubject<ModeState> = .init()
     private let entireRunningTime: PublishSubject<Double> = .init()
     private let disposeBag: DisposeBag = .init()
@@ -37,7 +37,7 @@ final class DailyStartUseCase: ModeStartUseCase {
     }
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(remainTime: timeObservable,
+        let output = Output(remainTime: remainTimeSubject,
                             modeState: modeStateObservable,
                             entireRunningTime: entireRunningTime)
 
@@ -92,8 +92,9 @@ private extension DailyStartUseCase {
         
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self else { return }
+            self.remainTime.flow(second: interval)
             
-            if self.remainTime.totalSecond == 0 {
+            if self.remainTime.totalSecond <= 0 {
                 let endDate = self.timeSchedule.removeFirst()
                 let endState = self.stateSchedule.removeFirst()
                 
@@ -114,8 +115,6 @@ private extension DailyStartUseCase {
                 
                 self.remainTime = Time(second: target - now)
                 self.modeState = endState
-            } else {
-                self.remainTime.flow(second: interval)
             }
         })
         

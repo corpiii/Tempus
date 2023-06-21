@@ -82,8 +82,9 @@ private extension BlockStartUseCase {
                 
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self = self else { return }
+            self.remainTime.flow(second: interval)
             
-            if self.remainTime.totalSecond == 0 {
+            if self.remainTime.totalSecond <= 0 {
                 let endDate = self.schedule.removeFirst()
                 let addingOneDayDate = endDate.addingTimeInterval(24 * 60 * 60)
                 
@@ -92,8 +93,6 @@ private extension BlockStartUseCase {
                 let target = self.schedule[0].timeIntervalSince1970
                 
                 self.remainTime = Time(second: target - now)
-            } else {
-                self.remainTime.flow(second: interval)
             }
         })
         

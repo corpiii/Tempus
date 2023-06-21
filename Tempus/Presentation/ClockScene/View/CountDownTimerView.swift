@@ -83,14 +83,14 @@ extension CountDownTimerView {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             
-            let currentFrame = (1 - ((time.totalSecond + 1) / self.entireRunningTime)) * Constant.totalFrame
-            let targetFrame = (1 - (time.totalSecond / self.entireRunningTime)) * Constant.totalFrame
-            
-            self.animationView.play(fromFrame: currentFrame, toFrame: targetFrame)
-            
             if self.entireRunningTime == .zero {
                 self.remainTimeLabel.text = "지금은 대기시간 입니다. \n \(time.hour) : \(time.minute) : \(Int(time.second))"
             } else {
+                if time.totalSecond > 0 {
+                    let currentFrame = (1 - (time.totalSecond / self.entireRunningTime)) * Constant.totalFrame
+                    let targetFrame = (1 - ((time.totalSecond - 1) / self.entireRunningTime)) * Constant.totalFrame
+                    self.animationView.play(fromFrame: currentFrame, toFrame: targetFrame)
+                }
                 self.remainTimeLabel.text = "\(time.hour) : \(time.minute) : \(Int(time.second))"
             }
         }

@@ -26,7 +26,6 @@ struct Time {
     
     mutating func flow(second: Double) {
         self.second -= second
-        self.second = Double(Int(round(self.second * 10))) / 10
         
         if self.second < 0 {
             self.minute -= 1
