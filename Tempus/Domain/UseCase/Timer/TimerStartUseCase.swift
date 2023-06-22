@@ -106,5 +106,6 @@ private extension TimerStartUseCase {
     
     func removeNotification() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 }
