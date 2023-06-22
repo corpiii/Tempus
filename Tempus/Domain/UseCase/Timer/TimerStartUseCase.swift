@@ -11,6 +11,7 @@ import RxSwift
 import UserNotifications
 
 final class TimerStartUseCase: ModeStartUseCase {
+    private let notificationIdentifier: String = "TimerNotification"
     private var remainTime: Time {
         didSet {
             timeObservable.onNext(remainTime)
@@ -85,8 +86,25 @@ private extension TimerStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
+    func enrollNotification(_ wasteTime: Double) {
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "Timer"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: wasteTime, repeats: true)
+        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+    
     func modeStop() {
+        removeNotification()
         timer?.invalidate()
         timer = nil
+    }
+    
+    func removeNotification() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }
