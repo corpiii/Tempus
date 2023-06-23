@@ -8,8 +8,10 @@
 import Foundation
 
 import RxSwift
+import UserNotifications
 
 final class DailyStartUseCase: ModeStartUseCase {
+    private let notificationIdentifier: String = "DailyNotification"
     private var remainTime: Time {
         didSet {
             remainTimeSubject.onNext(remainTime)
@@ -68,7 +70,6 @@ private extension DailyStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
         
-        /* Noti enroll */
         let interval = 0.1
         let schedule = generateSchedule(originModel)
         
@@ -121,10 +122,31 @@ private extension DailyStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
+    func enrollNotification(_ date: Date) {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "Daily Timer"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+    
     func modeStop() {
-        /* Noti remove */
+        removeNotification()
         timer?.invalidate()
         timer = nil
+    }
+    
+    func removeNotification() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     func generateSchedule(_ originModel: DailyModel) -> (timeSchedule: [Date], stateSchedule: [ModeState]) {
@@ -133,10 +155,10 @@ private extension DailyStartUseCase {
         
         var startTime = calendar.startOfDay(for: now).addingTimeInterval(originModel.startTime)
         let repeatCount = originModel.repeatCount
-        let focusTime = originModel.focusTime
-        let breakTime = originModel.breakTime
+        let modelFocusTime = originModel.focusTime
+        let modelBreakTime = originModel.breakTime
         
-        let oneIntervalSecond = focusTime + breakTime
+        let oneIntervalSecond = modelFocusTime + modelBreakTime
         let oneDaySecond = 24.0 * 60.0 * 60.0
         
         var schedule: [Date] = []
@@ -144,12 +166,19 @@ private extension DailyStartUseCase {
         
         schedule.append(startTime)
         state.append(.waitingTime)
+        enrollNotification(startTime)
         
         (1...repeatCount).forEach({ _ in
-            schedule.append(startTime.addingTimeInterval(focusTime))
+            let focusTime = startTime.addingTimeInterval(modelFocusTime)
+            schedule.append(focusTime)
             state.append(.focusTime)
-            schedule.append(startTime.addingTimeInterval(focusTime + breakTime))
+            enrollNotification(focusTime)
+
+            let breakTime = startTime.addingTimeInterval(modelFocusTime + modelBreakTime)
+            schedule.append(breakTime)
             state.append(.breakTime)
+            enrollNotification(breakTime)
+            
             startTime = startTime.addingTimeInterval(oneIntervalSecond)
         })
         

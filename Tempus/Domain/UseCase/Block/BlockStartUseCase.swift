@@ -8,7 +8,7 @@
 import Foundation
 
 import RxSwift
-import UIKit
+import UserNotifications
 
 /// Start Block used by BlockModel
 final class BlockStartUseCase: ModeStartUseCase {
