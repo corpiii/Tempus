@@ -8,8 +8,10 @@
 import Foundation
 
 import RxSwift
+import UserNotifications
 
 final class TimerStartUseCase: ModeStartUseCase {
+    private let notificationIdentifier: String = "TimerNotification"
     private var remainTime: Time {
         didSet {
             timeObservable.onNext(remainTime)
@@ -66,7 +68,9 @@ private extension TimerStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
 
-        let interval = 1.0
+        enrollNotification(originModel.wasteTime)
+        
+        let interval = 0.1
         self.modeState = .focusTime
         entireRunningTime.onNext(originModel.wasteTime)
         remainTime = Time(second: originModel.wasteTime)
@@ -74,7 +78,7 @@ private extension TimerStartUseCase {
             guard let self else { return }
             self.remainTime.flow(second: interval)
             
-            if self.remainTime.totalSecond == 0 {
+            if self.remainTime.totalSecond <= 0 {
                 self.remainTime = Time(second: self.originModel.wasteTime)
             }
         })
@@ -82,8 +86,26 @@ private extension TimerStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
+    func enrollNotification(_ wasteTime: Double) {
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "Timer"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: wasteTime, repeats: true)
+        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+    
     func modeStop() {
+        removeNotification()
         timer?.invalidate()
         timer = nil
+    }
+    
+    func removeNotification() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 }

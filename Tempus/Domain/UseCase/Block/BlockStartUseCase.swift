@@ -8,10 +8,11 @@
 import Foundation
 
 import RxSwift
-import UIKit
+import UserNotifications
 
 /// Start Block used by BlockModel
 final class BlockStartUseCase: ModeStartUseCase {
+    private let notificationIdentifier: String = "BlockNotification"
     private var remainTime: Time {
         didSet {
             timeObservable.onNext(remainTime)
@@ -69,9 +70,9 @@ private extension BlockStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
         
-        /* Noti enroll */
+        enrollNotification(originModel.blockTime)
         
-        let interval = 1.0
+        let interval = 0.1
         self.schedule = generateSchedule(blockTime: originModel.blockTime)
         self.modeState = .focusTime
         
@@ -99,9 +100,28 @@ private extension BlockStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
+    func enrollNotification(_ blockTime: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "Block Timer"
+        content.sound = UNNotificationSound.default
+        
+        let interval = Double(blockTime * 60 * 60)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: true)
+        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+    
     func modeStop() {
+        removeNotification()
         timer?.invalidate()
         timer = nil
+    }
+    
+    func removeNotification() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     func generateSchedule(blockTime: Int) -> [Date] {
