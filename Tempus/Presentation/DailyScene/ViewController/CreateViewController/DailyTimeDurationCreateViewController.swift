@@ -171,8 +171,6 @@ private extension DailyTimeDurationCreateViewController {
         repeatCountStackView.addArrangedSubview(repeatCountLabel)
         repeatCountStackView.addArrangedSubview(repeatCountStepper)
         
-        // spacing?
-        
         configureRepeatCountStepper()
     }
     

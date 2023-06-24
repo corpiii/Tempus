@@ -168,8 +168,6 @@ private extension DailyTimeDurationEditViewController {
         repeatCountStackView.addArrangedSubview(repeatCountLabel)
         repeatCountStackView.addArrangedSubview(repeatCountStepper)
         
-        // spacing?
-        
         configureRepeatCountStepper()
     }
     
