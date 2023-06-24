@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import UserNotifications
 
-/// Start Block used by BlockModel
 final class BlockStartUseCase: ModeStartUseCase {
     private let notificationIdentifier: String = "BlockNotification"
     private var remainTime: Time {
