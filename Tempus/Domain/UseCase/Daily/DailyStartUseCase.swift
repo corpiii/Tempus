@@ -36,6 +36,11 @@ final class DailyStartUseCase: ModeStartUseCase {
         self.originModel = originModel
         self.remainTime = Time(second: 0)
         self.modeState = .waitingTime
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {

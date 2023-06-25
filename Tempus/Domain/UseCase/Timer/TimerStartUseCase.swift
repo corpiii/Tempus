@@ -34,6 +34,11 @@ final class TimerStartUseCase: ModeStartUseCase {
         self.originModel = originModel
         self.remainTime = Time(second: originModel.wasteTime)
         self.modeState = .focusTime
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {

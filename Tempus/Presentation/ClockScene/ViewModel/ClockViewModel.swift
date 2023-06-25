@@ -30,6 +30,11 @@ final class ClockViewModel {
             let startUseCaseOutput = modeStartUseCase.transform(input: startUseCaseInput, disposeBag: self.disposeBag)
             
             self.modeStartUseCaseOutput.onNext(startUseCaseOutput)
+            
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(modeStartUseCase) {
+                UserDefaults.standard.setValue(encoded, forKey: "startUseCase")
+            }
         }
     }
     

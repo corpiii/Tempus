@@ -14,7 +14,7 @@ protocol ModeTransform {
     func transform(input: Input, disposeBag: DisposeBag) -> Output
 }
 
-class ModeStartUseCase: ModeTransform {
+class ModeStartUseCase: ModeTransform, Codable {
     struct Input {
         let modeStartEvent: Observable<Void>
         let modeStopEvent: Observable<Void>
