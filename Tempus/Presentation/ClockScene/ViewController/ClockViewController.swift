@@ -104,11 +104,9 @@ private extension ClockViewController {
         } else {
             startEvent.onNext(())
         }
-        startButton.isSelected
-        ? stopEvent.onNext(())
-        : startEvent.onNext(())
         
         startButton.isSelected = !startButton.isSelected
+        UserDefaults.standard.set(startButton.isSelected, forKey: "isModeStarted")
     }
 }
 

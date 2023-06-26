@@ -8,6 +8,7 @@
 import Foundation
 
 import RxSwift
+import UserNotifications
 
 final class ClockViewModel {
     // MARK: - Input
@@ -59,6 +60,7 @@ final class ClockViewModel {
 extension ClockViewModel: StartModeDelegate {
     func startWith(_ startUseCase: ModeStartUseCase) {
         self.modeStartUseCase = startUseCase
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound], completionHandler: { _, _ in })
         self.coordinator?.startTimer()
     }
 }
