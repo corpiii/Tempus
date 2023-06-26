@@ -74,6 +74,7 @@ private extension TimerStartUseCase {
         guard timer == nil else { return }
 
         enrollNotification(originModel.wasteTime)
+        UserDefaults.standard.set(true, forKey: "isModeStarted")
         
         let interval = 0.1
         self.modeState = .focusTime
@@ -105,6 +106,7 @@ private extension TimerStartUseCase {
     
     func modeStop() {
         removeNotification()
+        UserDefaults.standard.set(false, forKey: "isModeStarted")
         timer?.invalidate()
         timer = nil
     }

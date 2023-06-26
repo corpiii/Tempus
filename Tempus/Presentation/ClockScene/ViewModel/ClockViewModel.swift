@@ -11,13 +11,11 @@ import RxSwift
 import UserNotifications
 
 final class ClockViewModel {
-    // MARK: - Input
     struct Input {
         let modeStartEvent: PublishSubject<Void>
         let modeStopEvent: PublishSubject<Void>
     }
     
-    // MARK: - Output
     struct Output {
         let modeStartUseCaseOutput: PublishSubject<ModeStartUseCase.Output>
     }
@@ -31,11 +29,6 @@ final class ClockViewModel {
             let startUseCaseOutput = modeStartUseCase.transform(input: startUseCaseInput, disposeBag: self.disposeBag)
             
             self.modeStartUseCaseOutput.onNext(startUseCaseOutput)
-            
-            let encoder = JSONEncoder()
-            if let encoded = try? encoder.encode(modeStartUseCase) {
-                UserDefaults.standard.setValue(encoded, forKey: "startUseCase")
-            }
         }
     }
     

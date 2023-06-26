@@ -75,6 +75,7 @@ private extension BlockStartUseCase {
         guard timer == nil else { return }
         
         enrollNotification(originModel.blockTime)
+        UserDefaults.standard.set(true, forKey: "isModeStarted")
         
         let interval = 0.1
         self.schedule = generateSchedule(blockTime: originModel.blockTime)
@@ -119,6 +120,7 @@ private extension BlockStartUseCase {
     
     func modeStop() {
         removeNotification()
+        UserDefaults.standard.set(false, forKey: "isModeStarted")
         timer?.invalidate()
         timer = nil
     }

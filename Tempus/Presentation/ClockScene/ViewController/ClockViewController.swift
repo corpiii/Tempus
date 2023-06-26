@@ -127,7 +127,6 @@ private extension ClockViewController {
             .subscribe(onNext: { [weak self] output in
                 guard let self else { return }
                 
-                
                 output.remainTime.subscribe(onNext: { time in
                     #if DEBUG
                     print(time, #file, #line)

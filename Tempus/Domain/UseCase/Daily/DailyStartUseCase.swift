@@ -75,6 +75,8 @@ private extension DailyStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
         
+        UserDefaults.standard.set(true, forKey: "isModeStarted")
+        
         let interval = 0.1
         let schedule = generateSchedule(originModel)
         
@@ -145,6 +147,7 @@ private extension DailyStartUseCase {
     
     func modeStop() {
         removeNotification()
+        UserDefaults.standard.set(false, forKey: "isModeStarted")
         timer?.invalidate()
         timer = nil
     }
