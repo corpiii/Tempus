@@ -45,6 +45,24 @@ class ClockViewController: UIViewController {
         configureSelfView()
         configureUI()
         bindViewModel()
+        NotificationCenter.default.addObserver(self, selector: #selector(observeModel), name: NSNotification.Name("modelNotification"), object: nil)
+    }
+    
+    @objc private func observeModel(_ sender: Notification) {
+        if let object = sender.object as? Data {
+            let decoder = JSONDecoder()
+            
+            if let dailyModel = try? decoder.decode(DailyModel.self, from: object) {
+                let dailyStartUseCase = DailyStartUseCase(originModel: dailyModel)
+                viewModel?.modeStartUseCase = dailyStartUseCase
+            } else if let blockModel = try? decoder.decode(BlockModel.self, from: object) {
+                let blockStartUseCase = BlockStartUseCase(originModel: blockModel)
+                viewModel?.modeStartUseCase = blockStartUseCase
+            } else if let timerModel = try? decoder.decode(TimerModel.self, from: object) {
+                let timerStartUseCase = TimerStartUseCase(originModel: timerModel)
+                viewModel?.modeStartUseCase = timerStartUseCase
+            }
+        }
     }
 }
 

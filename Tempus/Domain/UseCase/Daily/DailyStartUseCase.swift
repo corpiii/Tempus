@@ -47,7 +47,7 @@ final class DailyStartUseCase: ModeStartUseCase {
         let output = Output(remainTime: remainTimeSubject,
                             modeState: modeStateObservable,
                             entireRunningTime: entireRunningTime)
-
+        
         bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
         bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
 
@@ -75,7 +75,12 @@ private extension DailyStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
         
-        UserDefaults.standard.set(true, forKey: "isModeStarted")
+        removeNotification()
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(originModel) {
+            UserDefaults.standard.set(true, forKey: "isModeStarted")
+            UserDefaults.standard.set(encoded, forKey: "model")
+        }
         
         let interval = 0.1
         let schedule = generateSchedule(originModel)

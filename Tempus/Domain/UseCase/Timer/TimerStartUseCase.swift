@@ -73,8 +73,14 @@ private extension TimerStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
 
+        removeNotification()
         enrollNotification(originModel.wasteTime)
-        UserDefaults.standard.set(true, forKey: "isModeStarted")
+        
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(originModel) {
+            UserDefaults.standard.set(true, forKey: "isModeStarted")
+            UserDefaults.standard.set(encoded, forKey: "model")
+        }
         
         let interval = 0.1
         self.modeState = .focusTime

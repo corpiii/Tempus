@@ -74,8 +74,13 @@ private extension BlockStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
         
+        removeNotification()
         enrollNotification(originModel.blockTime)
-        UserDefaults.standard.set(true, forKey: "isModeStarted")
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(originModel) {
+            UserDefaults.standard.set(true, forKey: "isModeStarted")
+            UserDefaults.standard.set(encoded, forKey: "model")
+        }
         
         let interval = 0.1
         self.schedule = generateSchedule(blockTime: originModel.blockTime)
