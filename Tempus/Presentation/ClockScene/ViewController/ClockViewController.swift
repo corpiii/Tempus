@@ -7,9 +7,9 @@
 
 import UIKit
 
-import SSBouncyButton
 import RxSwift
 import SnapKit
+import SSBouncyButton
 
 class ClockViewController: UIViewController {
     private let startButton: SSBouncyButton = {
@@ -45,24 +45,6 @@ class ClockViewController: UIViewController {
         configureSelfView()
         configureUI()
         bindViewModel()
-        NotificationCenter.default.addObserver(self, selector: #selector(observeModel), name: NSNotification.Name("modelNotification"), object: nil)
-    }
-    
-    @objc private func observeModel(_ sender: Notification) {
-        if let object = sender.object as? Data {
-            let decoder = JSONDecoder()
-            
-            if let dailyModel = try? decoder.decode(DailyModel.self, from: object) {
-                let dailyStartUseCase = DailyStartUseCase(originModel: dailyModel)
-                viewModel?.modeStartUseCase = dailyStartUseCase
-            } else if let blockModel = try? decoder.decode(BlockModel.self, from: object) {
-                let blockStartUseCase = BlockStartUseCase(originModel: blockModel)
-                viewModel?.modeStartUseCase = blockStartUseCase
-            } else if let timerModel = try? decoder.decode(TimerModel.self, from: object) {
-                let timerStartUseCase = TimerStartUseCase(originModel: timerModel)
-                viewModel?.modeStartUseCase = timerStartUseCase
-            }
-        }
     }
 }
 
@@ -157,7 +139,6 @@ private extension ClockViewController {
                     self.countDownTimerView.setRunningTime(runningTime)
                 }).disposed(by: self.disposeBag)
                 
-                self.startEvent.onNext(())
                 self.startButton.isSelected = true
             }).disposed(by: disposeBag)
     }
