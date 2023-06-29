@@ -88,10 +88,9 @@ private extension DailyStartUseCase {
         timeSchedule = schedule.timeSchedule
         stateSchedule = schedule.stateSchedule
         
-        let target = timeSchedule[0].timeIntervalSince1970
-        let now = Date().timeIntervalSince1970
+        let intervalToNextSection = timeSchedule[0].timeIntervalSince(Date())
         
-        remainTime = Time(second: target - now)
+        remainTime = Time(second: intervalToNextSection)
         modeState = stateSchedule[0]
         
         print(timeSchedule)
@@ -114,7 +113,7 @@ private extension DailyStartUseCase {
                 let addingOneDayDate = endDate.addingTimeInterval(24 * 60 * 60)
                 
                 let now = Date().timeIntervalSince1970
-                let target = self.timeSchedule[0].timeIntervalSince1970
+                let intervalToNextSection = self.timeSchedule[0].timeIntervalSince(Date())
                 let nowState = self.stateSchedule[0]
                 
                 switch nowState {
@@ -126,7 +125,7 @@ private extension DailyStartUseCase {
                 self.timeSchedule.append(addingOneDayDate)
                 self.stateSchedule.append(endState)
                 
-                self.remainTime = Time(second: target - now)
+                self.remainTime = Time(second: intervalToNextSection)
                 self.modeState = endState
             }
         })
