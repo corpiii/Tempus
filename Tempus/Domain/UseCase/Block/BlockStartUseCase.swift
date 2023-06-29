@@ -86,10 +86,9 @@ private extension BlockStartUseCase {
         self.schedule = generateSchedule(blockTime: originModel.blockTime)
         self.modeState = .focusTime
         
-        let target = schedule[0].timeIntervalSince1970
+        let target = schedule[0].timeIntervalSince(Date())
         entireRunningTime.onNext(Double(originModel.blockTime) * 60 * 60)
-        let now = Date().timeIntervalSince1970
-        remainTime = Time(second: target - now)
+        remainTime = Time(second: target)
                 
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self = self else { return }
@@ -101,9 +100,9 @@ private extension BlockStartUseCase {
                 
                 self.schedule.append(addingOneDayDate)
                 let now = Date().timeIntervalSince1970
-                let target = self.schedule[0].timeIntervalSince1970
+                let target = self.schedule[0].timeIntervalSince(Date())
                 
-                self.remainTime = Time(second: target - now)
+                self.remainTime = Time(second: target)
             }
         })
         
