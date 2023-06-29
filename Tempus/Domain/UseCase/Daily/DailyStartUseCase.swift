@@ -134,22 +134,6 @@ private extension DailyStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
-    func enrollNotification(_ date: Date) {
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
-        
-        let content = UNMutableNotificationContent()
-        content.title = "알림"
-        content.body = "Daily Timer"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        
-        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request)
-    }
-    
     func modeStop() {
         removeNotification()
         UserDefaults.standard.set(false, forKey: "isModeStarted")
@@ -205,5 +189,21 @@ private extension DailyStartUseCase {
         }
         
         return (schedule, state)
+    }
+    
+    func enrollNotification(_ date: Date) {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "Daily Timer"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: UUID().description, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
     }
 }
