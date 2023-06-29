@@ -63,8 +63,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to undo the changes made on entering the background.
         // setting
         let isModeStarted = UserDefaults.standard.bool(forKey: "isModeStarted")
-        if isModeStarted == true, let model = UserDefaults.standard.object(forKey: "model") as? Data {
+        
+        if isModeStarted == true,
+           let model = UserDefaults.standard.object(forKey: "model") as? Data,
+           let date = UserDefaults.standard.object(forKey: "date") as? Date {
             NotificationCenter.default.post(name: NSNotification.Name("modelNotification"), object: model)
+            NotificationCenter.default.post(name: NSNotification.Name("inOutDateNotification"), object: date)
         }
     }
 
@@ -76,7 +80,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
 

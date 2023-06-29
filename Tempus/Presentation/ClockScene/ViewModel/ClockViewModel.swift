@@ -76,6 +76,8 @@ final class ClockViewModel {
 extension ClockViewModel: StartModeDelegate {
     func startWith(_ startUseCase: ModeStartUseCase) {
         self.modeStartUseCase = startUseCase
+        self.modeStartEvent.onNext(())
+        UserDefaults.standard.set(Date(), forKey: "date")
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound], completionHandler: { _, _ in })
         self.coordinator?.startTimer()
     }
