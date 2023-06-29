@@ -97,12 +97,10 @@ private extension BlockStartUseCase {
             if self.remainTime.totalSecond <= 0 {
                 let endDate = self.schedule.removeFirst()
                 let addingOneDayDate = endDate.addingTimeInterval(24 * 60 * 60)
-                
-                self.schedule.append(addingOneDayDate)
-                let now = Date().timeIntervalSince1970
                 let target = self.schedule[0].timeIntervalSince(Date())
                 
                 self.remainTime = Time(second: target)
+                self.schedule.append(addingOneDayDate)
             }
         })
         
