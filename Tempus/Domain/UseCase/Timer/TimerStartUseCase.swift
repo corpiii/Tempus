@@ -49,11 +49,23 @@ final class TimerStartUseCase: ModeStartUseCase {
         bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
         bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustDate), name: NSNotification.Name("inOutDateNotification"), object: nil)
+        
         return output
     }
 }
 
 private extension TimerStartUseCase {
+    @objc func adjustDate(_ sender: Notification) {
+        timerStart()
+        
+        if let object = sender.object as? Date {
+            let flowSecond = Date().timeIntervalSince(object)
+            let interval = flowSecond.truncatingRemainder(dividingBy: originModel.wasteTime)
+            remainTime.flow(second: interval)
+        }
+    }
+    
     func bindModeStartEvent(_ modeStartEvent: Observable<Void>, disposeBag: DisposeBag) {
         modeStartEvent
             .subscribe(onNext: { [weak self] _ in
@@ -71,10 +83,25 @@ private extension TimerStartUseCase {
     }
     
     func modeStart() {
-        guard timer == nil else { return }
-
         removeNotification()
         enrollNotification(originModel.wasteTime)
+        timerStart()
+    }
+    
+    func enrollNotification(_ wasteTime: Double) {
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "Timer"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: wasteTime, repeats: true)
+        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    func timerStart() {
+        guard timer == nil else { return }
         
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(originModel) {
@@ -96,18 +123,6 @@ private extension TimerStartUseCase {
         })
         
         RunLoop.current.add(timer!, forMode: .default)
-    }
-    
-    func enrollNotification(_ wasteTime: Double) {
-        let content = UNMutableNotificationContent()
-        content.title = "알림"
-        content.body = "Timer"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: wasteTime, repeats: true)
-        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request)
     }
     
     func modeStop() {
