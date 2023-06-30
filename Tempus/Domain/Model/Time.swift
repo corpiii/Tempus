@@ -17,11 +17,9 @@ struct Time {
     }
     
     init(second: Double) {
-        let second = Int(second)
-        
-        self.hour = second / 3600
-        self.minute = second / 60 % 60
-        self.second = Double(second % 60)
+        self.hour = Int(second / 3600)
+        self.minute = Int((second.truncatingRemainder(dividingBy: 3600)) / 60)
+        self.second = second.truncatingRemainder(dividingBy: 60)
     }
     
     mutating func flow(second: Double) {

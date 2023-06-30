@@ -35,6 +35,11 @@ final class BlockStartUseCase: ModeStartUseCase {
         self.originModel = originModel
         self.remainTime = Time(second: 0)
         self.modeState = .focusTime
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {
@@ -69,16 +74,21 @@ private extension BlockStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
         
+        removeNotification()
         enrollNotification(originModel.blockTime)
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(originModel) {
+            UserDefaults.standard.set(true, forKey: "isModeStarted")
+            UserDefaults.standard.set(encoded, forKey: "model")
+        }
         
         let interval = 0.1
         self.schedule = generateSchedule(blockTime: originModel.blockTime)
         self.modeState = .focusTime
         
-        let target = schedule[0].timeIntervalSince1970
+        let target = schedule[0].timeIntervalSince(Date())
         entireRunningTime.onNext(Double(originModel.blockTime) * 60 * 60)
-        let now = Date().timeIntervalSince1970
-        remainTime = Time(second: target - now)
+        remainTime = Time(second: target)
                 
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self = self else { return }
@@ -87,12 +97,10 @@ private extension BlockStartUseCase {
             if self.remainTime.totalSecond <= 0 {
                 let endDate = self.schedule.removeFirst()
                 let addingOneDayDate = endDate.addingTimeInterval(24 * 60 * 60)
+                let target = self.schedule[0].timeIntervalSince(Date())
                 
+                self.remainTime = Time(second: target)
                 self.schedule.append(addingOneDayDate)
-                let now = Date().timeIntervalSince1970
-                let target = self.schedule[0].timeIntervalSince1970
-                
-                self.remainTime = Time(second: target - now)
             }
         })
         
@@ -114,6 +122,7 @@ private extension BlockStartUseCase {
     
     func modeStop() {
         removeNotification()
+        UserDefaults.standard.set(false, forKey: "isModeStarted")
         timer?.invalidate()
         timer = nil
     }

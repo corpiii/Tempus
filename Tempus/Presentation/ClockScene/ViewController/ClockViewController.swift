@@ -7,9 +7,9 @@
 
 import UIKit
 
-import SSBouncyButton
 import RxSwift
 import SnapKit
+import SSBouncyButton
 
 class ClockViewController: UIViewController {
     private let startButton: SSBouncyButton = {
@@ -104,11 +104,9 @@ private extension ClockViewController {
         } else {
             startEvent.onNext(())
         }
-        startButton.isSelected
-        ? stopEvent.onNext(())
-        : startEvent.onNext(())
         
         startButton.isSelected = !startButton.isSelected
+        UserDefaults.standard.set(startButton.isSelected, forKey: "isModeStarted")
     }
 }
 
@@ -129,7 +127,6 @@ private extension ClockViewController {
             .subscribe(onNext: { [weak self] output in
                 guard let self else { return }
                 
-                
                 output.remainTime.subscribe(onNext: { time in
                     #if DEBUG
                     print(time, #file, #line)
@@ -142,7 +139,6 @@ private extension ClockViewController {
                     self.countDownTimerView.setRunningTime(runningTime)
                 }).disposed(by: self.disposeBag)
                 
-                self.startEvent.onNext(())
                 self.startButton.isSelected = true
             }).disposed(by: disposeBag)
     }

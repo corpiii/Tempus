@@ -36,13 +36,18 @@ final class DailyStartUseCase: ModeStartUseCase {
         self.originModel = originModel
         self.remainTime = Time(second: 0)
         self.modeState = .waitingTime
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
     
     override func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(remainTime: remainTimeSubject,
                             modeState: modeStateObservable,
                             entireRunningTime: entireRunningTime)
-
+        
         bindModeStartEvent(input.modeStartEvent, disposeBag: disposeBag)
         bindModeStopEvent(input.modeStopEvent, disposeBag: disposeBag)
 
@@ -70,16 +75,22 @@ private extension DailyStartUseCase {
     func modeStart() {
         guard timer == nil else { return }
         
+        removeNotification()
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(originModel) {
+            UserDefaults.standard.set(true, forKey: "isModeStarted")
+            UserDefaults.standard.set(encoded, forKey: "model")
+        }
+        
         let interval = 0.1
         let schedule = generateSchedule(originModel)
         
         timeSchedule = schedule.timeSchedule
         stateSchedule = schedule.stateSchedule
         
-        let target = timeSchedule[0].timeIntervalSince1970
-        let now = Date().timeIntervalSince1970
+        let target = timeSchedule[0].timeIntervalSince(Date())
         
-        remainTime = Time(second: target - now)
+        remainTime = Time(second: target)
         modeState = stateSchedule[0]
         
         print(timeSchedule)
@@ -101,8 +112,7 @@ private extension DailyStartUseCase {
                 
                 let addingOneDayDate = endDate.addingTimeInterval(24 * 60 * 60)
                 
-                let now = Date().timeIntervalSince1970
-                let target = self.timeSchedule[0].timeIntervalSince1970
+                let target = self.timeSchedule[0].timeIntervalSince(Date())
                 let nowState = self.stateSchedule[0]
                 
                 switch nowState {
@@ -114,7 +124,7 @@ private extension DailyStartUseCase {
                 self.timeSchedule.append(addingOneDayDate)
                 self.stateSchedule.append(endState)
                 
-                self.remainTime = Time(second: target - now)
+                self.remainTime = Time(second: target)
                 self.modeState = endState
             }
         })
@@ -122,24 +132,9 @@ private extension DailyStartUseCase {
         RunLoop.current.add(timer!, forMode: .default)
     }
     
-    func enrollNotification(_ date: Date) {
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
-        
-        let content = UNMutableNotificationContent()
-        content.title = "알림"
-        content.body = "Daily Timer"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        
-        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request)
-    }
-    
     func modeStop() {
         removeNotification()
+        UserDefaults.standard.set(false, forKey: "isModeStarted")
         timer?.invalidate()
         timer = nil
     }
@@ -192,5 +187,21 @@ private extension DailyStartUseCase {
         }
         
         return (schedule, state)
+    }
+    
+    func enrollNotification(_ date: Date) {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "Daily Timer"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: UUID().description, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
     }
 }
