@@ -10,20 +10,28 @@ import UIKit
 import RxSwift
 import SnapKit
 import SSBouncyButton
+import LGButton
 
 class ClockViewController: UIViewController {
-    private let startButton: SSBouncyButton = {
-        let button = SSBouncyButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("시작", for: .normal)
-        button.setTitle("중지", for: .selected)
-        button.tintColor = .systemBlue
-        button.titleLabel?.font = .preferredFont(forTextStyle: .subheadline, compatibleWith: .none)
+    private let entireStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        return stackView
+    }()
+        
+    private let countDownTimerView: CountDownTimerView = .init()
+    
+    private let startButton: LGButton = {
+        let button = LGButton()
+        button.leftImageSrc = .init(systemName: "play")
+        button.borderWidth = 3
+        button.bgColor = .cyan
+        button.cornerRadius = 20
         
         return button
     }()
-    
-    private let countDownTimerView: CountDownTimerView = .init()
     
     private let startEvent: PublishSubject<Void> = .init()
     private let stopEvent: PublishSubject<Void> = .init()
@@ -46,6 +54,16 @@ class ClockViewController: UIViewController {
         configureUI()
         bindViewModel()
     }
+    
+    private func makeHeightDividerView() -> UIView {
+        let emptyView = UIView()
+        
+        emptyView.snp.makeConstraints { make in
+            make.height.greaterThanOrEqualTo(1)
+        }
+        
+        return emptyView
+    }
 }
 
 // MARK: - ConfigureUI
@@ -55,36 +73,53 @@ private extension ClockViewController {
     }
     
     func configureUI() {
+        configureEntireStackView()
         configureTimerView()
         configureStartButton()
     }
     
-    func configureTimerView() {
-        self.view.addSubview(countDownTimerView)
+    func configureEntireStackView() {
+        self.view.addSubview(entireStackView)
+        
+        let dividerTopView = makeHeightDividerView()
+        let dividerBottomView = makeHeightDividerView()
+        
+        entireStackView.addArrangedSubview(countDownTimerView)
+        entireStackView.addArrangedSubview(startButton)
         
         let safeArea = self.view.safeAreaLayoutGuide
-        countDownTimerView.snp.makeConstraints { make in
+        
+        entireStackView.snp.makeConstraints { make in
             make.centerX.equalTo(safeArea.snp.centerX)
+            make.centerY.equalTo(safeArea.snp.centerY)
+        }
+        
+        let timerViewHeight = safeArea.layoutFrame.width * 0.8
+        entireStackView.spacing = timerViewHeight * 0.2
+    }
+    
+    func configureTimerView() {
+        let safeArea = self.view.safeAreaLayoutGuide
+        countDownTimerView.snp.makeConstraints { make in
+//            make.centerX.equalTo(safeArea.snp.centerX)
             make.width.equalTo(safeArea.snp.width).multipliedBy(0.8)
-            
             make.height.equalTo(countDownTimerView.snp.width)
             
-            let height = safeArea.layoutFrame.height
-            make.top.equalTo(safeArea.snp.top).offset(height * 0.1)
+//            let height = safeArea.layoutFrame.height
+//            make.top.equalTo(safeArea.snp.top).offset(height * 0.1)
         }
     }
     
     func configureStartButton() {
-        self.view.addSubview(startButton)
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         
         let safeArea = self.view.safeAreaLayoutGuide
         
         startButton.snp.makeConstraints { make in
-            let timerViewHeight = safeArea.layoutFrame.width * 0.8
-            make.top.equalTo(countDownTimerView.snp.bottom).offset(timerViewHeight * 0.2)
+//            let timerViewHeight = safeArea.layoutFrame.width * 0.8
+//            make.top.equalTo(countDownTimerView.snp.bottom).offset(timerViewHeight * 0.2)
             
-            make.centerX.equalTo(safeArea.snp.centerX)
+//            make.centerX.equalTo(safeArea.snp.centerX)
             
             let startButtonWidth = safeArea.layoutFrame.width * 0.2
             make.width.equalTo(startButtonWidth)

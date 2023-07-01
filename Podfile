@@ -5,6 +5,7 @@ target 'Tempus' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 pod 'SSBouncyButton', '~> 1.0'
+pod 'LGButton'
   # Pods for Tempus
 
   target 'TempusTests' do

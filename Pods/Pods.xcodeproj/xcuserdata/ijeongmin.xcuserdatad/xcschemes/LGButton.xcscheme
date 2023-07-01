@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F9734FECA428682C99C0AEF07113B978"
-               BuildableName = "Pods_TempusTests.framework"
-               BlueprintName = "Pods-TempusTests"
+               BlueprintIdentifier = "FD999FE212F29E29DEEA0A85E1DC4D4E"
+               BuildableName = "LGButton.framework"
+               BlueprintName = "LGButton"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
