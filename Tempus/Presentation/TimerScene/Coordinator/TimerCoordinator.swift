@@ -18,10 +18,13 @@ final class TimerCoordinator: Coordinator {
     private weak var startModeDelegate: StartModeDelegate?
     
     init(startModeDelegate: StartModeDelegate) {
+        let tabBarImage = UIImage(systemName: "timer")
+        let tabBarItem = UITabBarItem(title: nil, image: tabBarImage, selectedImage: nil)
+        
         self.timerViewModel = .init()
         self.timerViewController = .init(viewModel: timerViewModel)
         self.navigationController = .init(rootViewController: timerViewController)
-        self.navigationController.tabBarItem = .init(tabBarSystemItem: .more, tag: 3)
+        self.navigationController.tabBarItem = tabBarItem
         self.startModeDelegate = startModeDelegate
     }
     
