@@ -18,13 +18,18 @@ final class BlockListViewCoordinator: Coordinator, FinishDelegate {
     let navigationController: UINavigationController
     
     init(repository: DataManagerRepository, startModeDelegate: StartModeDelegate) {
+        let tabBarImage = UIImage(systemName: "square.split.2x2")
+        let tabBarSelectedImage = UIImage(systemName: "square.split.2x2.fill")
+        let tabBarItem = UITabBarItem(title: nil, image: tabBarImage, selectedImage: tabBarSelectedImage)
+        
         self.repository = repository
         
         self.blockListViewModel = BlockListViewModel(repository: repository)
         self.blockListViewController = BlockListViewController(viewModel: blockListViewModel)
         self.startModeDelegate = startModeDelegate
         self.navigationController = UINavigationController(rootViewController: blockListViewController)
-        self.navigationController.tabBarItem = .init(tabBarSystemItem: .bookmarks, tag: 1)
+        
+        self.navigationController.tabBarItem = tabBarItem
     }
     
     func start() {
