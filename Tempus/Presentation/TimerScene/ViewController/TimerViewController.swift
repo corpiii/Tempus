@@ -57,7 +57,7 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .init(hex: "#E3F4F4")
         configureUI()
         bindViewModel()
     }

@@ -9,7 +9,6 @@ import UIKit
 
 import RxSwift
 import SnapKit
-import SSBouncyButton
 import LGButton
 
 class ClockViewController: UIViewController {
@@ -85,7 +84,7 @@ class ClockViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension ClockViewController {
     func configureSelfView() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .init(hex: "#E3F4F4")
     }
     
     func configureUI() {
