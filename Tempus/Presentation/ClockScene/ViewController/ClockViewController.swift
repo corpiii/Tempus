@@ -41,7 +41,6 @@ class ClockViewController: UIViewController {
     private let startButton: LGButton = {
         let button = LGButton()
         button.leftImageColor = .white
-        button.borderWidth = 3
         button.bgColor = Constant.startButtonColor
         button.cornerRadius = 10
         
