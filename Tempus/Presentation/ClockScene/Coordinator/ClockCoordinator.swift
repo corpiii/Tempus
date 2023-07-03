@@ -15,9 +15,13 @@ class ClockCoordinator: Coordinator {
     private weak var startApplyDelegate: StartApplyDelegate?
     
     init(startApplyDelegate: StartApplyDelegate) {
+        let tabBarImage = UIImage(systemName: "clock")
+        let tabBarSelectedImage = UIImage(systemName: "clock.fill")
+        let tabBarItem = UITabBarItem(title: nil, image: tabBarImage, selectedImage: tabBarSelectedImage)
+        
         self.clockViewModel = ClockViewModel()
         self.clockViewController = ClockViewController(viewModel: self.clockViewModel)
-        self.clockViewController.tabBarItem = .init(tabBarSystemItem: .downloads, tag: 0)
+        self.clockViewController.tabBarItem = tabBarItem
         self.startApplyDelegate = startApplyDelegate
     }
     
