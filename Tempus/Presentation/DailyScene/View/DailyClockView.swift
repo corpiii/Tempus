@@ -11,8 +11,8 @@ class DailyClockView: ClockView {
     private enum Constant {
         static let degree: Double = 0.25
         static let topAngle: CGFloat = -90 * .pi / 180
-        static let focusTimeColor: UIColor = .init(red: CGFloat(65) / 255 , green: CGFloat(183) / 255, blue: CGFloat(242) / 255, alpha: CGFloat(80) / 100)
-        static let breakTimeColor: UIColor = .init(red: CGFloat(69) / 255 , green: CGFloat(130) / 255, blue: CGFloat(219) / 255, alpha: CGFloat(80) / 100)
+        static let focusTimeColor: UIColor = .init(hex: "#0EA293", alpha: 0.8)!
+        static let breakTimeColor: UIColor = .init(hex: "#F5F3C1", alpha: 0.8)!
     }
     
     private var focusTime: Double?
