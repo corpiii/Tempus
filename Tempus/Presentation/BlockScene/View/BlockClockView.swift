@@ -11,6 +11,10 @@ final class BlockClockView: ClockView {
     private var ClockInterval: String = ""
     private var splitLayer = CALayer()
     
+    private var splittedStrokeColor: CGColor = UIColor(red: 96 / 255.0,
+                                                       green: 105 / 255.0,
+                                                       blue: 143 / 255.0,
+                                                       alpha: 56 / 100.0).cgColor
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         splitClock(by: ClockInterval)
@@ -41,8 +45,8 @@ final class BlockClockView: ClockView {
             arkLayer.path = arkPath.cgPath
 
             arkLayer.lineWidth = 2.0
-            arkLayer.strokeColor = UIColor.red.cgColor
-            arkLayer.fillColor = Constant.splittedBackGroundColor
+            arkLayer.strokeColor = Constant.lineColor
+            arkLayer.fillColor = UIColor.clear.cgColor
 
             splitLayer.addSublayer(arkLayer)
         }

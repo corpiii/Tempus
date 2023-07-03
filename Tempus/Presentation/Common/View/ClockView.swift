@@ -9,14 +9,11 @@ import UIKit
 
 class ClockView: UIView {
     enum Constant {
-        static let lineColor: CGColor = UIColor.black.cgColor
-        static let lineWidth: CGFloat = 2.0
-        static let clockBackgroundColor: CGColor = UIColor.systemGray6.cgColor
         static let startAngle: CGFloat = -75 * CGFloat.pi / 180
-        
-        static let splittedBackGroundColor: CGColor = UIColor(red:0.07, green:0.44, blue:0.54, alpha:0.4).cgColor
-        
+        static let lineWidth: CGFloat = 3.0
         static let dotRadius: CGFloat = 3.0
+        static let lineColor: CGColor = UIColor(hex: "#176B87")!.cgColor
+        static let clockBackgroundColor: CGColor = UIColor(hex: "#64CCC5")!.cgColor
     }
     
     lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)
