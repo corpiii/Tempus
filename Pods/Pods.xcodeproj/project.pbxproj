@@ -7,246 +7,105 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BE3F911ED3C46434B20261EA9EF3ED2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		12752E4F44292BF6251F9BF477665D59 /* themify.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75C1EDD2C5466EBE29FB29A5707F671C /* themify.ttf */; };
-		12E799EB0CBEE827C008EA91239A834C /* UIColor-Hex-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FD56FE62B4FA0536D386F09CE541206D /* UIColor-Hex-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12752E4F44292BF6251F9BF477665D59 /* themify.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB728B89E474B00E040071D645C3A3ED /* themify.ttf */; };
 		139107533DCA039E077844962F448DE9 /* Pods-TempusTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E57BA06AD42BC25373627F9096B51D17 /* Pods-TempusTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1891666C00F51FA57205B0F7FA656FDB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		190492A6C86BB9C102310EC5E0ECD754 /* map-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EB75BF6CB6473EC41AC3EBDA7FBDA86 /* map-icons.ttf */; };
-		25CE806D8C53AC49E1431FEA760500CA /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62D919BB5C1CD69D32E09EA9FAEA572D /* MaterialIcons-Regular.ttf */; };
-		2F653943E6EDE1FA23A94A531E465ED3 /* LGButton-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 51137963930C5E5DEBC640C16E36BEFD /* LGButton-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3226AC9AC18FF65C2884C3B66DA0F0A6 /* FontMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C5692CB3E112EFA10C45BF7A2671F /* FontMaterial.swift */; };
-		32C2BAB81BBCF64E5A28D1B97D02EFAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */; };
-		3912D7EAAD1DB42EE6D6AC6D183BF8B1 /* SSBouncyButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B7020082CEEB0026B30818DAAA1B701C /* SSBouncyButton-dummy.m */; };
-		3A1801D960949433F0E1A5E9EBE9CFC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */; };
-		3DA8C2F13D34FB41FFE7B2D3B41FC7D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */; };
-		4046B540821603D05A9F4E61A6844569 /* BRYSerialAnimationQueue-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EC847FD933774B5CCD09D166C8A72154 /* BRYSerialAnimationQueue-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A9004B9E41C404EE824FBF7B005E42E /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45469A8AE900172C5EF0D18AF3E3B2B5 /* FontAwesome.swift */; };
-		54807CCDB3E5693DC446A0C894FA733B /* LGButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57F51080E216497BA58A161A285675C7 /* LGButton.xib */; };
-		54B36BB31733DD5E378D94B9058BE299 /* open-iconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1D980EEA26385B78D74F64268605908 /* open-iconic.ttf */; };
-		55057D10C0F4A3063FB8C86B1BBF2A52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */; };
-		5587532098FACECE0846A61284ED5FB4 /* SSBouncyButton.h in Headers */ = {isa = PBXBuildFile; fileRef = DFB4C5601DA094B65857CE45BD4C47E0 /* SSBouncyButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		572CB39FC4CD6DBB18F8190B3434492F /* BRYSerialAnimationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DDDD19B8E6423F0995666049C23B072 /* BRYSerialAnimationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		190492A6C86BB9C102310EC5E0ECD754 /* map-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25913690DAC475B37D706CBB01130EAB /* map-icons.ttf */; };
+		25CE806D8C53AC49E1431FEA760500CA /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC3F9D4C8D16BB4E89EAB8C267B92982 /* MaterialIcons-Regular.ttf */; };
+		2F653943E6EDE1FA23A94A531E465ED3 /* LGButton-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB93E2303A4534C18998BCE625B5C3EE /* LGButton-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3226AC9AC18FF65C2884C3B66DA0F0A6 /* FontMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904816F98B5C8B096F4A03AE2F1A071 /* FontMaterial.swift */; };
+		4A9004B9E41C404EE824FBF7B005E42E /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DC7C8ABB65E809591ADE9F9AC783 /* FontAwesome.swift */; };
+		54807CCDB3E5693DC446A0C894FA733B /* LGButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52BEA02043D5B17C53C06223606AFAFC /* LGButton.xib */; };
+		54B36BB31733DD5E378D94B9058BE299 /* open-iconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90F659AA112ACEE8DB189C4BA369B56B /* open-iconic.ttf */; };
 		5C53B1D2AFB83DB1D1E5701F0770B151 /* Pods-TempusTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C89968DAE84795632FCED90CA4644B2E /* Pods-TempusTests-dummy.m */; };
-		5F4C0388AB51FE73FD125D77EC3C61DC /* SwiftIconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAB3E51E3D178ADC7FAD7A0035B5789 /* SwiftIconFont.swift */; };
-		5FDD05828ECE893FB09E1C36FF5BB7DB /* BRYSerialAnimationQueue-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F71FF6A14F1D304FA06AA3883E50A52 /* BRYSerialAnimationQueue-dummy.m */; };
-		6268B2D04691B0FB581CF9C8E646A0D5 /* FontOpenic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12840D1CF5D4AEF35460A1A82E458ADE /* FontOpenic.swift */; };
-		64CCD9D3700E690CD2E2265D491408D4 /* UIImage+BetterAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E831336C1EC99B128533662F8BA50B1 /* UIImage+BetterAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		669F343CEFDCD4C390870303B08B7306 /* SSBouncyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0164AD09BC29D8BBF9150549B50128C3 /* SSBouncyButton.m */; };
-		680E97DA4CEBF097623386251AC4E22A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		6D37E076860A2E824817B449EB787BC1 /* Pods-Tempus-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 686635A2EB27083236291C1DF04A79A4 /* Pods-Tempus-dummy.m */; };
-		725B11C02826F31CB87E895C869C1C0F /* LGButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DD500AC6A62EB1D9D6685786B03950 /* LGButton-dummy.m */; };
-		75093DABEC65456FC3DE5E7567DB7240 /* FontMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CB42761E056093731A087228DEFC62 /* FontMap.swift */; };
-		7BE09552A8C5772CDAEAF76058D4E3AE /* SwiftIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB759BC4151ABCA474E3735BF0A9F54 /* SwiftIconLabel.swift */; };
-		7D0A112B539F8F5A0C979EC5220B6F5D /* Pods-Tempus-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BD62A441EF0F1F869044D5A59CCFD6 /* Pods-Tempus-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A4C307B1CC4CA2C3AD07EE275B904AC /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FD97A02836CE9315DE129130353C7D3 /* UIColor+Hex.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A1D75D4EA62C1AA392CFD74156C2D5B /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = B97EB473FD27620BEDCFC5FE576D6FA9 /* UIColor+Hex.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		A1FCEE675A64D150E129CA9F175FE265 /* SSBouncyButton-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A840C93C11B577D6212A6C8A219E698 /* SSBouncyButton-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9F1CF9DE5A9643EC0A5434BDE8178AE /* FontOct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A549A21DFB6FE685FC70F79D9DC59 /* FontOct.swift */; };
-		B3771023D522E5368FED33A4824D2F62 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD6D1F0CFF8F64B41778824178C2E2 /* Ionicons.ttf */; };
-		B5E5977C17F314C31AAE313E20479E85 /* UIImage+BetterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB62EE0DA23BD47EAB82625DE35C1BB /* UIImage+BetterAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C3CA79EF4CE45FE156FD1544EADDA36D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99BDE0B92CD63DA30F1D43CD4C07F3D1 /* FontAwesome.ttf */; };
-		C5465DB3BBA6AFBB0022FB8C24D61A8E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		CF4181B53E72DA956DF59C69994A1610 /* BRYSerialAnimationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 151A3C3FA944A3A4EE19E9C46972D52A /* BRYSerialAnimationQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D312E77482C95DA6D3D1F41C56D04781 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		D333247A1D5CD6D23B526E8BB51D55C9 /* FontIon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150450E7260A46FF506551991E1836B /* FontIon.swift */; };
-		D3C300C454782A3E1E2A24124159BE61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		D4485193E9FC99B0DCFC83F58258EE13 /* UIImage+BetterAdditions-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA96C750F086CD6AA10C984AA6A382 /* UIImage+BetterAdditions-dummy.m */; };
-		D9896928005DF97EDA0FAD8809E62193 /* UIColor-Hex-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D99C5B13269FAE3D36283F3259842BE /* UIColor-Hex-dummy.m */; };
-		DCB77FC62545AEE5EB8E9758ED29007A /* FontThemify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9471F5F62B42DC8DF197A1DEEF1DAC88 /* FontThemify.swift */; };
-		DDB639C108807FA99419414744AD2ED8 /* UIImage+BetterAdditions-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FDCCFC9B4D145BD4C9108565DDAE8920 /* UIImage+BetterAdditions-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DF70C405E2F852339B35C31F9E6B4CDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		EEC2534822806EC8A2E3359ABDEC7D4C /* LGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D7AFFA103BF6D3203FE34DFF56F53E /* LGButton.swift */; };
-		F14AE282E7A5D6BFE77BF5C4EA9C3F05 /* octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D78ABB6D1576C7823B60DFB42CB16918 /* octicons.ttf */; };
-		FFE26C92C76C7AF253DC50707D58AF13 /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D02E37B982D9231E4DA2363A222F442 /* FontLoader.swift */; };
+		5F4C0388AB51FE73FD125D77EC3C61DC /* SwiftIconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EF47E6D7656F4D640839100AA599BA /* SwiftIconFont.swift */; };
+		6268B2D04691B0FB581CF9C8E646A0D5 /* FontOpenic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C87AF22E4D7F5F40D7EE2FEA5BD640 /* FontOpenic.swift */; };
+		725B11C02826F31CB87E895C869C1C0F /* LGButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF6138F17B6B8563F296484E55127 /* LGButton-dummy.m */; };
+		75093DABEC65456FC3DE5E7567DB7240 /* FontMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A275B3A285F477A135778BD185B9D6 /* FontMap.swift */; };
+		7BE09552A8C5772CDAEAF76058D4E3AE /* SwiftIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB19C5A267935408AE327BBC08BEA817 /* SwiftIconLabel.swift */; };
+		9DDCF3BDB1058345F01A4DD5CB1B4FB2 /* Pods-Tempus-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 686635A2EB27083236291C1DF04A79A4 /* Pods-Tempus-dummy.m */; };
+		A9F1CF9DE5A9643EC0A5434BDE8178AE /* FontOct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6C0EAD85E3BBD1A8E4D519109F090 /* FontOct.swift */; };
+		B3771023D522E5368FED33A4824D2F62 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F0A488336FF126A324A37C67A092EB3 /* Ionicons.ttf */; };
+		B6672B725FF1B58825C9D2715CAC7B79 /* Pods-Tempus-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BD62A441EF0F1F869044D5A59CCFD6 /* Pods-Tempus-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD391501540A39F8771586C9726B03D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		C3CA79EF4CE45FE156FD1544EADDA36D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DBF80E3539F7FB60745CA4577FACBD9 /* FontAwesome.ttf */; };
+		D333247A1D5CD6D23B526E8BB51D55C9 /* FontIon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AD8BAB3D5090AC4A3796F50EB03261 /* FontIon.swift */; };
+		D3C300C454782A3E1E2A24124159BE61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		DCB77FC62545AEE5EB8E9758ED29007A /* FontThemify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8D78095FAD13600E3392AAA3FEAE6 /* FontThemify.swift */; };
+		DF70C405E2F852339B35C31F9E6B4CDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		EEC2534822806EC8A2E3359ABDEC7D4C /* LGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA141D1F064A320E34D1DAA818787A5 /* LGButton.swift */; };
+		F14AE282E7A5D6BFE77BF5C4EA9C3F05 /* octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C6247BD16DBAD5EC89116163EFE74C /* octicons.ttf */; };
+		FFE26C92C76C7AF253DC50707D58AF13 /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5C10857AC89D6ABCE3E2D6D24DAF8 /* FontLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		21F360BBF8987F68AED0D718B8CC8BC9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FD999FE212F29E29DEEA0A85E1DC4D4E;
-			remoteInfo = LGButton;
-		};
-		2623A0483C6A2868E0DFC745D97EA38B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FBDE0A3FF4473CF689AD35D504A7B1F7;
-			remoteInfo = BRYSerialAnimationQueue;
-		};
-		33B9897B62738E70400A0718811C7F34 /* PBXContainerItemProxy */ = {
+		27F574C940C8293EE4F6226BC25F5958 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FB48F5E7D247F6540DBA70DE75C4FB32;
 			remoteInfo = "Pods-Tempus";
 		};
-		3F4A1DA2FC60614FBC290169014535C6 /* PBXContainerItemProxy */ = {
+		DA684D24A796827CAC90441E3F8B75BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9EE6304522E8774FC6803D6905A792CA;
-			remoteInfo = "UIColor-Hex";
-		};
-		3F8A2A9957F18E06A739427A9B2DC413 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C94D6FBF5723FAFE8C7D8C2FDC5609E;
-			remoteInfo = "UIImage+BetterAdditions";
-		};
-		A65772194544888BC4A28034552EBEA8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50BF2150400A5C6A706C51570CDA7E92;
-			remoteInfo = SSBouncyButton;
-		};
-		B16CF85BDF4FD7540F63613087C5CC8D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C94D6FBF5723FAFE8C7D8C2FDC5609E;
-			remoteInfo = "UIImage+BetterAdditions";
-		};
-		E8AC8A6E0B72E0799C8A4A9926150CD8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9EE6304522E8774FC6803D6905A792CA;
-			remoteInfo = "UIColor-Hex";
-		};
-		EFD9028E5C5C96410DF55A609957B2A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FBDE0A3FF4473CF689AD35D504A7B1F7;
-			remoteInfo = BRYSerialAnimationQueue;
+			remoteGlobalIDString = FD999FE212F29E29DEEA0A85E1DC4D4E;
+			remoteInfo = LGButton;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0164AD09BC29D8BBF9150549B50128C3 /* SSBouncyButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SSBouncyButton.m; path = SSBouncyButton/SSBouncyButton.m; sourceTree = "<group>"; };
 		0CE8AB1959BDBB25B8EA3C8804F122AA /* Pods-Tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tempus.release.xcconfig"; sourceTree = "<group>"; };
-		0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage+BetterAdditions */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "UIImage+BetterAdditions"; path = UIImage_BetterAdditions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		12840D1CF5D4AEF35460A1A82E458ADE /* FontOpenic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontOpenic.swift; path = LGButton/Classes/SwiftIconFont/FontOpenic.swift; sourceTree = "<group>"; };
-		151A3C3FA944A3A4EE19E9C46972D52A /* BRYSerialAnimationQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BRYSerialAnimationQueue.m; path = Classes/BRYSerialAnimationQueue.m; sourceTree = "<group>"; };
-		1E207C9D020DC2BDB5782DF71C7133AC /* UIImage+BetterAdditions.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "UIImage+BetterAdditions.modulemap"; sourceTree = "<group>"; };
-		1EB75BF6CB6473EC41AC3EBDA7FBDA86 /* map-icons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "map-icons.ttf"; path = "LGButton/Resources/map-icons.ttf"; sourceTree = "<group>"; };
-		23B1FC21998A871B931C751B7598D8EF /* SSBouncyButton.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SSBouncyButton.debug.xcconfig; sourceTree = "<group>"; };
-		29A4F21B773E63F755F2162A8E1BC1D6 /* UIColor-Hex-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor-Hex-prefix.pch"; sourceTree = "<group>"; };
-		2B1176FAC36B36C944F8A5CD41C4BE7E /* SSBouncyButton-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SSBouncyButton-prefix.pch"; sourceTree = "<group>"; };
-		2E7C5692CB3E112EFA10C45BF7A2671F /* FontMaterial.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontMaterial.swift; path = LGButton/Classes/SwiftIconFont/FontMaterial.swift; sourceTree = "<group>"; };
-		37CB42761E056093731A087228DEFC62 /* FontMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontMap.swift; path = LGButton/Classes/SwiftIconFont/FontMap.swift; sourceTree = "<group>"; };
-		3AAD6D1F0CFF8F64B41778824178C2E2 /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Ionicons.ttf; path = LGButton/Resources/Ionicons.ttf; sourceTree = "<group>"; };
-		3C7A549A21DFB6FE685FC70F79D9DC59 /* FontOct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontOct.swift; path = LGButton/Classes/SwiftIconFont/FontOct.swift; sourceTree = "<group>"; };
-		3D0A499325DD26DE10F3A8000A4C3013 /* UIImage+BetterAdditions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIImage+BetterAdditions.debug.xcconfig"; sourceTree = "<group>"; };
-		3F0BA45160ADC56B49411C7995BA2D76 /* UIImage+BetterAdditions-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+BetterAdditions-prefix.pch"; sourceTree = "<group>"; };
-		45469A8AE900172C5EF0D18AF3E3B2B5 /* FontAwesome.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontAwesome.swift; path = LGButton/Classes/SwiftIconFont/FontAwesome.swift; sourceTree = "<group>"; };
-		4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		4B2BF7F0B0EBCB9D893BF29229BAE4B2 /* BRYSerialAnimationQueue-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BRYSerialAnimationQueue-prefix.pch"; sourceTree = "<group>"; };
+		15FB93FAE4DA44BE68098AB78204DE66 /* LGButton.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LGButton.release.xcconfig; sourceTree = "<group>"; };
+		1F0A488336FF126A324A37C67A092EB3 /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Ionicons.ttf; path = LGButton/Resources/Ionicons.ttf; sourceTree = "<group>"; };
+		23C6247BD16DBAD5EC89116163EFE74C /* octicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = octicons.ttf; path = LGButton/Resources/octicons.ttf; sourceTree = "<group>"; };
+		25913690DAC475B37D706CBB01130EAB /* map-icons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "map-icons.ttf"; path = "LGButton/Resources/map-icons.ttf"; sourceTree = "<group>"; };
+		29A5C10857AC89D6ABCE3E2D6D24DAF8 /* FontLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontLoader.swift; path = LGButton/Classes/SwiftIconFont/FontLoader.swift; sourceTree = "<group>"; };
+		4904816F98B5C8B096F4A03AE2F1A071 /* FontMaterial.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontMaterial.swift; path = LGButton/Classes/SwiftIconFont/FontMaterial.swift; sourceTree = "<group>"; };
 		4E39C81FC917AC86BF38D39D906FA217 /* Pods-TempusTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TempusTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4E831336C1EC99B128533662F8BA50B1 /* UIImage+BetterAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+BetterAdditions.h"; sourceTree = "<group>"; };
-		4FEF1A4387CDEDBA0D6F689CB47AA3DC /* SSBouncyButton.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SSBouncyButton.modulemap; sourceTree = "<group>"; };
-		51137963930C5E5DEBC640C16E36BEFD /* LGButton-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LGButton-umbrella.h"; sourceTree = "<group>"; };
-		5150450E7260A46FF506551991E1836B /* FontIon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontIon.swift; path = LGButton/Classes/SwiftIconFont/FontIon.swift; sourceTree = "<group>"; };
-		5305FFC9CE2544D716B27F684C4C5198 /* UIImage+BetterAdditions-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "UIImage+BetterAdditions-Info.plist"; sourceTree = "<group>"; };
-		57F51080E216497BA58A161A285675C7 /* LGButton.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = LGButton.xib; path = LGButton/Resources/LGButton.xib; sourceTree = "<group>"; };
+		52BEA02043D5B17C53C06223606AFAFC /* LGButton.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = LGButton.xib; path = LGButton/Resources/LGButton.xib; sourceTree = "<group>"; };
 		595113CDC1DF40AACD06A6524821E45D /* Pods-Tempus.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Tempus.modulemap"; sourceTree = "<group>"; };
-		5A840C93C11B577D6212A6C8A219E698 /* SSBouncyButton-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SSBouncyButton-umbrella.h"; sourceTree = "<group>"; };
 		5AC3B72AB0A3619EE352A179FA1FB35E /* Pods-Tempus-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tempus-acknowledgements.plist"; sourceTree = "<group>"; };
+		5CA141D1F064A320E34D1DAA818787A5 /* LGButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LGButton.swift; path = LGButton/Classes/LGButton.swift; sourceTree = "<group>"; };
 		5D36CB83F99EEA2E22BC215BC0B57230 /* Pods-TempusTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-TempusTests"; path = Pods_TempusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D99C5B13269FAE3D36283F3259842BE /* UIColor-Hex-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Hex-dummy.m"; sourceTree = "<group>"; };
-		62D919BB5C1CD69D32E09EA9FAEA572D /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "MaterialIcons-Regular.ttf"; path = "LGButton/Resources/MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
 		686635A2EB27083236291C1DF04A79A4 /* Pods-Tempus-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Tempus-dummy.m"; sourceTree = "<group>"; };
-		68CD166330245A6D4F6940397D93160B /* BRYSerialAnimationQueue.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BRYSerialAnimationQueue.modulemap; sourceTree = "<group>"; };
 		72B5844F5EA69406F97706BD10AB52B2 /* Pods-TempusTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TempusTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		75C1EDD2C5466EBE29FB29A5707F671C /* themify.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = themify.ttf; path = LGButton/Resources/themify.ttf; sourceTree = "<group>"; };
-		75DD500AC6A62EB1D9D6685786B03950 /* LGButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LGButton-dummy.m"; sourceTree = "<group>"; };
-		77CA0E80CDA9652F7932120103A3BE0C /* UIColor-Hex.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "UIColor-Hex.modulemap"; sourceTree = "<group>"; };
-		7ABDA89BE7087B891A63506044D97334 /* UIColor-Hex */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "UIColor-Hex"; path = UIColor_Hex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EB62EE0DA23BD47EAB82625DE35C1BB /* UIImage+BetterAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BetterAdditions.m"; sourceTree = "<group>"; };
-		7F71FF6A14F1D304FA06AA3883E50A52 /* BRYSerialAnimationQueue-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BRYSerialAnimationQueue-dummy.m"; sourceTree = "<group>"; };
-		83CA96C750F086CD6AA10C984AA6A382 /* UIImage+BetterAdditions-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BetterAdditions-dummy.m"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		78BCF6138F17B6B8563F296484E55127 /* LGButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LGButton-dummy.m"; sourceTree = "<group>"; };
+		7DBF80E3539F7FB60745CA4577FACBD9 /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesome.ttf; path = LGButton/Resources/FontAwesome.ttf; sourceTree = "<group>"; };
 		8709D051D72D65C3EB5F6283A79208AC /* Pods-TempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TempusTests.release.xcconfig"; sourceTree = "<group>"; };
-		8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		8D02E37B982D9231E4DA2363A222F442 /* FontLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontLoader.swift; path = LGButton/Classes/SwiftIconFont/FontLoader.swift; sourceTree = "<group>"; };
 		8D9A4D6BC8430FBC69800F92F9C26580 /* Pods-TempusTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TempusTests-Info.plist"; sourceTree = "<group>"; };
-		8DFC6E07A5CF796EA063555CCF008800 /* BRYSerialAnimationQueue-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BRYSerialAnimationQueue-Info.plist"; sourceTree = "<group>"; };
-		8FD97A02836CE9315DE129130353C7D3 /* UIColor+Hex.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "Classes/UIColor+Hex.h"; sourceTree = "<group>"; };
-		91002BA0F6FF72C9E4E362189B70DDFB /* UIColor-Hex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIColor-Hex.release.xcconfig"; sourceTree = "<group>"; };
-		9471F5F62B42DC8DF197A1DEEF1DAC88 /* FontThemify.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontThemify.swift; path = LGButton/Classes/SwiftIconFont/FontThemify.swift; sourceTree = "<group>"; };
+		90A275B3A285F477A135778BD185B9D6 /* FontMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontMap.swift; path = LGButton/Classes/SwiftIconFont/FontMap.swift; sourceTree = "<group>"; };
+		90F659AA112ACEE8DB189C4BA369B56B /* open-iconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "open-iconic.ttf"; path = "LGButton/Resources/open-iconic.ttf"; sourceTree = "<group>"; };
 		9973B0C76F0324E2E44C568FEE6D9FF8 /* Pods-Tempus-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tempus-frameworks.sh"; sourceTree = "<group>"; };
-		99BDE0B92CD63DA30F1D43CD4C07F3D1 /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesome.ttf; path = LGButton/Resources/FontAwesome.ttf; sourceTree = "<group>"; };
-		9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BRYSerialAnimationQueue; path = BRYSerialAnimationQueue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9DDDD19B8E6423F0995666049C23B072 /* BRYSerialAnimationQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BRYSerialAnimationQueue.h; path = Classes/BRYSerialAnimationQueue.h; sourceTree = "<group>"; };
-		9FB759BC4151ABCA474E3735BF0A9F54 /* SwiftIconLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIconLabel.swift; path = LGButton/Classes/SwiftIconFont/SwiftIconLabel.swift; sourceTree = "<group>"; };
-		9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		A0D7AFFA103BF6D3203FE34DFF56F53E /* LGButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LGButton.swift; path = LGButton/Classes/LGButton.swift; sourceTree = "<group>"; };
-		A18CBCE61C67FDD918726F9EAE9183FA /* UIColor-Hex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIColor-Hex.debug.xcconfig"; sourceTree = "<group>"; };
+		A0C87AF22E4D7F5F40D7EE2FEA5BD640 /* FontOpenic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontOpenic.swift; path = LGButton/Classes/SwiftIconFont/FontOpenic.swift; sourceTree = "<group>"; };
 		A365B15A1576EDDC9E1FE31AEF05B6A5 /* Pods-Tempus-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tempus-Info.plist"; sourceTree = "<group>"; };
-		A4BDF19F5B75C22C9ADCF1CBCB76BB6A /* BRYSerialAnimationQueue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BRYSerialAnimationQueue.release.xcconfig; sourceTree = "<group>"; };
-		A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SSBouncyButton; path = SSBouncyButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8C307D48A2C04232D8D5637F55BEEAA /* BRYSerialAnimationQueue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BRYSerialAnimationQueue.debug.xcconfig; sourceTree = "<group>"; };
+		A4C6C0EAD85E3BBD1A8E4D519109F090 /* FontOct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontOct.swift; path = LGButton/Classes/SwiftIconFont/FontOct.swift; sourceTree = "<group>"; };
+		A5A8D78095FAD13600E3392AAA3FEAE6 /* FontThemify.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontThemify.swift; path = LGButton/Classes/SwiftIconFont/FontThemify.swift; sourceTree = "<group>"; };
+		AB19C5A267935408AE327BBC08BEA817 /* SwiftIconLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIconLabel.swift; path = LGButton/Classes/SwiftIconFont/SwiftIconLabel.swift; sourceTree = "<group>"; };
+		AB728B89E474B00E040071D645C3A3ED /* themify.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = themify.ttf; path = LGButton/Resources/themify.ttf; sourceTree = "<group>"; };
 		B1254FACAAEF1FE48A950CBD01D777FE /* Pods-TempusTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TempusTests.modulemap"; sourceTree = "<group>"; };
-		B7020082CEEB0026B30818DAAA1B701C /* SSBouncyButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SSBouncyButton-dummy.m"; sourceTree = "<group>"; };
-		B97EB473FD27620BEDCFC5FE576D6FA9 /* UIColor+Hex.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "Classes/UIColor+Hex.m"; sourceTree = "<group>"; };
-		BCDBBF48A6BDD7B3A37A3373EC2CF158 /* LGButton-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LGButton-Info.plist"; sourceTree = "<group>"; };
 		BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LGButton; path = LGButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C278A3631AB129EB2F763252C2752E91 /* LGButton.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LGButton.modulemap; sourceTree = "<group>"; };
+		BF17DC7C8ABB65E809591ADE9F9AC783 /* FontAwesome.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontAwesome.swift; path = LGButton/Classes/SwiftIconFont/FontAwesome.swift; sourceTree = "<group>"; };
 		C89968DAE84795632FCED90CA4644B2E /* Pods-TempusTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TempusTests-dummy.m"; sourceTree = "<group>"; };
 		C9D1EC16624D0C59378E2AA755A050B2 /* Pods-Tempus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tempus.debug.xcconfig"; sourceTree = "<group>"; };
 		CB6D7F64733F16798F6AEAF6527DABE9 /* Pods-Tempus-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tempus-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CCDBCB62EB24A40255CA079302F6CEF1 /* LGButton.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LGButton.release.xcconfig; sourceTree = "<group>"; };
-		CFAB3E51E3D178ADC7FAD7A0035B5789 /* SwiftIconFont.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIconFont.swift; path = LGButton/Classes/SwiftIconFont/SwiftIconFont.swift; sourceTree = "<group>"; };
-		D6DD6FA5007C139061E99EDE27C006F6 /* UIColor-Hex-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "UIColor-Hex-Info.plist"; sourceTree = "<group>"; };
-		D78ABB6D1576C7823B60DFB42CB16918 /* octicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = octicons.ttf; path = LGButton/Resources/octicons.ttf; sourceTree = "<group>"; };
-		DFB4C5601DA094B65857CE45BD4C47E0 /* SSBouncyButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SSBouncyButton.h; path = SSBouncyButton/SSBouncyButton.h; sourceTree = "<group>"; };
-		E0332342B54B758F776BABFB9C49DF81 /* LGButton-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LGButton-prefix.pch"; sourceTree = "<group>"; };
-		E1D980EEA26385B78D74F64268605908 /* open-iconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "open-iconic.ttf"; path = "LGButton/Resources/open-iconic.ttf"; sourceTree = "<group>"; };
+		D2EF47E6D7656F4D640839100AA599BA /* SwiftIconFont.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIconFont.swift; path = LGButton/Classes/SwiftIconFont/SwiftIconFont.swift; sourceTree = "<group>"; };
+		DAD8F359391573D6549D92B67E1B49E3 /* LGButton.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LGButton.debug.xcconfig; sourceTree = "<group>"; };
+		DAF7D16F6B20905B8A556D339F1D7592 /* LGButton-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LGButton-Info.plist"; sourceTree = "<group>"; };
+		E07E88A6155BDB925A9652B2664F974E /* LGButton.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LGButton.modulemap; sourceTree = "<group>"; };
 		E57BA06AD42BC25373627F9096B51D17 /* Pods-TempusTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TempusTests-umbrella.h"; sourceTree = "<group>"; };
-		E705060C39B4F99516ADE06E4867BC14 /* UIImage+BetterAdditions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIImage+BetterAdditions.release.xcconfig"; sourceTree = "<group>"; };
-		EC847FD933774B5CCD09D166C8A72154 /* BRYSerialAnimationQueue-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BRYSerialAnimationQueue-umbrella.h"; sourceTree = "<group>"; };
-		F7A7645A1A664907C55717CAB4F1A62C /* SSBouncyButton.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SSBouncyButton.release.xcconfig; sourceTree = "<group>"; };
-		F7F2C268C4F97C7A9A745484FA93A7C4 /* LGButton.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LGButton.debug.xcconfig; sourceTree = "<group>"; };
-		F8532340ACDDCF2E2F11FBE725CD6C16 /* SSBouncyButton-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SSBouncyButton-Info.plist"; sourceTree = "<group>"; };
+		E5AD8BAB3D5090AC4A3796F50EB03261 /* FontIon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontIon.swift; path = LGButton/Classes/SwiftIconFont/FontIon.swift; sourceTree = "<group>"; };
+		EC5B33CD47CFD0B9A002283ACE031E6B /* LGButton-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LGButton-prefix.pch"; sourceTree = "<group>"; };
 		F8BD62A441EF0F1F869044D5A59CCFD6 /* Pods-Tempus-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Tempus-umbrella.h"; sourceTree = "<group>"; };
-		FD56FE62B4FA0536D386F09CE541206D /* UIColor-Hex-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor-Hex-umbrella.h"; sourceTree = "<group>"; };
-		FDCCFC9B4D145BD4C9108565DDAE8920 /* UIImage+BetterAdditions-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+BetterAdditions-umbrella.h"; sourceTree = "<group>"; };
+		FB93E2303A4534C18998BCE625B5C3EE /* LGButton-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LGButton-umbrella.h"; sourceTree = "<group>"; };
+		FC3F9D4C8D16BB4E89EAB8C267B92982 /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "MaterialIcons-Regular.ttf"; path = "LGButton/Resources/MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
 		FE39AFA72156A7B670CE955085A73470 /* Pods-TempusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TempusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FF380E04BC0F3553B8EBF52AFBF0A633 /* Pods-Tempus */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Tempus"; path = Pods_Tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		014FCB46538C3D65FA71E1F672C48E6D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0BE3F911ED3C46434B20261EA9EF3ED2 /* Foundation.framework in Frameworks */,
-				32C2BAB81BBCF64E5A28D1B97D02EFAF /* QuartzCore.framework in Frameworks */,
-				3DA8C2F13D34FB41FFE7B2D3B41FC7D6 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		046D72766AC0FB431025D6F9BB8CFBD5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C5465DB3BBA6AFBB0022FB8C24D61A8E /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		387B82043247B725355094710FB428F9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D312E77482C95DA6D3D1F41C56D04781 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		508BA2EFBB67D31E00E766AFDE12E0F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,50 +122,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9960208DB10FB49F57C2A18B510D2A9 /* Frameworks */ = {
+		81447F3B129B98E8188359CB297128BE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				680E97DA4CEBF097623386251AC4E22A /* Foundation.framework in Frameworks */,
-				3A1801D960949433F0E1A5E9EBE9CFC5 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4B88F3681AAB603C99E446FD1FED769 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1891666C00F51FA57205B0F7FA656FDB /* Foundation.framework in Frameworks */,
-				55057D10C0F4A3063FB8C86B1BBF2A52 /* UIKit.framework in Frameworks */,
+				BD391501540A39F8771586C9726B03D9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03C14C4102D9E73413A4B595EE0439C9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				99BDE0B92CD63DA30F1D43CD4C07F3D1 /* FontAwesome.ttf */,
-				3AAD6D1F0CFF8F64B41778824178C2E2 /* Ionicons.ttf */,
-				57F51080E216497BA58A161A285675C7 /* LGButton.xib */,
-				1EB75BF6CB6473EC41AC3EBDA7FBDA86 /* map-icons.ttf */,
-				62D919BB5C1CD69D32E09EA9FAEA572D /* MaterialIcons-Regular.ttf */,
-				D78ABB6D1576C7823B60DFB42CB16918 /* octicons.ttf */,
-				E1D980EEA26385B78D74F64268605908 /* open-iconic.ttf */,
-				75C1EDD2C5466EBE29FB29A5707F671C /* themify.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		03C5C200A0787E300053CFA8F53CA094 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F0A778C0229E9BF1FD97896B93F3272B /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		05A6D4A7342F6E7F6CADE8B820346BCD /* Pods-TempusTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,73 +149,6 @@
 			path = "Target Support Files/Pods-TempusTests";
 			sourceTree = "<group>";
 		};
-		0715E0CE9533C55A25795814563FC2C2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue */,
-				BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton */,
-				FF380E04BC0F3553B8EBF52AFBF0A633 /* Pods-Tempus */,
-				5D36CB83F99EEA2E22BC215BC0B57230 /* Pods-TempusTests */,
-				A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton */,
-				7ABDA89BE7087B891A63506044D97334 /* UIColor-Hex */,
-				0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage+BetterAdditions */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		0C2E455724E4A9ABC1AD13D4BD1E652E /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				4FEF1A4387CDEDBA0D6F689CB47AA3DC /* SSBouncyButton.modulemap */,
-				B7020082CEEB0026B30818DAAA1B701C /* SSBouncyButton-dummy.m */,
-				F8532340ACDDCF2E2F11FBE725CD6C16 /* SSBouncyButton-Info.plist */,
-				2B1176FAC36B36C944F8A5CD41C4BE7E /* SSBouncyButton-prefix.pch */,
-				5A840C93C11B577D6212A6C8A219E698 /* SSBouncyButton-umbrella.h */,
-				23B1FC21998A871B931C751B7598D8EF /* SSBouncyButton.debug.xcconfig */,
-				F7A7645A1A664907C55717CAB4F1A62C /* SSBouncyButton.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SSBouncyButton";
-			sourceTree = "<group>";
-		};
-		19DF44B8A568C2EA093BEBC96A4D1CCC /* SSBouncyButton */ = {
-			isa = PBXGroup;
-			children = (
-				DFB4C5601DA094B65857CE45BD4C47E0 /* SSBouncyButton.h */,
-				0164AD09BC29D8BBF9150549B50128C3 /* SSBouncyButton.m */,
-				0C2E455724E4A9ABC1AD13D4BD1E652E /* Support Files */,
-			);
-			name = SSBouncyButton;
-			path = SSBouncyButton;
-			sourceTree = "<group>";
-		};
-		1DB90CB4A6537394F2F731A62DE3C5D0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				77CA0E80CDA9652F7932120103A3BE0C /* UIColor-Hex.modulemap */,
-				5D99C5B13269FAE3D36283F3259842BE /* UIColor-Hex-dummy.m */,
-				D6DD6FA5007C139061E99EDE27C006F6 /* UIColor-Hex-Info.plist */,
-				29A4F21B773E63F755F2162A8E1BC1D6 /* UIColor-Hex-prefix.pch */,
-				FD56FE62B4FA0536D386F09CE541206D /* UIColor-Hex-umbrella.h */,
-				A18CBCE61C67FDD918726F9EAE9183FA /* UIColor-Hex.debug.xcconfig */,
-				91002BA0F6FF72C9E4E362189B70DDFB /* UIColor-Hex.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/UIColor-Hex";
-			sourceTree = "<group>";
-		};
-		1EFD2566371BBDF049A9F83D524F4A43 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5E168825CD678F3B9360BBFE47A73BAE /* BRYSerialAnimationQueue */,
-				6C3CFF761E4772F359141533265EB463 /* LGButton */,
-				19DF44B8A568C2EA093BEBC96A4D1CCC /* SSBouncyButton */,
-				BCA8C3F7A2AAB2BC3D738FA0A224A579 /* UIColor-Hex */,
-				BC254C8A0C3B223512EB88330EC8B1B5 /* UIImage+BetterAdditions */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		37DDBD7A62E2D71AD973A2CD9A14FC2B /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,124 +158,100 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		5E168825CD678F3B9360BBFE47A73BAE /* BRYSerialAnimationQueue */ = {
+		3FC3F085341B48FE10054D37377EF310 /* LGButton */ = {
 			isa = PBXGroup;
 			children = (
-				9DDDD19B8E6423F0995666049C23B072 /* BRYSerialAnimationQueue.h */,
-				151A3C3FA944A3A4EE19E9C46972D52A /* BRYSerialAnimationQueue.m */,
-				ECFA3BDA9ECE0DB60FA13C53F4393C90 /* Support Files */,
-			);
-			name = BRYSerialAnimationQueue;
-			path = BRYSerialAnimationQueue;
-			sourceTree = "<group>";
-		};
-		6BD6437CA02DA1788FFE7BE6ED7E570A /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C278A3631AB129EB2F763252C2752E91 /* LGButton.modulemap */,
-				75DD500AC6A62EB1D9D6685786B03950 /* LGButton-dummy.m */,
-				BCDBBF48A6BDD7B3A37A3373EC2CF158 /* LGButton-Info.plist */,
-				E0332342B54B758F776BABFB9C49DF81 /* LGButton-prefix.pch */,
-				51137963930C5E5DEBC640C16E36BEFD /* LGButton-umbrella.h */,
-				F7F2C268C4F97C7A9A745484FA93A7C4 /* LGButton.debug.xcconfig */,
-				CCDBCB62EB24A40255CA079302F6CEF1 /* LGButton.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/LGButton";
-			sourceTree = "<group>";
-		};
-		6C3CFF761E4772F359141533265EB463 /* LGButton */ = {
-			isa = PBXGroup;
-			children = (
-				45469A8AE900172C5EF0D18AF3E3B2B5 /* FontAwesome.swift */,
-				5150450E7260A46FF506551991E1836B /* FontIon.swift */,
-				8D02E37B982D9231E4DA2363A222F442 /* FontLoader.swift */,
-				37CB42761E056093731A087228DEFC62 /* FontMap.swift */,
-				2E7C5692CB3E112EFA10C45BF7A2671F /* FontMaterial.swift */,
-				3C7A549A21DFB6FE685FC70F79D9DC59 /* FontOct.swift */,
-				12840D1CF5D4AEF35460A1A82E458ADE /* FontOpenic.swift */,
-				9471F5F62B42DC8DF197A1DEEF1DAC88 /* FontThemify.swift */,
-				A0D7AFFA103BF6D3203FE34DFF56F53E /* LGButton.swift */,
-				CFAB3E51E3D178ADC7FAD7A0035B5789 /* SwiftIconFont.swift */,
-				9FB759BC4151ABCA474E3735BF0A9F54 /* SwiftIconLabel.swift */,
-				03C14C4102D9E73413A4B595EE0439C9 /* Resources */,
-				6BD6437CA02DA1788FFE7BE6ED7E570A /* Support Files */,
+				BF17DC7C8ABB65E809591ADE9F9AC783 /* FontAwesome.swift */,
+				E5AD8BAB3D5090AC4A3796F50EB03261 /* FontIon.swift */,
+				29A5C10857AC89D6ABCE3E2D6D24DAF8 /* FontLoader.swift */,
+				90A275B3A285F477A135778BD185B9D6 /* FontMap.swift */,
+				4904816F98B5C8B096F4A03AE2F1A071 /* FontMaterial.swift */,
+				A4C6C0EAD85E3BBD1A8E4D519109F090 /* FontOct.swift */,
+				A0C87AF22E4D7F5F40D7EE2FEA5BD640 /* FontOpenic.swift */,
+				A5A8D78095FAD13600E3392AAA3FEAE6 /* FontThemify.swift */,
+				5CA141D1F064A320E34D1DAA818787A5 /* LGButton.swift */,
+				D2EF47E6D7656F4D640839100AA599BA /* SwiftIconFont.swift */,
+				AB19C5A267935408AE327BBC08BEA817 /* SwiftIconLabel.swift */,
+				EF19BF38D9A211EC6C758A4F0A1180C3 /* Resources */,
+				E9E1FA25813D46EECCCE0A632D92C6EE /* Support Files */,
 			);
 			name = LGButton;
 			path = LGButton;
 			sourceTree = "<group>";
 		};
-		97E8823351445561C71514C97064F9F9 /* Support Files */ = {
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				1E207C9D020DC2BDB5782DF71C7133AC /* UIImage+BetterAdditions.modulemap */,
-				83CA96C750F086CD6AA10C984AA6A382 /* UIImage+BetterAdditions-dummy.m */,
-				5305FFC9CE2544D716B27F684C4C5198 /* UIImage+BetterAdditions-Info.plist */,
-				3F0BA45160ADC56B49411C7995BA2D76 /* UIImage+BetterAdditions-prefix.pch */,
-				FDCCFC9B4D145BD4C9108565DDAE8920 /* UIImage+BetterAdditions-umbrella.h */,
-				3D0A499325DD26DE10F3A8000A4C3013 /* UIImage+BetterAdditions.debug.xcconfig */,
-				E705060C39B4F99516ADE06E4867BC14 /* UIImage+BetterAdditions.release.xcconfig */,
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/UIImage+BetterAdditions";
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		BC254C8A0C3B223512EB88330EC8B1B5 /* UIImage+BetterAdditions */ = {
+		778516F7F91DDA71C8FA8A467F680728 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4E831336C1EC99B128533662F8BA50B1 /* UIImage+BetterAdditions.h */,
-				7EB62EE0DA23BD47EAB82625DE35C1BB /* UIImage+BetterAdditions.m */,
-				97E8823351445561C71514C97064F9F9 /* Support Files */,
+				BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton */,
+				FF380E04BC0F3553B8EBF52AFBF0A633 /* Pods-Tempus */,
+				5D36CB83F99EEA2E22BC215BC0B57230 /* Pods-TempusTests */,
 			);
-			name = "UIImage+BetterAdditions";
-			path = "UIImage+BetterAdditions";
+			name = Products;
 			sourceTree = "<group>";
 		};
-		BCA8C3F7A2AAB2BC3D738FA0A224A579 /* UIColor-Hex */ = {
+		AB40F9572D97EEA172B42068CBBBB8D6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8FD97A02836CE9315DE129130353C7D3 /* UIColor+Hex.h */,
-				B97EB473FD27620BEDCFC5FE576D6FA9 /* UIColor+Hex.m */,
-				1DB90CB4A6537394F2F731A62DE3C5D0 /* Support Files */,
+				3FC3F085341B48FE10054D37377EF310 /* LGButton */,
 			);
-			name = "UIColor-Hex";
-			path = "UIColor-Hex";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				03C5C200A0787E300053CFA8F53CA094 /* Frameworks */,
-				1EFD2566371BBDF049A9F83D524F4A43 /* Pods */,
-				0715E0CE9533C55A25795814563FC2C2 /* Products */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				AB40F9572D97EEA172B42068CBBBB8D6 /* Pods */,
+				778516F7F91DDA71C8FA8A467F680728 /* Products */,
 				37DDBD7A62E2D71AD973A2CD9A14FC2B /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		ECFA3BDA9ECE0DB60FA13C53F4393C90 /* Support Files */ = {
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				68CD166330245A6D4F6940397D93160B /* BRYSerialAnimationQueue.modulemap */,
-				7F71FF6A14F1D304FA06AA3883E50A52 /* BRYSerialAnimationQueue-dummy.m */,
-				8DFC6E07A5CF796EA063555CCF008800 /* BRYSerialAnimationQueue-Info.plist */,
-				4B2BF7F0B0EBCB9D893BF29229BAE4B2 /* BRYSerialAnimationQueue-prefix.pch */,
-				EC847FD933774B5CCD09D166C8A72154 /* BRYSerialAnimationQueue-umbrella.h */,
-				A8C307D48A2C04232D8D5637F55BEEAA /* BRYSerialAnimationQueue.debug.xcconfig */,
-				A4BDF19F5B75C22C9ADCF1CBCB76BB6A /* BRYSerialAnimationQueue.release.xcconfig */,
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/BRYSerialAnimationQueue";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F0A778C0229E9BF1FD97896B93F3272B /* iOS */ = {
+		E9E1FA25813D46EECCCE0A632D92C6EE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */,
-				9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */,
-				8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */,
+				E07E88A6155BDB925A9652B2664F974E /* LGButton.modulemap */,
+				78BCF6138F17B6B8563F296484E55127 /* LGButton-dummy.m */,
+				DAF7D16F6B20905B8A556D339F1D7592 /* LGButton-Info.plist */,
+				EC5B33CD47CFD0B9A002283ACE031E6B /* LGButton-prefix.pch */,
+				FB93E2303A4534C18998BCE625B5C3EE /* LGButton-umbrella.h */,
+				DAD8F359391573D6549D92B67E1B49E3 /* LGButton.debug.xcconfig */,
+				15FB93FAE4DA44BE68098AB78204DE66 /* LGButton.release.xcconfig */,
 			);
-			name = iOS;
+			name = "Support Files";
+			path = "../Target Support Files/LGButton";
+			sourceTree = "<group>";
+		};
+		EF19BF38D9A211EC6C758A4F0A1180C3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7DBF80E3539F7FB60745CA4577FACBD9 /* FontAwesome.ttf */,
+				1F0A488336FF126A324A37C67A092EB3 /* Ionicons.ttf */,
+				52BEA02043D5B17C53C06223606AFAFC /* LGButton.xib */,
+				25913690DAC475B37D706CBB01130EAB /* map-icons.ttf */,
+				FC3F9D4C8D16BB4E89EAB8C267B92982 /* MaterialIcons-Regular.ttf */,
+				23C6247BD16DBAD5EC89116163EFE74C /* octicons.ttf */,
+				90F659AA112ACEE8DB189C4BA369B56B /* open-iconic.ttf */,
+				AB728B89E474B00E040071D645C3A3ED /* themify.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F4F24E11C0F622716D5FB033BA855751 /* Pods-Tempus */ = {
@@ -539,47 +274,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		09A5483B0B1B87D8F5CAEDF14F0A1C22 /* Headers */ = {
+		77288D0CB3D000DB6A789D85DCB0DD74 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A4C307B1CC4CA2C3AD07EE275B904AC /* UIColor+Hex.h in Headers */,
-				12E799EB0CBEE827C008EA91239A834C /* UIColor-Hex-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A085A1C910162011F1250FE750E0955 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				572CB39FC4CD6DBB18F8190B3434492F /* BRYSerialAnimationQueue.h in Headers */,
-				4046B540821603D05A9F4E61A6844569 /* BRYSerialAnimationQueue-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		77051FA367995EAD60EF189A60E7659D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				64CCD9D3700E690CD2E2265D491408D4 /* UIImage+BetterAdditions.h in Headers */,
-				DDB639C108807FA99419414744AD2ED8 /* UIImage+BetterAdditions-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A3F70372C73D25D946AEBC0CF1F8BEDB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5587532098FACECE0846A61284ED5FB4 /* SSBouncyButton.h in Headers */,
-				A1FCEE675A64D150E129CA9F175FE265 /* SSBouncyButton-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A63008EA6268AEFAB53ACDC50A0C2869 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7D0A112B539F8F5A0C979EC5220B6F5D /* Pods-Tempus-umbrella.h in Headers */,
+				B6672B725FF1B58825C9D2715CAC7B79 /* Pods-Tempus-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,63 +301,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4C94D6FBF5723FAFE8C7D8C2FDC5609E /* UIImage+BetterAdditions */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5CD4232A9ADD62551A63050E836CF15D /* Build configuration list for PBXNativeTarget "UIImage+BetterAdditions" */;
-			buildPhases = (
-				77051FA367995EAD60EF189A60E7659D /* Headers */,
-				87A7D097E3628586A8278C185C6E46F2 /* Sources */,
-				A9960208DB10FB49F57C2A18B510D2A9 /* Frameworks */,
-				2901EEF06C1A054786F017900814345A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "UIImage+BetterAdditions";
-			productName = UIImage_BetterAdditions;
-			productReference = 0E552213BE19E6A25E7C3A3F431E27E9 /* UIImage+BetterAdditions */;
-			productType = "com.apple.product-type.framework";
-		};
-		50BF2150400A5C6A706C51570CDA7E92 /* SSBouncyButton */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CB4433CADF9DE29D8FABEC881A67E093 /* Build configuration list for PBXNativeTarget "SSBouncyButton" */;
-			buildPhases = (
-				A3F70372C73D25D946AEBC0CF1F8BEDB /* Headers */,
-				CDA70C6024A9D9A95201299175252716 /* Sources */,
-				014FCB46538C3D65FA71E1F672C48E6D /* Frameworks */,
-				2F1B4FA64CB9BCE8E0E0998F103C6F2D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				46D2CF24C503FEFCA23E3C55CB61DD04 /* PBXTargetDependency */,
-				7F815197AF730F69B26AC687C560A2D0 /* PBXTargetDependency */,
-				39AADDA9D8FBFF02E6D601DF6DC0A4D2 /* PBXTargetDependency */,
-			);
-			name = SSBouncyButton;
-			productName = SSBouncyButton;
-			productReference = A50ACE34088AA3319B5BD111D8DE2AB1 /* SSBouncyButton */;
-			productType = "com.apple.product-type.framework";
-		};
-		9EE6304522E8774FC6803D6905A792CA /* UIColor-Hex */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8CA7667454FDF22CF56E0D628E2D18CF /* Build configuration list for PBXNativeTarget "UIColor-Hex" */;
-			buildPhases = (
-				09A5483B0B1B87D8F5CAEDF14F0A1C22 /* Headers */,
-				7F060C55E2B7FC9850A79F109E086F5F /* Sources */,
-				387B82043247B725355094710FB428F9 /* Frameworks */,
-				AFC3A8206D94C72A57118B3A9822DEAD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "UIColor-Hex";
-			productName = UIColor_Hex;
-			productReference = 7ABDA89BE7087B891A63506044D97334 /* UIColor-Hex */;
-			productType = "com.apple.product-type.framework";
-		};
 		F9734FECA428682C99C0AEF07113B978 /* Pods-TempusTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E77FC15884936F94D71E3849CBE52AA7 /* Build configuration list for PBXNativeTarget "Pods-TempusTests" */;
@@ -671,7 +313,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				DBD67DB52C66495C925535E56CCB2AE1 /* PBXTargetDependency */,
+				B0E9A076261166838D28E953E7F815B7 /* PBXTargetDependency */,
 			);
 			name = "Pods-TempusTests";
 			productName = Pods_TempusTests;
@@ -680,43 +322,21 @@
 		};
 		FB48F5E7D247F6540DBA70DE75C4FB32 /* Pods-Tempus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E9A9F69E56B452FBD6881646EE04287 /* Build configuration list for PBXNativeTarget "Pods-Tempus" */;
+			buildConfigurationList = 87F82BCDB8B492BF6D8B45E5022D2D42 /* Build configuration list for PBXNativeTarget "Pods-Tempus" */;
 			buildPhases = (
-				A63008EA6268AEFAB53ACDC50A0C2869 /* Headers */,
-				D44E8CA82BC4D0A702713FF468529BC1 /* Sources */,
-				046D72766AC0FB431025D6F9BB8CFBD5 /* Frameworks */,
-				CAF1FCADFE5B1B1D796DEAF723D1DA01 /* Resources */,
+				77288D0CB3D000DB6A789D85DCB0DD74 /* Headers */,
+				9B57551CD307501D57F9818515403895 /* Sources */,
+				81447F3B129B98E8188359CB297128BE /* Frameworks */,
+				4EDB1BDD3758EE3C517AAEB53D5E9F63 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D4A36AFCC471E7370FA702474CC26CD1 /* PBXTargetDependency */,
-				0236E93D20BC84BB748263125907ED57 /* PBXTargetDependency */,
-				4111383B0C6685F0932925E4AD9C4488 /* PBXTargetDependency */,
-				A7CA5B262E6A0681092340425FB83AAC /* PBXTargetDependency */,
-				7107EC213BA058862F6A6F975AE3AC3A /* PBXTargetDependency */,
+				AF7C126E2E2AD87FFD2386FF204A80A1 /* PBXTargetDependency */,
 			);
 			name = "Pods-Tempus";
 			productName = Pods_Tempus;
 			productReference = FF380E04BC0F3553B8EBF52AFBF0A633 /* Pods-Tempus */;
-			productType = "com.apple.product-type.framework";
-		};
-		FBDE0A3FF4473CF689AD35D504A7B1F7 /* BRYSerialAnimationQueue */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4F94583E7C1F11381BAD3D8035C640B2 /* Build configuration list for PBXNativeTarget "BRYSerialAnimationQueue" */;
-			buildPhases = (
-				5A085A1C910162011F1250FE750E0955 /* Headers */,
-				C1225FE61C3A3AF7851A2E02EE39CF3A /* Sources */,
-				D4B88F3681AAB603C99E446FD1FED769 /* Frameworks */,
-				93C8073194859B4CA88A01DE0161338D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BRYSerialAnimationQueue;
-			productName = BRYSerialAnimationQueue;
-			productReference = 9B17AEC3DBB2759CE801204EAB765DB4 /* BRYSerialAnimationQueue */;
 			productType = "com.apple.product-type.framework";
 		};
 		FD999FE212F29E29DEEA0A85E1DC4D4E /* LGButton */ = {
@@ -755,51 +375,19 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 0715E0CE9533C55A25795814563FC2C2 /* Products */;
+			productRefGroup = 778516F7F91DDA71C8FA8A467F680728 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FBDE0A3FF4473CF689AD35D504A7B1F7 /* BRYSerialAnimationQueue */,
 				FD999FE212F29E29DEEA0A85E1DC4D4E /* LGButton */,
 				FB48F5E7D247F6540DBA70DE75C4FB32 /* Pods-Tempus */,
 				F9734FECA428682C99C0AEF07113B978 /* Pods-TempusTests */,
-				50BF2150400A5C6A706C51570CDA7E92 /* SSBouncyButton */,
-				9EE6304522E8774FC6803D6905A792CA /* UIColor-Hex */,
-				4C94D6FBF5723FAFE8C7D8C2FDC5609E /* UIImage+BetterAdditions */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2901EEF06C1A054786F017900814345A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2F1B4FA64CB9BCE8E0E0998F103C6F2D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		93C8073194859B4CA88A01DE0161338D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC3A8206D94C72A57118B3A9822DEAD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CAF1FCADFE5B1B1D796DEAF723D1DA01 /* Resources */ = {
+		4EDB1BDD3758EE3C517AAEB53D5E9F63 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -858,181 +446,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7F060C55E2B7FC9850A79F109E086F5F /* Sources */ = {
+		9B57551CD307501D57F9818515403895 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A1D75D4EA62C1AA392CFD74156C2D5B /* UIColor+Hex.m in Sources */,
-				D9896928005DF97EDA0FAD8809E62193 /* UIColor-Hex-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87A7D097E3628586A8278C185C6E46F2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5E5977C17F314C31AAE313E20479E85 /* UIImage+BetterAdditions.m in Sources */,
-				D4485193E9FC99B0DCFC83F58258EE13 /* UIImage+BetterAdditions-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C1225FE61C3A3AF7851A2E02EE39CF3A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CF4181B53E72DA956DF59C69994A1610 /* BRYSerialAnimationQueue.m in Sources */,
-				5FDD05828ECE893FB09E1C36FF5BB7DB /* BRYSerialAnimationQueue-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CDA70C6024A9D9A95201299175252716 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				669F343CEFDCD4C390870303B08B7306 /* SSBouncyButton.m in Sources */,
-				3912D7EAAD1DB42EE6D6AC6D183BF8B1 /* SSBouncyButton-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D44E8CA82BC4D0A702713FF468529BC1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D37E076860A2E824817B449EB787BC1 /* Pods-Tempus-dummy.m in Sources */,
+				9DDCF3BDB1058345F01A4DD5CB1B4FB2 /* Pods-Tempus-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0236E93D20BC84BB748263125907ED57 /* PBXTargetDependency */ = {
+		AF7C126E2E2AD87FFD2386FF204A80A1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LGButton;
 			target = FD999FE212F29E29DEEA0A85E1DC4D4E /* LGButton */;
-			targetProxy = 21F360BBF8987F68AED0D718B8CC8BC9 /* PBXContainerItemProxy */;
+			targetProxy = DA684D24A796827CAC90441E3F8B75BE /* PBXContainerItemProxy */;
 		};
-		39AADDA9D8FBFF02E6D601DF6DC0A4D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "UIImage+BetterAdditions";
-			target = 4C94D6FBF5723FAFE8C7D8C2FDC5609E /* UIImage+BetterAdditions */;
-			targetProxy = 3F8A2A9957F18E06A739427A9B2DC413 /* PBXContainerItemProxy */;
-		};
-		4111383B0C6685F0932925E4AD9C4488 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SSBouncyButton;
-			target = 50BF2150400A5C6A706C51570CDA7E92 /* SSBouncyButton */;
-			targetProxy = A65772194544888BC4A28034552EBEA8 /* PBXContainerItemProxy */;
-		};
-		46D2CF24C503FEFCA23E3C55CB61DD04 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BRYSerialAnimationQueue;
-			target = FBDE0A3FF4473CF689AD35D504A7B1F7 /* BRYSerialAnimationQueue */;
-			targetProxy = 2623A0483C6A2868E0DFC745D97EA38B /* PBXContainerItemProxy */;
-		};
-		7107EC213BA058862F6A6F975AE3AC3A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "UIImage+BetterAdditions";
-			target = 4C94D6FBF5723FAFE8C7D8C2FDC5609E /* UIImage+BetterAdditions */;
-			targetProxy = B16CF85BDF4FD7540F63613087C5CC8D /* PBXContainerItemProxy */;
-		};
-		7F815197AF730F69B26AC687C560A2D0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "UIColor-Hex";
-			target = 9EE6304522E8774FC6803D6905A792CA /* UIColor-Hex */;
-			targetProxy = E8AC8A6E0B72E0799C8A4A9926150CD8 /* PBXContainerItemProxy */;
-		};
-		A7CA5B262E6A0681092340425FB83AAC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "UIColor-Hex";
-			target = 9EE6304522E8774FC6803D6905A792CA /* UIColor-Hex */;
-			targetProxy = 3F4A1DA2FC60614FBC290169014535C6 /* PBXContainerItemProxy */;
-		};
-		D4A36AFCC471E7370FA702474CC26CD1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BRYSerialAnimationQueue;
-			target = FBDE0A3FF4473CF689AD35D504A7B1F7 /* BRYSerialAnimationQueue */;
-			targetProxy = EFD9028E5C5C96410DF55A609957B2A0 /* PBXContainerItemProxy */;
-		};
-		DBD67DB52C66495C925535E56CCB2AE1 /* PBXTargetDependency */ = {
+		B0E9A076261166838D28E953E7F815B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Tempus";
 			target = FB48F5E7D247F6540DBA70DE75C4FB32 /* Pods-Tempus */;
-			targetProxy = 33B9897B62738E70400A0718811C7F34 /* PBXContainerItemProxy */;
+			targetProxy = 27F574C940C8293EE4F6226BC25F5958 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		15A79B59BDE140BC110AF652104302B9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A18CBCE61C67FDD918726F9EAE9183FA /* UIColor-Hex.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/UIColor-Hex/UIColor-Hex-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/UIColor-Hex/UIColor-Hex-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/UIColor-Hex/UIColor-Hex.modulemap";
-				PRODUCT_MODULE_NAME = UIColor_Hex;
-				PRODUCT_NAME = UIColor_Hex;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		180078FF6082F1B3CE9A9758756FC8DE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D0A499325DD26DE10F3A8000A4C3013 /* UIImage+BetterAdditions.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions.modulemap";
-				PRODUCT_MODULE_NAME = UIImage_BetterAdditions;
-				PRODUCT_NAME = UIImage_BetterAdditions;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		1806A4AEA6ABE2F8618D37F6A4BBB117 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCDBCB62EB24A40255CA079302F6CEF1 /* LGButton.release.xcconfig */;
+			baseConfigurationReference = 15FB93FAE4DA44BE68098AB78204DE66 /* LGButton.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1169,45 +611,7 @@
 			};
 			name = Debug;
 		};
-		4CA0E1A79989B911591389FEBFF07F9D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CE8AB1959BDBB25B8EA3C8804F122AA /* Pods-Tempus.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Tempus/Pods-Tempus-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Tempus/Pods-Tempus.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4E3590C8E44E5F6425375B26BA0D0C5C /* Debug */ = {
+		6E9EF94D54B732F26E6F38BE03EBB920 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C9D1EC16624D0C59378E2AA755A050B2 /* Pods-Tempus.debug.xcconfig */;
 			buildSettings = {
@@ -1244,44 +648,9 @@
 			};
 			name = Debug;
 		};
-		59D2B0F7E2AC8F4FA70771130B451398 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91002BA0F6FF72C9E4E362189B70DDFB /* UIColor-Hex.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/UIColor-Hex/UIColor-Hex-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/UIColor-Hex/UIColor-Hex-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/UIColor-Hex/UIColor-Hex.modulemap";
-				PRODUCT_MODULE_NAME = UIColor_Hex;
-				PRODUCT_NAME = UIColor_Hex;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		8988BEBB893C1B6B55661B0857E8CEBE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7F2C268C4F97C7A9A745484FA93A7C4 /* LGButton.debug.xcconfig */;
+			baseConfigurationReference = DAD8F359391573D6549D92B67E1B49E3 /* LGButton.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1375,110 +744,6 @@
 			};
 			name = Release;
 		};
-		959861985FF5C5197B2E234B359EDB20 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7A7645A1A664907C55717CAB4F1A62C /* SSBouncyButton.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SSBouncyButton/SSBouncyButton-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SSBouncyButton/SSBouncyButton-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SSBouncyButton/SSBouncyButton.modulemap";
-				PRODUCT_MODULE_NAME = SSBouncyButton;
-				PRODUCT_NAME = SSBouncyButton;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		970A916E7F5EFE8CB1AFEA726EAB5320 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4BDF19F5B75C22C9ADCF1CBCB76BB6A /* BRYSerialAnimationQueue.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue.modulemap";
-				PRODUCT_MODULE_NAME = BRYSerialAnimationQueue;
-				PRODUCT_NAME = BRYSerialAnimationQueue;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		DB4E8F3B419DB1B447B11A26CF9614B6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23B1FC21998A871B931C751B7598D8EF /* SSBouncyButton.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SSBouncyButton/SSBouncyButton-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SSBouncyButton/SSBouncyButton-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SSBouncyButton/SSBouncyButton.modulemap";
-				PRODUCT_MODULE_NAME = SSBouncyButton;
-				PRODUCT_NAME = SSBouncyButton;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		DED1A80960F69A9C7B46910AD5301F65 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FE39AFA72156A7B670CE955085A73470 /* Pods-TempusTests.debug.xcconfig */;
@@ -1516,10 +781,12 @@
 			};
 			name = Debug;
 		};
-		F0051DA6B999F10062D908E74C9525A2 /* Release */ = {
+		E1A21C844979BF6807A5C8C889E82F28 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E705060C39B4F99516ADE06E4867BC14 /* UIImage+BetterAdditions.release.xcconfig */;
+			baseConfigurationReference = 0CE8AB1959BDBB25B8EA3C8804F122AA /* Pods-Tempus.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1528,62 +795,29 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Tempus/Pods-Tempus-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/UIImage+BetterAdditions/UIImage+BetterAdditions.modulemap";
-				PRODUCT_MODULE_NAME = UIImage_BetterAdditions;
-				PRODUCT_NAME = UIImage_BetterAdditions;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Tempus/Pods-Tempus.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		FDF59E7C4046B97F1851E5B12E09D0B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8C307D48A2C04232D8D5637F55BEEAA /* BRYSerialAnimationQueue.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/BRYSerialAnimationQueue/BRYSerialAnimationQueue.modulemap";
-				PRODUCT_MODULE_NAME = BRYSerialAnimationQueue;
-				PRODUCT_NAME = BRYSerialAnimationQueue;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1597,15 +831,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E9A9F69E56B452FBD6881646EE04287 /* Build configuration list for PBXNativeTarget "Pods-Tempus" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4E3590C8E44E5F6425375B26BA0D0C5C /* Debug */,
-				4CA0E1A79989B911591389FEBFF07F9D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1615,38 +840,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F94583E7C1F11381BAD3D8035C640B2 /* Build configuration list for PBXNativeTarget "BRYSerialAnimationQueue" */ = {
+		87F82BCDB8B492BF6D8B45E5022D2D42 /* Build configuration list for PBXNativeTarget "Pods-Tempus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FDF59E7C4046B97F1851E5B12E09D0B4 /* Debug */,
-				970A916E7F5EFE8CB1AFEA726EAB5320 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5CD4232A9ADD62551A63050E836CF15D /* Build configuration list for PBXNativeTarget "UIImage+BetterAdditions" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				180078FF6082F1B3CE9A9758756FC8DE /* Debug */,
-				F0051DA6B999F10062D908E74C9525A2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8CA7667454FDF22CF56E0D628E2D18CF /* Build configuration list for PBXNativeTarget "UIColor-Hex" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				15A79B59BDE140BC110AF652104302B9 /* Debug */,
-				59D2B0F7E2AC8F4FA70771130B451398 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CB4433CADF9DE29D8FABEC881A67E093 /* Build configuration list for PBXNativeTarget "SSBouncyButton" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DB4E8F3B419DB1B447B11A26CF9614B6 /* Debug */,
-				959861985FF5C5197B2E234B359EDB20 /* Release */,
+				6E9EF94D54B732F26E6F38BE03EBB920 /* Debug */,
+				E1A21C844979BF6807A5C8C889E82F28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

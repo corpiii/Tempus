@@ -1,6 +1,2 @@
 ${PODS_ROOT}/Target Support Files/Pods-Tempus/Pods-Tempus-frameworks.sh
-${BUILT_PRODUCTS_DIR}/BRYSerialAnimationQueue/BRYSerialAnimationQueue.framework
 ${BUILT_PRODUCTS_DIR}/LGButton/LGButton.framework
-${BUILT_PRODUCTS_DIR}/SSBouncyButton/SSBouncyButton.framework
-${BUILT_PRODUCTS_DIR}/UIColor-Hex/UIColor_Hex.framework
-${BUILT_PRODUCTS_DIR}/UIImage+BetterAdditions/UIImage_BetterAdditions.framework
