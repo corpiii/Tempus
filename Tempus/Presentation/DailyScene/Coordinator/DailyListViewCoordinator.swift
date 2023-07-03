@@ -19,12 +19,15 @@ final class DailyListViewCoordinator: Coordinator, FinishDelegate {
     let navigationController: UINavigationController
     
     init(repository: DataManagerRepository, startModeDelegate: StartModeDelegate) {
+        let tabBarImage = UIImage(systemName: "calendar")
+        let tabBarItem = UITabBarItem(title: nil, image: tabBarImage, selectedImage: nil)
+        
         self.repository = repository
         self.dailyListViewModel = .init(repository: self.repository)
         self.dailyListViewController = .init(viewModel: self.dailyListViewModel)
         self.startModeDelegate = startModeDelegate
         self.navigationController = .init(rootViewController: dailyListViewController)
-        self.navigationController.tabBarItem = .init(tabBarSystemItem: .favorites, tag: 2)
+        self.navigationController.tabBarItem = tabBarItem
     }
     
     func start() {
