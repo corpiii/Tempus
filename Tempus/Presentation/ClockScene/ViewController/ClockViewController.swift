@@ -129,7 +129,7 @@ private extension ClockViewController {
         
         leftDivideView.snp.makeConstraints { make in
             let totalWidth = safeArea.layoutFrame.width * Constant.timerViewWidthMultipleBySafeAreaWidth
-            let startButtonWidth = safeArea.layoutFrame.width * 0.20
+            let startButtonWidth = safeArea.layoutFrame.width * 0.25
             let width = (totalWidth - startButtonWidth) / 2
             
             make.width.equalTo(width)
