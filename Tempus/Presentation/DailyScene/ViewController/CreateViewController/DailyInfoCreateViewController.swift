@@ -109,6 +109,10 @@ final class DailyInfoCreateViewController: UIViewController {
         configureUI()
         bindViewModel()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - ConfigureUI

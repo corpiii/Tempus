@@ -99,6 +99,10 @@ final class BlockCreateViewController: UIViewController {
         disappearEvent.onNext(())
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     private func makeHeightDividerView() -> UIView {
         let emptyView = UIView()
         
