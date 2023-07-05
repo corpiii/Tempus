@@ -59,8 +59,9 @@ private extension TimerStartUseCase {
     @objc func adjustDate(_ sender: Notification) {
         timerStart()
         
-        if let object = sender.object as? Date {
-            let flowSecond = Date().timeIntervalSince(object)
+        if let object = sender.object as? Double {
+            let date = Date(timeIntervalSince1970: object)
+            let flowSecond = Date().timeIntervalSince(date)
             let interval = flowSecond.truncatingRemainder(dividingBy: originModel.wasteTime)
             remainTime.flow(second: interval)
         }
