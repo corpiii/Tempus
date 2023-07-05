@@ -22,7 +22,6 @@ final class DailyInfoCreateViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "제목"
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = .clear
         
         return textField
     }()
