@@ -171,7 +171,7 @@ private extension ClockViewController {
     
     func setStartButtonState(isSelected: Bool) {
         if isSelected {
-            startButton.leftImageSrc = .init(systemName: "pause.fill")
+            startButton.leftImageSrc = .init(systemName: "stop.fill")
         } else {
             startButton.leftImageSrc = .init(systemName: "play.fill")
         }
