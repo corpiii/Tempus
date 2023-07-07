@@ -18,7 +18,7 @@ final class BlockListViewController: UIViewController {
     private let tableViewDataSourceManager: BlockTableViewDataSourceManager
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
-        tableView.backgroundColor = .init(hex: "#E3F4F4")
+        tableView.backgroundColor = ColorConstant.fourthColor
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView

@@ -120,7 +120,7 @@ final class BlockEditViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension BlockEditViewController {
     func configureUI() {
-        self.view.backgroundColor = .init(hex: "#E3F4F4")
+        self.view.backgroundColor = ColorConstant.fourthColor
         configureNavigationBar()
         configureEntireStackView()
         configureDivideCountStackView()

@@ -12,8 +12,8 @@ class ClockView: UIView {
         static let startAngle: CGFloat = -75 * CGFloat.pi / 180
         static let lineWidth: CGFloat = 3.0
         static let dotRadius: CGFloat = 3.0
-        static let lineColor: CGColor = UIColor(hex: "#176B87")!.cgColor
-        static let clockBackgroundColor: CGColor = UIColor(hex: "#64CCC5")!.cgColor
+        static let lineColor: CGColor = ColorConstant.firstColor.cgColor
+        static let clockBackgroundColor: CGColor = UIColor.systemBackground.cgColor
     }
     
     lazy var circleCenter = CGPoint(x: bounds.midX, y: bounds.midY)

@@ -109,7 +109,7 @@ final class DailyTimeDurationCreateViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension DailyTimeDurationCreateViewController {
     func configureUI() {
-        self.view.backgroundColor = .init(hex: "#E3F4F4")
+        self.view.backgroundColor = ColorConstant.fourthColor
         
         configureNavigationBar()
         configureEntireStackView()

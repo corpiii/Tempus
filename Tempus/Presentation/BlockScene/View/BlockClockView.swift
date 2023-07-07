@@ -45,8 +45,8 @@ final class BlockClockView: ClockView {
             arkLayer.path = arkPath.cgPath
 
             arkLayer.lineWidth = 2.0
-            arkLayer.strokeColor = Constant.lineColor
-            arkLayer.fillColor = UIColor.clear.cgColor
+            arkLayer.strokeColor = UIColor.systemBackground.cgColor
+            arkLayer.fillColor = ColorConstant.firstColor.cgColor
 
             splitLayer.addSublayer(arkLayer)
         }
