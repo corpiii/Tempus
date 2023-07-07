@@ -8,8 +8,10 @@
 import UIKit
 
 enum ColorConstant {
-    static let firstColor: UIColor = .init(hex: "#A0C49D")!
-    static let secondColor: UIColor = .init(hex: "#C4D7B2")!
-    static let thirdColor: UIColor = .init(hex: "#E1ECC8")!
-    static let fourthColor: UIColor = .init(hex: "#FFFFFF")!
+    static let firstColor: UIColor = .init(hex: "#6096D4")!
+    static let secondColor: UIColor = .init(hex: "#3F72AF", alpha: 0.8)!
+    static let thirdColor: UIColor = .init(hex: "#A5DEE5", alpha: 0.8)!
+    static let fourthColor: UIColor = .init(hex: "#EEE9DA")!
+    
+    static let backGroundColor: UIColor = .init(hex: "#FFFFFF")!
 }

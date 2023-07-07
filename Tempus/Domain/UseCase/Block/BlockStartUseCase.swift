@@ -104,7 +104,7 @@ private extension BlockStartUseCase {
             }
         })
         
-        RunLoop.current.add(timer!, forMode: .default)
+        RunLoop.current.add(timer!, forMode: .common)
     }
     
     func enrollNotification(_ blockTime: Int) {

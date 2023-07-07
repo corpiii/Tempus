@@ -129,7 +129,7 @@ private extension DailyStartUseCase {
             }
         })
         
-        RunLoop.current.add(timer!, forMode: .default)
+        RunLoop.current.add(timer!, forMode: .common)
     }
     
     func modeStop() {

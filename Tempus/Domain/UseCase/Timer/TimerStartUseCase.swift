@@ -123,7 +123,7 @@ private extension TimerStartUseCase {
             }
         })
         
-        RunLoop.current.add(timer!, forMode: .default)
+        RunLoop.current.add(timer!, forMode: .common)
     }
     
     func modeStop() {
