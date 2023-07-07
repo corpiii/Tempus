@@ -104,7 +104,7 @@ final class DailyInfoCreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = ColorConstant.fourthColor
+        self.view.backgroundColor = ColorConstant.backGroundColor
         configureUI()
         bindViewModel()
     }

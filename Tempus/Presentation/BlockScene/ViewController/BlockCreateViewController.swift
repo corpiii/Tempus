@@ -127,7 +127,7 @@ final class BlockCreateViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension BlockCreateViewController {
     func configureUI() {
-        self.view.backgroundColor = ColorConstant.fourthColor
+        self.view.backgroundColor = ColorConstant.backGroundColor
         configureNavigationBar()
         configureEntireStackView()
         configureDivideCountStackView()

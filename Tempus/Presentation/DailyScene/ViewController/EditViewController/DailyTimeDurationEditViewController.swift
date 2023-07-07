@@ -106,7 +106,7 @@ class DailyTimeDurationEditViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension DailyTimeDurationEditViewController {
     func configureUI() {
-        self.view.backgroundColor = ColorConstant.fourthColor
+        self.view.backgroundColor = ColorConstant.backGroundColor
         
         configureNavigationBar()
         configureEntireStackView()

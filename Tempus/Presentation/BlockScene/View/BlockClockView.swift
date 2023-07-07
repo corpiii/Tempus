@@ -38,7 +38,7 @@ final class BlockClockView: ClockView {
             let arkPath = UIBezierPath()
 
             arkPath.move(to: circleCenter)
-            arkPath.addArc(withCenter: circleCenter, radius: radius,
+            arkPath.addArc(withCenter: circleCenter, radius: radius * 0.8,
                            startAngle: angle, endAngle: angle + angleInterval, clockwise: true)
             arkPath.close()
 

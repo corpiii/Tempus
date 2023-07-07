@@ -84,7 +84,7 @@ class ClockViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension ClockViewController {
     func configureSelfView() {
-        self.view.backgroundColor = ColorConstant.fourthColor
+        self.view.backgroundColor = ColorConstant.backGroundColor
     }
     
     func configureUI() {

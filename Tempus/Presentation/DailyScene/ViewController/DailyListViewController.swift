@@ -18,7 +18,7 @@ final class DailyListViewController: UIViewController {
     private let tableViewDataSourceManager: DailyTableViewDataSourceManager
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
-        tableView.backgroundColor = ColorConstant.fourthColor
+        tableView.backgroundColor = ColorConstant.backGroundColor
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
