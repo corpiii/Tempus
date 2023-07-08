@@ -59,7 +59,15 @@
 |![Timer_Start](https://github.com/jjpush/Tempus/assets/82566116/292a0f37-1ac1-4b45-a5ab-f9a26add29da)|
 
 ## 🔥 기술적 도전
-- RxSwift
-- SnapKit
-- Custom View
-- UseCase내 Input, Output
+#### RxSwift
+- 어떤 이벤트로 발생한 값이 하나의 스트림으로 이어져 작업을 수행할 수 있도록 Reactive한 프로그래밍을 하기 위해서 RxSwift를 사용해보았습니다.
+
+#### SnapKit
+- 기존 AutoLayout을 보완하는 오픈소스인 SnapKit을 사용하여 AutoLayout을 보다 간결하고 가독성을 높여주도록 하기 위해 사용해보았습니다.
+
+#### Custom View
+- 시계를 표시하기위한 적절한 라이브러리를 찾지 못해 직접 개발하자는 생각이 들었습니다. 
+- 향후 혹시나 저와 같은 고민을 하는 분들도 있을 수 있어 오픈소스로 출시를 할 예정입니다.
+
+#### UseCase내 Input, Output
+- 잘 쓰이는 패턴은 아니지만 Clean Architecture에서 소개된 Input, Output의 개념을 ViewModel 뿐만 아닌 UseCase에도 적용을 해보자 싶어 적용해보았습니다.
