@@ -18,8 +18,7 @@
 ## 🛠️ 아키텍쳐
 
 **MVVM-C & Clean Architecture**
-
-![](https://hackmd.io/_uploads/HJzw5iIK3.png)
+<img width="2493" alt="스크린샷 2023-07-08 오후 9 31 46" src="https://github.com/jjpush/Tempus/assets/82566116/6a088749-c5f2-40ec-a1de-b0477c82362e">
 
 #### MVVM
 - MVVM을 아키텍쳐를 이용해서 ViewController에서 ViewModel로 로직을 분리시켜 주었습니다
