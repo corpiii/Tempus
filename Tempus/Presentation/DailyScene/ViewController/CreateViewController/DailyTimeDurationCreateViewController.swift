@@ -100,12 +100,16 @@ final class DailyTimeDurationCreateViewController: UIViewController {
         bindViewModel()
         dailyClockView.alertDelegate = self
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - ConfigureUI
 private extension DailyTimeDurationCreateViewController {
     func configureUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = ColorConstant.backGroundColor
         
         configureNavigationBar()
         configureEntireStackView()

@@ -99,6 +99,10 @@ final class BlockCreateViewController: UIViewController {
         disappearEvent.onNext(())
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     private func makeHeightDividerView() -> UIView {
         let emptyView = UIView()
         
@@ -123,7 +127,7 @@ final class BlockCreateViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension BlockCreateViewController {
     func configureUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = ColorConstant.backGroundColor
         configureNavigationBar()
         configureEntireStackView()
         configureDivideCountStackView()

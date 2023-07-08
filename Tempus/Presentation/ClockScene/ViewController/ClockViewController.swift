@@ -9,21 +9,44 @@ import UIKit
 
 import RxSwift
 import SnapKit
-import SSBouncyButton
+import LGButton
 
 class ClockViewController: UIViewController {
-    private let startButton: SSBouncyButton = {
-        let button = SSBouncyButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("시작", for: .normal)
-        button.setTitle("중지", for: .selected)
-        button.tintColor = .systemBlue
-        button.titleLabel?.font = .preferredFont(forTextStyle: .subheadline, compatibleWith: .none)
+    private enum Constant {
+        static let startButtonColor: UIColor = .init(red: 49 / 255.0,
+                                                     green: 130 / 255.0,
+                                                     blue: 222 / 255.0,
+                                                     alpha: 87 / 100.0)
+        static let timerViewWidthMultipleBySafeAreaWidth: Double = 0.8
+    }
+    
+    private let entireStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        return stackView
+    }()
+        
+    private let countDownTimerView: CountDownTimerView = .init()
+    
+    private let startButtonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        
+        return stackView
+    }()
+    
+    private let startButton: LGButton = {
+        let button = LGButton()
+        button.leftImageColor = .white
+        button.leftImageSrc = .init(systemName: "play.fill")
+        button.bgColor = Constant.startButtonColor
+        button.cornerRadius = 10
         
         return button
     }()
-    
-    private let countDownTimerView: CountDownTimerView = .init()
     
     private let startEvent: PublishSubject<Void> = .init()
     private let stopEvent: PublishSubject<Void> = .init()
@@ -46,49 +69,85 @@ class ClockViewController: UIViewController {
         configureUI()
         bindViewModel()
     }
+    
+    private func makeWidthDividerView() -> UIView {
+        let emptyView = UIView()
+        
+        emptyView.snp.makeConstraints { make in
+            make.width.greaterThanOrEqualTo(1)
+        }
+        
+        return emptyView
+    }
 }
 
 // MARK: - ConfigureUI
 private extension ClockViewController {
     func configureSelfView() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = ColorConstant.backGroundColor
     }
     
     func configureUI() {
+        configureEntireStackView()
         configureTimerView()
-        configureStartButton()
+        configureStartButtonStackView()
+    }
+    
+    func configureEntireStackView() {
+        self.view.addSubview(entireStackView)
+        
+        entireStackView.addArrangedSubview(countDownTimerView)
+        entireStackView.addArrangedSubview(startButtonStackView)
+        
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        entireStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(safeArea.snp.centerX)
+            make.centerY.equalTo(safeArea.snp.centerY)
+        }
+        
+        let timerViewHeight = safeArea.layoutFrame.width * Constant.timerViewWidthMultipleBySafeAreaWidth
+        entireStackView.spacing = timerViewHeight * 0.2
     }
     
     func configureTimerView() {
-        self.view.addSubview(countDownTimerView)
-        
         let safeArea = self.view.safeAreaLayoutGuide
         countDownTimerView.snp.makeConstraints { make in
-            make.centerX.equalTo(safeArea.snp.centerX)
-            make.width.equalTo(safeArea.snp.width).multipliedBy(0.8)
-            
+            make.width.equalTo(safeArea.snp.width).multipliedBy(Constant.timerViewWidthMultipleBySafeAreaWidth)
             make.height.equalTo(countDownTimerView.snp.width)
-            
-            let height = safeArea.layoutFrame.height
-            make.top.equalTo(safeArea.snp.top).offset(height * 0.1)
         }
     }
     
+    func configureStartButtonStackView() {
+        let leftDivideView = makeWidthDividerView()
+        let rightDivideView = makeWidthDividerView()
+        
+        startButtonStackView.addArrangedSubview(leftDivideView)
+        startButtonStackView.addArrangedSubview(startButton)
+        startButtonStackView.addArrangedSubview(rightDivideView)
+        
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        leftDivideView.snp.makeConstraints { make in
+            let totalWidth = safeArea.layoutFrame.width * Constant.timerViewWidthMultipleBySafeAreaWidth
+            let startButtonWidth = safeArea.layoutFrame.width * 0.25
+            let width = (totalWidth - startButtonWidth) / 2
+            
+            make.width.equalTo(width)
+        }
+        
+        configureStartButton()
+    }
+    
     func configureStartButton() {
-        self.view.addSubview(startButton)
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         
         let safeArea = self.view.safeAreaLayoutGuide
         
         startButton.snp.makeConstraints { make in
-            let timerViewHeight = safeArea.layoutFrame.width * 0.8
-            make.top.equalTo(countDownTimerView.snp.bottom).offset(timerViewHeight * 0.2)
-            
-            make.centerX.equalTo(safeArea.snp.centerX)
-            
-            let startButtonWidth = safeArea.layoutFrame.width * 0.2
+            let startButtonWidth = safeArea.layoutFrame.width * 0.25
             make.width.equalTo(startButtonWidth)
-            make.height.equalTo(startButtonWidth / 2)
+            make.height.equalTo(startButtonWidth * 0.5)
         }
     }
     
@@ -106,7 +165,16 @@ private extension ClockViewController {
         }
         
         startButton.isSelected = !startButton.isSelected
+        setStartButtonState(isSelected: startButton.isSelected)
         UserDefaults.standard.set(startButton.isSelected, forKey: "isModeStarted")
+    }
+    
+    func setStartButtonState(isSelected: Bool) {
+        if isSelected {
+            startButton.leftImageSrc = .init(systemName: "stop.fill")
+        } else {
+            startButton.leftImageSrc = .init(systemName: "play.fill")
+        }
     }
 }
 
@@ -140,6 +208,7 @@ private extension ClockViewController {
                 }).disposed(by: self.disposeBag)
                 
                 self.startButton.isSelected = true
+                self.setStartButtonState(isSelected: true)
             }).disposed(by: disposeBag)
     }
 }

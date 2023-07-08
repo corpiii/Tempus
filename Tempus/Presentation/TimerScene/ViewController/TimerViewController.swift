@@ -8,11 +8,15 @@
 import UIKit
 
 import RxSwift
-import SSBouncyButton
+import LGButton
 
 class TimerViewController: UIViewController {
     private enum Constant {
         static let outerMargin: CGFloat = 20
+        static let startButtonColor: UIColor = .init(red: 49 / 255.0,
+                                                     green: 130 / 255.0,
+                                                     blue: 222 / 255.0,
+                                                     alpha: 87 / 100.0)
     }
     
     private let entireStackView: UIStackView = {
@@ -31,12 +35,14 @@ class TimerViewController: UIViewController {
         return datePicker
     }()
     
-    private let startButton: SSBouncyButton = {
-        let button = SSBouncyButton()
+    private let startButton: LGButton = {
+        let button = LGButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("시작", for: .normal)
-        button.tintColor = .darkGray
-        button.titleLabel?.font = .preferredFont(forTextStyle: .subheadline, compatibleWith: .none)
+        button.titleString = "시작"
+        button.bgColor = Constant.startButtonColor
+        button.titleFontName = "AppleSDGothicNeo-Bold"
+        button.titleFontSize = UIFont.buttonFontSize
+        button.cornerRadius = 10
         
         return button
     }()
@@ -57,7 +63,7 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = ColorConstant.backGroundColor
         configureUI()
         bindViewModel()
     }

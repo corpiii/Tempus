@@ -1,28 +1,16 @@
 PODS:
-  - BRYSerialAnimationQueue (1.0.0)
-  - SSBouncyButton (1.0.7):
-    - BRYSerialAnimationQueue (~> 1.0)
-    - UIColor-Hex (~> 0.1)
-    - "UIImage+BetterAdditions (~> 2.0)"
-  - UIColor-Hex (0.1.1)
-  - "UIImage+BetterAdditions (2.0.3)"
+  - LGButton (1.1.6)
 
 DEPENDENCIES:
-  - SSBouncyButton (~> 1.0)
+  - LGButton
 
 SPEC REPOS:
   trunk:
-    - BRYSerialAnimationQueue
-    - SSBouncyButton
-    - UIColor-Hex
-    - "UIImage+BetterAdditions"
+    - LGButton
 
 SPEC CHECKSUMS:
-  BRYSerialAnimationQueue: 75feef56345338619a6c2111f2a81de28a59c368
-  SSBouncyButton: 90f6da63da6c6d32f9dab4928b80632b427d871a
-  UIColor-Hex: 77e80f383c6b3a63c5e95a9a4a7f4a71976e38a5
-  "UIImage+BetterAdditions": 185cbe06059747dd4a65562c1b0c560e761d030c
+  LGButton: 9f0a7f9d3030e3f504108342f6b66d64a429371b
 
-PODFILE CHECKSUM: 575167628dec3c04f9b3b366c41ab7ea278e37bd
+PODFILE CHECKSUM: bcef05793e205988d375d80ba71497ab719e3414
 
 COCOAPODS: 1.12.0

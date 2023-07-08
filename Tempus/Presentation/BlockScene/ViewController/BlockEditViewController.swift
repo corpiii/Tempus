@@ -92,6 +92,10 @@ final class BlockEditViewController: UIViewController {
         bindViewModel()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     private func makeHeightDividerView() -> UIView {
         let emptyView = UIView()
         
@@ -116,7 +120,7 @@ final class BlockEditViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension BlockEditViewController {
     func configureUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = ColorConstant.backGroundColor
         configureNavigationBar()
         configureEntireStackView()
         configureDivideCountStackView()

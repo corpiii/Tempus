@@ -22,7 +22,6 @@ final class DailyInfoCreateViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "제목"
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = .clear
         
         return textField
     }()
@@ -105,9 +104,13 @@ final class DailyInfoCreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = ColorConstant.backGroundColor
         configureUI()
         bindViewModel()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 

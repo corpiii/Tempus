@@ -50,7 +50,7 @@ final class BlockDetailViewController: UIViewController {
 // MARK: - ConfigureUI
 private extension BlockDetailViewController {
     func configureUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = ColorConstant.backGroundColor
         configureNavigationBar()
         configureClockView()
     }

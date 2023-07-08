@@ -176,16 +176,10 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/BRYSerialAnimationQueue/BRYSerialAnimationQueue.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SSBouncyButton/SSBouncyButton.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UIColor-Hex/UIColor_Hex.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UIImage+BetterAdditions/UIImage_BetterAdditions.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/LGButton/LGButton.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/BRYSerialAnimationQueue/BRYSerialAnimationQueue.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SSBouncyButton/SSBouncyButton.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UIColor-Hex/UIColor_Hex.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/UIImage+BetterAdditions/UIImage_BetterAdditions.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/LGButton/LGButton.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
