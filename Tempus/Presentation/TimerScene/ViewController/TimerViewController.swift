@@ -13,10 +13,6 @@ import LGButton
 class TimerViewController: UIViewController {
     private enum Constant {
         static let outerMargin: CGFloat = 20
-        static let startButtonColor: UIColor = .init(red: 49 / 255.0,
-                                                     green: 130 / 255.0,
-                                                     blue: 222 / 255.0,
-                                                     alpha: 87 / 100.0)
     }
     
     private let entireStackView: UIStackView = {
@@ -39,7 +35,7 @@ class TimerViewController: UIViewController {
         let button = LGButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleString = "시작"
-        button.bgColor = Constant.startButtonColor
+        button.bgColor = ColorConstant.firstColor
         button.titleFontName = "AppleSDGothicNeo-Bold"
         button.titleFontSize = UIFont.buttonFontSize
         button.cornerRadius = 10
