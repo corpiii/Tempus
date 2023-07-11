@@ -15,6 +15,8 @@ final class BlockClockView: ClockView {
                                                        green: 105 / 255.0,
                                                        blue: 143 / 255.0,
                                                        alpha: 56 / 100.0).cgColor
+    private let radiusRatio: Double = 0.8
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         splitClock(by: ClockInterval)
@@ -38,7 +40,7 @@ final class BlockClockView: ClockView {
             let arkPath = UIBezierPath()
 
             arkPath.move(to: circleCenter)
-            arkPath.addArc(withCenter: circleCenter, radius: radius * 0.8,
+            arkPath.addArc(withCenter: circleCenter, radius: radius * radiusRatio,
                            startAngle: angle, endAngle: angle + angleInterval, clockwise: true)
             arkPath.close()
 

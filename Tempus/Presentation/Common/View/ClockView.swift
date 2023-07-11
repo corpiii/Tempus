@@ -12,7 +12,7 @@ class ClockView: UIView {
         static let startAngle: CGFloat = -75 * CGFloat.pi / 180
         static let lineWidth: CGFloat = 3.0
         static let dotRadius: CGFloat = 3.0
-        static let lineColor: CGColor = ColorConstant.firstColor.cgColor
+        static let lineColor: CGColor = ColorConstant.thirdColor.cgColor
         static let clockBackgroundColor: CGColor = UIColor.systemBackground.cgColor
     }
     
