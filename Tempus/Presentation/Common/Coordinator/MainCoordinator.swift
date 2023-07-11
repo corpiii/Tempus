@@ -18,6 +18,7 @@ class MainCoordinator: Coordinator {
     
     init(_ tabBarController: UITabBarController, _ repository: DataManagerRepository) {
         self.tabBarController = tabBarController
+        tabBarController.tabBar.tintColor = ColorConstant.secondColor
         self.repository = repository
         
         // clockCoordinator

@@ -13,10 +13,6 @@ import LGButton
 
 class ClockViewController: UIViewController {
     private enum Constant {
-        static let startButtonColor: UIColor = .init(red: 49 / 255.0,
-                                                     green: 130 / 255.0,
-                                                     blue: 222 / 255.0,
-                                                     alpha: 87 / 100.0)
         static let timerViewWidthMultipleBySafeAreaWidth: Double = 0.8
     }
     
@@ -42,7 +38,7 @@ class ClockViewController: UIViewController {
         let button = LGButton()
         button.leftImageColor = .white
         button.leftImageSrc = .init(systemName: "play.fill")
-        button.bgColor = Constant.startButtonColor
+        button.bgColor = ColorConstant.firstColor
         button.cornerRadius = 10
         
         return button
