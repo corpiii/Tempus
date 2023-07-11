@@ -49,7 +49,7 @@ private extension ClockView {
     func setCircleCenterDotLayer() {
         let circleCenterDotLayer = CAShapeLayer()
         let circleCenterDotPath = UIBezierPath(arcCenter: circleCenter, radius: 1.0,
-                                         startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+                                               startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
                 
         circleCenterDotLayer.strokeColor = Constant.lineColor
         circleCenterDotLayer.fillColor = Constant.clockBackgroundColor

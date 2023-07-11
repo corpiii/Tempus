@@ -58,6 +58,7 @@ class DailyClockView: ClockView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        setCircleBackGround()
         drawClockLine()
     }
     
@@ -129,12 +130,23 @@ private extension DailyClockView {
         layer.addSublayer(splitLayer)
     }
     
+    func setCircleBackGround() {
+        let circleBackGroundLayer = CAShapeLayer()
+        let circleBackGroundPath = UIBezierPath(arcCenter: circleCenter, radius: radius * 0.8,
+                                                startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+        
+        circleBackGroundLayer.fillColor = ColorConstant.fourthColor.cgColor
+        circleBackGroundLayer.path = circleBackGroundPath.cgPath
+        
+        layer.addSublayer(circleBackGroundLayer)
+    }
+    
     func generateTimeLineLayer(startAngle: CGFloat, endAngle: CGFloat, color: UIColor) -> CAShapeLayer {
         let timeLayer = CAShapeLayer()
         let arkPath = UIBezierPath()
         
         arkPath.move(to: circleCenter)
-        arkPath.addArc(withCenter: circleCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        arkPath.addArc(withCenter: circleCenter, radius: radius * 0.8, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         
         timeLayer.path = arkPath.cgPath
         
