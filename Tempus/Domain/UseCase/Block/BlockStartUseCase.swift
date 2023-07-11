@@ -111,7 +111,7 @@ private extension BlockStartUseCase {
         let content = UNMutableNotificationContent()
         content.title = "알림"
         content.body = "Block Timer"
-        content.sound = UNNotificationSound.default
+        content.sound = UNNotificationSound.init(named: UNNotificationSoundName("ringTune.m4a"))
         
         let interval = Double(blockTime * 60 * 60)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: true)

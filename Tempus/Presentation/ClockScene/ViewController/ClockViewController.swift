@@ -158,6 +158,8 @@ private extension ClockViewController {
             countDownTimerView.setEmpty()
         } else {
             startEvent.onNext(())
+            let date = Date().timeIntervalSince1970
+            UserDefaults.standard.set(date, forKey: "date")
         }
         
         startButton.isSelected = !startButton.isSelected

@@ -11,7 +11,7 @@ enum ColorConstant {
     static let firstColor: UIColor = .init(hex: "#6ebfed")!
     static let secondColor: UIColor = .init(hex: "#74c0f4")!
     static let thirdColor: UIColor = .init(hex: "#a6dbf7")!
-    static let fourthColor: UIColor = .init(hex: "#e8e8e8")!
+    static let fourthColor: UIColor = .init(hex: "#ededed")!
     
     static let backGroundColor: UIColor = .init(hex: "#FFFFFF")!
 }

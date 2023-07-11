@@ -196,7 +196,7 @@ private extension DailyStartUseCase {
         let content = UNMutableNotificationContent()
         content.title = "알림"
         content.body = "Daily Timer"
-        content.sound = UNNotificationSound.default
+        content.sound = UNNotificationSound.init(named: UNNotificationSoundName("ringTune.m4a"))
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         

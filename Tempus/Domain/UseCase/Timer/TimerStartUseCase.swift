@@ -93,7 +93,7 @@ private extension TimerStartUseCase {
         let content = UNMutableNotificationContent()
         content.title = "알림"
         content.body = "Timer"
-        content.sound = UNNotificationSound.default
+        content.sound = UNNotificationSound.init(named: UNNotificationSoundName("ringTune.m4a"))
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: wasteTime, repeats: true)
         let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)

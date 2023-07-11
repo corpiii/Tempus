@@ -65,8 +65,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isModeStarted = UserDefaults.standard.bool(forKey: "isModeStarted")
         
         if isModeStarted == true,
-           let model = UserDefaults.standard.object(forKey: "model") as? Data,
-           let date = UserDefaults.standard.double(forKey: "date") as? Double {
+           let model = UserDefaults.standard.object(forKey: "model") as? Data {
+            let date = UserDefaults.standard.double(forKey: "date")
             NotificationCenter.default.post(name: NSNotification.Name("modelNotification"), object: model)
             NotificationCenter.default.post(name: NSNotification.Name("inOutDateNotification"), object: date)
         }
