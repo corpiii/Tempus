@@ -199,7 +199,6 @@ private extension DailyStartUseCase {
         content.sound = UNNotificationSound.init(named: UNNotificationSoundName("ringTune.m4a"))
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        
         let request = UNNotificationRequest(identifier: UUID().description, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)

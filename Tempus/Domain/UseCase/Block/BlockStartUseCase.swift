@@ -75,7 +75,7 @@ private extension BlockStartUseCase {
         guard timer == nil else { return }
         
         removeNotification()
-        enrollNotification(originModel.blockTime)
+        
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(originModel) {
             UserDefaults.standard.set(true, forKey: "isModeStarted")
@@ -107,15 +107,17 @@ private extension BlockStartUseCase {
         RunLoop.current.add(timer!, forMode: .common)
     }
     
-    func enrollNotification(_ blockTime: Int) {
+    func enrollNotification(_ date: Date) {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
+        
         let content = UNMutableNotificationContent()
         content.title = "알림"
         content.body = "Block Timer"
         content.sound = UNNotificationSound.init(named: UNNotificationSoundName("ringTune.m4a"))
         
-        let interval = Double(blockTime * 60 * 60)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: true)
-        let request = UNNotificationRequest(identifier: self.notificationIdentifier, content: content, trigger: trigger)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().description, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)
     }
@@ -145,6 +147,7 @@ private extension BlockStartUseCase {
         
         while date < lastDate {
             schedule.append(date)
+            enrollNotification(date)
             date = date.addingTimeInterval(interval * oneHourSecond)
         }
         
