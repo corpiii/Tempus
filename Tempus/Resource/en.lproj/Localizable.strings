@@ -7,7 +7,7 @@
 */
 
 alertTitle = "Alert";
-alertFailTitle = "Fail";
+alertFailTitle = "Caution";
 successCreateTitle = "Complete";
 storeAlertTitle = "Save";
 storeAlertMessage = "Saved successfully.";

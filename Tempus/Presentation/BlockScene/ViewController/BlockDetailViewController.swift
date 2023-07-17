@@ -13,7 +13,7 @@ import SnapKit
 final class BlockDetailViewController: UIViewController {
     private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
     private let editBarButton: UIBarButtonItem = .init(systemItem: .edit)
-    private let startBarButton: UIBarButtonItem = .init(title: "시작")
+    private let startBarButton: UIBarButtonItem = .init(title: I18NStrings.NavigationItem.start)
     
     private let titleLabel: UILabel = {
         let label = UILabel()

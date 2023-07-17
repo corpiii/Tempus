@@ -58,7 +58,7 @@ private extension BlockListViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationItem.title = "블록모드"
+        self.navigationItem.title = I18NStrings.NavigationItem.blockListTitle
         
         self.navigationItem.rightBarButtonItem = addButton
     }
@@ -103,11 +103,11 @@ private extension BlockListViewController {
                 if case .success(let model) = result {
                     self?.tableViewDataSourceManager.delete(model: model)
                 } else if case .failure(let error) = result {
-                    let alertController = UIAlertController(title: "알림",
+                    let alertController = UIAlertController(title: I18NStrings.Alert.alertTitle,
                                                             message: error.errorDescription,
                                                             preferredStyle: .alert)
                     
-                    let confirmAction = UIAlertAction(title: "확인", style: .default)
+                    let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
                     alertController.addAction(confirmAction)
                     
                     self?.present(alertController, animated: true)
@@ -130,7 +130,7 @@ extension BlockListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
+        let deleteAction = UIContextualAction(style: .destructive, title: I18NStrings.Alert.deleteAction) { [weak self] _, _, success in
             guard let self else { return }
             let model = self.tableViewDataSourceManager.fetch(index: indexPath.row)
             

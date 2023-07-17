@@ -17,7 +17,7 @@ final class BlockCreateViewController: UIViewController {
         static let entireStackSpacing: CGFloat = 40
         static let divideCountStackSpacing: CGFloat = 40
         static let pickerViewWidth: CGFloat = 100
-        static let blockTimeCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
+        static let blockTimeCandidates: [String] = [I18NStrings.View.select, "3", "4", "6", "8", "12"]
     }
     
     private let cancelButton: UIBarButtonItem = .init(systemItem: .cancel)
@@ -43,7 +43,7 @@ final class BlockCreateViewController: UIViewController {
     private let titleTextField: UITextField = {
         let titleTextField = UITextField()
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
-        titleTextField.placeholder = "제목"
+        titleTextField.placeholder = I18NStrings.View.titlePlaceholder
         titleTextField.borderStyle = .roundedRect
         
         return titleTextField
@@ -58,7 +58,7 @@ final class BlockCreateViewController: UIViewController {
     private let timeIntervalLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "시간 간격"
+        label.text = I18NStrings.View.timeInterval
         
         return label
     }()
@@ -140,7 +140,7 @@ private extension BlockCreateViewController {
     func configureNavigationBar() {
         self.navigationItem.leftBarButtonItem = cancelButton
         
-        self.navigationItem.title = "새로 만들기"
+        self.navigationItem.title = I18NStrings.NavigationItem.create
         self.navigationItem.rightBarButtonItem = completeButton
         completeButton.target = self
         completeButton.action = #selector(completeButtonTapped)
@@ -156,18 +156,18 @@ private extension BlockCreateViewController {
     }
     
     func alertSuccess() {
-        let alertController = UIAlertController(title: "생성 완료",
-                                      message: "타이머를 바로 시작하시겠습니까?",
-                                      preferredStyle: .alert)
+        let alertController = UIAlertController(title: I18NStrings.Alert.successCreateTitle,
+                                                message: I18NStrings.Alert.timerStartNowMessage,
+                                                preferredStyle: .alert)
         
-        let completeWithStartAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+        let completeWithStartAction = UIAlertAction(title: I18NStrings.Alert.YesAction, style: .default) { [weak self] _ in
             self?.startEvent.onNext(.completeWithStart)
         }
-        let completeWithoutStartAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
-            let alertController = UIAlertController(title: "저장",
-                                          message: "저장되었습니다",
-                                          preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+        let completeWithoutStartAction = UIAlertAction(title: I18NStrings.Alert.NoAction, style: .cancel) { [weak self] _ in
+            let alertController = UIAlertController(title: I18NStrings.Alert.storeAlertTitle,
+                                                    message: I18NStrings.Alert.storeAlertMessage,
+                                                    preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default) { [weak self] _ in
                 self?.startEvent.onNext(.completeWithoutStart)
             }
             
@@ -183,10 +183,10 @@ private extension BlockCreateViewController {
     }
     
     func alertFailure() {
-        let alert = UIAlertController(title: "실패",
-                                      message: "빈 값이 있는지 확인해주세요",
+        let alert = UIAlertController(title: I18NStrings.Alert.alertFailTitle,
+                                      message: I18NStrings.Alert.dataEmptyCheckMessage,
                                       preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alert.addAction(confirmAction)
         

@@ -7,7 +7,7 @@
 */
 
 alertTitle = "알림";
-alertFailTitle = "실패";
+alertFailTitle = "주의";
 successCreateTitle = "완료";
 storeAlertTitle = "저장";
 storeAlertMessage = "저장되었습니다.";
