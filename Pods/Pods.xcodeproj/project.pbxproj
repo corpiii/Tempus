@@ -57,9 +57,9 @@
 /* Begin PBXFileReference section */
 		0CE8AB1959BDBB25B8EA3C8804F122AA /* Pods-Tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tempus.release.xcconfig"; sourceTree = "<group>"; };
 		15FB93FAE4DA44BE68098AB78204DE66 /* LGButton.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LGButton.release.xcconfig; sourceTree = "<group>"; };
-		1F0A488336FF126A324A37C67A092EB3 /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Ionicons.ttf; path = LGButton/Resources/Ionicons.ttf; sourceTree = "<group>"; };
-		23C6247BD16DBAD5EC89116163EFE74C /* octicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = octicons.ttf; path = LGButton/Resources/octicons.ttf; sourceTree = "<group>"; };
-		25913690DAC475B37D706CBB01130EAB /* map-icons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "map-icons.ttf"; path = "LGButton/Resources/map-icons.ttf"; sourceTree = "<group>"; };
+		1F0A488336FF126A324A37C67A092EB3 /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = Ionicons.ttf; path = LGButton/Resources/Ionicons.ttf; sourceTree = "<group>"; };
+		23C6247BD16DBAD5EC89116163EFE74C /* octicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = octicons.ttf; path = LGButton/Resources/octicons.ttf; sourceTree = "<group>"; };
+		25913690DAC475B37D706CBB01130EAB /* map-icons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "map-icons.ttf"; path = "LGButton/Resources/map-icons.ttf"; sourceTree = "<group>"; };
 		29A5C10857AC89D6ABCE3E2D6D24DAF8 /* FontLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontLoader.swift; path = LGButton/Classes/SwiftIconFont/FontLoader.swift; sourceTree = "<group>"; };
 		4904816F98B5C8B096F4A03AE2F1A071 /* FontMaterial.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontMaterial.swift; path = LGButton/Classes/SwiftIconFont/FontMaterial.swift; sourceTree = "<group>"; };
 		4E39C81FC917AC86BF38D39D906FA217 /* Pods-TempusTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TempusTests-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -72,21 +72,21 @@
 		72B5844F5EA69406F97706BD10AB52B2 /* Pods-TempusTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TempusTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		78BCF6138F17B6B8563F296484E55127 /* LGButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LGButton-dummy.m"; sourceTree = "<group>"; };
-		7DBF80E3539F7FB60745CA4577FACBD9 /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesome.ttf; path = LGButton/Resources/FontAwesome.ttf; sourceTree = "<group>"; };
+		7DBF80E3539F7FB60745CA4577FACBD9 /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = FontAwesome.ttf; path = LGButton/Resources/FontAwesome.ttf; sourceTree = "<group>"; };
 		8709D051D72D65C3EB5F6283A79208AC /* Pods-TempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TempusTests.release.xcconfig"; sourceTree = "<group>"; };
 		8D9A4D6BC8430FBC69800F92F9C26580 /* Pods-TempusTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TempusTests-Info.plist"; sourceTree = "<group>"; };
 		90A275B3A285F477A135778BD185B9D6 /* FontMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontMap.swift; path = LGButton/Classes/SwiftIconFont/FontMap.swift; sourceTree = "<group>"; };
-		90F659AA112ACEE8DB189C4BA369B56B /* open-iconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "open-iconic.ttf"; path = "LGButton/Resources/open-iconic.ttf"; sourceTree = "<group>"; };
+		90F659AA112ACEE8DB189C4BA369B56B /* open-iconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "open-iconic.ttf"; path = "LGButton/Resources/open-iconic.ttf"; sourceTree = "<group>"; };
 		9973B0C76F0324E2E44C568FEE6D9FF8 /* Pods-Tempus-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tempus-frameworks.sh"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0C87AF22E4D7F5F40D7EE2FEA5BD640 /* FontOpenic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontOpenic.swift; path = LGButton/Classes/SwiftIconFont/FontOpenic.swift; sourceTree = "<group>"; };
 		A365B15A1576EDDC9E1FE31AEF05B6A5 /* Pods-Tempus-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tempus-Info.plist"; sourceTree = "<group>"; };
 		A4C6C0EAD85E3BBD1A8E4D519109F090 /* FontOct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontOct.swift; path = LGButton/Classes/SwiftIconFont/FontOct.swift; sourceTree = "<group>"; };
 		A5A8D78095FAD13600E3392AAA3FEAE6 /* FontThemify.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontThemify.swift; path = LGButton/Classes/SwiftIconFont/FontThemify.swift; sourceTree = "<group>"; };
 		AB19C5A267935408AE327BBC08BEA817 /* SwiftIconLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIconLabel.swift; path = LGButton/Classes/SwiftIconFont/SwiftIconLabel.swift; sourceTree = "<group>"; };
-		AB728B89E474B00E040071D645C3A3ED /* themify.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = themify.ttf; path = LGButton/Resources/themify.ttf; sourceTree = "<group>"; };
+		AB728B89E474B00E040071D645C3A3ED /* themify.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = themify.ttf; path = LGButton/Resources/themify.ttf; sourceTree = "<group>"; };
 		B1254FACAAEF1FE48A950CBD01D777FE /* Pods-TempusTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TempusTests.modulemap"; sourceTree = "<group>"; };
-		BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LGButton; path = LGButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LGButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF17DC7C8ABB65E809591ADE9F9AC783 /* FontAwesome.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FontAwesome.swift; path = LGButton/Classes/SwiftIconFont/FontAwesome.swift; sourceTree = "<group>"; };
 		C89968DAE84795632FCED90CA4644B2E /* Pods-TempusTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TempusTests-dummy.m"; sourceTree = "<group>"; };
 		C9D1EC16624D0C59378E2AA755A050B2 /* Pods-Tempus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tempus.debug.xcconfig"; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		EC5B33CD47CFD0B9A002283ACE031E6B /* LGButton-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LGButton-prefix.pch"; sourceTree = "<group>"; };
 		F8BD62A441EF0F1F869044D5A59CCFD6 /* Pods-Tempus-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Tempus-umbrella.h"; sourceTree = "<group>"; };
 		FB93E2303A4534C18998BCE625B5C3EE /* LGButton-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LGButton-umbrella.h"; sourceTree = "<group>"; };
-		FC3F9D4C8D16BB4E89EAB8C267B92982 /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "MaterialIcons-Regular.ttf"; path = "LGButton/Resources/MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
+		FC3F9D4C8D16BB4E89EAB8C267B92982 /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "MaterialIcons-Regular.ttf"; path = "LGButton/Resources/MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
 		FE39AFA72156A7B670CE955085A73470 /* Pods-TempusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TempusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FF380E04BC0F3553B8EBF52AFBF0A633 /* Pods-Tempus */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Tempus"; path = Pods_Tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -175,7 +175,6 @@
 				EF19BF38D9A211EC6C758A4F0A1180C3 /* Resources */,
 				E9E1FA25813D46EECCCE0A632D92C6EE /* Support Files */,
 			);
-			name = LGButton;
 			path = LGButton;
 			sourceTree = "<group>";
 		};
@@ -190,7 +189,7 @@
 		778516F7F91DDA71C8FA8A467F680728 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton */,
+				BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton.framework */,
 				FF380E04BC0F3553B8EBF52AFBF0A633 /* Pods-Tempus */,
 				5D36CB83F99EEA2E22BC215BC0B57230 /* Pods-TempusTests */,
 			);
@@ -354,7 +353,7 @@
 			);
 			name = LGButton;
 			productName = LGButton;
-			productReference = BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton */;
+			productReference = BEB5730D0C9DB3D9997CC93D0C703557 /* LGButton.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -487,7 +486,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/LGButton/LGButton-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/LGButton/LGButton-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -663,7 +662,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/LGButton/LGButton-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/LGButton/LGButton-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
