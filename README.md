@@ -6,7 +6,7 @@
 > 개발기간: 2023.03 ~ 2023.06 (4개월)
 
 <a href="https://apps.apple.com/kr/app/tempus-repeattimer/id6451366323?l=en-GB">
-  <img src="https://github.com/jjpush/Tempus/assets/82566116/b8a3bc3d-9c18-4eb0-801c-633c127624e7" width="20%">
+  <img src="./icons/pngwing.com.png" width="20%">
 </a>
 
 ## 🍎 프로젝트 소개
