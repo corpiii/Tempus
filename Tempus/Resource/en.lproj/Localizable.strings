@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  Tempus
+
+  Created by 이정민 on 2023/07/18.
+  
+*/
+
+alertTitle = "Alert";
+alertFailTitle = "Fail";
+successCreateTitle = "Complete";
+storeAlertTitle = "Save";
+storeAlertMessage = "Saved successfully.";
+timerStartNowMessage = "Would you like to start the timer now?";
+modeEmptyMessage = "Mode is Empty.";
+dataEmptyCheckMessage = "Please ensure there are no empty values.";
+confirmAction = "OK";
+deleteAction = "Delete";
+YesAction = "Yes";
+NoAction = "No";
+blockListTitle = "Block List";
+dailyListTitle = "Daily List";
+create = "New Item";
+edit = "Edit";
+next = "Next";
+start = "Start";
+timeInterval = "TimeInterval";
+titlePlaceholder = "Title";
+select = "Scroll";
+createFailure = "Unable to create";
+fetchFailure = "Unable to fetch";
+updateFailure = "Unable to update";
+deleteFailure = "Unable to delete";

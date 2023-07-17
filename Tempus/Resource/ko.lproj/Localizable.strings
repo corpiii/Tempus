@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  Tempus
+
+  Created by 이정민 on 2023/07/18.
+  
+*/
+
+alertTitle = "알림";
+alertFailTitle = "실패";
+successCreateTitle = "완료";
+storeAlertTitle = "저장";
+storeAlertMessage = "저장되었습니다.";
+timerStartNowMessage = "지금 바로 타이머를 시작할까요?";
+modeEmptyMessage = "모드가 비었습니다.";
+dataEmptyCheckMessage = "빈 값이 있는지 확인해주세요.";
+confirmAction = "확인";
+deleteAction = "삭제";
+YesAction = "네";
+NoAction = "아니요";
+blockListTitle = "블록모드";
+dailyListTitle = "일상모드";
+create = "새로운 항목";
+edit = "수정";
+next = "다음";
+start = "시작";
+timeInterval = "시간 간격";
+titlePlaceholder = "제목";
+select = "선택";
+createFailure = "생성을 할 수 없습니다.";
+fetchFailure = "가져올 수 없습니다.";
+updateFailure = "업데이트를 할 수 없습니다.";
+deleteFailure = "삭제할 수 없습니다.";
