@@ -18,6 +18,8 @@ enum I18NStrings {
         static let timerStartNowMessage = "timerStartNowMessage".localized
         static let modeEmptyMessage = "modeEmptyMessage".localized
         static let dataEmptyCheckMessage = "dataEmptyCheckMessage".localized
+        static let createFailMessage = "createFailMessage".localized
+        static let repeatCountExceeded = "repeatCountExceeded".localized
         
         static let confirmAction = "confirmAction".localized
         static let deleteAction = "deleteAction".localized
@@ -39,6 +41,12 @@ enum I18NStrings {
         static let timeInterval = "timeInterval".localized
         static let titlePlaceholder = "titlePlaceholder".localized
         static let select = "select".localized
+        
+        static let focusTime = "focusTime".localized
+        static let breakTime = "breakTime".localized
+        static let startTime = "startTime".localized
+        static let repeatCount = "repeatCount".localized
+        
     }
     
     enum DataManageError {
