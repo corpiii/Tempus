@@ -85,7 +85,8 @@ extension CountDownTimerView {
             guard let self else { return }
             
             if self.entireRunningTime == .zero {
-                self.remainTimeLabel.text = "지금은 대기시간 입니다. \n \(time.hour) : \(time.minute) : \(Int(time.second))"
+                let waitingTimeComment = I18NStrings.View.waitingTimeComment
+                self.remainTimeLabel.text = "\(waitingTimeComment)\n \(time.hour) : \(time.minute) : \(Int(time.second))"
                 self.animationView.isHidden = true
             } else {
                 if time.totalSecond > 0 {
