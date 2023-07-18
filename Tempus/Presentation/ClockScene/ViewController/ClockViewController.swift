@@ -214,8 +214,10 @@ private extension ClockViewController {
 // MARK: - alert
 private extension ClockViewController {
     func alertUseCaseEmpty() {
-        let alertController = UIAlertController(title: "알림", message: "모드가 비었습니다", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let alertController = UIAlertController(title: I18NStrings.Alert.alertTitle,
+                                                message: I18NStrings.Alert.modeEmptyMessage,
+                                                preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alertController.addAction(confirmAction)
         

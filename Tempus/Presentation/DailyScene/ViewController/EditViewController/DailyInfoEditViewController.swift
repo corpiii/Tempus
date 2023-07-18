@@ -20,7 +20,7 @@ final class DailyInfoEditViewController: UIViewController {
     private let titleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "제목"
+        textField.placeholder = I18NStrings.View.titlePlaceholder
         textField.borderStyle = .roundedRect
         
         return textField
@@ -45,7 +45,7 @@ final class DailyInfoEditViewController: UIViewController {
     private let focusTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "집중시간"
+        label.text = I18NStrings.View.focusTime
         label.font = .preferredFont(forTextStyle: .headline)
         
         return label
@@ -70,7 +70,7 @@ final class DailyInfoEditViewController: UIViewController {
     private let breakTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "휴식시간"
+        label.text = I18NStrings.View.breakTime
         label.font = .preferredFont(forTextStyle: .headline)
         
         return label
@@ -123,11 +123,11 @@ private extension DailyInfoEditViewController {
     }
     
     func configureNavigationBar() {
-        self.navigationItem.title = "수정하기"
+        self.navigationItem.title = I18NStrings.NavigationItem.edit
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.rightBarButtonItem = nextButton
         
-        nextButton.title = "다음"
+        nextButton.title = I18NStrings.NavigationItem.next
         nextButton.target = self
         nextButton.action = #selector(nextBarButtonTapped)
     }
@@ -213,10 +213,10 @@ private extension DailyInfoEditViewController {
     }
     
     func alertFailure() {
-        let alert = UIAlertController(title: "실패",
-                                      message: "빈 값이 있는지 확인해주세요",
+        let alert = UIAlertController(title: I18NStrings.Alert.alertFailTitle,
+                                      message: I18NStrings.Alert.dataEmptyCheckMessage,
                                       preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alert.addAction(confirmAction)
         

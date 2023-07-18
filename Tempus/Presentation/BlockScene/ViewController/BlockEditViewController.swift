@@ -16,7 +16,7 @@ final class BlockEditViewController: UIViewController {
         static let entireStackSpacing: CGFloat = 40
         static let divideCountStackSpacing: CGFloat = 40
         static let pickerViewWidth: CGFloat = 100
-        static let blockTimeCandidates: [String] = ["선택", "3", "4", "6", "8", "12"]
+        static let blockTimeCandidates: [String] = [I18NStrings.View.select, "3", "4", "6", "8", "12"]
     }
     
     private let backBarButton: UIBarButtonItem = .init(image: UIImage(systemName: "arrow.backward"))
@@ -42,7 +42,7 @@ final class BlockEditViewController: UIViewController {
     private let titleTextField: UITextField = {
         let titleTextField = UITextField()
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
-        titleTextField.placeholder = "제목"
+        titleTextField.placeholder = I18NStrings.View.titlePlaceholder
         titleTextField.borderStyle = .roundedRect
         
         return titleTextField
@@ -57,7 +57,7 @@ final class BlockEditViewController: UIViewController {
     private let divideCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "시간 간격"
+        label.text = I18NStrings.View.timeInterval
         
         return label
     }()
@@ -133,7 +133,7 @@ private extension BlockEditViewController {
     func configureNavigationBar() {
         self.navigationItem.leftBarButtonItem = backBarButton
         
-        self.navigationItem.title = "수정하기"
+        self.navigationItem.title = I18NStrings.NavigationItem.edit
         self.navigationItem.rightBarButtonItem = doneButton
         doneButton.target = self
         doneButton.action = #selector(completeButtonTapped)
@@ -246,10 +246,10 @@ private extension BlockEditViewController {
     }
     
     func alertFailure() {
-        let alert = UIAlertController(title: "실패",
-                                      message: "수정이 실패했습니다. \n 빈값이 있는지 확인해주세요.",
+        let alert = UIAlertController(title: I18NStrings.Alert.alertFailTitle,
+                                      message: I18NStrings.Alert.dataEmptyCheckMessage,
                                       preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alert.addAction(confirmAction)
         

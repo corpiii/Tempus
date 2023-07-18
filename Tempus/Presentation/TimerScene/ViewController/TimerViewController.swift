@@ -34,7 +34,7 @@ class TimerViewController: UIViewController {
     private let startButton: LGButton = {
         let button = LGButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleString = "시작"
+        button.titleString = I18NStrings.View.startButtonTitle
         button.bgColor = ColorConstant.firstColor
         button.titleFontName = "AppleSDGothicNeo-Bold"
         button.titleFontSize = UIFont.buttonFontSize

@@ -36,7 +36,7 @@ final class DailyTimeDurationCreateViewController: UIViewController {
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "시작 시간"
+        label.text = I18NStrings.View.startTime
         label.font = .preferredFont(forTextStyle: .headline)
         
         return label
@@ -63,7 +63,7 @@ final class DailyTimeDurationCreateViewController: UIViewController {
     private let repeatCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "반복 횟수"
+        label.text = I18NStrings.View.repeatCount
         label.font = .preferredFont(forTextStyle: .headline)
         
         return label
@@ -117,7 +117,7 @@ private extension DailyTimeDurationCreateViewController {
     
     func configureNavigationBar() {
         self.navigationItem.leftBarButtonItem = backBarButton
-        self.navigationItem.title = "새로 만들기"
+        self.navigationItem.title = I18NStrings.NavigationItem.create
         
         self.navigationItem.rightBarButtonItem = doneBarButton
         doneBarButton.target = self
@@ -208,19 +208,19 @@ private extension DailyTimeDurationCreateViewController {
     }
     
     func alertSuccess() {
-        let alertController = UIAlertController(title: "생성 완료",
-                                      message: "타이머를 바로 시작하시겠습니까?",
-                                      preferredStyle: .alert)
+        let alertController = UIAlertController(title: I18NStrings.Alert.successCreateTitle,
+                                                message: I18NStrings.Alert.timerStartNowMessage,
+                                                preferredStyle: .alert)
         
-        let completeWithStartAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+        let completeWithStartAction = UIAlertAction(title: I18NStrings.Alert.YesAction, style: .default) { [weak self] _ in
             self?.startEvent.onNext(.completeWithStart)
         }
         
-        let completeWithoutStartAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
-            let alertController = UIAlertController(title: "저장",
-                                          message: "저장되었습니다",
-                                          preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+        let completeWithoutStartAction = UIAlertAction(title: I18NStrings.Alert.NoAction, style: .cancel) { [weak self] _ in
+            let alertController = UIAlertController(title: I18NStrings.Alert.storeAlertTitle,
+                                                    message: I18NStrings.Alert.storeAlertMessage,
+                                                    preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default) { [weak self] _ in
                 self?.startEvent.onNext(.completeWithoutStart)
             }
             
@@ -236,8 +236,10 @@ private extension DailyTimeDurationCreateViewController {
     }
     
     func alertCreateFail() {
-        let alertController = UIAlertController(title: "실패", message: "생성 실패", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let alertController = UIAlertController(title: I18NStrings.Alert.alertFailTitle,
+                                                message: I18NStrings.Alert.createFailMessage,
+                                                preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alertController.addAction(confirmAction)
         
@@ -249,8 +251,10 @@ extension DailyTimeDurationCreateViewController: AlertRepeatCountOverDelegate {
     func alertRepeatCountOver() {
         repeatCountStepper.value -= 1
         
-        let alertController = UIAlertController(title: "실패", message: "횟수가 너무 많아요", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let alertController = UIAlertController(title: I18NStrings.Alert.alertFailTitle,
+                                                message: I18NStrings.Alert.repeatCountExceeded,
+                                                preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alertController.addAction(confirmAction)
         present(alertController, animated: true)

@@ -34,7 +34,7 @@ class DailyTimeDurationEditViewController: UIViewController {
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "시작 시간"
+        label.text = I18NStrings.View.startTime
         label.font = .preferredFont(forTextStyle: .headline)
         
         return label
@@ -61,7 +61,7 @@ class DailyTimeDurationEditViewController: UIViewController {
     private let repeatCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "반복 횟수"
+        label.text = I18NStrings.View.repeatCount
         label.font = .preferredFont(forTextStyle: .headline)
         
         return label
@@ -114,7 +114,7 @@ private extension DailyTimeDurationEditViewController {
     
     func configureNavigationBar() {
         self.navigationItem.leftBarButtonItem = backBarButton
-        self.navigationItem.title = "수정하기"
+        self.navigationItem.title = I18NStrings.NavigationItem.edit
         
         self.navigationItem.rightBarButtonItem = doneBarButton
         doneBarButton.target = self
@@ -223,10 +223,10 @@ private extension DailyTimeDurationEditViewController {
     }
     
     func alertFailure() {
-        let alert = UIAlertController(title: "실패",
-                                      message: "수정이 실패했습니다. \n 빈값이 있는지 확인해주세요.",
+        let alert = UIAlertController(title: I18NStrings.Alert.alertFailTitle,
+                                      message: I18NStrings.Alert.dataEmptyCheckMessage,
                                       preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alert.addAction(confirmAction)
         
@@ -238,8 +238,10 @@ extension DailyTimeDurationEditViewController: AlertRepeatCountOverDelegate {
     func alertRepeatCountOver() {
         repeatCountStepper.value -= 1
         
-        let alertController = UIAlertController(title: "실패", message: "횟수가 너무 많아요", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let alertController = UIAlertController(title: I18NStrings.Alert.alertFailTitle,
+                                                message: I18NStrings.Alert.repeatCountExceeded,
+                                                preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: I18NStrings.Alert.confirmAction, style: .default)
         
         alertController.addAction(confirmAction)
         present(alertController, animated: true)
