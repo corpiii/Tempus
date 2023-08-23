@@ -7,15 +7,15 @@
 
 import UIKit
 
-final class DefaultTimerCoordinator: Coordinator {
+final class DefaultTimerCoordinator: TimerCoordinator {
     var childCoordinators: [Coordinator] = []
-    
     var type: CoordinatorType { .timer }
+    
+    private weak var startModeDelegate: StartModeDelegate?
     
     let navigationController: UINavigationController
     private let timerViewModel: TimerViewModel
     private let timerViewController: TimerViewController
-    private weak var startModeDelegate: StartModeDelegate?
     
     init(startModeDelegate: StartModeDelegate) {
         let tabBarImage = UIImage(systemName: "timer")
@@ -32,7 +32,7 @@ final class DefaultTimerCoordinator: Coordinator {
         timerViewModel.coordinator = self
     }
     
-    func modeStart(_ startUseCase: TimerStartUseCase) {
+    func finish(_ startUseCase: TimerStartUseCase) {
         startModeDelegate?.startWith(startUseCase)
     }
 }

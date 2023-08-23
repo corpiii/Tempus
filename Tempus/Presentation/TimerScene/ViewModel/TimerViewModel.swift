@@ -54,7 +54,7 @@ private extension TimerViewModel {
                 let originModel = TimerModel(id: UUID(), wasteTime: wasteTime)
                 let startUseCase = TimerStartUseCase(originModel: originModel)
 
-                self?.coordinator?.modeStart(startUseCase)
+                self?.coordinator?.finish(startUseCase)
             }).disposed(by: disposeBag)
     }
     

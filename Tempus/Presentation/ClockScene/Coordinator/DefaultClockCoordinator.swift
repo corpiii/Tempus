@@ -10,9 +10,11 @@ import UIKit
 class DefaultClockCoordinator: ClockCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .clock }
+    
+    private weak var startApplyDelegate: StartApplyDelegate?
+    
     let clockViewModel: ClockViewModel
     let clockViewController: ClockViewController
-    private weak var startApplyDelegate: StartApplyDelegate?
     
     init(startApplyDelegate: StartApplyDelegate) {
         let tabBarImage = UIImage(systemName: "clock")
