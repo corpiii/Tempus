@@ -7,18 +7,18 @@
 
 import UIKit
 
-final class DefaultDailyTimeDurationEditCoordinator: Coordinator {
+final class DefaultDailyTimeDurationEditCoordinator: DailyTimeDurationEditCoordinator {
     var childCoordinators: [Coordinator] = []
-    
     var type: CoordinatorType { .dailyTimeDurationEdit }
     
     private let navigationController: UINavigationController
     private let repository: DataManagerRepository
-    private let dailyTimeDurationEditViewController: DailyTimeDurationEditViewController
-    private let dailyTimeDurationEditViewModel: DailyTimeDurationEditViewModel
     
     private weak var editReflectDelegate: EditReflectDelegate?
     private weak var finishDelegate: DailyFinishDelegate?
+    
+    private let dailyTimeDurationEditViewModel: DailyTimeDurationEditViewModel
+    private let dailyTimeDurationEditViewController: DailyTimeDurationEditViewController
     
     init(navigationController: UINavigationController,
          repository: DataManagerRepository,

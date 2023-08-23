@@ -7,9 +7,8 @@
 
 import UIKit
 
-final class DefaultDailyDetailCoordinator: Coordinator {
+final class DefaultDailyDetailCoordinator: DailyDetailCoordinator {
     var childCoordinators: [Coordinator] = []
-    
     var type: CoordinatorType { .dailyDetail }
     
     private let navigationController: UINavigationController

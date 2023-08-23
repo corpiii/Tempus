@@ -234,7 +234,7 @@ private extension DailyTimeDurationEditViewController {
     }
 }
 
-extension DailyTimeDurationEditViewController: AlertRepeatCountOverDelegate {
+extension DailyTimeDurationEditViewController: RepeatCountOverAlertDelegate {
     func alertRepeatCountOver() {
         repeatCountStepper.value -= 1
         

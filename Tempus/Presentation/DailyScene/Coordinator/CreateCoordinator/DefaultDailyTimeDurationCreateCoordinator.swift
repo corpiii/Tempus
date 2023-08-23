@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultDailyTimeDurationCreateCoordinator: Coordinator {
+final class DefaultDailyTimeDurationCreateCoordinator: DailyTimeDurationCreateCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .dailyTimeDurationCreate }
     

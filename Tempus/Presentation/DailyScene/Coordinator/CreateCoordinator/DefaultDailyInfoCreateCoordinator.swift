@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultDailyInfoCreateCoordinator: Coordinator {
+final class DefaultDailyInfoCreateCoordinator: DailyInfoCreateCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .dailyInfoCreate }
     

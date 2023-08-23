@@ -7,16 +7,17 @@
 
 import UIKit
 
-final class DefaultDailyListViewCoordinator: Coordinator, FinishDelegate {
+final class DefaultDailyListViewCoordinator: DailyListViewCoordinator {
     var childCoordinators: [Coordinator] = []
-    
     var type: CoordinatorType { .dailyList }
     
+    let navigationController: UINavigationController
     private let repository: DataManagerRepository
+    
+    private weak var startModeDelegate: StartModeDelegate?
+    
     private let dailyListViewModel: DailyListViewModel
     private let dailyListViewController: DailyListViewController
-    private weak var startModeDelegate: StartModeDelegate?
-    let navigationController: UINavigationController
     
     init(repository: DataManagerRepository, startModeDelegate: StartModeDelegate) {
         let tabBarImage = UIImage(systemName: "calendar")
