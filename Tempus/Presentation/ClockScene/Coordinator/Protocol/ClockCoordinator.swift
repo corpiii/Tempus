@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ClockCoordinator: Coordinator {
+protocol ClockCoordinator: Coordinator, AnyObject {
     func startTimer()
 }

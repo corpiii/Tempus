@@ -5,7 +5,7 @@
 //  Created by 이정민 on 2023/08/23.
 //
 
-protocol DailyDetailCoordinator: Coordinator, FinishDelegate {
+protocol DailyDetailCoordinator: Coordinator, FinishDelegate, AnyObject {
     func finish(with startUseCase: DailyStartUseCase?)
     func pushDailyInfoEditViewController(originModel: DailyModel)
 }

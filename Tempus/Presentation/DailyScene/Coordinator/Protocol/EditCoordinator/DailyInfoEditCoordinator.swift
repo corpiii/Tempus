@@ -5,7 +5,7 @@
 //  Created by 이정민 on 2023/08/23.
 //
 
-protocol DailyInfoEditCoordinator: Coordinator {
+protocol DailyInfoEditCoordinator: Coordinator, AnyObject {
     func finish()
     func pushDailyTimeDurationEditViewController(originModel: DailyModel)
 }
