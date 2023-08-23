@@ -27,6 +27,6 @@ class ModeStartUseCase: ModeTransform {
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        return Output(remainTime: .init(), modeState: .init(), entireRunningTime: .init())
+        fatalError("Subclasses must override transform(input:disposeBag:)")
     }
 }
