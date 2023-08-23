@@ -36,7 +36,7 @@ final class ClockViewModelTest: XCTestCase {
         // Arrange
         let modeStateExpectation = XCTestExpectation(description: "modeState_test")
         let remainTimeExpectation = XCTestExpectation(description: "remainTime_test")
-        let blockModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 12)
+        let blockModel = BlockModel(id: UUID(), title: "testTitle", blockTime: 12)
         
         clockViewModelOutput.modeStartUseCaseOutput
             .subscribe(onNext: { [weak self] output in

@@ -25,9 +25,8 @@ final class BlockDeleteUseCaseTest: XCTestCase {
         let id = UUID()
         let title = "testTitle"
         let divideCount = 6
-        let model = BlockModel(id: id, title: title, divideCount: divideCount)
+        let model = BlockModel(id: id, title: title, blockTime: divideCount)
         let expectation = XCTestExpectation(description: "block_delete_test")
-        
         
         try! coreDataRepositoryMock.create(model)
         
@@ -37,8 +36,13 @@ final class BlockDeleteUseCaseTest: XCTestCase {
         let deleteOutput = blockDeleteUseCase.transform(input: deleteInput, disposeBag: disposeBag)
         
         deleteOutput.isDeleteSuccess
-            .subscribe(onNext: { isSuccess in
-                XCTAssertTrue(isSuccess)
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(_):
+                    break
+                case .failure(_):
+                    XCTFail()
+                }
                 expectation.fulfill()
             }).disposed(by: disposeBag)
         
