@@ -1,5 +1,5 @@
 //
-//  DailyTimeDurationEditCoordinator.swift
+//  DefaultDailyTimeDurationEditCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/06/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DailyTimeDurationEditCoordinator: Coordinator {
+final class DefaultDailyTimeDurationEditCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .dailyTimeDurationEdit }

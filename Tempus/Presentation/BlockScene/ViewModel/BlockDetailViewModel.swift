@@ -19,7 +19,7 @@ final class BlockDetailViewModel {
     }
     
     private let originModelSubject: BehaviorSubject<BlockModel>
-    weak var coordinator: BlockDetailCoordinator?
+    weak var coordinator: DefaultBlockDetailCoordinator?
     
     init(originModel: BlockModel) {
         self.originModelSubject = .init(value: originModel)

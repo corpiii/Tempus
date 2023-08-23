@@ -27,7 +27,7 @@ final class DailyInfoCreateViewModel {
     private var modelTitle: String?
     private var modelFocusTime: Double?
     private var modelBreakTime: Double?
-    weak var coordinator: DailyInfoCreateCoordinator?
+    weak var coordinator: DefaultDailyInfoCreateCoordinator?
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()

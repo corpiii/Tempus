@@ -22,21 +22,21 @@ class MainCoordinator: Coordinator {
         self.repository = repository
         
         // clockCoordinator
-        let clockCoordinator = ClockCoordinator(startApplyDelegate: self)
+        let clockCoordinator = DefaultClockCoordinator(startApplyDelegate: self)
         childCoordinators.append(clockCoordinator)
         
         // blockListCoordinator
-        let blockListViewCoordinator = BlockListViewCoordinator(repository: repository,
+        let blockListViewCoordinator = DefaultBlockListViewCoordinator(repository: repository,
                                                                 startModeDelegate: clockCoordinator.clockViewModel)
         childCoordinators.append(blockListViewCoordinator)
         
         // dailyListCoordinator
-        let dailyListViewCoordinator = DailyListViewCoordinator(repository: repository,
+        let dailyListViewCoordinator = DefaultDailyListViewCoordinator(repository: repository,
                                                                 startModeDelegate: clockCoordinator.clockViewModel)
         childCoordinators.append(dailyListViewCoordinator)
         
         // timerCoordinator
-        let timerCoordinator = TimerCoordinator(startModeDelegate: clockCoordinator.clockViewModel)
+        let timerCoordinator = DefaultTimerCoordinator(startModeDelegate: clockCoordinator.clockViewModel)
         childCoordinators.append(timerCoordinator)
         
         tabBarController.setViewControllers([clockCoordinator.clockViewController,

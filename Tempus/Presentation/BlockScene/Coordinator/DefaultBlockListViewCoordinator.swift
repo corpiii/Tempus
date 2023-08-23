@@ -1,5 +1,5 @@
 //
-//  BlockListViewCoordinator.swift
+//  DefaultBlockListViewCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BlockListViewCoordinator: Coordinator, FinishDelegate {
+final class DefaultBlockListViewCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .blockList }
     
@@ -37,7 +37,7 @@ final class BlockListViewCoordinator: Coordinator, FinishDelegate {
     }
     
     func pushCreateViewController(_ fetchRefreshDelegate: FetchRefreshDelegate) {
-        let blockCreateCoordinator = BlockCreateCoordinator(navigationController: self.navigationController,
+        let blockCreateCoordinator = DefaultBlockCreateCoordinator(navigationController: self.navigationController,
                                                             repository: self.repository,
                                                             fetchRefreshDelegate: self.blockListViewModel,
                                                             finishDelegate: self,
@@ -47,7 +47,7 @@ final class BlockListViewCoordinator: Coordinator, FinishDelegate {
     }
     
     func pushDetailViewController(with model: BlockModel) {
-        let blockDetailCoordinator = BlockDetailCoordinator(navigationController: self.navigationController,
+        let blockDetailCoordinator = DefaultBlockDetailCoordinator(navigationController: self.navigationController,
                                                             repository: self.repository,
                                                             originModel: model,
                                                             fetchRefreshDelegate: self.blockListViewModel,

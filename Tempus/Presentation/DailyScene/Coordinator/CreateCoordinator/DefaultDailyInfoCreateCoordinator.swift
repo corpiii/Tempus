@@ -1,5 +1,5 @@
 //
-//  DailyInfoCreateCoordinator.swift
+//  DefaultDailyInfoCreateCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/06/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DailyInfoCreateCoordinator: Coordinator {
+final class DefaultDailyInfoCreateCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .dailyInfoCreate }
     
@@ -44,7 +44,7 @@ final class DailyInfoCreateCoordinator: Coordinator {
     func pushTimeDurationCreateViewController(modelTitle: String,
                                               focusTime: Double,
                                               breakTime: Double) {
-        let dailyTimeDurationCreateCoordinator = DailyTimeDurationCreateCoordinator(navigationController: self.dailyInfoCreateNavigationController,
+        let dailyTimeDurationCreateCoordinator = DefaultDailyTimeDurationCreateCoordinator(navigationController: self.dailyInfoCreateNavigationController,
                                                                                     modelTitle: modelTitle,
                                                                                     focusTime: focusTime,
                                                                                     breakTime: breakTime,
@@ -62,7 +62,7 @@ final class DailyInfoCreateCoordinator: Coordinator {
     }
 }
 
-extension DailyInfoCreateCoordinator: DailyFinishDelegate {
+extension DefaultDailyInfoCreateCoordinator: DailyFinishDelegate {
     func completeFinish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
         self.finish()

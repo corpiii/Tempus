@@ -1,5 +1,5 @@
 //
-//  BlockCreateCoordinator.swift
+//  DefaultBlockCreateCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/28.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BlockCreateCoordinator: Coordinator, FinishDelegate {
+final class DefaultBlockCreateCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .blockCreate }
     private let navigationController: UINavigationController

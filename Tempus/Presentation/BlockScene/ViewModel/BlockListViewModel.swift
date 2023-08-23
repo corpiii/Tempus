@@ -28,7 +28,7 @@ final class BlockListViewModel {
     
     private var modelFetchEvent: PublishSubject<Void> = .init()
     
-    weak var coordinator: BlockListViewCoordinator?
+    weak var coordinator: DefaultBlockListViewCoordinator?
     
     init(repository: DataManagerRepository) {
         self.blockFetchUseCase = .init(repository: repository)

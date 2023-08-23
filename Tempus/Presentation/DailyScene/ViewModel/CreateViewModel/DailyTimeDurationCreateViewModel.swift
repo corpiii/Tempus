@@ -35,7 +35,7 @@ final class DailyTimeDurationCreateViewModel {
     
     private let createUseCase: DailyCreateUseCase
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
-    weak var coordinator: DailyTimeDurationCreateCoordinator?
+    weak var coordinator: DefaultDailyTimeDurationCreateCoordinator?
     
     init(modelTitle: String,
          focusTime: Double,

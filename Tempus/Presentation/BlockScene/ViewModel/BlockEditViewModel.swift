@@ -28,7 +28,7 @@ final class BlockEditViewModel {
     
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
     private weak var editReflectDelegate: EditReflectDelegate?
-    weak var coordinator: BlockEditCoordinator?
+    weak var coordinator: DefaultBlockEditCoordinator?
     
     init(originModel: BlockModel,
          repository: DataManagerRepository,

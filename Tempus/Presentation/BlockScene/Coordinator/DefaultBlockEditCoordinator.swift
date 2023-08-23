@@ -1,5 +1,5 @@
 //
-//  BlockEditCoordinator.swift
+//  DefaultBlockEditCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/31.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BlockEditCoordinator: Coordinator {
+final class DefaultBlockEditCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .blockEdit }
     private let navigationController: UINavigationController

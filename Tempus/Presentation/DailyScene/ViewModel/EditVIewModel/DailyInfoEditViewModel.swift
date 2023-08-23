@@ -31,7 +31,7 @@ final class DailyInfoEditViewModel {
     private var modelBreakTime: Double?
     
     private var originModel: DailyModel
-    weak var coordinator: DailyInfoEditCoordinator?
+    weak var coordinator: DefaultDailyInfoEditCoordinator?
     
     init(originModel: DailyModel) {
         self.originModel = originModel

@@ -1,5 +1,5 @@
 //
-//  TimerCoordinator.swift
+//  DefaultTimerCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/06/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TimerCoordinator: Coordinator {
+final class DefaultTimerCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .timer }

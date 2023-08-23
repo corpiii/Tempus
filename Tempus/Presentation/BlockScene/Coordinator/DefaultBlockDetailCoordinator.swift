@@ -1,5 +1,5 @@
 //
-//  BlockDetailCoordinator.swift
+//  DefaultBlockDetailCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BlockDetailCoordinator: Coordinator, FinishDelegate {
+final class DefaultBlockDetailCoordinator: Coordinator, FinishDelegate {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .blockDetail }
@@ -51,7 +51,7 @@ final class BlockDetailCoordinator: Coordinator, FinishDelegate {
     }
     
     func pushBlockEditViewController(with originModel: BlockModel) {
-        let blockEditCoordinator = BlockEditCoordinator(navigationController: self.navigationController,
+        let blockEditCoordinator = DefaultBlockEditCoordinator(navigationController: self.navigationController,
                                                         repository: self.repository,
                                                         originModel: originModel,
                                                         fetchRefreshDelegate: self.fetchRefreshDelegate,

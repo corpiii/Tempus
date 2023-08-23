@@ -1,5 +1,5 @@
 //
-//  ClockCoordinator.swift
+//  DefaultClockCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ClockCoordinator: Coordinator {
+class DefaultClockCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .clock }
     let clockViewModel: ClockViewModel

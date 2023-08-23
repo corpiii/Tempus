@@ -1,5 +1,5 @@
 //
-//  DailyDetailCoordinator.swift
+//  DefaultDailyDetailCoordinator.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/06/17.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DailyDetailCoordinator: Coordinator {
+final class DefaultDailyDetailCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .dailyDetail }
@@ -53,7 +53,7 @@ final class DailyDetailCoordinator: Coordinator {
     }
     
     func pushDailyInfoEditViewController(originModel: DailyModel) {
-        let dailyInfoEditCoordinator = DailyInfoEditCoordinator(navigationController: self.navigationController,
+        let dailyInfoEditCoordinator = DefaultDailyInfoEditCoordinator(navigationController: self.navigationController,
                                                                 repository: self.repository,
                                                                 originModel: originModel,
                                                                 fetchRefreshDelegate: fetchRefreshDelegate,
@@ -64,7 +64,7 @@ final class DailyDetailCoordinator: Coordinator {
     }
 }
 
-extension DailyDetailCoordinator: DailyFinishDelegate {
+extension DefaultDailyDetailCoordinator: DailyFinishDelegate {
     func completeFinish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0.type != childCoordinator.type }
         self.navigationController.popToViewController(dailyDetailViewController, animated: true)
