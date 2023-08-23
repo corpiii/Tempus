@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DefaultClockCoordinator: Coordinator {
+class DefaultClockCoordinator: ClockCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .clock }
     let clockViewModel: ClockViewModel
