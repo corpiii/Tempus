@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultBlockListViewCoordinator: Coordinator, FinishDelegate {
+final class DefaultBlockListViewCoordinator: BlockListViewCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .blockList }
     

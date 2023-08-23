@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultBlockDetailCoordinator: Coordinator, FinishDelegate {
+final class DefaultBlockDetailCoordinator: BlockDetailCoordinator {
     var childCoordinators: [Coordinator] = []
     
     var type: CoordinatorType { .blockDetail }

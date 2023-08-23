@@ -7,9 +7,10 @@
 
 import UIKit
 
-final class DefaultBlockCreateCoordinator: Coordinator, FinishDelegate {
+final class DefaultBlockCreateCoordinator: BlockCreateCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { return .blockCreate }
+    
     private let navigationController: UINavigationController
     private let repository: DataManagerRepository
 
