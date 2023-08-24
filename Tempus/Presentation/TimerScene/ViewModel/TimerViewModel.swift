@@ -17,7 +17,7 @@ final class TimerViewModel {
     }
     
     private var wasteTime: Double?
-    weak var coordinator: DefaultTimerCoordinator?
+    weak var coordinator: TimerCoordinator?
     
     func bind(input: Input, disposeBag: DisposeBag) {
         bindModelWasteTime(input.modelWasteTime, disposeBag)
