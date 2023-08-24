@@ -19,7 +19,7 @@ final class DailyDetailViewModel {
     }
     
     private let originModelSubject: BehaviorSubject<DailyModel>
-    weak var coordinator: DefaultDailyDetailCoordinator?
+    weak var coordinator: DailyDetailCoordinator?
     
     init(originModel: DailyModel) {
         self.originModelSubject = .init(value: originModel)
@@ -62,7 +62,7 @@ private extension DailyDetailViewModel {
     func bindBackButtonTapEvent(_ backButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         backButtonTapEvent
             .subscribe(onNext: { [weak self] in
-                self?.coordinator?.finish()
+                self?.coordinator?.finish(with: nil)
             }).disposed(by: disposeBag)
     }
 }

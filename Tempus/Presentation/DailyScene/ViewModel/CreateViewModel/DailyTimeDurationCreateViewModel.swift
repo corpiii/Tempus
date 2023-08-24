@@ -35,7 +35,7 @@ final class DailyTimeDurationCreateViewModel {
     
     private let createUseCase: DailyCreateUseCase
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
-    weak var coordinator: DefaultDailyTimeDurationCreateCoordinator?
+    weak var coordinator: DailyTimeDurationCreateCoordinator?
     
     init(modelTitle: String,
          focusTime: Double,
@@ -134,7 +134,7 @@ private extension DailyTimeDurationCreateViewModel {
                 self?.coordinator?.completeFinish(with: startUseCase)
                 break
             case .completeWithoutStart:
-                self?.coordinator?.completeFinish()
+                self?.coordinator?.completeFinish(with: nil)
                 break
             }
         }).disposed(by: disposeBag)
