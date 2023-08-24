@@ -38,21 +38,21 @@ final class DefaultBlockListViewCoordinator: BlockListViewCoordinator {
     
     func pushCreateViewController(_ fetchRefreshDelegate: FetchRefreshDelegate) {
         let blockCreateCoordinator = DefaultBlockCreateCoordinator(navigationController: self.navigationController,
-                                                            repository: self.repository,
-                                                            fetchRefreshDelegate: self.blockListViewModel,
-                                                            finishDelegate: self,
-                                                            startModeDelegate: self.startModeDelegate)
+                                                                   repository: self.repository,
+                                                                   fetchRefreshDelegate: self.blockListViewModel,
+                                                                   finishDelegate: self,
+                                                                   startModeDelegate: self.startModeDelegate)
         blockCreateCoordinator.start()
         childCoordinators.append(blockCreateCoordinator)
     }
     
     func pushDetailViewController(with model: BlockModel) {
         let blockDetailCoordinator = DefaultBlockDetailCoordinator(navigationController: self.navigationController,
-                                                            repository: self.repository,
-                                                            originModel: model,
-                                                            fetchRefreshDelegate: self.blockListViewModel,
-                                                            finishDelegate: self,
-                                                            startModeDelegate: self.startModeDelegate)
+                                                                   repository: self.repository,
+                                                                   originModel: model,
+                                                                   fetchRefreshDelegate: self.blockListViewModel,
+                                                                   finishDelegate: self,
+                                                                   startModeDelegate: self.startModeDelegate)
         blockDetailCoordinator.start()
         childCoordinators.append(blockDetailCoordinator)
     }

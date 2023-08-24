@@ -42,7 +42,7 @@ final class DefaultBlockCreateCoordinator: BlockCreateCoordinator {
         self.navigationController.present(self.blockCreateNavigationController, animated: true)
     }
     
-    func finish(with startUseCase: BlockStartUseCase? = nil) {
+    func finish(with startUseCase: BlockStartUseCase?) {
         if let startUseCase {
             startModeDelegate?.startWith(startUseCase)
         }

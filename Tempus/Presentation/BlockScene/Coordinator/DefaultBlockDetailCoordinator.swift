@@ -41,7 +41,7 @@ final class DefaultBlockDetailCoordinator: BlockDetailCoordinator {
     }
 
     
-    func finish(with startUseCase: BlockStartUseCase? = nil) {
+    func finish(with startUseCase: BlockStartUseCase?) {
         if let startUseCase {
             startModeDelegate?.startWith(startUseCase)
         }
@@ -52,11 +52,11 @@ final class DefaultBlockDetailCoordinator: BlockDetailCoordinator {
     
     func pushBlockEditViewController(with originModel: BlockModel) {
         let blockEditCoordinator = DefaultBlockEditCoordinator(navigationController: self.navigationController,
-                                                        repository: self.repository,
-                                                        originModel: originModel,
-                                                        fetchRefreshDelegate: self.fetchRefreshDelegate,
-                                                        finishDelegate: self,
-                                                        editReflectDelegate: self.blockDetailViewModel)
+                                                               repository: self.repository,
+                                                               originModel: originModel,
+                                                               fetchRefreshDelegate: self.fetchRefreshDelegate,
+                                                               finishDelegate: self,
+                                                               editReflectDelegate: self.blockDetailViewModel)
         blockEditCoordinator.start()
         self.childCoordinators.append(blockEditCoordinator)
     }

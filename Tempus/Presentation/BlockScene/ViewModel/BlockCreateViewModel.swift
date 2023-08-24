@@ -30,7 +30,7 @@ final class BlockCreateViewModel {
     
     private let createUseCase: BlockCreateUseCase
     private weak var fetchRefreshDelegate: FetchRefreshDelegate?
-    weak var coordinator: DefaultBlockCreateCoordinator?
+    weak var coordinator: BlockCreateCoordinator?
     
     init(repository: DataManagerRepository, fetchRefreshDelegate: FetchRefreshDelegate) {
         self.createUseCase = .init(repository: repository)
@@ -105,7 +105,7 @@ private extension BlockCreateViewModel {
     func bindCancelButtonTapEvent(_ cancelButtonTapEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         cancelButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.finish()
+                self?.coordinator?.finish(with: nil)
             }).disposed(by: disposeBag)
     }
     
@@ -119,7 +119,7 @@ private extension BlockCreateViewModel {
                 let startUseCase = BlockStartUseCase(originModel: originModel)
                 self.coordinator?.finish(with: startUseCase)
             case .completeWithoutStart:
-                self.coordinator?.finish()
+                self.coordinator?.finish(with: nil)
             }
         }).disposed(by: disposeBag)
     }

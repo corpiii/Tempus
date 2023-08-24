@@ -60,7 +60,7 @@ private extension BlockDetailViewModel {
         disappearEvent
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                self.coordinator?.finish()
+                self.coordinator?.finish(with: nil)
             }).disposed(by: disposeBag)
     }
 }
