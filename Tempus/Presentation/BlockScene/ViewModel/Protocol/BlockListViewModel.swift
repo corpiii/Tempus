@@ -7,8 +7,6 @@
 
 import RxSwift
 
-protocol BlockListViewModel: AnyObject, FetchRefreshDelegate {
+protocol BlockListViewModel: AnyObject, FetchRefreshDelegate, ViewModel {
     var coordinator: BlockListViewCoordinator? { get set }
-    
-    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType?
 }

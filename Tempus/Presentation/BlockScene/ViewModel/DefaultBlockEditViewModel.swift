@@ -1,5 +1,5 @@
 //
-//  BlockEditViewModel.swift
+//  DefaultBlockEditViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/04/26.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class BlockEditViewModel {
+final class DefaultBlockEditViewModel: BlockEditViewModel {
     struct Input {
         let modelTitle: Observable<String>
         let modelBlockTime: Observable<Int>
@@ -41,7 +41,11 @@ final class BlockEditViewModel {
         self.editReflectDelegate = editReflectDelegate
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let editUseCaseInput = BlockEditUseCase.Input(modelEditEvent: self.doneButtonTapEvent)
         let editUseCaseOutput = blockEditUseCase.transform(input: editUseCaseInput,
                                                            disposeBag: disposeBag)
@@ -56,11 +60,11 @@ final class BlockEditViewModel {
         bindCompleteEvent(input.completeEvent, disposeBag)
         bindEditSuccess(editUseCaseOutput.isEditSuccess, disposeBag)
         
-        return output
+        return output as? OutputType
     }
 }
 
-private extension BlockEditViewModel {
+private extension DefaultBlockEditViewModel {
     func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
         modelTitle
             .subscribe(onNext: { [weak self] modelTitle in

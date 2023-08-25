@@ -13,7 +13,7 @@ final class DefaultBlockEditCoordinator: BlockEditCoordinator {
     private let navigationController: UINavigationController
     private let repository: DataManagerRepository
     private weak var finishDelegate: FinishDelegate?
-    private let blockEditViewModel: BlockEditViewModel
+    private let blockEditViewModel: DefaultBlockEditViewModel
     private let blockEditViewController: BlockEditViewController
     
     init(navigationController: UINavigationController,

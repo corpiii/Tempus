@@ -7,8 +7,6 @@
 
 import RxSwift
 
-protocol BlockCreateViewModel: AnyObject {
+protocol BlockCreateViewModel: AnyObject, ViewModel {
     var coordinator: BlockCreateCoordinator? { get set }
-    
-    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType?
 }

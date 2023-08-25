@@ -212,13 +212,16 @@ private extension BlockEditViewController {
 // MARK: - BindViewModel
 private extension BlockEditViewController {
     func bindViewModel() {
-        let input = BlockEditViewModel.Input(modelTitle: textFieldSubject,
-                                             modelBlockTime: blockTimeSubject,
-                                             doneButtonTapEvent: doneButtonTapEvent,
-                                             backButtonTapEvent: backBarButton.rx.tap.asObservable(),
-                                             completeEvent: completeEvent)
+        typealias Input = DefaultBlockEditViewModel.Input
+        typealias Output = DefaultBlockEditViewModel.Output
         
-        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag),
+        let input = Input(modelTitle: textFieldSubject,
+                          modelBlockTime: blockTimeSubject,
+                          doneButtonTapEvent: doneButtonTapEvent,
+                          backButtonTapEvent: backBarButton.rx.tap.asObservable(),
+                          completeEvent: completeEvent)
+        
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag),
               let pickerIndex = Constant.blockTimeCandidates.firstIndex(of: "\(output.blockTime)") else {
             return
         }

@@ -7,9 +7,7 @@
 
 import RxSwift
 
-protocol ClockViewModel: AnyObject, StartModeDelegate {
+protocol ClockViewModel: AnyObject, StartModeDelegate, ViewModel {
     var modeStartUseCase: ModeStartUseCase? { get set }
     var coordinator: ClockCoordinator? { get set }
-    
-    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType?
 }

@@ -7,8 +7,6 @@
 
 import RxSwift
 
-protocol BlockDetailViewModel: AnyObject, EditReflectDelegate {
+protocol BlockDetailViewModel: AnyObject, EditReflectDelegate, ViewModel {
     var coordinator: BlockDetailCoordinator? { get set }
-    
-    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType?
 }
