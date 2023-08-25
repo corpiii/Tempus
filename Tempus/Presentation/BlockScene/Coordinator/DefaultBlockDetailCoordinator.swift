@@ -17,7 +17,7 @@ final class DefaultBlockDetailCoordinator: BlockDetailCoordinator {
     private weak var startModeDelegate: StartModeDelegate?
     private weak var finishDelegate: FinishDelegate?
     
-    private let blockDetailViewModel: BlockDetailViewModel
+    private let blockDetailViewModel: DefaultBlockDetailViewModel
     private let blockDetailViewController: BlockDetailViewController
     
     init(navigationController: UINavigationController,

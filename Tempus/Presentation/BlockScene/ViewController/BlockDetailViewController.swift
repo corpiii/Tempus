@@ -78,13 +78,16 @@ private extension BlockDetailViewController {
 // MARK: - BindViewModel
 private extension BlockDetailViewController {
     func bindViewModel() {
-        guard let viewModel = viewModel else { return }
+        typealias Input = DefaultBlockDetailViewModel.Input
+        typealias Output = DefaultBlockDetailViewModel.Output
         
-        let input = BlockDetailViewModel.Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
-                                               editButtonTapEvent: editBarButton.rx.tap.asObservable(),
-                                               disappearEvent: backBarButton.rx.tap.asObservable())
-        
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        let input = Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
+                          editButtonTapEvent: editBarButton.rx.tap.asObservable(),
+                          disappearEvent: backBarButton.rx.tap.asObservable())
+    
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+            return
+        }
         
         output.originModelSubject
             .subscribe(onNext: { model in
@@ -93,5 +96,6 @@ private extension BlockDetailViewController {
                     self.clockView.splitClock(by: "\(model.blockTime)")
                 }
             }).disposed(by: disposeBag)
+        
     }
 }

@@ -1,5 +1,5 @@
 //
-//  BlockDetailViewModel.swift
+//  DefaultBlockDetailViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/04/25.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class BlockDetailViewModel {
+final class DefaultBlockDetailViewModel: BlockDetailViewModel {
     struct Input {
         let startButtonTapEvent: Observable<Void>
         let editButtonTapEvent: Observable<Void>
@@ -19,24 +19,28 @@ final class BlockDetailViewModel {
     }
     
     private let originModelSubject: BehaviorSubject<BlockModel>
-    weak var coordinator: DefaultBlockDetailCoordinator?
+    weak var coordinator: BlockDetailCoordinator?
     
     init(originModel: BlockModel) {
         self.originModelSubject = .init(value: originModel)
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: RxSwift.DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let output = Output(originModelSubject: originModelSubject)
         
         bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
         bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
         bindDisappearEvent(input.disappearEvent, disposeBag)
         
-        return output
+        return output as? OutputType
     }
 }
 
-private extension BlockDetailViewModel {
+private extension DefaultBlockDetailViewModel {
     func bindStartButtonTapEvent(_ startEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         startEvent
             .subscribe(onNext: { [weak self] in
@@ -65,7 +69,7 @@ private extension BlockDetailViewModel {
     }
 }
 
-extension BlockDetailViewModel: EditReflectDelegate {
+extension DefaultBlockDetailViewModel {
     func reflect(_ model: Model) {
         if let model = model as? BlockModel {
             self.originModelSubject.onNext(model)
