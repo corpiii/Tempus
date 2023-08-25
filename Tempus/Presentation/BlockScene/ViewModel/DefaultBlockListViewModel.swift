@@ -1,5 +1,5 @@
 //
-//  BlockListViewModel.swift
+//  DefaultBlockListViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/04/18.
@@ -10,7 +10,7 @@ import RxCocoa
 import RxRelay
 import RxSwift
 
-final class BlockListViewModel {
+final class DefaultBlockListViewModel: BlockListViewModel {
     struct Input {
         let addButtonEvent: Observable<Void>
         let modelDeleteEvent: Observable<BlockModel>
@@ -35,7 +35,11 @@ final class BlockListViewModel {
         self.blockDeleteUseCase = .init(repository: repository)
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let output = Output()
         
         let fetchUseCaseInput = BlockFetchUseCase.Input(modelFetchEvent: modelFetchEvent)
@@ -56,11 +60,12 @@ final class BlockListViewModel {
         bindModelTapEvent(input.modelTapEvent, disposeBag: disposeBag)
         
         output.blockModelArray.onNext([])
-        return output
+        
+        return output as? OutputType
     }
 }
 
-private extension BlockListViewModel {
+private extension DefaultBlockListViewModel {
     func bindDeleteSuccess(_ deleteEvent: PublishSubject<Result<BlockModel, DataManageError>>, to isDeleteSuccess: PublishRelay<Result<BlockModel, DataManageError>>, _ disposeBag: DisposeBag) {
         deleteEvent
             .subscribe(onNext: { [weak self] result in
@@ -98,7 +103,7 @@ private extension BlockListViewModel {
     }
 }
 
-extension BlockListViewModel: FetchRefreshDelegate {
+extension DefaultBlockListViewModel {
     func refresh() {
         modelFetchEvent.onNext(())
     }

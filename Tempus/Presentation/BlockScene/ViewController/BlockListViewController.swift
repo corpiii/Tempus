@@ -77,12 +77,15 @@ private extension BlockListViewController {
 // MARK: - BindViewModel
 private extension BlockListViewController {
     func bindViewModel() {
-        let input = BlockListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
-                                             modelDeleteEvent: modelDeleteEvent,
-                                             modelFetchEvent: modelFetchEvent,
-                                             modelTapEvent: modelTapEvent)
+        typealias Input = DefaultBlockListViewModel.Input
+        typealias Output = DefaultBlockListViewModel.Output
         
-        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+        let input = DefaultBlockListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
+                                                    modelDeleteEvent: modelDeleteEvent,
+                                                    modelFetchEvent: modelFetchEvent,
+                                                    modelTapEvent: modelTapEvent)
+        
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             return
         }
         

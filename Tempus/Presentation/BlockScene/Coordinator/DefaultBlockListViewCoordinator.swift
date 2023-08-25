@@ -13,7 +13,7 @@ final class DefaultBlockListViewCoordinator: BlockListViewCoordinator {
     
     private let repository: DataManagerRepository
     private let blockListViewController: BlockListViewController
-    private let blockListViewModel: BlockListViewModel
+    private let blockListViewModel: DefaultBlockListViewModel
     private weak var startModeDelegate: StartModeDelegate?
     let navigationController: UINavigationController
     
@@ -24,7 +24,7 @@ final class DefaultBlockListViewCoordinator: BlockListViewCoordinator {
         
         self.repository = repository
         
-        self.blockListViewModel = BlockListViewModel(repository: repository)
+        self.blockListViewModel = DefaultBlockListViewModel(repository: repository)
         self.blockListViewController = BlockListViewController(viewModel: blockListViewModel)
         self.startModeDelegate = startModeDelegate
         self.navigationController = UINavigationController(rootViewController: blockListViewController)

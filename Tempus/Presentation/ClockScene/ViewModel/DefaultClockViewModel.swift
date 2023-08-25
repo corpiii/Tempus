@@ -63,17 +63,17 @@ final class DefaultClockViewModel: ClockViewModel {
     weak var coordinator: ClockCoordinator?
     
     func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType? {
-        let output = Output(modeStartUseCaseOutput: modeStartUseCaseOutput)
-        
-        if let input = input as? Input {
-            self.modeStartEvent = input.modeStartEvent
-            self.modeStopEvent = input.modeStopEvent
-            self.disposeBag = disposeBag
-            
-            return output as? OutputType
+        guard let input = input as? Input else {
+            return nil
         }
         
-        return nil
+        let output = Output(modeStartUseCaseOutput: modeStartUseCaseOutput)
+        
+        self.modeStartEvent = input.modeStartEvent
+        self.modeStopEvent = input.modeStopEvent
+        self.disposeBag = disposeBag
+        
+        return output as? OutputType
     }
 }
 
