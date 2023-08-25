@@ -1,5 +1,5 @@
 //
-//  BlockCreateViewModel.swift
+//  DefaultBlockCreateViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/04/20.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
-final class BlockCreateViewModel {
+final class DefaultBlockCreateViewModel: BlockCreateViewModel {
     struct Input {
         let modelTitle: Observable<String>
         let modelBlockTime: Observable<Int>
@@ -37,7 +37,11 @@ final class BlockCreateViewModel {
         self.fetchRefreshDelegate = fetchRefreshDelegate
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: RxSwift.DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let output = Output()
         
         let createUseCaseInput = BlockCreateUseCase.Input(modelCreate: self.modelCreateEvent)
@@ -53,12 +57,11 @@ final class BlockCreateViewModel {
         bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
         bindStartEvent(input.startEvent, disposeBag)
         
-        return output
+        return output as? OutputType
     }
-    
 }
 
-private extension BlockCreateViewModel {
+private extension DefaultBlockCreateViewModel {
     func bindCreateSuccess(_ isCreateSuccess: Observable<Bool>,
                            to isCreateSuccessRelay: PublishRelay<Bool>,
                            _ disposeBag: DisposeBag) {

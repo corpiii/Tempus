@@ -14,7 +14,7 @@ final class DefaultBlockCreateCoordinator: BlockCreateCoordinator {
     private let navigationController: UINavigationController
     private let repository: DataManagerRepository
 
-    private let blockCreateViewModel: BlockCreateViewModel
+    private let blockCreateViewModel: DefaultBlockCreateViewModel
     private let blockCreateViewController: BlockCreateViewController
     private let blockCreateNavigationController: UINavigationController
     
@@ -28,7 +28,7 @@ final class DefaultBlockCreateCoordinator: BlockCreateCoordinator {
          startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
         self.repository = repository
-        self.blockCreateViewModel = BlockCreateViewModel(repository: self.repository,
+        self.blockCreateViewModel = DefaultBlockCreateViewModel(repository: self.repository,
                                                          fetchRefreshDelegate: fetchRefreshDelegate)
         self.blockCreateViewController = BlockCreateViewController(viewModel: self.blockCreateViewModel)
         self.blockCreateNavigationController = UINavigationController(rootViewController: blockCreateViewController)
