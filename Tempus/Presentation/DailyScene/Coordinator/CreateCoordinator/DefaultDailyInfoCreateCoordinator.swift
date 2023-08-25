@@ -26,7 +26,7 @@ final class DefaultDailyInfoCreateCoordinator: DailyInfoCreateCoordinator {
          fetchRefreshDelegate: FetchRefreshDelegate?,
          startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
-        self.dailyInfoCreateViewModel = DailyInfoCreateViewModel()
+        self.dailyInfoCreateViewModel = DefaultDailyInfoCreateViewModel()
         self.dailyInfoCreateViewController = DailyInfoCreateViewController(viewModel: dailyInfoCreateViewModel)
         self.dailyInfoCreateNavigationController = UINavigationController(rootViewController: dailyInfoCreateViewController)
         self.repository = repository

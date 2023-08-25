@@ -10,7 +10,7 @@ import Foundation
 import RxRelay
 import RxSwift
 
-final class DailyInfoCreateViewModel {
+final class DefaultDailyInfoCreateViewModel: DailyInfoCreateViewModel {
     struct Input {
         let cancelButtonTapEvent: Observable<Void>
         let nextButtonTapEvent: Observable<Void>
@@ -29,7 +29,11 @@ final class DailyInfoCreateViewModel {
     private var modelBreakTime: Double?
     weak var coordinator: DailyInfoCreateCoordinator?
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: RxSwift.DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let output = Output()
         
         bindModelTitle(input.modelTitle, disposeBag)
@@ -39,11 +43,11 @@ final class DailyInfoCreateViewModel {
         bindNextButtonEvent(input.nextButtonTapEvent, to: output.isFillAllInfo, disposeBag)
         bindCancelButtonTapEvent(input.cancelButtonTapEvent, disposeBag)
         
-        return output
+        return output as? OutputType
     }
 }
 
-private extension DailyInfoCreateViewModel {
+private extension DefaultDailyInfoCreateViewModel {
     func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
         modelTitle
             .subscribe(onNext: { [weak self] title in

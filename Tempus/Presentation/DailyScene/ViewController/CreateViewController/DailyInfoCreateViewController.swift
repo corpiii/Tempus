@@ -190,13 +190,16 @@ private extension DailyInfoCreateViewController {
 // MARK: - BindViewModel
 private extension DailyInfoCreateViewController {
     func bindViewModel() {
-        let input = DailyInfoCreateViewModel.Input(cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
-                                                   nextButtonTapEvent: nextButtonTappedEvent,
-                                                   modelTitle: modelTitleSubject,
-                                                   modelFocusTime: modelFocusTimeSubject,
-                                                   modelBreakTime: modelBreakTimeSubject)
+        typealias Input = DefaultDailyInfoCreateViewModel.Input
+        typealias Output = DefaultDailyInfoCreateViewModel.Output
         
-        guard let output = viewModel?.transform(input: input, disposeBag: self.disposeBag) else {
+        let input = Input(cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
+                          nextButtonTapEvent: nextButtonTappedEvent,
+                          modelTitle: modelTitleSubject,
+                          modelFocusTime: modelFocusTimeSubject,
+                          modelBreakTime: modelBreakTimeSubject)
+        
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: self.disposeBag) else {
             return
         }
         
