@@ -1,5 +1,5 @@
 //
-//  DailyDetailViewModel.swift
+//  DefaultDailyDetailViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/04.
@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class DailyDetailViewModel {
+final class DefaultDailyDetailViewModel: DailyDetailViewModel {
     struct Input {
         let startButtonTapEvent: Observable<Void>
         let editButtonTapEvent: Observable<Void>
@@ -25,18 +25,22 @@ final class DailyDetailViewModel {
         self.originModelSubject = .init(value: originModel)
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: RxSwift.DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let output = Output(originModelSubject: originModelSubject)
         
         bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         bindEditButtonTapEvent(input.editButtonTapEvent, disposeBag)
         bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
-                
-        return output
+        
+        return output as? OutputType
     }
 }
 
-private extension DailyDetailViewModel {
+private extension DefaultDailyDetailViewModel {
     func bindStartButtonTapEvent(_ startEvent: Observable<Void>, _ disposeBag: DisposeBag) {
         startEvent
             .subscribe(onNext: { [weak self] in
@@ -67,7 +71,7 @@ private extension DailyDetailViewModel {
     }
 }
 
-extension DailyDetailViewModel: EditReflectDelegate {
+extension DefaultDailyDetailViewModel {
     func reflect(_ model: Model) {
         if let model = model as? DailyModel {
             self.originModelSubject.onNext(model)

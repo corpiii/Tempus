@@ -18,7 +18,7 @@ final class DefaultDailyDetailCoordinator: DailyDetailCoordinator {
     private weak var finishDelegate: FinishDelegate?
     private weak var startModeDelegate: StartModeDelegate?
     
-    private let dailyDetailViewModel: DailyDetailViewModel
+    private let dailyDetailViewModel: DefaultDailyDetailViewModel
     private let dailyDetailViewController: DailyDetailViewController
     
     init(navigationController: UINavigationController,
