@@ -1,5 +1,5 @@
 //
-//  TimerViewModel.swift
+//  DefaultTimerViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/07.
@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class TimerViewModel {
+final class DefaultTimerViewModel: TimerViewModel {
     struct Input {
         let modelWasteTime: Observable<Date>
         
@@ -19,13 +19,17 @@ final class TimerViewModel {
     private var wasteTime: Double?
     weak var coordinator: TimerCoordinator?
     
-    func bind(input: Input, disposeBag: DisposeBag) {
+    func bind<InputType>(input: InputType, disposeBag: RxSwift.DisposeBag) {
+        guard let input = input as? Input else {
+            return
+        }
+        
         bindModelWasteTime(input.modelWasteTime, disposeBag)
         bindStartButtonTapEvent(input.startButtonTapEvent, disposeBag)
     }
 }
 
-private extension TimerViewModel {
+private extension DefaultTimerViewModel {
     func bindModelWasteTime(_ modelWasteTime: Observable<Date>, _ disposeBag: DisposeBag) {
         modelWasteTime
             .subscribe(onNext: { [weak self] wasteTime in

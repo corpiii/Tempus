@@ -21,7 +21,7 @@ final class DefaultTimerCoordinator: TimerCoordinator {
         let tabBarImage = UIImage(systemName: "timer")
         let tabBarItem = UITabBarItem(title: nil, image: tabBarImage, selectedImage: nil)
         
-        self.timerViewModel = .init()
+        self.timerViewModel = DefaultTimerViewModel()
         self.timerViewController = .init(viewModel: timerViewModel)
         self.navigationController = .init(rootViewController: timerViewController)
         self.navigationController.tabBarItem = tabBarItem

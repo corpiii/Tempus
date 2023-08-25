@@ -109,8 +109,9 @@ private extension TimerViewController {
 
 private extension TimerViewController {
     func bindViewModel() {
-        let input = TimerViewModel.Input(modelWasteTime: wasteTimeSubject,
-                                         startButtonTapEvent: startButtonTapEvent)
+        typealias Input = DefaultTimerViewModel.Input
+        
+        let input = Input(modelWasteTime: wasteTimeSubject, startButtonTapEvent: startButtonTapEvent)
         
         viewModel?.bind(input: input, disposeBag: disposeBag)
     }
