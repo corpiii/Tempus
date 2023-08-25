@@ -192,12 +192,17 @@ private extension DailyTimeDurationCreateViewController {
 // MARK: - BindViewModel
 private extension DailyTimeDurationCreateViewController {
     func bindViewModel() {
-        let input = DailyTimeDurationCreateViewModel.Input(startTime: startTimeSubject,
-                                                           repeatCount: repeatCountSubject,
-                                                           backButtonTapEvent: backBarButton.rx.tap.asObservable(),
-                                                           completeButtonTapEvent: doneButtonTapEvent, startEvent: startEvent)
+        typealias Input = DefaultDailyTimeDurationCreateViewModel.Input
+        typealias Output = DefaultDailyTimeDurationCreateViewModel.Output
         
-        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else { return }
+        let input = Input(startTime: startTimeSubject,
+                          repeatCount: repeatCountSubject,
+                          backButtonTapEvent: backBarButton.rx.tap.asObservable(),
+                          completeButtonTapEvent: doneButtonTapEvent, startEvent: startEvent)
+        
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+            return
+        }
         
         output.isCreateSuccess
             .subscribe(onNext: { [weak self] isCreateSuccess in

@@ -27,11 +27,11 @@ final class DefaultDailyTimeDurationCreateCoordinator: DailyTimeDurationCreateCo
          finishDelegate: DailyFinishDelegate?,
          startModeDelegate: StartModeDelegate?) {
         self.navigationController = navigationController
-        dailyTimeDurationCreateViewModel = .init(modelTitle: modelTitle,
-                                                 focusTime: focusTime,
-                                                 breakTime: breakTime,
-                                                 repository: repository,
-                                                 fetchRefreshDelgate: fetchRefreshDelegate)
+        dailyTimeDurationCreateViewModel = DefaultDailyTimeDurationCreateViewModel(modelTitle: modelTitle,
+                                                                                   focusTime: focusTime,
+                                                                                   breakTime: breakTime,
+                                                                                   repository: repository,
+                                                                                   fetchRefreshDelgate: fetchRefreshDelegate)
         dailyTimeDurationCreateViewController = .init(viewModel: dailyTimeDurationCreateViewModel,
                                                       focusTime: focusTime,
                                                       breakTime: breakTime)
