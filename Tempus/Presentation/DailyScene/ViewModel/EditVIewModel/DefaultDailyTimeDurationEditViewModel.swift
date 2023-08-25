@@ -1,5 +1,5 @@
 //
-//  DailyTimeDurationEditViewModel.swift
+//  DefaultDailyTimeDurationEditViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/06.
@@ -10,7 +10,7 @@ import Foundation
 import RxRelay
 import RxSwift
 
-final class DailyTimeDurationEditViewModel {
+final class DefaultDailyTimeDurationEditViewModel: DailyTimeDurationEditViewModel {
     struct Input {
         let startTime: Observable<Date>
         let repeatCount: Observable<Double>
@@ -49,7 +49,11 @@ final class DailyTimeDurationEditViewModel {
         self.editReflectDelegate = editReflectDelegate
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: RxSwift.DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let editUseCaseInput = DailyEditUseCase.Input(modelEditEvent: self.completeButtonTapEvent)
         let editUseCaseOutput = editUseCase.transform(input: editUseCaseInput,
                                                       disposeBag: disposeBag)
@@ -67,7 +71,7 @@ final class DailyTimeDurationEditViewModel {
         bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         bindCompleteEvent(input.completeEvent, disposeBag)
         
-        return output
+        return output as? OutputType
     }
     
     private func adjustModel(_ model: inout DailyModel) {
@@ -87,7 +91,7 @@ final class DailyTimeDurationEditViewModel {
     }
 }
 
-private extension DailyTimeDurationEditViewModel {
+private extension DefaultDailyTimeDurationEditViewModel {
     func bindStartTime(_ startTime: Observable<Date>, _ disposeBag: DisposeBag) {
         startTime
             .subscribe(onNext: { [weak self] startTime in

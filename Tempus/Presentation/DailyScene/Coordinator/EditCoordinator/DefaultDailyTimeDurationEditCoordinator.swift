@@ -29,10 +29,10 @@ final class DefaultDailyTimeDurationEditCoordinator: DailyTimeDurationEditCoordi
         self.navigationController = navigationController
         self.repository = repository
         self.finishDelegate = finishDelegate
-        dailyTimeDurationEditViewModel = .init(originModel: originModel,
-                                               repository: repository,
-                                               fetchRefreshDelegate: fetchRefreshDelegate,
-                                               editReflectDelegate: editReflectDelegate)
+        dailyTimeDurationEditViewModel = DefaultDailyTimeDurationEditViewModel(originModel: originModel,
+                                                                               repository: repository,
+                                                                               fetchRefreshDelegate: fetchRefreshDelegate,
+                                                                               editReflectDelegate: editReflectDelegate)
         dailyTimeDurationEditViewController = .init(viewModel: dailyTimeDurationEditViewModel)
     }
     
