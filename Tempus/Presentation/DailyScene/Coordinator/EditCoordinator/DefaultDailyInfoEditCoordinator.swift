@@ -32,7 +32,7 @@ final class DefaultDailyInfoEditCoordinator: DailyInfoEditCoordinator {
         self.fetchRefreshDelegate = fetchRefreshDelegate
         self.finishDelegate = finishDelegate
         self.editReflectDelegate = editReflectDelegate
-        self.dailyInfoEditViewModel = .init(originModel: originModel)
+        self.dailyInfoEditViewModel = DefaultDailyInfoEditViewModel(originModel: originModel)
         self.dailyInfoEditViewController = .init(viewModel: dailyInfoEditViewModel)
     }
     

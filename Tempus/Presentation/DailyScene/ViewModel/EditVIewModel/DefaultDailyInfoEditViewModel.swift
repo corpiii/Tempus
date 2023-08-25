@@ -1,5 +1,5 @@
 //
-//  DailyInfoEditViewModel.swift
+//  DefaultDailyInfoEditViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/05/05.
@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class DailyInfoEditViewModel {
+final class DefaultDailyInfoEditViewModel: DailyInfoEditViewModel {
     struct Input {
         let backButtonTapEvent: Observable<Void>
         let nextButtonTapEvent: Observable<Void>
@@ -37,7 +37,11 @@ final class DailyInfoEditViewModel {
         self.originModel = originModel
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let startDay = -9.0 * 60 * 60 // Date의 시작시간은 09시
         let focusTime = Date(timeIntervalSince1970: startDay + originModel.focusTime)
         let breakTime = Date(timeIntervalSince1970: startDay + originModel.breakTime)
@@ -51,11 +55,11 @@ final class DailyInfoEditViewModel {
         bindNextButtonTapEvent(input.nextButtonTapEvent, to: output.isFillAllInfo, disposeBag)
         bindBackButtonTapEvent(input.backButtonTapEvent, disposeBag)
         
-        return output
+        return output as? OutputType
     }
 }
 
-private extension DailyInfoEditViewModel {
+private extension DefaultDailyInfoEditViewModel {
     func bindModelTitle(_ modelTitle: Observable<String>, _ disposeBag: DisposeBag) {
         modelTitle
             .subscribe(onNext: { [weak self] title in
