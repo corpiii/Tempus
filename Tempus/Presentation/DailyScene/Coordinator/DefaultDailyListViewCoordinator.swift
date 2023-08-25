@@ -16,7 +16,7 @@ final class DefaultDailyListViewCoordinator: DailyListViewCoordinator {
     
     private weak var startModeDelegate: StartModeDelegate?
     
-    private let dailyListViewModel: DailyListViewModel
+    private let dailyListViewModel: DefaultDailyListViewModel
     private let dailyListViewController: DailyListViewController
     
     init(repository: DataManagerRepository, startModeDelegate: StartModeDelegate) {

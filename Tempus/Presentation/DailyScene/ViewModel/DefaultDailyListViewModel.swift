@@ -1,5 +1,5 @@
 //
-//  DailyListViewModel.swift
+//  DefaultDailyListViewModel.swift
 //  Tempus
 //
 //  Created by 이정민 on 2023/04/28.
@@ -9,7 +9,7 @@ import RxCocoa
 import RxRelay
 import RxSwift
 
-final class DailyListViewModel {
+final class DefaultDailyListViewModel: DailyListViewModel {
     struct Input {
         let addButtonEvent: Observable<Void>
         let modelDeleteEvent: Observable<DailyModel>
@@ -33,7 +33,11 @@ final class DailyListViewModel {
         self.dailyDeleteUseCase = .init(repository: repository)
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform<InputType, OutputType>(input: InputType, disposeBag: DisposeBag) -> OutputType? {
+        guard let input = input as? Input else {
+            return nil
+        }
+        
         let output = Output()
         self.modelFetchEvent = input.modelFetchEvent
         
@@ -52,11 +56,11 @@ final class DailyListViewModel {
         bindAddButton(input.addButtonEvent, disposeBag: disposeBag)
         bindModelTapEvent(input.modelTapEvent, disposeBag: disposeBag)
         
-        return output
+        return output as? OutputType
     }
 }
 
-private extension DailyListViewModel {
+private extension DefaultDailyListViewModel {
     func bindDeleteSuccess(_ deleteEvent: PublishSubject<Result<DailyModel, DataManageError>>, to isDeleteSuccess: PublishRelay<Result<DailyModel, DataManageError>>, _ disposeBag: DisposeBag) {
         deleteEvent
             .subscribe(onNext: { [weak self] result in
@@ -84,7 +88,7 @@ private extension DailyListViewModel {
     }
 }
 
-extension DailyListViewModel: FetchRefreshDelegate {
+extension DefaultDailyListViewModel {
     func refresh() {
         modelFetchEvent.onNext(())
     }
