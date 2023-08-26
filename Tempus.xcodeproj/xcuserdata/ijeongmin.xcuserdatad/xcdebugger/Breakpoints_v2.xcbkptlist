@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B465BB5F-E374-4FE4-9435-DF98CB08225E"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7614D654-48D1-4143-AA91-961B2BFB1080"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tempus/Data/CoreDataRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "fetchAllTimerModel()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7614D654-48D1-4143-AA91-961B2BFB1080 - bc385b6fb45fe1af"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tempus.CoreDataRepository.fetchAllTimerModel() throws -&gt; Swift.Array&lt;Tempus.TimerModel&gt;"
+                  moduleName = "Tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ijeongmin/Desktop/corpi/Tempus/Tempus/Data/CoreDataRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "840">
+               </Location>
+               <Location
+                  uuid = "7614D654-48D1-4143-AA91-961B2BFB1080 - bc385b6fb45fe1af"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tempus.CoreDataRepository.fetchAllTimerModel() throws -&gt; Swift.Array&lt;Tempus.TimerModel&gt;"
+                  moduleName = "Tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ijeongmin/Desktop/corpi/Tempus/Tempus/Data/CoreDataRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "896">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91E8EAF5-150F-4705-A61F-F8E002D92F6A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tempus/Data/CoreDataRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "fetchAllTimerModel()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "91E8EAF5-150F-4705-A61F-F8E002D92F6A - 29642d96ed8c3e57"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tempus.CoreDataRepository.fetchAllTimerEntity() throws -&gt; Swift.Array&lt;Tempus.TimerEntity&gt;"
+                  moduleName = "Tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ijeongmin/Desktop/corpi/Tempus/Tempus/Data/CoreDataRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "91E8EAF5-150F-4705-A61F-F8E002D92F6A - e1ca8917e4d090a3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TempusTests.CoreDataRepository.fetchAllTimerEntity() throws -&gt; Swift.Array&lt;TempusTests.TimerEntity&gt;"
+                  moduleName = "TempusTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ijeongmin/Desktop/corpi/Tempus/Tempus/Data/CoreDataRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "332">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E2DFBC6-831B-4A9F-8671-981D5DE18167"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TempusTests/CoreDataRepositoryTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "test_TimerModel_create_is_success()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
