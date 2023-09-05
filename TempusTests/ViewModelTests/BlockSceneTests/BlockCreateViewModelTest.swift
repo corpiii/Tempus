@@ -9,33 +9,53 @@ import XCTest
 
 import RxSwift
 
+class BlockCreateCoordinatorMock: BlockCreateCoordinator {
+    var childCoordinators: [Coordinator] = []
+    var type: CoordinatorType { .blockCreate }
+    
+    func start() { }
+    
+    func finish(with startUseCase: BlockStartUseCase?) { }
+}
+
 final class BlockCreateViewModelTest: XCTestCase {
     var repositoryMock: DataManagerRepositoryMock!
     var disposeBag: DisposeBag!
     
-    var completeButtonTapEvent: PublishSubject<CompleteAlert>!
     var modelTitle: PublishSubject<String>!
-    var divideCount: PublishSubject<Int>!
+    var blockTime: PublishSubject<Int>!
+    var completeButtonTapEvent: PublishSubject<Void>!
+    var cancelButtonTapEvent: PublishSubject<Void>!
+    var startButtonTapEvent: PublishSubject<CompleteAlert>!
     
     var fetchRefreshMock: FetchRefreshMock!
-    var blockCreateViewModel: BlockCreateViewModel!
-    var blockCreateViewModelInput: BlockCreateViewModel.Input!
-    var blockCreateViewModelOutput: BlockCreateViewModel.Output!
+    var coordinatorMock: BlockCreateCoordinatorMock!
+    
+    var blockCreateViewModel: DefaultBlockCreateViewModel!
+    var blockCreateViewModelInput: DefaultBlockCreateViewModel.Input!
+    var blockCreateViewModelOutput: DefaultBlockCreateViewModel.Output!
     
     override func setUpWithError() throws {
         repositoryMock = .init()
         disposeBag = .init()
         
-        completeButtonTapEvent = .init()
         modelTitle = .init()
-        divideCount = .init()
+        blockTime = .init()
+        completeButtonTapEvent = .init()
+        cancelButtonTapEvent = .init()
+        startButtonTapEvent = .init()
         
         fetchRefreshMock = .init()
+        coordinatorMock = .init()
         blockCreateViewModel = .init(repository: repositoryMock,
                                      fetchRefreshDelegate: fetchRefreshMock)
-        blockCreateViewModelInput = .init(completeButtonTapEvent: completeButtonTapEvent,
-                                          modelTitle: modelTitle,
-                                          modelDivideCount: divideCount)
+        blockCreateViewModel.coordinator = coordinatorMock
+        
+        blockCreateViewModelInput = .init(modelTitle: modelTitle,
+                                          modelBlockTime: blockTime,
+                                          completeButtonTapEvent: completeButtonTapEvent,
+                                          cancelButtonTapEvent: cancelButtonTapEvent,
+                                          startEvent: startButtonTapEvent)
         blockCreateViewModelOutput = blockCreateViewModel.transform(input: blockCreateViewModelInput,
                                                                     disposeBag: disposeBag)
     }
@@ -44,7 +64,7 @@ final class BlockCreateViewModelTest: XCTestCase {
         // Arrange
         let expectation = XCTestExpectation(description: "create_is_success_test")
         let testTitle = "testTitle"
-        let testDivideCount = 4
+        let testBlockTime = 4
         
         // Act
         blockCreateViewModelOutput.isCreateSuccess
@@ -54,11 +74,35 @@ final class BlockCreateViewModelTest: XCTestCase {
             }).disposed(by: disposeBag)
         
         modelTitle.onNext(testTitle)
-        divideCount.onNext(testDivideCount)
-        completeButtonTapEvent.onNext(.completeWithoutStart)
+        blockTime.onNext(testBlockTime)
+        completeButtonTapEvent.onNext(())
+        startButtonTapEvent.onNext(.completeWithStart)
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(repositoryMock.blockModel?.title, testTitle)
+    }
+    
+    func test_when_given_emptyTitle_then_create_is_failure() {
+        // Arrange
+        let expectation = XCTestExpectation(description: "create_is_fail_test")
+        let testTitle = ""
+        let testBlockTime = 2
+        
+        // Act
+        blockCreateViewModelOutput.isCreateSuccess
+            .subscribe(onNext: { isSuccess in
+                XCTAssertFalse(isSuccess)
+                expectation.fulfill()
+            }).disposed(by: disposeBag)
+        
+        modelTitle.onNext(testTitle)
+        blockTime.onNext(testBlockTime)
+        completeButtonTapEvent.onNext(())
+        startButtonTapEvent.onNext(.completeWithStart)
+        
+        // Assert
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(repositoryMock.blockModel?.title, nil)
     }
 }
