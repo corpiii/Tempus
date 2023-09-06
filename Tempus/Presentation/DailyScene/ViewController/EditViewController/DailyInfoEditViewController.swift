@@ -190,13 +190,16 @@ private extension DailyInfoEditViewController {
 // MARK: - BindViewModel
 private extension DailyInfoEditViewController {
     func bindViewModel() {
-        let input = DailyInfoEditViewModel.Input(backButtonTapEvent: backButton.rx.tap.asObservable(),
-                                                 nextButtonTapEvent: nextButtonTappedEvent,
-                                                 modelTitle: modelTitleSubject,
-                                                 modelFocusTime: modelFocusTimeSubject,
-                                                 modelBreakTime: modelBreakTimeSubject)
+        typealias Input = DefaultDailyInfoEditViewModel.Input
+        typealias Output = DefaultDailyInfoEditViewModel.Output
         
-        guard let output = viewModel?.transform(input: input, disposeBag: self.disposeBag) else {
+        let input = Input(backButtonTapEvent: backButton.rx.tap.asObservable(),
+                          nextButtonTapEvent: nextButtonTappedEvent,
+                          modelTitle: modelTitleSubject,
+                          modelFocusTime: modelFocusTimeSubject,
+                          modelBreakTime: modelBreakTimeSubject)
+        
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: self.disposeBag) else {
             return
         }
         

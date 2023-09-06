@@ -44,8 +44,13 @@ final class DailyDeleteUseCaseTest: XCTestCase {
         let deleteUseCaseOutput = deleteUseCase.transform(input: deleteUseCaseInput, disposeBag: disposeBag)
         
         deleteUseCaseOutput.isDeleteSuccess
-            .subscribe(onNext: { isSuccess in
-                XCTAssertTrue(isSuccess)
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(_):
+                    break
+                case .failure(_):
+                    XCTFail()
+                }
                 expectation.fulfill()
             }).disposed(by: disposeBag)
         

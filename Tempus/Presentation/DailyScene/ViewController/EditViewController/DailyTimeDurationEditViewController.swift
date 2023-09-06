@@ -189,13 +189,18 @@ private extension DailyTimeDurationEditViewController {
 // MARK: - BindViewModel
 private extension DailyTimeDurationEditViewController {
     func bindViewModel() {
-        let input = DailyTimeDurationEditViewModel.Input(startTime: startTimeSubject,
+        typealias Input = DefaultDailyTimeDurationEditViewModel.Input
+        typealias Output = DefaultDailyTimeDurationEditViewModel.Output
+        
+        let input = DefaultDailyTimeDurationEditViewModel.Input(startTime: startTimeSubject,
                                                          repeatCount: repeatCountSubject,
                                                          backButtonTapEvent: backBarButton.rx.tap.asObservable(),
                                                          doneButtonTapEvent: doneButtonTapEvent,
                                                          completeEvent: completeEvent)
         
-        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else { return }
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+            return
+        }
         
         self.startTimePicker.date = output.startTime
         bindOriginModelSubject(output.originModelSubject, disposeBag)
@@ -234,7 +239,7 @@ private extension DailyTimeDurationEditViewController {
     }
 }
 
-extension DailyTimeDurationEditViewController: AlertRepeatCountOverDelegate {
+extension DailyTimeDurationEditViewController: RepeatCountOverAlertDelegate {
     func alertRepeatCountOver() {
         repeatCountStepper.value -= 1
         

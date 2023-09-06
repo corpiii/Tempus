@@ -9,16 +9,25 @@ import XCTest
 
 import RxSwift
 
+class ClockCoordinatorMock: ClockCoordinator {
+    var childCoordinators: [Coordinator] = []
+    var type: CoordinatorType { .clock }
+    
+    func startTimer() { }
+    func start() { }
+}
+
 final class ClockViewModelTest: XCTestCase {
-    var clockViewModel: ClockViewModel!
+    var clockViewModel: DefaultClockViewModel!
     var modeStartEvent: PublishSubject<Void>!
     var modeStopEvent: PublishSubject<Void>!
     
     var disposeBag: DisposeBag!
-    var clockViewModelInput: ClockViewModel.Input!
-    var clockViewModelOutput: ClockViewModel.Output!
+    var clockViewModelInput: DefaultClockViewModel.Input!
+    var clockViewModelOutput: DefaultClockViewModel.Output!
     
     var repositoryMock: DataManagerRepositoryMock!
+    var coordinatorMock: ClockCoordinatorMock!
     
     override func setUpWithError() throws {
         clockViewModel = .init()
@@ -30,13 +39,16 @@ final class ClockViewModelTest: XCTestCase {
         clockViewModelOutput = clockViewModel.transform(input: clockViewModelInput, disposeBag: disposeBag)
         
         repositoryMock = .init()
+        coordinatorMock = .init()
+        
+        clockViewModel.coordinator = coordinatorMock
     }
     
-    func test_when_start_usecase_inject_by_BlockCreateViewModel_start_success() {
+    func test_when_start_usecase_inject_by_BlockCreateViewModel_then_success() {
         // Arrange
         let modeStateExpectation = XCTestExpectation(description: "modeState_test")
         let remainTimeExpectation = XCTestExpectation(description: "remainTime_test")
-        let blockModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 12)
+        let blockModel = BlockModel(id: UUID(), title: "testTitle", blockTime: 12)
         
         clockViewModelOutput.modeStartUseCaseOutput
             .subscribe(onNext: { [weak self] output in

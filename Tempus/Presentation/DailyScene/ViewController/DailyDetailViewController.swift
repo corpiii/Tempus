@@ -67,13 +67,16 @@ private extension DailyDetailViewController {
 // MARK: - BindViewModel
 private extension DailyDetailViewController {
     func bindViewModel() {
-        guard let viewModel = viewModel else { return }
+        typealias Input = DefaultDailyDetailViewModel.Input
+        typealias Output = DefaultDailyDetailViewModel.Output
         
-        let input = DailyDetailViewModel.Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
+        let input = Input(startButtonTapEvent: startBarButton.rx.tap.asObservable(),
                                                editButtonTapEvent: editBarButton.rx.tap.asObservable(),
                                                backButtonTapEvent: backBarButton.rx.tap.asObservable())
         
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+            return
+        }
         
         bindOriginModelSubject(output.originModelSubject, disposeBag)
     }

@@ -6,7 +6,7 @@
 //
 
 final class EditReflectMock: EditReflectDelegate {
-    func reflect(_ model: Mode) {
+    func reflect(_ model: Model) {
         #if DEBUG
         print("EditReflectMock: reflect(_ model: Mode) called")
         #endif

@@ -76,12 +76,15 @@ private extension DailyListViewController {
 // MARK: - BindViewModel
 private extension DailyListViewController {
     func bindViewModel() {
-        let input = DailyListViewModel.Input(addButtonEvent: addButton.rx.tap.asObservable(),
+        typealias Input = DefaultDailyListViewModel.Input
+        typealias Output = DefaultDailyListViewModel.Output
+        
+        let input = Input(addButtonEvent: addButton.rx.tap.asObservable(),
                                              modelDeleteEvent: modelDeleteEvent,
                                              modelFetchEvent: modelFetchEvent,
                                              modelTapEvent: modelTapEvent)
         
-        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             return
         }
         

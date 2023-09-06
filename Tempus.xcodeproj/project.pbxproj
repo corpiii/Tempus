@@ -1,0 +1,2066 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9A27400725C86AE080637EE4 /* Pods_Tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D1B439806EC0F05781E5481 /* Pods_Tempus.framework */; };
+		AC1CA1622A99D82C001D33F3 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CA1612A99D82C001D33F3 /* ClockViewModel.swift */; };
+		AC1CA1632A99D82C001D33F3 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CA1612A99D82C001D33F3 /* ClockViewModel.swift */; };
+		AC1CA1B32A99DE20001D33F3 /* BlockCreateViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A5729F3F2AE0039A671 /* BlockCreateViewModelTest.swift */; };
+		AC1CA1B42A99DF7B001D33F3 /* BlockCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4592A95F7B1000410C6 /* BlockCreateCoordinator.swift */; };
+		AC2F7A0F29E01CAF0039A671 /* BlockStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A0E29E01CAF0039A671 /* BlockStartUseCase.swift */; };
+		AC2F7A1029E01CAF0039A671 /* BlockStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A0E29E01CAF0039A671 /* BlockStartUseCase.swift */; };
+		AC2F7A1429E3DBB80039A671 /* DailyStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A1329E3DBB80039A671 /* DailyStartUseCase.swift */; };
+		AC2F7A1529E3DBB80039A671 /* DailyStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A1329E3DBB80039A671 /* DailyStartUseCase.swift */; };
+		AC2F7A1F29E69E660039A671 /* ModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A1E29E69E660039A671 /* ModeState.swift */; };
+		AC2F7A2029E69E660039A671 /* ModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A1E29E69E660039A671 /* ModeState.swift */; };
+		AC2F7A2229E96DF70039A671 /* ModeManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A2129E96DF70039A671 /* ModeManageError.swift */; };
+		AC2F7A2329E96DF70039A671 /* ModeManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A2129E96DF70039A671 /* ModeManageError.swift */; };
+		AC2F7A3229EE7A8F0039A671 /* DailyFetchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A3129EE7A8F0039A671 /* DailyFetchUseCase.swift */; };
+		AC2F7A3329EE7A8F0039A671 /* DailyFetchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A3129EE7A8F0039A671 /* DailyFetchUseCase.swift */; };
+		AC2F7A3729EE8CD70039A671 /* BlockFetchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A3629EE8CD70039A671 /* BlockFetchUseCase.swift */; };
+		AC2F7A3829EE8CD70039A671 /* BlockFetchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A3629EE8CD70039A671 /* BlockFetchUseCase.swift */; };
+		AC2F7A3E29EED42C0039A671 /* DefaultBlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A3D29EED42C0039A671 /* DefaultBlockListViewModel.swift */; };
+		AC2F7A4E29F148C00039A671 /* DefaultBlockCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A4D29F148C00039A671 /* DefaultBlockCreateViewModel.swift */; };
+		AC2F7A4F29F148C00039A671 /* DefaultBlockCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A4D29F148C00039A671 /* DefaultBlockCreateViewModel.swift */; };
+		AC2F7A5129F14A2B0039A671 /* CompleteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A5029F14A2B0039A671 /* CompleteAlert.swift */; };
+		AC2F7A5229F14A2B0039A671 /* CompleteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A5029F14A2B0039A671 /* CompleteAlert.swift */; };
+		AC32815129D6067F005B4288 /* BlockCreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815029D6067F005B4288 /* BlockCreateUseCase.swift */; };
+		AC32815229D6067F005B4288 /* BlockCreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815029D6067F005B4288 /* BlockCreateUseCase.swift */; };
+		AC32815C29D6089B005B4288 /* DataManagerRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */; };
+		AC32815E29D64694005B4288 /* BlockEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815D29D64694005B4288 /* BlockEditUseCase.swift */; };
+		AC32815F29D64694005B4288 /* BlockEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815D29D64694005B4288 /* BlockEditUseCase.swift */; };
+		AC32816329D733CD005B4288 /* BlockDeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32816229D733CD005B4288 /* BlockDeleteUseCase.swift */; };
+		AC32816429D733CD005B4288 /* BlockDeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32816229D733CD005B4288 /* BlockDeleteUseCase.swift */; };
+		AC32816929D73907005B4288 /* DailyCreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32816829D73907005B4288 /* DailyCreateUseCase.swift */; };
+		AC32816A29D73907005B4288 /* DailyCreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32816829D73907005B4288 /* DailyCreateUseCase.swift */; };
+		AC32816F29D7680D005B4288 /* DailyEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32816E29D7680D005B4288 /* DailyEditUseCase.swift */; };
+		AC32817429D8DAAA005B4288 /* DailyDeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32817329D8DAAA005B4288 /* DailyDeleteUseCase.swift */; };
+		AC32817529D8DAAA005B4288 /* DailyDeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32817329D8DAAA005B4288 /* DailyDeleteUseCase.swift */; };
+		AC32819F29DC15CC005B4288 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32819E29DC15CC005B4288 /* Time.swift */; };
+		AC3281A029DC15CC005B4288 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32819E29DC15CC005B4288 /* Time.swift */; };
+		AC3281A929DC1D7D005B4288 /* ModeStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3281A829DC1D7D005B4288 /* ModeStartUseCase.swift */; };
+		AC34D13A29D3F05F0083F42C /* Tempus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC34D13829D3F05F0083F42C /* Tempus.xcdatamodeld */; };
+		AC34D16829D3F20D0083F42C /* BlockEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16629D3F20D0083F42C /* BlockEntity+CoreDataClass.swift */; };
+		AC34D16929D3F20D0083F42C /* BlockEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16629D3F20D0083F42C /* BlockEntity+CoreDataClass.swift */; };
+		AC34D16A29D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16729D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift */; };
+		AC34D16B29D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16729D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift */; };
+		AC34D16E29D3F2300083F42C /* DailyEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16C29D3F2300083F42C /* DailyEntity+CoreDataClass.swift */; };
+		AC34D16F29D3F2300083F42C /* DailyEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16C29D3F2300083F42C /* DailyEntity+CoreDataClass.swift */; };
+		AC34D17029D3F2300083F42C /* DailyEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16D29D3F2300083F42C /* DailyEntity+CoreDataProperties.swift */; };
+		AC34D17129D3F2300083F42C /* DailyEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D16D29D3F2300083F42C /* DailyEntity+CoreDataProperties.swift */; };
+		AC34D17429D3F2460083F42C /* TimerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D17229D3F2460083F42C /* TimerEntity+CoreDataClass.swift */; };
+		AC34D17529D3F2460083F42C /* TimerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D17229D3F2460083F42C /* TimerEntity+CoreDataClass.swift */; };
+		AC34D17629D3F2460083F42C /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D17329D3F2460083F42C /* TimerEntity+CoreDataProperties.swift */; };
+		AC34D17729D3F2460083F42C /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC34D17329D3F2460083F42C /* TimerEntity+CoreDataProperties.swift */; };
+		AC47E6F72A37E8E900643E94 /* DefaultDailyTimeDurationCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E6F62A37E8E900643E94 /* DefaultDailyTimeDurationCreateCoordinator.swift */; };
+		AC47E6F92A3BCCB600643E94 /* DailyFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E6F82A3BCCB600643E94 /* DailyFinishDelegate.swift */; };
+		AC47E6FB2A3D29FD00643E94 /* DailyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E6FA2A3D29FD00643E94 /* DailyDetailViewController.swift */; };
+		AC47E6FD2A3D3C8E00643E94 /* DefaultDailyDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E6FC2A3D3C8E00643E94 /* DefaultDailyDetailCoordinator.swift */; };
+		AC47E7002A3E6AA900643E94 /* DailyInfoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E6FF2A3E6AA900643E94 /* DailyInfoEditViewController.swift */; };
+		AC47E7022A3E961800643E94 /* DefaultDailyInfoEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E7012A3E961800643E94 /* DefaultDailyInfoEditCoordinator.swift */; };
+		AC47E7042A3FE83A00643E94 /* DailyTimeDurationEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E7032A3FE83A00643E94 /* DailyTimeDurationEditViewController.swift */; };
+		AC47E7072A41590800643E94 /* DefaultDailyTimeDurationEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E7062A41590800643E94 /* DefaultDailyTimeDurationEditCoordinator.swift */; };
+		AC47E7092A41712F00643E94 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E7082A41712F00643E94 /* TimerViewController.swift */; };
+		AC47E70F2A4181D500643E94 /* DefaultTimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E70E2A4181D500643E94 /* DefaultTimerCoordinator.swift */; };
+		AC47E7112A52A48B00643E94 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47E7102A52A48B00643E94 /* UIColor+.swift */; };
+		AC4BA40B29F8059B00E682F1 /* DefaultBlockDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA40A29F8059B00E682F1 /* DefaultBlockDetailViewModel.swift */; };
+		AC4BA40E29F80A4600E682F1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA40D29F80A4600E682F1 /* Model.swift */; };
+		AC4BA40F29F80A4600E682F1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA40D29F80A4600E682F1 /* Model.swift */; };
+		AC4BA41229F80A9100E682F1 /* EditReflectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA41129F80A9100E682F1 /* EditReflectDelegate.swift */; };
+		AC4BA41329F80A9100E682F1 /* EditReflectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA41129F80A9100E682F1 /* EditReflectDelegate.swift */; };
+		AC4BA41729F9589800E682F1 /* DefaultBlockEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA41629F9589800E682F1 /* DefaultBlockEditViewModel.swift */; };
+		AC4BA41929F96FB000E682F1 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */; };
+		AC4BEDCA2A05F3D400616285 /* DefaultDailyTimeDurationEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDC92A05F3D400616285 /* DefaultDailyTimeDurationEditViewModel.swift */; };
+		AC4BEDCD2A07778A00616285 /* DailyEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32816E29D7680D005B4288 /* DailyEditUseCase.swift */; };
+		AC4BEDD82A079D6F00616285 /* DefaultTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDD72A079D6F00616285 /* DefaultTimerViewModel.swift */; };
+		AC4BEDE32A09D0C600616285 /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDE22A09D0C600616285 /* BlockListViewController.swift */; };
+		AC4BEDE92A0BAC4200616285 /* BlockCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDE82A0BAC4200616285 /* BlockCreateViewController.swift */; };
+		AC4BEDEB2A0BB48700616285 /* BlockClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDEA2A0BB48700616285 /* BlockClockView.swift */; };
+		AC4BEDED2A0E930D00616285 /* BlockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDEC2A0E930D00616285 /* BlockDetailViewController.swift */; };
+		AC4BEDEE2A12D46900616285 /* DataManagerRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */; };
+		AC4BEE192A14E07100616285 /* BlockEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEE182A14E07100616285 /* BlockEditViewController.swift */; };
+		AC4BEE292A16943D00616285 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEE282A16943D00616285 /* ClockViewController.swift */; };
+		AC50B4302A95D64B000410C6 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B42F2A95D64B000410C6 /* RxCocoa */; };
+		AC50B4322A95D64B000410C6 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B4312A95D64B000410C6 /* RxRelay */; };
+		AC50B4342A95D64B000410C6 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B4332A95D64B000410C6 /* RxSwift */; };
+		AC50B4372A95D659000410C6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B4362A95D659000410C6 /* SnapKit */; };
+		AC50B43A2A95D667000410C6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B4392A95D667000410C6 /* Lottie */; };
+		AC50B43E2A95D918000410C6 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B43D2A95D918000410C6 /* RxCocoa */; };
+		AC50B4402A95D918000410C6 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B43F2A95D918000410C6 /* RxRelay */; };
+		AC50B4422A95D918000410C6 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B4412A95D918000410C6 /* RxSwift */; };
+		AC50B4442A95DB6B000410C6 /* ModeStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3281A829DC1D7D005B4288 /* ModeStartUseCase.swift */; };
+		AC50B4492A95DC0A000410C6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BEE2A203F090033D296 /* Coordinator.swift */; };
+		AC50B44A2A95DC11000410C6 /* FinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BF82A2311800033D296 /* FinishDelegate.swift */; };
+		AC50B44B2A95DC19000410C6 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BFA2A2311AC0033D296 /* CoordinatorType.swift */; };
+		AC50B44F2A95DCAC000410C6 /* StartModeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BFD2A2447730033D296 /* StartModeDelegate.swift */; };
+		AC50B4532A95F3B6000410C6 /* ClockCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4522A95F3B6000410C6 /* ClockCoordinator.swift */; };
+		AC50B4542A95F3B6000410C6 /* ClockCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4522A95F3B6000410C6 /* ClockCoordinator.swift */; };
+		AC50B4572A95F72D000410C6 /* BlockListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4562A95F72D000410C6 /* BlockListViewCoordinator.swift */; };
+		AC50B4582A95F72D000410C6 /* BlockListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4562A95F72D000410C6 /* BlockListViewCoordinator.swift */; };
+		AC50B45A2A95F7B1000410C6 /* BlockCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4592A95F7B1000410C6 /* BlockCreateCoordinator.swift */; };
+		AC50B45D2A95FA10000410C6 /* BlockDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B45C2A95FA10000410C6 /* BlockDetailCoordinator.swift */; };
+		AC50B45E2A95FA10000410C6 /* BlockDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B45C2A95FA10000410C6 /* BlockDetailCoordinator.swift */; };
+		AC50B4632A95FCFD000410C6 /* BlockEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4622A95FCFD000410C6 /* BlockEditCoordinator.swift */; };
+		AC50B4642A95FCFD000410C6 /* BlockEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4622A95FCFD000410C6 /* BlockEditCoordinator.swift */; };
+		AC50B4672A961391000410C6 /* DailyListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4662A961391000410C6 /* DailyListViewCoordinator.swift */; };
+		AC50B4682A961391000410C6 /* DailyListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4662A961391000410C6 /* DailyListViewCoordinator.swift */; };
+		AC50B46A2A9614A5000410C6 /* DailyDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4692A9614A5000410C6 /* DailyDetailCoordinator.swift */; };
+		AC50B46B2A9614A5000410C6 /* DailyDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4692A9614A5000410C6 /* DailyDetailCoordinator.swift */; };
+		AC50B46E2A96163D000410C6 /* DailyInfoCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B46D2A96163D000410C6 /* DailyInfoCreateCoordinator.swift */; };
+		AC50B46F2A96163D000410C6 /* DailyInfoCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B46D2A96163D000410C6 /* DailyInfoCreateCoordinator.swift */; };
+		AC50B4712A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4702A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift */; };
+		AC50B4722A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4702A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift */; };
+		AC50B4742A963EC3000410C6 /* DailyInfoEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4732A963EC3000410C6 /* DailyInfoEditCoordinator.swift */; };
+		AC50B4752A963EC3000410C6 /* DailyInfoEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4732A963EC3000410C6 /* DailyInfoEditCoordinator.swift */; };
+		AC50B4782A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4772A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift */; };
+		AC50B4792A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4772A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift */; };
+		AC50B4802A9642CB000410C6 /* TimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B47F2A9642CB000410C6 /* TimerCoordinator.swift */; };
+		AC50B4812A9642CB000410C6 /* TimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B47F2A9642CB000410C6 /* TimerCoordinator.swift */; };
+		AC50B4962A98651A000410C6 /* DefaultClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4952A98651A000410C6 /* DefaultClockViewModel.swift */; };
+		AC50B49C2A98682D000410C6 /* BlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B49B2A98682D000410C6 /* BlockListViewModel.swift */; };
+		AC50B49D2A98682D000410C6 /* BlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B49B2A98682D000410C6 /* BlockListViewModel.swift */; };
+		AC50B4A02A986A77000410C6 /* BlockCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B49F2A986A77000410C6 /* BlockCreateViewModel.swift */; };
+		AC50B4A12A986A77000410C6 /* BlockCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B49F2A986A77000410C6 /* BlockCreateViewModel.swift */; };
+		AC50B4A32A986D24000410C6 /* BlockDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4A22A986D24000410C6 /* BlockDetailViewModel.swift */; };
+		AC50B4A42A986D24000410C6 /* BlockDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4A22A986D24000410C6 /* BlockDetailViewModel.swift */; };
+		AC50B4A62A986EDB000410C6 /* BlockEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4A52A986EDB000410C6 /* BlockEditViewModel.swift */; };
+		AC50B4A72A986EDB000410C6 /* BlockEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4A52A986EDB000410C6 /* BlockEditViewModel.swift */; };
+		AC50B4A92A986F22000410C6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4A82A986F22000410C6 /* ViewModel.swift */; };
+		AC50B4AA2A986F22000410C6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4A82A986F22000410C6 /* ViewModel.swift */; };
+		AC50B4AD2A98710D000410C6 /* DailyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4AC2A98710D000410C6 /* DailyListViewModel.swift */; };
+		AC50B4AE2A98710D000410C6 /* DailyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4AC2A98710D000410C6 /* DailyListViewModel.swift */; };
+		AC50B4B02A987258000410C6 /* DailyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4AF2A987258000410C6 /* DailyDetailViewModel.swift */; };
+		AC50B4B12A987258000410C6 /* DailyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4AF2A987258000410C6 /* DailyDetailViewModel.swift */; };
+		AC50B4B42A98741C000410C6 /* DailyInfoCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4B32A98741C000410C6 /* DailyInfoCreateViewModel.swift */; };
+		AC50B4B52A98741C000410C6 /* DailyInfoCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4B32A98741C000410C6 /* DailyInfoCreateViewModel.swift */; };
+		AC50B4B72A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4B62A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift */; };
+		AC50B4B82A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4B62A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift */; };
+		AC50B4BB2A987823000410C6 /* DailyInfoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4BA2A987823000410C6 /* DailyInfoEditViewModel.swift */; };
+		AC50B4BC2A987823000410C6 /* DailyInfoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4BA2A987823000410C6 /* DailyInfoEditViewModel.swift */; };
+		AC50B4BE2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4BD2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift */; };
+		AC50B4BF2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4BD2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift */; };
+		AC50B4C42A987B06000410C6 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4C32A987B06000410C6 /* TimerViewModel.swift */; };
+		AC550BD72A17E2B20033D296 /* CountDownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BD62A17E2B20033D296 /* CountDownTimerView.swift */; };
+		AC550BEC2A20358C0033D296 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BEB2A20358C0033D296 /* MainCoordinator.swift */; };
+		AC550BEF2A203F090033D296 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BEE2A203F090033D296 /* Coordinator.swift */; };
+		AC550BF32A203FE90033D296 /* DefaultBlockListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BF22A203FE90033D296 /* DefaultBlockListViewCoordinator.swift */; };
+		AC550BF52A2046950033D296 /* DefaultClockCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BF42A2046950033D296 /* DefaultClockCoordinator.swift */; };
+		AC550BF72A2307D80033D296 /* DefaultBlockCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BF62A2307D80033D296 /* DefaultBlockCreateCoordinator.swift */; };
+		AC550BF92A2311800033D296 /* FinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BF82A2311800033D296 /* FinishDelegate.swift */; };
+		AC550BFB2A2311AC0033D296 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BFA2A2311AC0033D296 /* CoordinatorType.swift */; };
+		AC550BFE2A2447730033D296 /* StartModeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BFD2A2447730033D296 /* StartModeDelegate.swift */; };
+		AC550C002A244DA70033D296 /* StartApplyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550BFF2A244DA70033D296 /* StartApplyDelegate.swift */; };
+		AC550C022A2473950033D296 /* BlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550C012A2473950033D296 /* BlockCell.swift */; };
+		AC550C052A247C800033D296 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550C042A247C7F0033D296 /* UITableViewCell+.swift */; };
+		AC550C072A25AD800033D296 /* DefaultBlockDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550C062A25AD800033D296 /* DefaultBlockDetailCoordinator.swift */; };
+		AC550C0A2A26FDBC0033D296 /* DefaultBlockEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550C092A26FDBC0033D296 /* DefaultBlockEditCoordinator.swift */; };
+		AC550C0F2A2869030033D296 /* BlockTableViewDataSourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC550C0E2A2869030033D296 /* BlockTableViewDataSourceManager.swift */; };
+		AC5CA0792A99CF4300587D51 /* DefaultClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4952A98651A000410C6 /* DefaultClockViewModel.swift */; };
+		AC5CA2942A99D39B00587D51 /* ClockViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A5F29F723820039A671 /* ClockViewModelTest.swift */; };
+		AC5D99302A65EB1C00A34357 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC5D99322A65EB1C00A34357 /* Localizable.strings */; };
+		AC5D99352A65EB5C00A34357 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5D99342A65EB5C00A34357 /* String+.swift */; };
+		AC5D99372A65EBDE00A34357 /* I18NStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5D99362A65EBDE00A34357 /* I18NStrings.swift */; };
+		AC624CD32A2B2ECE00F8CB05 /* TableViewDataSourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CD22A2B2ECE00F8CB05 /* TableViewDataSourceManager.swift */; };
+		AC624CD62A2B319B00F8CB05 /* DailyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CD52A2B319B00F8CB05 /* DailyListViewController.swift */; };
+		AC624CD92A2B338300F8CB05 /* DailyTableViewDataSourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CD82A2B338300F8CB05 /* DailyTableViewDataSourceManager.swift */; };
+		AC624CDC2A2B37C300F8CB05 /* DailyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CDB2A2B37C300F8CB05 /* DailyCell.swift */; };
+		AC624CDF2A2C6FB300F8CB05 /* DefaultDailyListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CDE2A2C6FB300F8CB05 /* DefaultDailyListViewCoordinator.swift */; };
+		AC624CE12A2C7BBC00F8CB05 /* DailyInfoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CE02A2C7BBC00F8CB05 /* DailyInfoCreateViewController.swift */; };
+		AC624CE32A30393300F8CB05 /* DefaultDailyInfoCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CE22A30393300F8CB05 /* DefaultDailyInfoCreateCoordinator.swift */; };
+		AC624CE52A305E0E00F8CB05 /* DailyTimeDurationCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CE42A305E0E00F8CB05 /* DailyTimeDurationCreateViewController.swift */; };
+		AC624CE92A30703700F8CB05 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CE82A30703700F8CB05 /* ClockView.swift */; };
+		AC624CEB2A3072FE00F8CB05 /* DailyClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CEA2A3072FE00F8CB05 /* DailyClockView.swift */; };
+		AC624CEF2A36A38E00F8CB05 /* RepeatCountOverAlertDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC624CEE2A36A38E00F8CB05 /* RepeatCountOverAlertDelegate.swift */; };
+		AC6C673529DD2F130015C8B7 /* TimerStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C673429DD2F130015C8B7 /* TimerStartUseCase.swift */; };
+		AC6C673629DD2F130015C8B7 /* TimerStartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C673429DD2F130015C8B7 /* TimerStartUseCase.swift */; };
+		AC7C769F29FBE11C00D92ED5 /* DefaultDailyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C769E29FBE11C00D92ED5 /* DefaultDailyListViewModel.swift */; };
+		AC7C76A729FC0B9C00D92ED5 /* FetchRefreshDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C76A629FC0B9C00D92ED5 /* FetchRefreshDelegate.swift */; };
+		AC7C76A829FC0B9C00D92ED5 /* FetchRefreshDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C76A629FC0B9C00D92ED5 /* FetchRefreshDelegate.swift */; };
+		AC7C76B029FC6B8200D92ED5 /* DailyDeleteUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32817629D8DAE1005B4288 /* DailyDeleteUseCaseTest.swift */; };
+		AC7C76B929FE9BC600D92ED5 /* DefaultDailyInfoCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C76B829FE9BC600D92ED5 /* DefaultDailyInfoCreateViewModel.swift */; };
+		ACC385C52A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385C42A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift */; };
+		ACC385D72A024A1E00525E20 /* FetchRefreshMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385D62A024A1E00525E20 /* FetchRefreshMock.swift */; };
+		ACC385DA2A024F7200525E20 /* EditReflectMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385D92A024F7200525E20 /* EditReflectMock.swift */; };
+		ACC385DC2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */; };
+		ACC385DF2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */; };
+		ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E029C70CDE004D0A70 /* AppDelegate.swift */; };
+		ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */; };
+		ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EC29C70CDF004D0A70 /* Assets.xcassets */; };
+		ACD138F029C70CDF004D0A70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EE29C70CDF004D0A70 /* LaunchScreen.storyboard */; };
+		ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
+		ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398629D29C12004D0A70 /* ModeType.swift */; };
+		ACD1398B29D2ABF3004D0A70 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */; };
+		ACD1398C29D2ABF3004D0A70 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */; };
+		ACD1398E29D2C269004D0A70 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398D29D2C269004D0A70 /* BlockModel.swift */; };
+		ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1398D29D2C269004D0A70 /* BlockModel.swift */; };
+		ACD1399129D2C272004D0A70 /* DailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399029D2C272004D0A70 /* DailyModel.swift */; };
+		ACD1399229D2C272004D0A70 /* DailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399029D2C272004D0A70 /* DailyModel.swift */; };
+		ACD1399529D37B58004D0A70 /* DataManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399429D37B58004D0A70 /* DataManagerRepository.swift */; };
+		ACD1399629D37B58004D0A70 /* DataManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399429D37B58004D0A70 /* DataManagerRepository.swift */; };
+		ACD1399C29D382E3004D0A70 /* DataManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399B29D382E3004D0A70 /* DataManageError.swift */; };
+		ACD1399D29D382E3004D0A70 /* DataManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399B29D382E3004D0A70 /* DataManageError.swift */; };
+		ACD1399F29D38EEB004D0A70 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */; };
+		ACFC23632A56CB5F00A047A8 /* ColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFC23622A56CB5F00A047A8 /* ColorConstant.swift */; };
+		ACFC23652A5DADE900A047A8 /* ringTune.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ACFC23642A5DADE900A047A8 /* ringTune.m4a */; };
+		F24C8FBEEA7AAE663B9C7D7B /* Pods_TempusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8047F540890F813F31B509 /* Pods_TempusTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ACD138F729C70CDF004D0A70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ACD138D529C70CDE004D0A70 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ACD138DC29C70CDE004D0A70;
+			remoteInfo = Tempus;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AC50B42D2A95D5ED000410C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		081049B39BD9C92FCB4CF6AA /* Pods-Tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tempus.release.xcconfig"; path = "Target Support Files/Pods-Tempus/Pods-Tempus.release.xcconfig"; sourceTree = "<group>"; };
+		2E8047F540890F813F31B509 /* Pods_TempusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TempusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D1B439806EC0F05781E5481 /* Pods_Tempus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99911746D354CDB50109521E /* Pods-Tempus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tempus.debug.xcconfig"; path = "Target Support Files/Pods-Tempus/Pods-Tempus.debug.xcconfig"; sourceTree = "<group>"; };
+		AC1CA1612A99D82C001D33F3 /* ClockViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
+		AC1CA1B22A99DC4B001D33F3 /* TempusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2F7A0B29DFA6930039A671 /* Tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2F7A0E29E01CAF0039A671 /* BlockStartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockStartUseCase.swift; sourceTree = "<group>"; };
+		AC2F7A1129E3D6590039A671 /* BlockStartUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockStartUseCaseTest.swift; sourceTree = "<group>"; };
+		AC2F7A1329E3DBB80039A671 /* DailyStartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStartUseCase.swift; sourceTree = "<group>"; };
+		AC2F7A1729E533180039A671 /* DailyStartUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStartUseCaseTest.swift; sourceTree = "<group>"; };
+		AC2F7A1E29E69E660039A671 /* ModeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeState.swift; sourceTree = "<group>"; };
+		AC2F7A2129E96DF70039A671 /* ModeManageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeManageError.swift; sourceTree = "<group>"; };
+		AC2F7A3129EE7A8F0039A671 /* DailyFetchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchUseCase.swift; sourceTree = "<group>"; };
+		AC2F7A3429EE7EA10039A671 /* DailyFetchUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchUseCaseTests.swift; sourceTree = "<group>"; };
+		AC2F7A3629EE8CD70039A671 /* BlockFetchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockFetchUseCase.swift; sourceTree = "<group>"; };
+		AC2F7A3929EE8D890039A671 /* BlockFetchUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockFetchUseCaseTest.swift; sourceTree = "<group>"; };
+		AC2F7A3D29EED42C0039A671 /* DefaultBlockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockListViewModel.swift; sourceTree = "<group>"; };
+		AC2F7A4529EFCF490039A671 /* BlockListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewModelTest.swift; sourceTree = "<group>"; };
+		AC2F7A4D29F148C00039A671 /* DefaultBlockCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockCreateViewModel.swift; sourceTree = "<group>"; };
+		AC2F7A5029F14A2B0039A671 /* CompleteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAlert.swift; sourceTree = "<group>"; };
+		AC2F7A5729F3F2AE0039A671 /* BlockCreateViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateViewModelTest.swift; sourceTree = "<group>"; };
+		AC2F7A5F29F723820039A671 /* ClockViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModelTest.swift; sourceTree = "<group>"; };
+		AC32815029D6067F005B4288 /* BlockCreateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateUseCase.swift; sourceTree = "<group>"; };
+		AC32815929D6083D005B4288 /* BlockCreateUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateUseCaseTest.swift; sourceTree = "<group>"; };
+		AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerRepositoryMock.swift; sourceTree = "<group>"; };
+		AC32815D29D64694005B4288 /* BlockEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditUseCase.swift; sourceTree = "<group>"; };
+		AC32816029D647CA005B4288 /* BlockEditUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditUseCaseTest.swift; sourceTree = "<group>"; };
+		AC32816229D733CD005B4288 /* BlockDeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDeleteUseCase.swift; sourceTree = "<group>"; };
+		AC32816529D73592005B4288 /* BlockDeleteUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDeleteUseCaseTest.swift; sourceTree = "<group>"; };
+		AC32816829D73907005B4288 /* DailyCreateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCreateUseCase.swift; sourceTree = "<group>"; };
+		AC32816C29D739BB005B4288 /* DailyCreateUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCreateUseCaseTest.swift; sourceTree = "<group>"; };
+		AC32816E29D7680D005B4288 /* DailyEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEditUseCase.swift; sourceTree = "<group>"; };
+		AC32817129D76851005B4288 /* DailyEditUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEditUseCaseTest.swift; sourceTree = "<group>"; };
+		AC32817329D8DAAA005B4288 /* DailyDeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDeleteUseCase.swift; sourceTree = "<group>"; };
+		AC32817629D8DAE1005B4288 /* DailyDeleteUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDeleteUseCaseTest.swift; sourceTree = "<group>"; };
+		AC32819E29DC15CC005B4288 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		AC3281A529DC1A0E005B4288 /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
+		AC3281A829DC1D7D005B4288 /* ModeStartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeStartUseCase.swift; sourceTree = "<group>"; };
+		AC34D13929D3F05F0083F42C /* Tempus.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tempus.xcdatamodel; sourceTree = "<group>"; };
+		AC34D16629D3F20D0083F42C /* BlockEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AC34D16729D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC34D16C29D3F2300083F42C /* DailyEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AC34D16D29D3F2300083F42C /* DailyEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC34D17229D3F2460083F42C /* TimerEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AC34D17329D3F2460083F42C /* TimerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC47E6F62A37E8E900643E94 /* DefaultDailyTimeDurationCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyTimeDurationCreateCoordinator.swift; sourceTree = "<group>"; };
+		AC47E6F82A3BCCB600643E94 /* DailyFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFinishDelegate.swift; sourceTree = "<group>"; };
+		AC47E6FA2A3D29FD00643E94 /* DailyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDetailViewController.swift; sourceTree = "<group>"; };
+		AC47E6FC2A3D3C8E00643E94 /* DefaultDailyDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyDetailCoordinator.swift; sourceTree = "<group>"; };
+		AC47E6FF2A3E6AA900643E94 /* DailyInfoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoEditViewController.swift; sourceTree = "<group>"; };
+		AC47E7012A3E961800643E94 /* DefaultDailyInfoEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoEditCoordinator.swift; sourceTree = "<group>"; };
+		AC47E7032A3FE83A00643E94 /* DailyTimeDurationEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationEditViewController.swift; sourceTree = "<group>"; };
+		AC47E7062A41590800643E94 /* DefaultDailyTimeDurationEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyTimeDurationEditCoordinator.swift; sourceTree = "<group>"; };
+		AC47E7082A41712F00643E94 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		AC47E70E2A4181D500643E94 /* DefaultTimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerCoordinator.swift; sourceTree = "<group>"; };
+		AC47E7102A52A48B00643E94 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		AC4BA40A29F8059B00E682F1 /* DefaultBlockDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockDetailViewModel.swift; sourceTree = "<group>"; };
+		AC4BA40D29F80A4600E682F1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		AC4BA41129F80A9100E682F1 /* EditReflectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReflectDelegate.swift; sourceTree = "<group>"; };
+		AC4BA41629F9589800E682F1 /* DefaultBlockEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockEditViewModel.swift; sourceTree = "<group>"; };
+		AC4BA41B29F976BF00E682F1 /* BlockEditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditViewModelTest.swift; sourceTree = "<group>"; };
+		AC4BEDC92A05F3D400616285 /* DefaultDailyTimeDurationEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyTimeDurationEditViewModel.swift; sourceTree = "<group>"; };
+		AC4BEDCF2A077B1C00616285 /* DailyTimeDurationEditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationEditViewModelTest.swift; sourceTree = "<group>"; };
+		AC4BEDD32A077D3800616285 /* DailyInfoEditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoEditViewModelTest.swift; sourceTree = "<group>"; };
+		AC4BEDD72A079D6F00616285 /* DefaultTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerViewModel.swift; sourceTree = "<group>"; };
+		AC4BEDDD2A07BD6100616285 /* TimerStartViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartViewModelTest.swift; sourceTree = "<group>"; };
+		AC4BEDE22A09D0C600616285 /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
+		AC4BEDE82A0BAC4200616285 /* BlockCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateViewController.swift; sourceTree = "<group>"; };
+		AC4BEDEA2A0BB48700616285 /* BlockClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockView.swift; sourceTree = "<group>"; };
+		AC4BEDEC2A0E930D00616285 /* BlockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailViewController.swift; sourceTree = "<group>"; };
+		AC4BEE182A14E07100616285 /* BlockEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditViewController.swift; sourceTree = "<group>"; };
+		AC4BEE282A16943D00616285 /* ClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
+		AC50B4282A95D4F4000410C6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AC50B42A2A95D5ED000410C6 /* LGButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LGButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC50B4522A95F3B6000410C6 /* ClockCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4562A95F72D000410C6 /* BlockListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4592A95F7B1000410C6 /* BlockCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateCoordinator.swift; sourceTree = "<group>"; };
+		AC50B45C2A95FA10000410C6 /* BlockDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4622A95FCFD000410C6 /* BlockEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4662A961391000410C6 /* DailyListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyListViewCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4692A9614A5000410C6 /* DailyDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDetailCoordinator.swift; sourceTree = "<group>"; };
+		AC50B46D2A96163D000410C6 /* DailyInfoCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoCreateCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4702A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationCreateCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4732A963EC3000410C6 /* DailyInfoEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoEditCoordinator.swift; sourceTree = "<group>"; };
+		AC50B4772A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationEditCoordinator.swift; sourceTree = "<group>"; };
+		AC50B47F2A9642CB000410C6 /* TimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerCoordinator.swift; path = Tempus/Presentation/TimerScene/Coordinator/Protocol/TimerCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		AC50B4952A98651A000410C6 /* DefaultClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultClockViewModel.swift; sourceTree = "<group>"; };
+		AC50B49B2A98682D000410C6 /* BlockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewModel.swift; sourceTree = "<group>"; };
+		AC50B49F2A986A77000410C6 /* BlockCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateViewModel.swift; sourceTree = "<group>"; };
+		AC50B4A22A986D24000410C6 /* BlockDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailViewModel.swift; sourceTree = "<group>"; };
+		AC50B4A52A986EDB000410C6 /* BlockEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditViewModel.swift; sourceTree = "<group>"; };
+		AC50B4A82A986F22000410C6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		AC50B4AC2A98710D000410C6 /* DailyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyListViewModel.swift; sourceTree = "<group>"; };
+		AC50B4AF2A987258000410C6 /* DailyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDetailViewModel.swift; sourceTree = "<group>"; };
+		AC50B4B32A98741C000410C6 /* DailyInfoCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoCreateViewModel.swift; sourceTree = "<group>"; };
+		AC50B4B62A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationCreateViewModel.swift; sourceTree = "<group>"; };
+		AC50B4BA2A987823000410C6 /* DailyInfoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoEditViewModel.swift; sourceTree = "<group>"; };
+		AC50B4BD2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationEditViewModel.swift; sourceTree = "<group>"; };
+		AC50B4C32A987B06000410C6 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		AC550BD62A17E2B20033D296 /* CountDownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownTimerView.swift; sourceTree = "<group>"; };
+		AC550BEB2A20358C0033D296 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		AC550BEE2A203F090033D296 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		AC550BF22A203FE90033D296 /* DefaultBlockListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockListViewCoordinator.swift; sourceTree = "<group>"; };
+		AC550BF42A2046950033D296 /* DefaultClockCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultClockCoordinator.swift; sourceTree = "<group>"; };
+		AC550BF62A2307D80033D296 /* DefaultBlockCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockCreateCoordinator.swift; sourceTree = "<group>"; };
+		AC550BF82A2311800033D296 /* FinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishDelegate.swift; sourceTree = "<group>"; };
+		AC550BFA2A2311AC0033D296 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
+		AC550BFD2A2447730033D296 /* StartModeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartModeDelegate.swift; sourceTree = "<group>"; };
+		AC550BFF2A244DA70033D296 /* StartApplyDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartApplyDelegate.swift; sourceTree = "<group>"; };
+		AC550C012A2473950033D296 /* BlockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCell.swift; sourceTree = "<group>"; };
+		AC550C042A247C7F0033D296 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
+		AC550C062A25AD800033D296 /* DefaultBlockDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockDetailCoordinator.swift; sourceTree = "<group>"; };
+		AC550C092A26FDBC0033D296 /* DefaultBlockEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBlockEditCoordinator.swift; sourceTree = "<group>"; };
+		AC550C0E2A2869030033D296 /* BlockTableViewDataSourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewDataSourceManager.swift; sourceTree = "<group>"; };
+		AC5D99312A65EB1C00A34357 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AC5D99332A65EB2900A34357 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AC5D99342A65EB5C00A34357 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		AC5D99362A65EBDE00A34357 /* I18NStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18NStrings.swift; sourceTree = "<group>"; };
+		AC624CD22A2B2ECE00F8CB05 /* TableViewDataSourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceManager.swift; sourceTree = "<group>"; };
+		AC624CD52A2B319B00F8CB05 /* DailyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyListViewController.swift; sourceTree = "<group>"; };
+		AC624CD82A2B338300F8CB05 /* DailyTableViewDataSourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewDataSourceManager.swift; sourceTree = "<group>"; };
+		AC624CDB2A2B37C300F8CB05 /* DailyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCell.swift; sourceTree = "<group>"; };
+		AC624CDE2A2C6FB300F8CB05 /* DefaultDailyListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyListViewCoordinator.swift; sourceTree = "<group>"; };
+		AC624CE02A2C7BBC00F8CB05 /* DailyInfoCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoCreateViewController.swift; sourceTree = "<group>"; };
+		AC624CE22A30393300F8CB05 /* DefaultDailyInfoCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoCreateCoordinator.swift; sourceTree = "<group>"; };
+		AC624CE42A305E0E00F8CB05 /* DailyTimeDurationCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationCreateViewController.swift; sourceTree = "<group>"; };
+		AC624CE82A30703700F8CB05 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
+		AC624CEA2A3072FE00F8CB05 /* DailyClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyClockView.swift; sourceTree = "<group>"; };
+		AC624CEE2A36A38E00F8CB05 /* RepeatCountOverAlertDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCountOverAlertDelegate.swift; sourceTree = "<group>"; };
+		AC6C673429DD2F130015C8B7 /* TimerStartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartUseCase.swift; sourceTree = "<group>"; };
+		AC6C673F29DE61540015C8B7 /* TimerStartUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartUseCaseTests.swift; sourceTree = "<group>"; };
+		AC7C769E29FBE11C00D92ED5 /* DefaultDailyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyListViewModel.swift; sourceTree = "<group>"; };
+		AC7C76A629FC0B9C00D92ED5 /* FetchRefreshDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRefreshDelegate.swift; sourceTree = "<group>"; };
+		AC7C76B529FC776100D92ED5 /* DailyListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyListViewModelTest.swift; sourceTree = "<group>"; };
+		AC7C76B829FE9BC600D92ED5 /* DefaultDailyInfoCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoCreateViewModel.swift; sourceTree = "<group>"; };
+		ACC385C42A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyTimeDurationCreateViewModel.swift; sourceTree = "<group>"; };
+		ACC385C72A00E0E800525E20 /* DailyInfoCreateViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoCreateViewModelTest.swift; sourceTree = "<group>"; };
+		ACC385C92A00E0FB00525E20 /* DailyTimeDurationCreateViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationCreateViewModelTest.swift; sourceTree = "<group>"; };
+		ACC385D62A024A1E00525E20 /* FetchRefreshMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRefreshMock.swift; sourceTree = "<group>"; };
+		ACC385D92A024F7200525E20 /* EditReflectMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReflectMock.swift; sourceTree = "<group>"; };
+		ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyDetailViewModel.swift; sourceTree = "<group>"; };
+		ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoEditViewModel.swift; sourceTree = "<group>"; };
+		ACD138E029C70CDE004D0A70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		ACD138EC29C70CDF004D0A70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ACD138EF29C70CDF004D0A70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ACD138F129C70CDF004D0A70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACD1398629D29C12004D0A70 /* ModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
+		ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		ACD1398D29D2C269004D0A70 /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
+		ACD1399029D2C272004D0A70 /* DailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyModel.swift; sourceTree = "<group>"; };
+		ACD1399429D37B58004D0A70 /* DataManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerRepository.swift; sourceTree = "<group>"; };
+		ACD1399B29D382E3004D0A70 /* DataManageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManageError.swift; sourceTree = "<group>"; };
+		ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoreDataRepository.swift; path = Tempus/Data/CoreDataRepository.swift; sourceTree = SOURCE_ROOT; };
+		ACD139A329D3E194004D0A70 /* CoreDataRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepositoryTests.swift; sourceTree = "<group>"; };
+		ACFC23622A56CB5F00A047A8 /* ColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstant.swift; sourceTree = "<group>"; };
+		ACFC23642A5DADE900A047A8 /* ringTune.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringTune.m4a; sourceTree = "<group>"; };
+		BF0F9087B34059150A736275 /* Pods-TempusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TempusTests.debug.xcconfig"; path = "Target Support Files/Pods-TempusTests/Pods-TempusTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D773B440C78EC309D9EA8BA6 /* Pods-TempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TempusTests.release.xcconfig"; path = "Target Support Files/Pods-TempusTests/Pods-TempusTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ACD138DA29C70CDE004D0A70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC50B4302A95D64B000410C6 /* RxCocoa in Frameworks */,
+				AC50B43A2A95D667000410C6 /* Lottie in Frameworks */,
+				AC50B4342A95D64B000410C6 /* RxSwift in Frameworks */,
+				AC50B4372A95D659000410C6 /* SnapKit in Frameworks */,
+				AC50B4322A95D64B000410C6 /* RxRelay in Frameworks */,
+				9A27400725C86AE080637EE4 /* Pods_Tempus.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACD138F329C70CDF004D0A70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC50B4402A95D918000410C6 /* RxRelay in Frameworks */,
+				AC50B43E2A95D918000410C6 /* RxCocoa in Frameworks */,
+				AC50B4422A95D918000410C6 /* RxSwift in Frameworks */,
+				F24C8FBEEA7AAE663B9C7D7B /* Pods_TempusTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7233A729FDF7CEEC0B2282C6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				99911746D354CDB50109521E /* Pods-Tempus.debug.xcconfig */,
+				081049B39BD9C92FCB4CF6AA /* Pods-Tempus.release.xcconfig */,
+				BF0F9087B34059150A736275 /* Pods-TempusTests.debug.xcconfig */,
+				D773B440C78EC309D9EA8BA6 /* Pods-TempusTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AC2F7A2629E973DC0039A671 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				AC2F7A2129E96DF70039A671 /* ModeManageError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		AC2F7A2729E974070039A671 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1399B29D382E3004D0A70 /* DataManageError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		AC2F7A3B29EED3E80039A671 /* BlockScene */ = {
+			isa = PBXGroup;
+			children = (
+				AC550BF02A203FC60033D296 /* Coordinator */,
+				AC2F7A3C29EED40A0039A671 /* ViewModel */,
+				AC4BEDE12A09D09E00616285 /* ViewController */,
+				AC550C0B2A2861660033D296 /* Model */,
+				AC4BEDE72A09D52200616285 /* View */,
+			);
+			path = BlockScene;
+			sourceTree = "<group>";
+		};
+		AC2F7A3C29EED40A0039A671 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B49E2A986838000410C6 /* Protocol */,
+				AC2F7A3D29EED42C0039A671 /* DefaultBlockListViewModel.swift */,
+				AC2F7A4D29F148C00039A671 /* DefaultBlockCreateViewModel.swift */,
+				AC4BA40A29F8059B00E682F1 /* DefaultBlockDetailViewModel.swift */,
+				AC4BA41629F9589800E682F1 /* DefaultBlockEditViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AC2F7A4429EFCF170039A671 /* UseCaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC32816B29D739A3005B4288 /* DailyUseCaseTests */,
+				AC32815329D607F0005B4288 /* BlockUseCaseTests */,
+				AC6C673E29DE613C0015C8B7 /* TimerUseCaseTests */,
+			);
+			path = UseCaseTests;
+			sourceTree = "<group>";
+		};
+		AC2F7A4729EFCF510039A671 /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				ACC385D52A024A0E00525E20 /* Common */,
+				AC2F7A6129F723930039A671 /* ClockSceneTests */,
+				AC2F7A5E29F71B030039A671 /* BlockSceneTests */,
+				AC7C76B729FC776400D92ED5 /* DailySceneTests */,
+				AC4BEDDC2A07BD4100616285 /* TimerSceneTests */,
+			);
+			path = ViewModelTests;
+			sourceTree = "<group>";
+		};
+		AC2F7A5329F14A340039A671 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ACFC23612A56CB4B00A047A8 /* Model */,
+				AC624CE72A30702A00F8CB05 /* View */,
+				AC624CD12A2B2EBE00F8CB05 /* Protocol */,
+				AC550C032A247C6C0033D296 /* Extension */,
+				AC550BEA2A2035700033D296 /* Coordinator */,
+				AC2F7A5029F14A2B0039A671 /* CompleteAlert.swift */,
+				AC4BA41129F80A9100E682F1 /* EditReflectDelegate.swift */,
+				AC7C76A629FC0B9C00D92ED5 /* FetchRefreshDelegate.swift */,
+				AC550BFA2A2311AC0033D296 /* CoordinatorType.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AC2F7A5C29F543E60039A671 /* ClockScene */ = {
+			isa = PBXGroup;
+			children = (
+				AC550BFC2A2447640033D296 /* Protocol */,
+				AC550BF12A203FCF0033D296 /* Coordinator */,
+				AC2F7A5D29F544BD0039A671 /* ViewModel */,
+				AC4BEE2A2A16944100616285 /* ViewController */,
+				AC550BD82A17E2B80033D296 /* View */,
+			);
+			path = ClockScene;
+			sourceTree = "<group>";
+		};
+		AC2F7A5D29F544BD0039A671 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B48E2A974B66000410C6 /* Protocol */,
+				AC50B4952A98651A000410C6 /* DefaultClockViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AC2F7A5E29F71B030039A671 /* BlockSceneTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC2F7A4529EFCF490039A671 /* BlockListViewModelTest.swift */,
+				AC2F7A5729F3F2AE0039A671 /* BlockCreateViewModelTest.swift */,
+				AC4BA41B29F976BF00E682F1 /* BlockEditViewModelTest.swift */,
+			);
+			path = BlockSceneTests;
+			sourceTree = "<group>";
+		};
+		AC2F7A6129F723930039A671 /* ClockSceneTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC2F7A5F29F723820039A671 /* ClockViewModelTest.swift */,
+			);
+			path = ClockSceneTests;
+			sourceTree = "<group>";
+		};
+		AC32814A29D6047A005B4288 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				AC6C673729DDD4BA0015C8B7 /* Protocol */,
+				AC32816729D738F4005B4288 /* Daily */,
+				AC32814F29D60672005B4288 /* Block */,
+				AC6C673329DD2F020015C8B7 /* Timer */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		AC32814F29D60672005B4288 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				AC32815029D6067F005B4288 /* BlockCreateUseCase.swift */,
+				AC2F7A3629EE8CD70039A671 /* BlockFetchUseCase.swift */,
+				AC32815D29D64694005B4288 /* BlockEditUseCase.swift */,
+				AC32816229D733CD005B4288 /* BlockDeleteUseCase.swift */,
+				AC2F7A0E29E01CAF0039A671 /* BlockStartUseCase.swift */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
+		AC32815329D607F0005B4288 /* BlockUseCaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC32815929D6083D005B4288 /* BlockCreateUseCaseTest.swift */,
+				AC2F7A3929EE8D890039A671 /* BlockFetchUseCaseTest.swift */,
+				AC32816029D647CA005B4288 /* BlockEditUseCaseTest.swift */,
+				AC32816529D73592005B4288 /* BlockDeleteUseCaseTest.swift */,
+				AC2F7A1129E3D6590039A671 /* BlockStartUseCaseTest.swift */,
+			);
+			path = BlockUseCaseTests;
+			sourceTree = "<group>";
+		};
+		AC32815729D6080E005B4288 /* CoreDataRepositoryTests */ = {
+			isa = PBXGroup;
+			children = (
+				ACD139A329D3E194004D0A70 /* CoreDataRepositoryTests.swift */,
+			);
+			path = CoreDataRepositoryTests;
+			sourceTree = "<group>";
+		};
+		AC32815829D6081F005B4288 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AC32816729D738F4005B4288 /* Daily */ = {
+			isa = PBXGroup;
+			children = (
+				AC32816829D73907005B4288 /* DailyCreateUseCase.swift */,
+				AC2F7A3129EE7A8F0039A671 /* DailyFetchUseCase.swift */,
+				AC32816E29D7680D005B4288 /* DailyEditUseCase.swift */,
+				AC32817329D8DAAA005B4288 /* DailyDeleteUseCase.swift */,
+				AC2F7A1329E3DBB80039A671 /* DailyStartUseCase.swift */,
+			);
+			path = Daily;
+			sourceTree = "<group>";
+		};
+		AC32816B29D739A3005B4288 /* DailyUseCaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC32816C29D739BB005B4288 /* DailyCreateUseCaseTest.swift */,
+				AC2F7A3429EE7EA10039A671 /* DailyFetchUseCaseTests.swift */,
+				AC32817129D76851005B4288 /* DailyEditUseCaseTest.swift */,
+				AC32817629D8DAE1005B4288 /* DailyDeleteUseCaseTest.swift */,
+				AC2F7A1729E533180039A671 /* DailyStartUseCaseTest.swift */,
+			);
+			path = DailyUseCaseTests;
+			sourceTree = "<group>";
+		};
+		AC3281A429DC19F7005B4288 /* TimeTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC3281A529DC1A0E005B4288 /* TimeTests.swift */,
+			);
+			path = TimeTests;
+			sourceTree = "<group>";
+		};
+		AC47E6FE2A3E6A7900643E94 /* CreateCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CE22A30393300F8CB05 /* DefaultDailyInfoCreateCoordinator.swift */,
+				AC47E6F62A37E8E900643E94 /* DefaultDailyTimeDurationCreateCoordinator.swift */,
+			);
+			path = CreateCoordinator;
+			sourceTree = "<group>";
+		};
+		AC47E7052A4158C300643E94 /* EditViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC47E6FF2A3E6AA900643E94 /* DailyInfoEditViewController.swift */,
+				AC47E7032A3FE83A00643E94 /* DailyTimeDurationEditViewController.swift */,
+			);
+			path = EditViewController;
+			sourceTree = "<group>";
+		};
+		AC47E70B2A4181AA00643E94 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC47E7082A41712F00643E94 /* TimerViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AC47E70C2A4181B400643E94 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4C22A987AFB000410C6 /* Protocol */,
+				AC4BEDD72A079D6F00616285 /* DefaultTimerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AC47E70D2A4181BE00643E94 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4C02A987AAA000410C6 /* Protocol */,
+				AC47E70E2A4181D500643E94 /* DefaultTimerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AC4BA41029F80A4900E682F1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC4BA40D29F80A4600E682F1 /* Model.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC4BEDC72A05F2FB00616285 /* CreateViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC7C76B829FE9BC600D92ED5 /* DefaultDailyInfoCreateViewModel.swift */,
+				ACC385C42A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift */,
+			);
+			path = CreateViewModel;
+			sourceTree = "<group>";
+		};
+		AC4BEDC82A05F32C00616285 /* EditVIewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */,
+				AC4BEDC92A05F3D400616285 /* DefaultDailyTimeDurationEditViewModel.swift */,
+			);
+			path = EditVIewModel;
+			sourceTree = "<group>";
+		};
+		AC4BEDD12A077B2100616285 /* CreateTest */ = {
+			isa = PBXGroup;
+			children = (
+				ACC385C72A00E0E800525E20 /* DailyInfoCreateViewModelTest.swift */,
+				ACC385C92A00E0FB00525E20 /* DailyTimeDurationCreateViewModelTest.swift */,
+			);
+			path = CreateTest;
+			sourceTree = "<group>";
+		};
+		AC4BEDD22A077B2800616285 /* EditTest */ = {
+			isa = PBXGroup;
+			children = (
+				AC4BEDD32A077D3800616285 /* DailyInfoEditViewModelTest.swift */,
+				AC4BEDCF2A077B1C00616285 /* DailyTimeDurationEditViewModelTest.swift */,
+			);
+			path = EditTest;
+			sourceTree = "<group>";
+		};
+		AC4BEDD62A079D4E00616285 /* TimerScene */ = {
+			isa = PBXGroup;
+			children = (
+				AC47E70D2A4181BE00643E94 /* Coordinator */,
+				AC47E70C2A4181B400643E94 /* ViewModel */,
+				AC47E70B2A4181AA00643E94 /* ViewController */,
+			);
+			path = TimerScene;
+			sourceTree = "<group>";
+		};
+		AC4BEDDC2A07BD4100616285 /* TimerSceneTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC4BEDDD2A07BD6100616285 /* TimerStartViewModelTest.swift */,
+			);
+			path = TimerSceneTests;
+			sourceTree = "<group>";
+		};
+		AC4BEDE12A09D09E00616285 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC4BEDE22A09D0C600616285 /* BlockListViewController.swift */,
+				AC4BEDE82A0BAC4200616285 /* BlockCreateViewController.swift */,
+				AC4BEDEC2A0E930D00616285 /* BlockDetailViewController.swift */,
+				AC4BEE182A14E07100616285 /* BlockEditViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AC4BEDE72A09D52200616285 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC4BEDEA2A0BB48700616285 /* BlockClockView.swift */,
+				AC550C012A2473950033D296 /* BlockCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC4BEE2A2A16944100616285 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC4BEE282A16943D00616285 /* ClockViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AC50B4512A95F398000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4522A95F3B6000410C6 /* ClockCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC50B4552A95F721000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4562A95F72D000410C6 /* BlockListViewCoordinator.swift */,
+				AC50B4592A95F7B1000410C6 /* BlockCreateCoordinator.swift */,
+				AC50B45C2A95FA10000410C6 /* BlockDetailCoordinator.swift */,
+				AC50B4622A95FCFD000410C6 /* BlockEditCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC50B4652A961381000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4662A961391000410C6 /* DailyListViewCoordinator.swift */,
+				AC50B4692A9614A5000410C6 /* DailyDetailCoordinator.swift */,
+				AC50B46C2A961626000410C6 /* CreateCoordinator */,
+				AC50B47A2A963F3E000410C6 /* EditCoordinator */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC50B46C2A961626000410C6 /* CreateCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B46D2A96163D000410C6 /* DailyInfoCreateCoordinator.swift */,
+				AC50B4702A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift */,
+			);
+			path = CreateCoordinator;
+			sourceTree = "<group>";
+		};
+		AC50B4762A963EF4000410C6 /* EditCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC47E7012A3E961800643E94 /* DefaultDailyInfoEditCoordinator.swift */,
+				AC47E7062A41590800643E94 /* DefaultDailyTimeDurationEditCoordinator.swift */,
+			);
+			path = EditCoordinator;
+			sourceTree = "<group>";
+		};
+		AC50B47A2A963F3E000410C6 /* EditCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4732A963EC3000410C6 /* DailyInfoEditCoordinator.swift */,
+				AC50B4772A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift */,
+			);
+			path = EditCoordinator;
+			sourceTree = "<group>";
+		};
+		AC50B48E2A974B66000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC1CA1612A99D82C001D33F3 /* ClockViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC50B49E2A986838000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B49B2A98682D000410C6 /* BlockListViewModel.swift */,
+				AC50B49F2A986A77000410C6 /* BlockCreateViewModel.swift */,
+				AC50B4A22A986D24000410C6 /* BlockDetailViewModel.swift */,
+				AC50B4A52A986EDB000410C6 /* BlockEditViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC50B4AB2A987100000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4AC2A98710D000410C6 /* DailyListViewModel.swift */,
+				AC50B4AF2A987258000410C6 /* DailyDetailViewModel.swift */,
+				AC50B4B22A9873AC000410C6 /* CreateViewModel */,
+				AC50B4B92A987807000410C6 /* EditViewModel */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC50B4B22A9873AC000410C6 /* CreateViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4B32A98741C000410C6 /* DailyInfoCreateViewModel.swift */,
+				AC50B4B62A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift */,
+			);
+			path = CreateViewModel;
+			sourceTree = "<group>";
+		};
+		AC50B4B92A987807000410C6 /* EditViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4BA2A987823000410C6 /* DailyInfoEditViewModel.swift */,
+				AC50B4BD2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift */,
+			);
+			path = EditViewModel;
+			sourceTree = "<group>";
+		};
+		AC50B4C02A987AAA000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B47F2A9642CB000410C6 /* TimerCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC50B4C22A987AFB000410C6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4C32A987B06000410C6 /* TimerViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC550BD82A17E2B80033D296 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC550BD62A17E2B20033D296 /* CountDownTimerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC550BEA2A2035700033D296 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC550BED2A203EFA0033D296 /* Protocol */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AC550BED2A203EFA0033D296 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC550BEE2A203F090033D296 /* Coordinator.swift */,
+				AC550BF82A2311800033D296 /* FinishDelegate.swift */,
+				AC550BFF2A244DA70033D296 /* StartApplyDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC550BF02A203FC60033D296 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4552A95F721000410C6 /* Protocol */,
+				AC550BF22A203FE90033D296 /* DefaultBlockListViewCoordinator.swift */,
+				AC550BF62A2307D80033D296 /* DefaultBlockCreateCoordinator.swift */,
+				AC550C062A25AD800033D296 /* DefaultBlockDetailCoordinator.swift */,
+				AC550C092A26FDBC0033D296 /* DefaultBlockEditCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AC550BF12A203FCF0033D296 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4512A95F398000410C6 /* Protocol */,
+				AC550BF42A2046950033D296 /* DefaultClockCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AC550BFC2A2447640033D296 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC550BFD2A2447730033D296 /* StartModeDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC550C032A247C6C0033D296 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AC550C042A247C7F0033D296 /* UITableViewCell+.swift */,
+				AC47E7102A52A48B00643E94 /* UIColor+.swift */,
+				AC5D99342A65EB5C00A34357 /* String+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AC550C0B2A2861660033D296 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC550C0E2A2869030033D296 /* BlockTableViewDataSourceManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AC624CD12A2B2EBE00F8CB05 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CD22A2B2ECE00F8CB05 /* TableViewDataSourceManager.swift */,
+				AC50B4A82A986F22000410C6 /* ViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC624CD42A2B318300F8CB05 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CD52A2B319B00F8CB05 /* DailyListViewController.swift */,
+				AC47E6FA2A3D29FD00643E94 /* DailyDetailViewController.swift */,
+				AC624CEC2A36A24B00F8CB05 /* CreateViewController */,
+				AC47E7052A4158C300643E94 /* EditViewController */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AC624CD72A2B336900F8CB05 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CD82A2B338300F8CB05 /* DailyTableViewDataSourceManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AC624CDA2A2B37A900F8CB05 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CDB2A2B37C300F8CB05 /* DailyCell.swift */,
+				AC624CEA2A3072FE00F8CB05 /* DailyClockView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC624CDD2A2C6F9A00F8CB05 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4652A961381000410C6 /* Protocol */,
+				AC624CDE2A2C6FB300F8CB05 /* DefaultDailyListViewCoordinator.swift */,
+				AC47E6FC2A3D3C8E00643E94 /* DefaultDailyDetailCoordinator.swift */,
+				AC47E6FE2A3E6A7900643E94 /* CreateCoordinator */,
+				AC50B4762A963EF4000410C6 /* EditCoordinator */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AC624CE72A30702A00F8CB05 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CE82A30703700F8CB05 /* ClockView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC624CEC2A36A24B00F8CB05 /* CreateViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CE02A2C7BBC00F8CB05 /* DailyInfoCreateViewController.swift */,
+				AC624CE42A305E0E00F8CB05 /* DailyTimeDurationCreateViewController.swift */,
+			);
+			path = CreateViewController;
+			sourceTree = "<group>";
+		};
+		AC624CED2A36A36E00F8CB05 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CEE2A36A38E00F8CB05 /* RepeatCountOverAlertDelegate.swift */,
+				AC47E6F82A3BCCB600643E94 /* DailyFinishDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC6C673329DD2F020015C8B7 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				AC6C673429DD2F130015C8B7 /* TimerStartUseCase.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		AC6C673729DDD4BA0015C8B7 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC3281A829DC1D7D005B4288 /* ModeStartUseCase.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC6C673E29DE613C0015C8B7 /* TimerUseCaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC6C673F29DE61540015C8B7 /* TimerStartUseCaseTests.swift */,
+			);
+			path = TimerUseCaseTests;
+			sourceTree = "<group>";
+		};
+		AC7C76A129FBE12200D92ED5 /* DailyScene */ = {
+			isa = PBXGroup;
+			children = (
+				AC624CED2A36A36E00F8CB05 /* Protocol */,
+				AC624CDD2A2C6F9A00F8CB05 /* Coordinator */,
+				AC624CD42A2B318300F8CB05 /* ViewController */,
+				AC7C76A229FBE20C00D92ED5 /* ViewModel */,
+				AC624CD72A2B336900F8CB05 /* Model */,
+				AC624CDA2A2B37A900F8CB05 /* View */,
+			);
+			path = DailyScene;
+			sourceTree = "<group>";
+		};
+		AC7C76A229FBE20C00D92ED5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B4AB2A987100000410C6 /* Protocol */,
+				AC7C769E29FBE11C00D92ED5 /* DefaultDailyListViewModel.swift */,
+				ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */,
+				AC4BEDC72A05F2FB00616285 /* CreateViewModel */,
+				AC4BEDC82A05F32C00616285 /* EditVIewModel */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AC7C76A329FBFF1C00D92ED5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC50B42A2A95D5ED000410C6 /* LGButton.framework */,
+				AC50B4282A95D4F4000410C6 /* XCTest.framework */,
+				4D1B439806EC0F05781E5481 /* Pods_Tempus.framework */,
+				2E8047F540890F813F31B509 /* Pods_TempusTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC7C76B729FC776400D92ED5 /* DailySceneTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC7C76B529FC776100D92ED5 /* DailyListViewModelTest.swift */,
+				AC4BEDD12A077B2100616285 /* CreateTest */,
+				AC4BEDD22A077B2800616285 /* EditTest */,
+			);
+			path = DailySceneTests;
+			sourceTree = "<group>";
+		};
+		ACC385D52A024A0E00525E20 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ACC385D82A024C6B00525E20 /* Mock */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ACC385D82A024C6B00525E20 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				ACC385D62A024A1E00525E20 /* FetchRefreshMock.swift */,
+				ACC385D92A024F7200525E20 /* EditReflectMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		ACD138D429C70CDE004D0A70 = {
+			isa = PBXGroup;
+			children = (
+				ACD138DF29C70CDE004D0A70 /* Tempus */,
+				ACD138F929C70CDF004D0A70 /* TempusTests */,
+				AC2F7A0B29DFA6930039A671 /* Tempus.app */,
+				AC7C76A329FBFF1C00D92ED5 /* Frameworks */,
+				7233A729FDF7CEEC0B2282C6 /* Pods */,
+				AC1CA1B22A99DC4B001D33F3 /* TempusTests.xctest */,
+			);
+			sourceTree = "<group>";
+		};
+		ACD138DF29C70CDE004D0A70 /* Tempus */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1391629C70E59004D0A70 /* Application */,
+				ACD1391329C70D95004D0A70 /* Presentation */,
+				ACD1391429C70D9D004D0A70 /* Domain */,
+				ACD139A129D38F00004D0A70 /* Data */,
+				ACD1391729C70EC0004D0A70 /* Resource */,
+			);
+			path = Tempus;
+			sourceTree = "<group>";
+		};
+		ACD138F929C70CDF004D0A70 /* TempusTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC32815829D6081F005B4288 /* Common */,
+				AC2F7A4729EFCF510039A671 /* ViewModelTests */,
+				AC2F7A4429EFCF170039A671 /* UseCaseTests */,
+				AC3281A429DC19F7005B4288 /* TimeTests */,
+				AC32815729D6080E005B4288 /* CoreDataRepositoryTests */,
+			);
+			path = TempusTests;
+			sourceTree = "<group>";
+		};
+		ACD1391329C70D95004D0A70 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				AC2F7A5329F14A340039A671 /* Common */,
+				AC2F7A5C29F543E60039A671 /* ClockScene */,
+				AC2F7A3B29EED3E80039A671 /* BlockScene */,
+				AC7C76A129FBE12200D92ED5 /* DailyScene */,
+				AC4BEDD62A079D4E00616285 /* TimerScene */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		ACD1391429C70D9D004D0A70 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1398529D29BE6004D0A70 /* Common */,
+				AC32814A29D6047A005B4288 /* UseCase */,
+				ACD1398929D2ABDA004D0A70 /* Model */,
+				ACD1397B29D1BBBA004D0A70 /* Entity */,
+				ACD1399329D37B26004D0A70 /* Repository */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		ACD1391629C70E59004D0A70 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				ACD138E029C70CDE004D0A70 /* AppDelegate.swift */,
+				ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */,
+				AC550BEB2A20358C0033D296 /* MainCoordinator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		ACD1391729C70EC0004D0A70 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				ACFC23642A5DADE900A047A8 /* ringTune.m4a */,
+				ACD138EC29C70CDF004D0A70 /* Assets.xcassets */,
+				ACD138EE29C70CDF004D0A70 /* LaunchScreen.storyboard */,
+				ACD138F129C70CDF004D0A70 /* Info.plist */,
+				AC5D99322A65EB1C00A34357 /* Localizable.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		ACD1397B29D1BBBA004D0A70 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				AC34D13829D3F05F0083F42C /* Tempus.xcdatamodeld */,
+				ACD1397E29D1BBD3004D0A70 /* Timer */,
+				ACD1397D29D1BBCC004D0A70 /* Block */,
+				ACD1397C29D1BBC3004D0A70 /* Daily */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		ACD1397C29D1BBC3004D0A70 /* Daily */ = {
+			isa = PBXGroup;
+			children = (
+				AC34D16C29D3F2300083F42C /* DailyEntity+CoreDataClass.swift */,
+				AC34D16D29D3F2300083F42C /* DailyEntity+CoreDataProperties.swift */,
+			);
+			path = Daily;
+			sourceTree = "<group>";
+		};
+		ACD1397D29D1BBCC004D0A70 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				AC34D16629D3F20D0083F42C /* BlockEntity+CoreDataClass.swift */,
+				AC34D16729D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
+		ACD1397E29D1BBD3004D0A70 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				AC34D17229D3F2460083F42C /* TimerEntity+CoreDataClass.swift */,
+				AC34D17329D3F2460083F42C /* TimerEntity+CoreDataProperties.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		ACD1398529D29BE6004D0A70 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AC2F7A1E29E69E660039A671 /* ModeState.swift */,
+				ACD1398629D29C12004D0A70 /* ModeType.swift */,
+				AC2F7A2629E973DC0039A671 /* Error */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ACD1398929D2ABDA004D0A70 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC4BA41029F80A4900E682F1 /* Protocol */,
+				ACD1398A29D2ABF3004D0A70 /* TimerModel.swift */,
+				ACD1398D29D2C269004D0A70 /* BlockModel.swift */,
+				ACD1399029D2C272004D0A70 /* DailyModel.swift */,
+				AC32819E29DC15CC005B4288 /* Time.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ACD1399329D37B26004D0A70 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				ACD1399429D37B58004D0A70 /* DataManagerRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		ACD139A129D38F00004D0A70 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AC2F7A2729E974070039A671 /* Error */,
+				ACD1399E29D38EEB004D0A70 /* CoreDataRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		ACFC23612A56CB4B00A047A8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ACFC23622A56CB5F00A047A8 /* ColorConstant.swift */,
+				AC5D99362A65EBDE00A34357 /* I18NStrings.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ACD138DC29C70CDE004D0A70 /* Tempus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACD1390A29C70CDF004D0A70 /* Build configuration list for PBXNativeTarget "Tempus" */;
+			buildPhases = (
+				25670597CEE37301BD0BC2DE /* [CP] Check Pods Manifest.lock */,
+				ACD138D929C70CDE004D0A70 /* Sources */,
+				ACD138DA29C70CDE004D0A70 /* Frameworks */,
+				ACD138DB29C70CDE004D0A70 /* Resources */,
+				AAECC96D7C686AB646634902 /* [CP] Embed Pods Frameworks */,
+				AC50B42D2A95D5ED000410C6 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tempus;
+			packageProductDependencies = (
+				AC50B42F2A95D64B000410C6 /* RxCocoa */,
+				AC50B4312A95D64B000410C6 /* RxRelay */,
+				AC50B4332A95D64B000410C6 /* RxSwift */,
+				AC50B4362A95D659000410C6 /* SnapKit */,
+				AC50B4392A95D667000410C6 /* Lottie */,
+			);
+			productName = Tempus;
+			productReference = AC2F7A0B29DFA6930039A671 /* Tempus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ACD138F529C70CDF004D0A70 /* TempusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACD1390D29C70CDF004D0A70 /* Build configuration list for PBXNativeTarget "TempusTests" */;
+			buildPhases = (
+				1DC1BA9B5323F59ED01259ED /* [CP] Check Pods Manifest.lock */,
+				ACD138F229C70CDF004D0A70 /* Sources */,
+				ACD138F329C70CDF004D0A70 /* Frameworks */,
+				ACD138F429C70CDF004D0A70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ACD138F829C70CDF004D0A70 /* PBXTargetDependency */,
+			);
+			name = TempusTests;
+			packageProductDependencies = (
+				AC50B43D2A95D918000410C6 /* RxCocoa */,
+				AC50B43F2A95D918000410C6 /* RxRelay */,
+				AC50B4412A95D918000410C6 /* RxSwift */,
+			);
+			productName = TempusTests;
+			productReference = AC1CA1B22A99DC4B001D33F3 /* TempusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ACD138D529C70CDE004D0A70 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					ACD138DC29C70CDE004D0A70 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					ACD138F529C70CDF004D0A70 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = ACD138DC29C70CDE004D0A70;
+					};
+				};
+			};
+			buildConfigurationList = ACD138D829C70CDE004D0A70 /* Build configuration list for PBXProject "Tempus" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ko,
+			);
+			mainGroup = ACD138D429C70CDE004D0A70;
+			packageReferences = (
+				AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				AC50B4352A95D659000410C6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AC50B4382A95D667000410C6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
+			productRefGroup = ACD138D429C70CDE004D0A70;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ACD138DC29C70CDE004D0A70 /* Tempus */,
+				ACD138F529C70CDF004D0A70 /* TempusTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ACD138DB29C70CDE004D0A70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACD138F029C70CDF004D0A70 /* LaunchScreen.storyboard in Resources */,
+				AC5D99302A65EB1C00A34357 /* Localizable.strings in Resources */,
+				ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */,
+				ACFC23652A5DADE900A047A8 /* ringTune.m4a in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACD138F429C70CDF004D0A70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1DC1BA9B5323F59ED01259ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TempusTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		25670597CEE37301BD0BC2DE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tempus-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAECC96D7C686AB646634902 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tempus/Pods-Tempus-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tempus/Pods-Tempus-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tempus/Pods-Tempus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ACD138D929C70CDE004D0A70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC47E7022A3E961800643E94 /* DefaultDailyInfoEditCoordinator.swift in Sources */,
+				AC624CD32A2B2ECE00F8CB05 /* TableViewDataSourceManager.swift in Sources */,
+				AC624CE52A305E0E00F8CB05 /* DailyTimeDurationCreateViewController.swift in Sources */,
+				AC4BA41729F9589800E682F1 /* DefaultBlockEditViewModel.swift in Sources */,
+				AC5D99372A65EBDE00A34357 /* I18NStrings.swift in Sources */,
+				AC4BEDE32A09D0C600616285 /* BlockListViewController.swift in Sources */,
+				AC50B4A92A986F22000410C6 /* ViewModel.swift in Sources */,
+				AC50B4672A961391000410C6 /* DailyListViewCoordinator.swift in Sources */,
+				AC47E7092A41712F00643E94 /* TimerViewController.swift in Sources */,
+				AC32817429D8DAAA005B4288 /* DailyDeleteUseCase.swift in Sources */,
+				AC32816929D73907005B4288 /* DailyCreateUseCase.swift in Sources */,
+				AC2F7A5129F14A2B0039A671 /* CompleteAlert.swift in Sources */,
+				AC47E6FB2A3D29FD00643E94 /* DailyDetailViewController.swift in Sources */,
+				AC550BD72A17E2B20033D296 /* CountDownTimerView.swift in Sources */,
+				AC550BF72A2307D80033D296 /* DefaultBlockCreateCoordinator.swift in Sources */,
+				AC2F7A3729EE8CD70039A671 /* BlockFetchUseCase.swift in Sources */,
+				AC32815129D6067F005B4288 /* BlockCreateUseCase.swift in Sources */,
+				AC34D17029D3F2300083F42C /* DailyEntity+CoreDataProperties.swift in Sources */,
+				ACD1399129D2C272004D0A70 /* DailyModel.swift in Sources */,
+				AC47E7042A3FE83A00643E94 /* DailyTimeDurationEditViewController.swift in Sources */,
+				AC624CD92A2B338300F8CB05 /* DailyTableViewDataSourceManager.swift in Sources */,
+				ACC385DC2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift in Sources */,
+				ACFC23632A56CB5F00A047A8 /* ColorConstant.swift in Sources */,
+				AC3281A929DC1D7D005B4288 /* ModeStartUseCase.swift in Sources */,
+				AC550BF52A2046950033D296 /* DefaultClockCoordinator.swift in Sources */,
+				AC624CE32A30393300F8CB05 /* DefaultDailyInfoCreateCoordinator.swift in Sources */,
+				ACD1398B29D2ABF3004D0A70 /* TimerModel.swift in Sources */,
+				AC50B45D2A95FA10000410C6 /* BlockDetailCoordinator.swift in Sources */,
+				AC550BF32A203FE90033D296 /* DefaultBlockListViewCoordinator.swift in Sources */,
+				AC50B4A02A986A77000410C6 /* BlockCreateViewModel.swift in Sources */,
+				AC50B4782A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift in Sources */,
+				AC32819F29DC15CC005B4288 /* Time.swift in Sources */,
+				AC6C673529DD2F130015C8B7 /* TimerStartUseCase.swift in Sources */,
+				AC2F7A1429E3DBB80039A671 /* DailyStartUseCase.swift in Sources */,
+				AC50B4632A95FCFD000410C6 /* BlockEditCoordinator.swift in Sources */,
+				AC32816329D733CD005B4288 /* BlockDeleteUseCase.swift in Sources */,
+				ACD1399529D37B58004D0A70 /* DataManagerRepository.swift in Sources */,
+				ACD1398729D29C12004D0A70 /* ModeType.swift in Sources */,
+				AC34D17629D3F2460083F42C /* TimerEntity+CoreDataProperties.swift in Sources */,
+				ACC385DF2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift in Sources */,
+				AC4BA41229F80A9100E682F1 /* EditReflectDelegate.swift in Sources */,
+				AC624CEF2A36A38E00F8CB05 /* RepeatCountOverAlertDelegate.swift in Sources */,
+				AC47E6F92A3BCCB600643E94 /* DailyFinishDelegate.swift in Sources */,
+				AC47E7072A41590800643E94 /* DefaultDailyTimeDurationEditCoordinator.swift in Sources */,
+				AC4BEDEB2A0BB48700616285 /* BlockClockView.swift in Sources */,
+				AC50B46A2A9614A5000410C6 /* DailyDetailCoordinator.swift in Sources */,
+				AC2F7A1F29E69E660039A671 /* ModeState.swift in Sources */,
+				AC4BA40B29F8059B00E682F1 /* DefaultBlockDetailViewModel.swift in Sources */,
+				AC50B4802A9642CB000410C6 /* TimerCoordinator.swift in Sources */,
+				AC4BEDE92A0BAC4200616285 /* BlockCreateViewController.swift in Sources */,
+				ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */,
+				AC550C072A25AD800033D296 /* DefaultBlockDetailCoordinator.swift in Sources */,
+				AC34D16E29D3F2300083F42C /* DailyEntity+CoreDataClass.swift in Sources */,
+				AC2F7A4E29F148C00039A671 /* DefaultBlockCreateViewModel.swift in Sources */,
+				AC50B4712A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift in Sources */,
+				AC550C0A2A26FDBC0033D296 /* DefaultBlockEditCoordinator.swift in Sources */,
+				AC34D16829D3F20D0083F42C /* BlockEntity+CoreDataClass.swift in Sources */,
+				AC50B4B42A98741C000410C6 /* DailyInfoCreateViewModel.swift in Sources */,
+				AC550C022A2473950033D296 /* BlockCell.swift in Sources */,
+				AC550C002A244DA70033D296 /* StartApplyDelegate.swift in Sources */,
+				AC32816F29D7680D005B4288 /* DailyEditUseCase.swift in Sources */,
+				ACC385C52A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift in Sources */,
+				AC624CDC2A2B37C300F8CB05 /* DailyCell.swift in Sources */,
+				AC50B4C42A987B06000410C6 /* TimerViewModel.swift in Sources */,
+				AC7C76B929FE9BC600D92ED5 /* DefaultDailyInfoCreateViewModel.swift in Sources */,
+				AC4BEDD82A079D6F00616285 /* DefaultTimerViewModel.swift in Sources */,
+				AC5D99352A65EB5C00A34357 /* String+.swift in Sources */,
+				AC4BEDCA2A05F3D400616285 /* DefaultDailyTimeDurationEditViewModel.swift in Sources */,
+				AC624CE12A2C7BBC00F8CB05 /* DailyInfoCreateViewController.swift in Sources */,
+				AC624CE92A30703700F8CB05 /* ClockView.swift in Sources */,
+				AC7C76A729FC0B9C00D92ED5 /* FetchRefreshDelegate.swift in Sources */,
+				AC550BEC2A20358C0033D296 /* MainCoordinator.swift in Sources */,
+				AC34D16A29D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift in Sources */,
+				AC50B4572A95F72D000410C6 /* BlockListViewCoordinator.swift in Sources */,
+				AC50B46E2A96163D000410C6 /* DailyInfoCreateCoordinator.swift in Sources */,
+				AC4BEDEE2A12D46900616285 /* DataManagerRepositoryMock.swift in Sources */,
+				AC2F7A0F29E01CAF0039A671 /* BlockStartUseCase.swift in Sources */,
+				AC50B4B02A987258000410C6 /* DailyDetailViewModel.swift in Sources */,
+				AC47E7112A52A48B00643E94 /* UIColor+.swift in Sources */,
+				AC50B4AD2A98710D000410C6 /* DailyListViewModel.swift in Sources */,
+				AC624CEB2A3072FE00F8CB05 /* DailyClockView.swift in Sources */,
+				ACD1399F29D38EEB004D0A70 /* CoreDataRepository.swift in Sources */,
+				AC50B4B72A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift in Sources */,
+				AC2F7A3229EE7A8F0039A671 /* DailyFetchUseCase.swift in Sources */,
+				AC2F7A3E29EED42C0039A671 /* DefaultBlockListViewModel.swift in Sources */,
+				AC50B49C2A98682D000410C6 /* BlockListViewModel.swift in Sources */,
+				AC550BEF2A203F090033D296 /* Coordinator.swift in Sources */,
+				AC7C769F29FBE11C00D92ED5 /* DefaultDailyListViewModel.swift in Sources */,
+				AC50B4A62A986EDB000410C6 /* BlockEditViewModel.swift in Sources */,
+				AC47E6F72A37E8E900643E94 /* DefaultDailyTimeDurationCreateCoordinator.swift in Sources */,
+				AC550BFE2A2447730033D296 /* StartModeDelegate.swift in Sources */,
+				ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */,
+				AC550C0F2A2869030033D296 /* BlockTableViewDataSourceManager.swift in Sources */,
+				AC50B45A2A95F7B1000410C6 /* BlockCreateCoordinator.swift in Sources */,
+				AC550BF92A2311800033D296 /* FinishDelegate.swift in Sources */,
+				AC550C052A247C800033D296 /* UITableViewCell+.swift in Sources */,
+				AC4BEDED2A0E930D00616285 /* BlockDetailViewController.swift in Sources */,
+				AC32815E29D64694005B4288 /* BlockEditUseCase.swift in Sources */,
+				AC50B4532A95F3B6000410C6 /* ClockCoordinator.swift in Sources */,
+				AC34D17429D3F2460083F42C /* TimerEntity+CoreDataClass.swift in Sources */,
+				AC50B4742A963EC3000410C6 /* DailyInfoEditCoordinator.swift in Sources */,
+				AC47E6FD2A3D3C8E00643E94 /* DefaultDailyDetailCoordinator.swift in Sources */,
+				AC550BFB2A2311AC0033D296 /* CoordinatorType.swift in Sources */,
+				AC2F7A2229E96DF70039A671 /* ModeManageError.swift in Sources */,
+				AC624CD62A2B319B00F8CB05 /* DailyListViewController.swift in Sources */,
+				AC50B4962A98651A000410C6 /* DefaultClockViewModel.swift in Sources */,
+				AC4BEE292A16943D00616285 /* ClockViewController.swift in Sources */,
+				AC4BEE192A14E07100616285 /* BlockEditViewController.swift in Sources */,
+				AC624CDF2A2C6FB300F8CB05 /* DefaultDailyListViewCoordinator.swift in Sources */,
+				AC50B4BE2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift in Sources */,
+				AC47E70F2A4181D500643E94 /* DefaultTimerCoordinator.swift in Sources */,
+				AC50B4BB2A987823000410C6 /* DailyInfoEditViewModel.swift in Sources */,
+				AC47E7002A3E6AA900643E94 /* DailyInfoEditViewController.swift in Sources */,
+				ACD1399C29D382E3004D0A70 /* DataManageError.swift in Sources */,
+				AC4BA40E29F80A4600E682F1 /* Model.swift in Sources */,
+				AC50B4A32A986D24000410C6 /* BlockDetailViewModel.swift in Sources */,
+				AC34D13A29D3F05F0083F42C /* Tempus.xcdatamodeld in Sources */,
+				ACD1398E29D2C269004D0A70 /* BlockModel.swift in Sources */,
+				AC1CA1622A99D82C001D33F3 /* ClockViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACD138F229C70CDF004D0A70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC50B46F2A96163D000410C6 /* DailyInfoCreateCoordinator.swift in Sources */,
+				AC2F7A4F29F148C00039A671 /* DefaultBlockCreateViewModel.swift in Sources */,
+				AC50B4B52A98741C000410C6 /* DailyInfoCreateViewModel.swift in Sources */,
+				AC2F7A3829EE8CD70039A671 /* BlockFetchUseCase.swift in Sources */,
+				AC4BA41929F96FB000E682F1 /* CoreDataRepository.swift in Sources */,
+				AC50B4A12A986A77000410C6 /* BlockCreateViewModel.swift in Sources */,
+				AC2F7A5229F14A2B0039A671 /* CompleteAlert.swift in Sources */,
+				ACD1398C29D2ABF3004D0A70 /* TimerModel.swift in Sources */,
+				AC50B4642A95FCFD000410C6 /* BlockEditCoordinator.swift in Sources */,
+				AC34D17129D3F2300083F42C /* DailyEntity+CoreDataProperties.swift in Sources */,
+				AC50B4BC2A987823000410C6 /* DailyInfoEditViewModel.swift in Sources */,
+				AC50B49D2A98682D000410C6 /* BlockListViewModel.swift in Sources */,
+				AC50B4492A95DC0A000410C6 /* Coordinator.swift in Sources */,
+				AC50B4792A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift in Sources */,
+				ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */,
+				AC34D17729D3F2460083F42C /* TimerEntity+CoreDataProperties.swift in Sources */,
+				AC32815C29D6089B005B4288 /* DataManagerRepositoryMock.swift in Sources */,
+				AC2F7A1529E3DBB80039A671 /* DailyStartUseCase.swift in Sources */,
+				AC50B4682A961391000410C6 /* DailyListViewCoordinator.swift in Sources */,
+				AC50B44B2A95DC19000410C6 /* CoordinatorType.swift in Sources */,
+				AC1CA1B32A99DE20001D33F3 /* BlockCreateViewModelTest.swift in Sources */,
+				AC2F7A2329E96DF70039A671 /* ModeManageError.swift in Sources */,
+				AC32816A29D73907005B4288 /* DailyCreateUseCase.swift in Sources */,
+				AC6C673629DD2F130015C8B7 /* TimerStartUseCase.swift in Sources */,
+				AC50B4B82A9875FF000410C6 /* DailyTimeDurationCreateViewModel.swift in Sources */,
+				AC50B4722A963DD9000410C6 /* DailyTimeDurationCreateCoordinator.swift in Sources */,
+				AC50B4AE2A98710D000410C6 /* DailyListViewModel.swift in Sources */,
+				AC4BEDCD2A07778A00616285 /* DailyEditUseCase.swift in Sources */,
+				AC32816429D733CD005B4288 /* BlockDeleteUseCase.swift in Sources */,
+				ACD1399D29D382E3004D0A70 /* DataManageError.swift in Sources */,
+				AC34D16B29D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift in Sources */,
+				AC34D17529D3F2460083F42C /* TimerEntity+CoreDataClass.swift in Sources */,
+				ACC385DA2A024F7200525E20 /* EditReflectMock.swift in Sources */,
+				AC32815229D6067F005B4288 /* BlockCreateUseCase.swift in Sources */,
+				AC50B4B12A987258000410C6 /* DailyDetailViewModel.swift in Sources */,
+				AC3281A029DC15CC005B4288 /* Time.swift in Sources */,
+				AC2F7A3329EE7A8F0039A671 /* DailyFetchUseCase.swift in Sources */,
+				AC50B4A42A986D24000410C6 /* BlockDetailViewModel.swift in Sources */,
+				AC50B4BF2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift in Sources */,
+				AC1CA1632A99D82C001D33F3 /* ClockViewModel.swift in Sources */,
+				AC50B4752A963EC3000410C6 /* DailyInfoEditCoordinator.swift in Sources */,
+				AC34D16929D3F20D0083F42C /* BlockEntity+CoreDataClass.swift in Sources */,
+				AC50B44F2A95DCAC000410C6 /* StartModeDelegate.swift in Sources */,
+				AC2F7A2029E69E660039A671 /* ModeState.swift in Sources */,
+				AC50B44A2A95DC11000410C6 /* FinishDelegate.swift in Sources */,
+				AC4BA40F29F80A4600E682F1 /* Model.swift in Sources */,
+				AC7C76A829FC0B9C00D92ED5 /* FetchRefreshDelegate.swift in Sources */,
+				AC50B4AA2A986F22000410C6 /* ViewModel.swift in Sources */,
+				AC50B4442A95DB6B000410C6 /* ModeStartUseCase.swift in Sources */,
+				AC50B4582A95F72D000410C6 /* BlockListViewCoordinator.swift in Sources */,
+				ACC385D72A024A1E00525E20 /* FetchRefreshMock.swift in Sources */,
+				ACD1399229D2C272004D0A70 /* DailyModel.swift in Sources */,
+				AC50B4812A9642CB000410C6 /* TimerCoordinator.swift in Sources */,
+				AC4BA41329F80A9100E682F1 /* EditReflectDelegate.swift in Sources */,
+				AC1CA1B42A99DF7B001D33F3 /* BlockCreateCoordinator.swift in Sources */,
+				AC7C76B029FC6B8200D92ED5 /* DailyDeleteUseCaseTest.swift in Sources */,
+				AC5CA2942A99D39B00587D51 /* ClockViewModelTest.swift in Sources */,
+				AC2F7A1029E01CAF0039A671 /* BlockStartUseCase.swift in Sources */,
+				AC5CA0792A99CF4300587D51 /* DefaultClockViewModel.swift in Sources */,
+				ACD1399629D37B58004D0A70 /* DataManagerRepository.swift in Sources */,
+				AC34D16F29D3F2300083F42C /* DailyEntity+CoreDataClass.swift in Sources */,
+				AC50B45E2A95FA10000410C6 /* BlockDetailCoordinator.swift in Sources */,
+				AC32817529D8DAAA005B4288 /* DailyDeleteUseCase.swift in Sources */,
+				AC50B4A72A986EDB000410C6 /* BlockEditViewModel.swift in Sources */,
+				AC50B46B2A9614A5000410C6 /* DailyDetailCoordinator.swift in Sources */,
+				AC32815F29D64694005B4288 /* BlockEditUseCase.swift in Sources */,
+				AC50B4542A95F3B6000410C6 /* ClockCoordinator.swift in Sources */,
+				ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ACD138F829C70CDF004D0A70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ACD138DC29C70CDE004D0A70 /* Tempus */;
+			targetProxy = ACD138F729C70CDF004D0A70 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AC5D99322A65EB1C00A34357 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC5D99312A65EB1C00A34357 /* en */,
+				AC5D99332A65EB2900A34357 /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		ACD138EE29C70CDF004D0A70 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACD138EF29C70CDF004D0A70 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ACD1390829C70CDF004D0A70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
+				ENABLE_ON_DEMAND_RESOURCES = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ACD1390929C70CDF004D0A70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_ON_DEMAND_RESOURCES = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ACD1390B29C70CDF004D0A70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99911746D354CDB50109521E /* Pods-Tempus.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tempus/Tempus.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = S63496UWBR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tempus/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tempus;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corpi.Tempus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		ACD1390C29C70CDF004D0A70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 081049B39BD9C92FCB4CF6AA /* Pods-Tempus.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tempus/Tempus.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = S63496UWBR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tempus/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tempus;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corpi.Tempus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		ACD1390E29C70CDF004D0A70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF0F9087B34059150A736275 /* Pods-TempusTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S63496UWBR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corpi.TempusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tempus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tempus";
+			};
+			name = Debug;
+		};
+		ACD1390F29C70CDF004D0A70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D773B440C78EC309D9EA8BA6 /* Pods-TempusTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S63496UWBR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corpi.TempusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tempus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tempus";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ACD138D829C70CDE004D0A70 /* Build configuration list for PBXProject "Tempus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACD1390829C70CDF004D0A70 /* Debug */,
+				ACD1390929C70CDF004D0A70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACD1390A29C70CDF004D0A70 /* Build configuration list for PBXNativeTarget "Tempus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACD1390B29C70CDF004D0A70 /* Debug */,
+				ACD1390C29C70CDF004D0A70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACD1390D29C70CDF004D0A70 /* Build configuration list for PBXNativeTarget "TempusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACD1390E29C70CDF004D0A70 /* Debug */,
+				ACD1390F29C70CDF004D0A70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		AC50B4352A95D659000410C6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		AC50B4382A95D667000410C6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC50B42F2A95D64B000410C6 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		AC50B4312A95D64B000410C6 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		AC50B4332A95D64B000410C6 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		AC50B4362A95D659000410C6 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B4352A95D659000410C6 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		AC50B4392A95D667000410C6 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B4382A95D667000410C6 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		AC50B43D2A95D918000410C6 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		AC50B43F2A95D918000410C6 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		AC50B4412A95D918000410C6 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC50B42E2A95D64B000410C6 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		AC34D13829D3F05F0083F42C /* Tempus.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AC34D13929D3F05F0083F42C /* Tempus.xcdatamodel */,
+			);
+			currentVersion = AC34D13929D3F05F0083F42C /* Tempus.xcdatamodel */;
+			path = Tempus.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = ACD138D529C70CDE004D0A70 /* Project object */;
+}

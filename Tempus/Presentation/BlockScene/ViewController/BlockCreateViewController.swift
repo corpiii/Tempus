@@ -258,13 +258,16 @@ private extension BlockCreateViewController {
 // MARK: - BindViewModel
 private extension BlockCreateViewController {
     func bindViewModel() {
-        let input = BlockCreateViewModel.Input(modelTitle: textFieldSubject,
-                                               modelBlockTime: timeIntervalSubject,
-                                               completeButtonTapEvent: completeEvent,
-                                               cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
-                                               startEvent: startEvent)
+        typealias Input = DefaultBlockCreateViewModel.Input
+        typealias Output = DefaultBlockCreateViewModel.Output
         
-        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+        let input = Input(modelTitle: textFieldSubject,
+                          modelBlockTime: timeIntervalSubject,
+                          completeButtonTapEvent: completeEvent,
+                          cancelButtonTapEvent: cancelButton.rx.tap.asObservable(),
+                          startEvent: startEvent)
+        
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             return
         }
         

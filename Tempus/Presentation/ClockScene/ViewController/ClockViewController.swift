@@ -7,9 +7,9 @@
 
 import UIKit
 
+import LGButton
 import RxSwift
 import SnapKit
-import LGButton
 
 class ClockViewController: UIViewController {
     private enum Constant {
@@ -179,10 +179,12 @@ private extension ClockViewController {
 // MARK: - BindViewModel
 private extension ClockViewController {
     func bindViewModel() {
-        let input = ClockViewModel.Input(modeStartEvent: startEvent,
-                                         modeStopEvent: stopEvent)
+        typealias Input = DefaultClockViewModel.Input
+        typealias Output = DefaultClockViewModel.Output
         
-        guard let output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
+        let input = Input(modeStartEvent: startEvent, modeStopEvent: stopEvent)
+        
+        guard let output: Output = viewModel?.transform(input: input, disposeBag: disposeBag) else {
             #if DEBUG
             print(#file, #function, #line, "viewModel missed")
             #endif

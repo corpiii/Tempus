@@ -30,7 +30,8 @@ final class DailyListViewModelTest: XCTestCase {
         
         dailyListViewModelInput = .init(addButtonEvent: PublishSubject<Void>(),
                                         modelDeleteEvent: modelDeleteEvent,
-                                        modelFetchEvent: modelFetchEvent)
+                                        modelFetchEvent: modelFetchEvent,
+                                        modelTapEvent: <#PublishSubject<DailyModel>#>)
         dailyListViewModelOutput = dailyListViewModel.transform(input: dailyListViewModelInput,
                                                                 disposeBag: disposeBag)
     }
@@ -86,8 +87,13 @@ final class DailyListViewModelTest: XCTestCase {
             }).disposed(by: disposeBag)
         
         dailyListViewModelOutput.isDeleteSuccess
-            .subscribe(onNext: { isSuccess in
-                XCTAssertTrue(isSuccess)
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(_):
+                    break
+                case .failure(_):
+                    XCTFail()
+                }
                 deleteExpectation.fulfill()
             }).disposed(by: disposeBag)
         
