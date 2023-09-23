@@ -193,6 +193,7 @@
 		ACCE434A2ABEC5DF00161947 /* DefaultBlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A3D29EED42C0039A671 /* DefaultBlockListViewModel.swift */; };
 		ACCE434B2ABEC5E700161947 /* DefaultBlockDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA40A29F8059B00E682F1 /* DefaultBlockDetailViewModel.swift */; };
 		ACCE434C2ABEC5EA00161947 /* DefaultBlockEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA41629F9589800E682F1 /* DefaultBlockEditViewModel.swift */; };
+		ACCE434F2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE434E2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift */; };
 		ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E029C70CDE004D0A70 /* AppDelegate.swift */; };
 		ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */; };
 		ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EC29C70CDF004D0A70 /* Assets.xcassets */; };
@@ -383,6 +384,7 @@
 		ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyDetailViewModel.swift; sourceTree = "<group>"; };
 		ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoEditViewModel.swift; sourceTree = "<group>"; };
 		ACCE43472AA8CE7B00161947 /* ClockCoordinatorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCoordinatorDummy.swift; sourceTree = "<group>"; };
+		ACCE434E2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateCoordinatorDummy.swift; sourceTree = "<group>"; };
 		ACD138E029C70CDE004D0A70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		ACD138EC29C70CDF004D0A70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 		AC2F7A5E29F71B030039A671 /* BlockSceneTests */ = {
 			isa = PBXGroup;
 			children = (
+				ACCE434D2ABEC8DC00161947 /* Dummy */,
 				AC2F7A4529EFCF490039A671 /* BlockListViewModelTest.swift */,
 				AC2F7A5729F3F2AE0039A671 /* BlockCreateViewModelTest.swift */,
 				AC4BA41B29F976BF00E682F1 /* BlockEditViewModelTest.swift */,
@@ -1140,6 +1143,14 @@
 			path = Dummy;
 			sourceTree = "<group>";
 		};
+		ACCE434D2ABEC8DC00161947 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				ACCE434E2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
 		ACD138D429C70CDE004D0A70 = {
 			isa = PBXGroup;
 			children = (
@@ -1633,6 +1644,7 @@
 				AC50B4642A95FCFD000410C6 /* BlockEditCoordinator.swift in Sources */,
 				AC34D17129D3F2300083F42C /* DailyEntity+CoreDataProperties.swift in Sources */,
 				AC50B4BC2A987823000410C6 /* DailyInfoEditViewModel.swift in Sources */,
+				ACCE434F2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift in Sources */,
 				AC50B49D2A98682D000410C6 /* BlockListViewModel.swift in Sources */,
 				AC50B4492A95DC0A000410C6 /* Coordinator.swift in Sources */,
 				AC50B4792A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift in Sources */,

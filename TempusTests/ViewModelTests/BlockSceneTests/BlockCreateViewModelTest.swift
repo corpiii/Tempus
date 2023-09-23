@@ -9,15 +9,6 @@ import XCTest
 
 import RxSwift
 
-class BlockCreateCoordinatorMock: BlockCreateCoordinator {
-    var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .blockCreate }
-    
-    func start() { }
-    
-    func finish(with startUseCase: BlockStartUseCase?) { }
-}
-
 final class BlockCreateViewModelTest: XCTestCase {
     var repositoryFake: DataManagerRepositoryFake!
     var disposeBag: DisposeBag!
@@ -29,7 +20,7 @@ final class BlockCreateViewModelTest: XCTestCase {
     var startButtonTapEvent: PublishSubject<CompleteAlert>!
     
     var fetchRefreshDummy: FetchRefreshDummy!
-    var coordinatorMock: BlockCreateCoordinatorMock!
+    var coordinatorDummy: BlockCreateCoordinator!
     
     var blockCreateViewModel: DefaultBlockCreateViewModel!
     var blockCreateViewModelInput: DefaultBlockCreateViewModel.Input!
@@ -46,10 +37,10 @@ final class BlockCreateViewModelTest: XCTestCase {
         startButtonTapEvent = .init()
         
         fetchRefreshDummy = .init()
-        coordinatorMock = .init()
+        coordinatorDummy = BlockCreateCoordinatorDummy()
         blockCreateViewModel = .init(repository: repositoryFake,
                                      fetchRefreshDelegate: fetchRefreshDummy)
-        blockCreateViewModel.coordinator = coordinatorMock
+        blockCreateViewModel.coordinator = coordinatorDummy
         
         blockCreateViewModelInput = .init(modelTitle: modelTitle,
                                           modelBlockTime: blockTime,
