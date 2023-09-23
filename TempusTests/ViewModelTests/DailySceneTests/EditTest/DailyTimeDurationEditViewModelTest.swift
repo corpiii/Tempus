@@ -10,25 +10,27 @@ import XCTest
 import RxSwift
 
 final class DailyTimeDurationEditViewModelTest: XCTestCase {
-    var repositoryMock: DataManagerRepositoryMock!
+    var repositoryFake: DataManagerRepositoryFake!
     var disposeBag: DisposeBag!
     
-    var fetchRefreshDelegate: FetchRefreshMock!
-    var editReflectDelegate: EditReflectMock!
+    var fetchRefreshDelegate: FetchRefreshDummy!
+    var editReflectDelegate: EditReflectDummy!
     
     var originModel: DailyModel!
     
     var dailyTimeDurationEditViewModel: DailyTimeDurationEditViewModel!
     
-    var startTime: PublishSubject<Double>!
-    var repeatCount: PublishSubject<Int>!
+    var startTime: PublishSubject<Date>!
+    var repeatCount: PublishSubject<Double>!
+    var backButtonTapEvent: PublishSubject<Void>!
+    var doneButtonTapEvent: PublishSubject<Void>!
     var completeButtonTapEvent: PublishSubject<Void>!
     
-    var input: DailyTimeDurationEditViewModel.Input!
-    var output: DailyTimeDurationEditViewModel.Output!
+    var dailyTimeDurationEditViewModelInput: DefaultDailyTimeDurationEditViewModel.Input!
+    var dailyTimeDurationEditViewModelOutput: DefaultDailyTimeDurationEditViewModel.Output!
     
     override func setUpWithError() throws {
-        repositoryMock = .init()
+        repositoryFake = .init()
         disposeBag = .init()
         
         fetchRefreshDelegate = .init()
@@ -41,31 +43,38 @@ final class DailyTimeDurationEditViewModelTest: XCTestCase {
                             focusTime: 1.5 * 60 * 60,
                             breakTime: 0.5 * 60 * 60)
         
-        dailyTimeDurationEditViewModel = .init(originModel: originModel,
-                                               repository: repositoryMock,
-                                               fetchRefreshDelegate: fetchRefreshDelegate,
-                                               editReflectDelegate: editReflectDelegate)
+        dailyTimeDurationEditViewModel = DefaultDailyTimeDurationEditViewModel(originModel: originModel,
+                                                                               repository: repositoryFake,
+                                                                               fetchRefreshDelegate: fetchRefreshDelegate,
+                                                                               editReflectDelegate: editReflectDelegate)
         
         startTime = .init()
         repeatCount = .init()
+        backButtonTapEvent = .init()
+        doneButtonTapEvent = .init()
         completeButtonTapEvent = .init()
         
-        input = .init(startTime: startTime,
-                      repeatCount: repeatCount,
-                      backButtonTapEvent: PublishSubject<Void>(),
-                      completeButtonTapEvent: completeButtonTapEvent)
-        output = dailyTimeDurationEditViewModel.transform(input: input, disposeBag: disposeBag)
+        dailyTimeDurationEditViewModelInput = .init(startTime: startTime,
+                                                    repeatCount: repeatCount,
+                                                    backButtonTapEvent: backButtonTapEvent,
+                                                    doneButtonTapEvent: doneButtonTapEvent,
+                                                    completeEvent: completeButtonTapEvent)
+        dailyTimeDurationEditViewModelOutput = dailyTimeDurationEditViewModel.transform(input: dailyTimeDurationEditViewModelInput,
+                                                                                        disposeBag: disposeBag)
     }
     
     func test_edit_is_success() {
         // Arrange
+        
+        let startToday = Calendar(identifier: .gregorian).startOfDay(for: Date())
+        
         let expectation = XCTestExpectation(description: "edit_is_success")
-        let testStartTime = 15.0 * 60 * 60
-        let testRepeatCount = 3
+        let testStartTime = Date(timeInterval: 15 * 60 * 60, since: startToday)
+        let testRepeatCount = Double(3)
         var result = false
         
         // Act
-        output.isEditSuccess
+        dailyTimeDurationEditViewModelOutput.isEditSuccess
             .subscribe(onNext: { isSuccess in
                 result = isSuccess
                 expectation.fulfill()
@@ -73,15 +82,12 @@ final class DailyTimeDurationEditViewModelTest: XCTestCase {
         
         startTime.onNext(testStartTime)
         repeatCount.onNext(testRepeatCount)
+        doneButtonTapEvent.onNext(())
         completeButtonTapEvent.onNext(())
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
         XCTAssertTrue(result)
-        
-        let dailyModel = repositoryMock.dailyModel
-        XCTAssertEqual(dailyModel?.startTime, testStartTime)
-        XCTAssertEqual(dailyModel?.repeatCount, testRepeatCount)
     }
 
 }

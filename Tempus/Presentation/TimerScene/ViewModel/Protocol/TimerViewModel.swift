@@ -9,6 +9,7 @@ import RxSwift
 
 protocol TimerViewModel: AnyObject {
     var coordinator: TimerCoordinator? { get set }
+    var wasteTime: Double? { get set }
     
     func bind<InputType>(input: InputType, disposeBag: DisposeBag)
 }

@@ -11,27 +11,29 @@ import RxSwift
 
 final class DailyListViewModelTest: XCTestCase {
     var disposeBag: DisposeBag!
-    var repositoryMock: DataManagerRepositoryMock!
-    var dailyListViewModel: DailyListViewModel!
+    var repositoryFake: DataManagerRepositoryFake!
     
     var modelDeleteEvent: PublishSubject<DailyModel>!
     var modelFetchEvent: PublishSubject<Void>!
+    var modelTapEvent: PublishSubject<DailyModel>!
     
-    var dailyListViewModelInput: DailyListViewModel.Input!
-    var dailyListViewModelOutput: DailyListViewModel.Output!
+    var dailyListViewModel: DailyListViewModel!
+    var dailyListViewModelInput: DefaultDailyListViewModel.Input!
+    var dailyListViewModelOutput: DefaultDailyListViewModel.Output!
     
     override func setUpWithError() throws {
         disposeBag = .init()
-        repositoryMock = .init()
-        dailyListViewModel = .init(repository: repositoryMock)
+        repositoryFake = .init()
+        dailyListViewModel = DefaultDailyListViewModel(repository: repositoryFake)
         
         modelDeleteEvent = .init()
         modelFetchEvent = .init()
+        modelTapEvent = .init()
         
         dailyListViewModelInput = .init(addButtonEvent: PublishSubject<Void>(),
                                         modelDeleteEvent: modelDeleteEvent,
                                         modelFetchEvent: modelFetchEvent,
-                                        modelTapEvent: <#PublishSubject<DailyModel>#>)
+                                        modelTapEvent: modelTapEvent)
         dailyListViewModelOutput = dailyListViewModel.transform(input: dailyListViewModelInput,
                                                                 disposeBag: disposeBag)
     }
@@ -47,8 +49,8 @@ final class DailyListViewModelTest: XCTestCase {
                                breakTime: 300)
         var resultModels: [DailyModel] = []
         
-        try! repositoryMock.create(model)
-        XCTAssertNotNil(repositoryMock.dailyModel)
+        try! repositoryFake.create(model)
+        XCTAssertNotNil(repositoryFake.dailyModel)
         
         // Act
         dailyListViewModelOutput.dailyModelArray
@@ -76,8 +78,8 @@ final class DailyListViewModelTest: XCTestCase {
                                breakTime: 300)
         var resultModels: [DailyModel] = []
         
-        try! repositoryMock.create(model)
-        XCTAssertNotNil(repositoryMock.dailyModel)
+        try! repositoryFake.create(model)
+        XCTAssertNotNil(repositoryFake.dailyModel)
         
         // Act
         dailyListViewModelOutput.dailyModelArray

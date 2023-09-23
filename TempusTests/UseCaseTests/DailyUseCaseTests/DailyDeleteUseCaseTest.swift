@@ -10,12 +10,12 @@ import XCTest
 import RxSwift
 
 final class DailyDeleteUseCaseTest: XCTestCase {
-    var repository: DataManagerRepositoryMock!
+    var repository: DataManagerRepositoryFake!
     var deleteUseCase: DailyDeleteUseCase!
     var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
-        repository = DataManagerRepositoryMock()
+        repository = DataManagerRepositoryFake()
         deleteUseCase = DailyDeleteUseCase(repository: repository)
         disposeBag = .init()
     }

@@ -10,40 +10,46 @@ import XCTest
 import RxSwift
 
 final class BlockEditViewModelTest: XCTestCase {
-    var repositoryMock: DataManagerRepositoryMock!
+    var repositoryFake: DataManagerRepositoryFake!
     var originModel: BlockModel!
     var disposeBag: DisposeBag!
     
-    var fetchRefreshMock: FetchRefreshMock!
-    var editReflectMock: EditReflectMock!
+    var fetchRefreshDummy: FetchRefreshDummy!
+    var editReflectDummy: EditReflectDummy!
     
     var modelTitle: PublishSubject<String>!
-    var modelDivideCount: PublishSubject<Int>!
-    var completeButtonTapEvent: PublishSubject<Void>!
+    var modelBlockTime: PublishSubject<Int>!
+    var backButtonTapEvent: PublishSubject<Void>!
+    var doneButtonTapEvent: PublishSubject<Void>!
+    var completeEvent: PublishSubject<Void>!
     
     var blockEditViewModel: BlockEditViewModel!
-    var editViewModelInput: BlockEditViewModel.Input!
-    var editViewModelOutput: BlockEditViewModel.Output!
+    var editViewModelInput: DefaultBlockEditViewModel.Input!
+    var editViewModelOutput: DefaultBlockEditViewModel.Output!
     
     override func setUpWithError() throws {
-        repositoryMock = .init()
-        originModel = .init(id: UUID(), title: "testTitle", divideCount: 4)
+        repositoryFake = .init()
+        originModel = .init(id: UUID(), title: "testTitle", blockTime: 4)
         disposeBag = .init()
         
-        fetchRefreshMock = .init()
-        editReflectMock = .init()
+        fetchRefreshDummy = .init()
+        editReflectDummy = .init()
         
         modelTitle = .init()
-        modelDivideCount = .init()
-        completeButtonTapEvent = .init()
+        modelBlockTime = .init()
+        backButtonTapEvent = .init()
+        doneButtonTapEvent = .init()
+        completeEvent = .init()
         
-        blockEditViewModel = .init(originModel: originModel,
-                                   repository: repositoryMock,
-                                   fetchRefreshDelegate: fetchRefreshMock,
-                                   editReflectDelegate: editReflectMock)
+        blockEditViewModel = DefaultBlockEditViewModel(originModel: originModel,
+                                   repository: repositoryFake,
+                                   fetchRefreshDelegate: fetchRefreshDummy,
+                                   editReflectDelegate: editReflectDummy)
         editViewModelInput = .init(modelTitle: modelTitle,
-                                   modelDivideCount: modelDivideCount,
-                                   completeButtonTapEvent: completeButtonTapEvent)
+                                   modelBlockTime: modelBlockTime,
+                                   doneButtonTapEvent: doneButtonTapEvent,
+                                   backButtonTapEvent: backButtonTapEvent,
+                                   completeEvent: completeEvent)
         
         editViewModelOutput = blockEditViewModel.transform(input: editViewModelInput,
                                                            disposeBag: disposeBag)
@@ -53,9 +59,9 @@ final class BlockEditViewModelTest: XCTestCase {
         // Arrange
         let expectation = XCTestExpectation(description: "edit_is_success_test")
         let changeTitle = "changeTitle"
-        let testDivideCount = 4
+        let testBlockTime = 4
         
-        try! repositoryMock.create(originModel)
+        try! repositoryFake.create(originModel)
         
         editViewModelOutput.isEditSuccess
             .subscribe(onNext: { isEditSuccess in
@@ -65,11 +71,11 @@ final class BlockEditViewModelTest: XCTestCase {
         
         // Act
         modelTitle.onNext(changeTitle)
-        modelDivideCount.onNext(testDivideCount)
-        completeButtonTapEvent.onNext(())
+        modelBlockTime.onNext(testBlockTime)
+        doneButtonTapEvent.onNext(())
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(repositoryMock.blockModel?.title, changeTitle)
+        XCTAssertEqual(repositoryFake.blockModel?.title, changeTitle)
     }
 }

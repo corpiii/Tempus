@@ -16,7 +16,7 @@ final class DefaultTimerViewModel: TimerViewModel {
         let startButtonTapEvent: Observable<Void>
     }
     
-    private var wasteTime: Double?
+    var wasteTime: Double?
     weak var coordinator: TimerCoordinator?
     
     func bind<InputType>(input: InputType, disposeBag: RxSwift.DisposeBag) {

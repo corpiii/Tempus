@@ -14,13 +14,14 @@ final class DailyInfoEditViewModelTest: XCTestCase {
     var originModel: DailyModel!
     var dailyInfoEditViewModel: DailyInfoEditViewModel!
     
+    var backButtonTapEvent: PublishSubject<Void>!
     var nextButtonTapEvent: PublishSubject<Void>!
     var modelTitle: PublishSubject<String>!
-    var modelFocusTime: PublishSubject<Double>!
-    var modelBreakTime: PublishSubject<Double>!
+    var modelFocusTime: PublishSubject<Date>!
+    var modelBreakTime: PublishSubject<Date>!
     
-    var input: DailyInfoEditViewModel.Input!
-    var output: DailyInfoEditViewModel.Output!
+    var dailyInfoEditViewModelInput: DefaultDailyInfoEditViewModel.Input!
+    var dailyInfoEditViewModelOutput: DefaultDailyInfoEditViewModel.Output!
     
     override func setUpWithError() throws {
         disposeBag = .init()
@@ -28,42 +29,46 @@ final class DailyInfoEditViewModelTest: XCTestCase {
                             title: "testTitle",
                             startTime: 13.0 * 60 * 60,
                             repeatCount: 4,
-                            focusTime: 1.5 * 60 * 60,
-                            breakTime: 0.5 * 60 * 60)
+                            focusTime: 0,
+                            breakTime: 0)
         
-        dailyInfoEditViewModel = .init(originModel: originModel)
+        dailyInfoEditViewModel = DefaultDailyInfoEditViewModel(originModel: originModel)
         
+        backButtonTapEvent = .init()
         nextButtonTapEvent = .init()
         modelTitle = .init()
         modelFocusTime = .init()
         modelBreakTime = .init()
         
-        input = .init(nextButtonTapEvent: nextButtonTapEvent,
-                      cancelButtonTapEvent: PublishSubject<Void>(),
-                      modelTitle: modelTitle,
-                      modelFocusTime: modelFocusTime,
-                      modelBreakTime: modelBreakTime)
-        output = dailyInfoEditViewModel.transform(input: input, disposeBag: disposeBag)
+        dailyInfoEditViewModelInput = .init(backButtonTapEvent: backButtonTapEvent,
+                                            nextButtonTapEvent: nextButtonTapEvent,
+                                            modelTitle: modelTitle,
+                                            modelFocusTime: modelFocusTime,
+                                            modelBreakTime: modelBreakTime)
+        dailyInfoEditViewModelOutput = dailyInfoEditViewModel.transform(input: dailyInfoEditViewModelInput,
+                                                                        disposeBag: disposeBag)
     }
 
     func test_isFillAllInfo_is_success() {
         // Arrange
         let expectation = XCTestExpectation(description: "isFillAllInfo_is_success")
+        let startToday = Calendar(identifier: .gregorian).startOfDay(for: Date())
+        
         let testModelTitle = "changeTitle"
-        let testModelFocusTime = 3.0 * 60 * 60
-        let testModelBreakTime = 1.0 * 60 * 60
+        let testFocusTime = Date(timeInterval: 3 * 60 * 60, since: startToday)
+        let testBreakTime = Date(timeInterval: 30 * 60, since: startToday)
         var result: Bool = false
         
         // Act
-        output.isFillAllInfo
+        dailyInfoEditViewModelOutput.isFillAllInfo
             .subscribe(onNext: { isFillAllInfo in
                 result = isFillAllInfo
                 expectation.fulfill()
             }).disposed(by: disposeBag)
         
         modelTitle.onNext(testModelTitle)
-        modelFocusTime.onNext(testModelFocusTime)
-        modelBreakTime.onNext(testModelBreakTime)
+        modelFocusTime.onNext(testFocusTime)
+        modelBreakTime.onNext(testBreakTime)
         nextButtonTapEvent.onNext(())
         
         // Assert

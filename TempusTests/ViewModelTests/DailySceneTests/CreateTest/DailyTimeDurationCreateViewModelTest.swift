@@ -10,36 +10,39 @@ import XCTest
 import RxSwift
 
 final class DailyTimeDurationCreateViewModelTest: XCTestCase {
-    var repositoryMock: DataManagerRepositoryMock!
+    var repositoryFake: DataManagerRepositoryFake!
     var disposeBag: DisposeBag!
-    var fetchRefreshMock: FetchRefreshMock!
+    var fetchRefreshDummy: FetchRefreshDummy!
     
-    var startTime: PublishSubject<Double>!
-    var repeatCount: PublishSubject<Int>!
-    var completeButtonTapEvent: PublishSubject<CompleteAlert>!
+    var startTime: PublishSubject<Date>!
+    var repeatCount: PublishSubject<Double>!
+    var completeButtonTapEvent: PublishSubject<Void>!
+    var startEvent: PublishSubject<CompleteAlert>!
     
     var dailyTimeCreateViewModel: DailyTimeDurationCreateViewModel!
-    var dailyTimeCreateViewModelInput: DailyTimeDurationCreateViewModel.Input!
-    var dailyTimeCreateViewModelOutput: DailyTimeDurationCreateViewModel.Output!
+    var dailyTimeCreateViewModelInput: DefaultDailyTimeDurationCreateViewModel.Input!
+    var dailyTimeCreateViewModelOutput: DefaultDailyTimeDurationCreateViewModel.Output!
     
     override func setUpWithError() throws {
-        repositoryMock = .init()
+        repositoryFake = .init()
         disposeBag = .init()
-        fetchRefreshMock = .init()
+        fetchRefreshDummy = .init()
         
         startTime = .init()
         repeatCount = .init()
         completeButtonTapEvent = .init()
+        startEvent = .init()
         
-        dailyTimeCreateViewModel = .init(modelTitle: "testTitle",
-                                         focusTime: 1.5 * 60 * 60,
-                                         breakTime: 5.0 * 60,
-                                         repository: repositoryMock,
-                                         fetchRefreshDelgate: fetchRefreshMock)
+        dailyTimeCreateViewModel = DefaultDailyTimeDurationCreateViewModel(modelTitle: "testTitle",
+                                                                           focusTime: 1.5 * 60 * 60,
+                                                                           breakTime: 5.0 * 60,
+                                                                           repository: repositoryFake,
+                                                                           fetchRefreshDelgate: fetchRefreshDummy)
         dailyTimeCreateViewModelInput = .init(startTime: startTime,
                                               repeatCount: repeatCount,
                                               backButtonTapEvent: PublishSubject<Void>(),
-                                              completeButtonTapEvent: completeButtonTapEvent)
+                                              completeButtonTapEvent: completeButtonTapEvent,
+                                              startEvent: startEvent)
         dailyTimeCreateViewModelOutput = dailyTimeCreateViewModel.transform(input: dailyTimeCreateViewModelInput,
                                                                             disposeBag: disposeBag)
     }
@@ -47,8 +50,9 @@ final class DailyTimeDurationCreateViewModelTest: XCTestCase {
     func test_create_is_success() {
         // Arrange
         let expectation = XCTestExpectation(description: "create_is_success")
-        let testStartTime = 12.0 * 60 * 60
-        let testRepeatCount = 4
+        let startToday = Calendar(identifier: .gregorian).startOfDay(for: Date())
+        let testStartTime = Date(timeInterval: 12 * 60 * 60, since: startToday)
+        let testRepeatCount = Double(4)
         var resultValue = false
         
         // Act
@@ -60,7 +64,8 @@ final class DailyTimeDurationCreateViewModelTest: XCTestCase {
         
         startTime.onNext(testStartTime)
         repeatCount.onNext(testRepeatCount)
-        completeButtonTapEvent.onNext(.completeWithoutStart)
+        completeButtonTapEvent.onNext(())
+        startEvent.onNext(.completeWithoutStart)
         
         // Assert
         wait(for: [expectation], timeout: 1.0)

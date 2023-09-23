@@ -1,5 +1,5 @@
 //
-//  DataManagerRepositoryMock.swift
+//  DataManagerRepositoryFake.swift
 //  TempusTests
 //
 //  Created by 이정민 on 2023/03/31.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DataManagerRepositoryMock: DataManagerRepository {
+final class DataManagerRepositoryFake: DataManagerRepository {
     var timerModel: TimerModel?
     var blockModel: BlockModel?
     var dailyModel: DailyModel?

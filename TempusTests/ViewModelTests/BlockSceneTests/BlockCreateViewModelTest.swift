@@ -9,17 +9,8 @@ import XCTest
 
 import RxSwift
 
-class BlockCreateCoordinatorMock: BlockCreateCoordinator {
-    var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .blockCreate }
-    
-    func start() { }
-    
-    func finish(with startUseCase: BlockStartUseCase?) { }
-}
-
 final class BlockCreateViewModelTest: XCTestCase {
-    var repositoryMock: DataManagerRepositoryMock!
+    var repositoryFake: DataManagerRepositoryFake!
     var disposeBag: DisposeBag!
     
     var modelTitle: PublishSubject<String>!
@@ -28,15 +19,15 @@ final class BlockCreateViewModelTest: XCTestCase {
     var cancelButtonTapEvent: PublishSubject<Void>!
     var startButtonTapEvent: PublishSubject<CompleteAlert>!
     
-    var fetchRefreshMock: FetchRefreshMock!
-    var coordinatorMock: BlockCreateCoordinatorMock!
+    var fetchRefreshDummy: FetchRefreshDummy!
+    var coordinatorDummy: BlockCreateCoordinator!
     
     var blockCreateViewModel: DefaultBlockCreateViewModel!
     var blockCreateViewModelInput: DefaultBlockCreateViewModel.Input!
     var blockCreateViewModelOutput: DefaultBlockCreateViewModel.Output!
     
     override func setUpWithError() throws {
-        repositoryMock = .init()
+        repositoryFake = .init()
         disposeBag = .init()
         
         modelTitle = .init()
@@ -45,11 +36,11 @@ final class BlockCreateViewModelTest: XCTestCase {
         cancelButtonTapEvent = .init()
         startButtonTapEvent = .init()
         
-        fetchRefreshMock = .init()
-        coordinatorMock = .init()
-        blockCreateViewModel = .init(repository: repositoryMock,
-                                     fetchRefreshDelegate: fetchRefreshMock)
-        blockCreateViewModel.coordinator = coordinatorMock
+        fetchRefreshDummy = .init()
+        coordinatorDummy = BlockCreateCoordinatorDummy()
+        blockCreateViewModel = .init(repository: repositoryFake,
+                                     fetchRefreshDelegate: fetchRefreshDummy)
+        blockCreateViewModel.coordinator = coordinatorDummy
         
         blockCreateViewModelInput = .init(modelTitle: modelTitle,
                                           modelBlockTime: blockTime,
@@ -80,7 +71,7 @@ final class BlockCreateViewModelTest: XCTestCase {
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(repositoryMock.blockModel?.title, testTitle)
+        XCTAssertEqual(repositoryFake.blockModel?.title, testTitle)
     }
     
     func test_when_given_emptyTitle_then_create_is_failure() {
@@ -103,6 +94,6 @@ final class BlockCreateViewModelTest: XCTestCase {
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(repositoryMock.blockModel?.title, nil)
+        XCTAssertEqual(repositoryFake.blockModel?.title, nil)
     }
 }
