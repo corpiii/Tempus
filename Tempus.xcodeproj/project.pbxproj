@@ -31,7 +31,7 @@
 		AC2F7A5229F14A2B0039A671 /* CompleteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A5029F14A2B0039A671 /* CompleteAlert.swift */; };
 		AC32815129D6067F005B4288 /* BlockCreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815029D6067F005B4288 /* BlockCreateUseCase.swift */; };
 		AC32815229D6067F005B4288 /* BlockCreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815029D6067F005B4288 /* BlockCreateUseCase.swift */; };
-		AC32815C29D6089B005B4288 /* DataManagerRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */; };
+		AC32815C29D6089B005B4288 /* DataManagerRepositoryFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815B29D6089B005B4288 /* DataManagerRepositoryFake.swift */; };
 		AC32815E29D64694005B4288 /* BlockEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815D29D64694005B4288 /* BlockEditUseCase.swift */; };
 		AC32815F29D64694005B4288 /* BlockEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815D29D64694005B4288 /* BlockEditUseCase.swift */; };
 		AC32816329D733CD005B4288 /* BlockDeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32816229D733CD005B4288 /* BlockDeleteUseCase.swift */; };
@@ -82,7 +82,7 @@
 		AC4BEDE92A0BAC4200616285 /* BlockCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDE82A0BAC4200616285 /* BlockCreateViewController.swift */; };
 		AC4BEDEB2A0BB48700616285 /* BlockClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDEA2A0BB48700616285 /* BlockClockView.swift */; };
 		AC4BEDED2A0E930D00616285 /* BlockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDEC2A0E930D00616285 /* BlockDetailViewController.swift */; };
-		AC4BEDEE2A12D46900616285 /* DataManagerRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */; };
+		AC4BEDEE2A12D46900616285 /* DataManagerRepositoryFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32815B29D6089B005B4288 /* DataManagerRepositoryFake.swift */; };
 		AC4BEE192A14E07100616285 /* BlockEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEE182A14E07100616285 /* BlockEditViewController.swift */; };
 		AC4BEE292A16943D00616285 /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEE282A16943D00616285 /* ClockViewController.swift */; };
 		AC50B4302A95D64B000410C6 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AC50B42F2A95D64B000410C6 /* RxCocoa */; };
@@ -188,6 +188,7 @@
 		ACC385DA2A024F7200525E20 /* EditReflectMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385D92A024F7200525E20 /* EditReflectMock.swift */; };
 		ACC385DC2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */; };
 		ACC385DF2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */; };
+		ACCE43482AA8CE7B00161947 /* ClockCoordinatorDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE43472AA8CE7B00161947 /* ClockCoordinatorDummy.swift */; };
 		ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E029C70CDE004D0A70 /* AppDelegate.swift */; };
 		ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */; };
 		ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EC29C70CDF004D0A70 /* Assets.xcassets */; };
@@ -259,7 +260,7 @@
 		AC2F7A5F29F723820039A671 /* ClockViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModelTest.swift; sourceTree = "<group>"; };
 		AC32815029D6067F005B4288 /* BlockCreateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateUseCase.swift; sourceTree = "<group>"; };
 		AC32815929D6083D005B4288 /* BlockCreateUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateUseCaseTest.swift; sourceTree = "<group>"; };
-		AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerRepositoryMock.swift; sourceTree = "<group>"; };
+		AC32815B29D6089B005B4288 /* DataManagerRepositoryFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerRepositoryFake.swift; sourceTree = "<group>"; };
 		AC32815D29D64694005B4288 /* BlockEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditUseCase.swift; sourceTree = "<group>"; };
 		AC32816029D647CA005B4288 /* BlockEditUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditUseCaseTest.swift; sourceTree = "<group>"; };
 		AC32816229D733CD005B4288 /* BlockDeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDeleteUseCase.swift; sourceTree = "<group>"; };
@@ -377,6 +378,7 @@
 		ACC385D92A024F7200525E20 /* EditReflectMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReflectMock.swift; sourceTree = "<group>"; };
 		ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyDetailViewModel.swift; sourceTree = "<group>"; };
 		ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoEditViewModel.swift; sourceTree = "<group>"; };
+		ACCE43472AA8CE7B00161947 /* ClockCoordinatorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCoordinatorDummy.swift; sourceTree = "<group>"; };
 		ACD138E029C70CDE004D0A70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		ACD138EC29C70CDF004D0A70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 		AC2F7A6129F723930039A671 /* ClockSceneTests */ = {
 			isa = PBXGroup;
 			children = (
+				ACCE43462AA8CE0800161947 /* Dummy */,
 				AC2F7A5F29F723820039A671 /* ClockViewModelTest.swift */,
 			);
 			path = ClockSceneTests;
@@ -598,7 +601,7 @@
 		AC32815829D6081F005B4288 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				AC32815B29D6089B005B4288 /* DataManagerRepositoryMock.swift */,
+				AC32815B29D6089B005B4288 /* DataManagerRepositoryFake.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1125,6 +1128,14 @@
 			path = Mock;
 			sourceTree = "<group>";
 		};
+		ACCE43462AA8CE0800161947 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				ACCE43472AA8CE7B00161947 /* ClockCoordinatorDummy.swift */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
 		ACD138D429C70CDE004D0A70 = {
 			isa = PBXGroup;
 			children = (
@@ -1556,7 +1567,7 @@
 				AC34D16A29D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift in Sources */,
 				AC50B4572A95F72D000410C6 /* BlockListViewCoordinator.swift in Sources */,
 				AC50B46E2A96163D000410C6 /* DailyInfoCreateCoordinator.swift in Sources */,
-				AC4BEDEE2A12D46900616285 /* DataManagerRepositoryMock.swift in Sources */,
+				AC4BEDEE2A12D46900616285 /* DataManagerRepositoryFake.swift in Sources */,
 				AC2F7A0F29E01CAF0039A671 /* BlockStartUseCase.swift in Sources */,
 				AC50B4B02A987258000410C6 /* DailyDetailViewModel.swift in Sources */,
 				AC47E7112A52A48B00643E94 /* UIColor+.swift in Sources */,
@@ -1623,7 +1634,7 @@
 				AC50B4792A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift in Sources */,
 				ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */,
 				AC34D17729D3F2460083F42C /* TimerEntity+CoreDataProperties.swift in Sources */,
-				AC32815C29D6089B005B4288 /* DataManagerRepositoryMock.swift in Sources */,
+				AC32815C29D6089B005B4288 /* DataManagerRepositoryFake.swift in Sources */,
 				AC2F7A1529E3DBB80039A671 /* DailyStartUseCase.swift in Sources */,
 				AC50B4682A961391000410C6 /* DailyListViewCoordinator.swift in Sources */,
 				AC50B44B2A95DC19000410C6 /* CoordinatorType.swift in Sources */,
@@ -1675,6 +1686,7 @@
 				AC32815F29D64694005B4288 /* BlockEditUseCase.swift in Sources */,
 				AC50B4542A95F3B6000410C6 /* ClockCoordinator.swift in Sources */,
 				ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */,
+				ACCE43482AA8CE7B00161947 /* ClockCoordinatorDummy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

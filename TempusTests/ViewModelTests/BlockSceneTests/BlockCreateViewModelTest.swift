@@ -19,7 +19,7 @@ class BlockCreateCoordinatorMock: BlockCreateCoordinator {
 }
 
 final class BlockCreateViewModelTest: XCTestCase {
-    var repositoryMock: DataManagerRepositoryMock!
+    var repositoryMock: DataManagerRepositoryFake!
     var disposeBag: DisposeBag!
     
     var modelTitle: PublishSubject<String>!

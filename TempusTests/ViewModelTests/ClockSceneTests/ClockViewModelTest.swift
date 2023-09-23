@@ -9,14 +9,6 @@ import XCTest
 
 import RxSwift
 
-class ClockCoordinatorMock: ClockCoordinator {
-    var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .clock }
-    
-    func startTimer() { }
-    func start() { }
-}
-
 final class ClockViewModelTest: XCTestCase {
     var clockViewModel: DefaultClockViewModel!
     var modeStartEvent: PublishSubject<Void>!
@@ -26,8 +18,8 @@ final class ClockViewModelTest: XCTestCase {
     var clockViewModelInput: DefaultClockViewModel.Input!
     var clockViewModelOutput: DefaultClockViewModel.Output!
     
-    var repositoryMock: DataManagerRepositoryMock!
-    var coordinatorMock: ClockCoordinatorMock!
+    var repositoryFake: DataManagerRepositoryFake!
+    var coordinatorDummy: ClockCoordinatorDummy!
     
     override func setUpWithError() throws {
         clockViewModel = .init()
@@ -38,10 +30,10 @@ final class ClockViewModelTest: XCTestCase {
         clockViewModelInput = .init(modeStartEvent: modeStartEvent, modeStopEvent: modeStopEvent)
         clockViewModelOutput = clockViewModel.transform(input: clockViewModelInput, disposeBag: disposeBag)
         
-        repositoryMock = .init()
-        coordinatorMock = .init()
+        repositoryFake = .init()
+        coordinatorDummy = .init()
         
-        clockViewModel.coordinator = coordinatorMock
+        clockViewModel.coordinator = coordinatorDummy
     }
     
     func test_when_start_usecase_inject_by_BlockCreateViewModel_then_success() {
