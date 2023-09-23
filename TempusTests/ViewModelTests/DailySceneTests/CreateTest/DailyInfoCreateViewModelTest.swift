@@ -10,19 +10,18 @@ import XCTest
 import RxSwift
 
 final class DailyInfoCreateViewModelTest: XCTestCase {
-    var dailyInfoCreateViewModel: DailyInfoCreateViewModel!
     var disposeBag: DisposeBag!
     
     var modelTitle: PublishSubject<String>!
-    var modelFocusTime: PublishSubject<Double>!
-    var modelBreakTime: PublishSubject<Double>!
+    var modelFocusTime: PublishSubject<Date>!
+    var modelBreakTime: PublishSubject<Date>!
     var nextButtonTapEvent: PublishSubject<Void>!
     
-    var dailyInfoCreateViewModelInput: DailyInfoCreateViewModel.Input!
-    var dailyInfoCreateViewModelOutput: DailyInfoCreateViewModel.Output!
+    var dailyInfoCreateViewModel: DailyInfoCreateViewModel!
+    var dailyInfoCreateViewModelInput: DefaultDailyInfoCreateViewModel.Input!
+    var dailyInfoCreateViewModelOutput: DefaultDailyInfoCreateViewModel.Output!
 
     override func setUpWithError() throws {
-        dailyInfoCreateViewModel = .init()
         disposeBag = .init()
         
         modelTitle = .init()
@@ -30,21 +29,24 @@ final class DailyInfoCreateViewModelTest: XCTestCase {
         modelBreakTime = .init()
         nextButtonTapEvent = .init()
         
-        dailyInfoCreateViewModelInput = DailyInfoCreateViewModel.Input(cancelButtonTapEvent: PublishSubject<Void>(),
-                                                                       nextButtonTapEvent: nextButtonTapEvent,
-                                                                       modelTitle: modelTitle,
-                                                                       modelFocusTime: modelFocusTime,
-                                                                       modelBreakTime: modelBreakTime)
+        dailyInfoCreateViewModel = DefaultDailyInfoCreateViewModel()
+        dailyInfoCreateViewModelInput = .init(cancelButtonTapEvent: PublishSubject<Void>(),
+                                              nextButtonTapEvent: nextButtonTapEvent,
+                                              modelTitle: modelTitle,
+                                              modelFocusTime: modelFocusTime,
+                                              modelBreakTime: modelBreakTime)
         dailyInfoCreateViewModelOutput = dailyInfoCreateViewModel.transform(input: dailyInfoCreateViewModelInput,
                                                                             disposeBag: disposeBag)
     }
     
     func test_isFillAllInfo_is_true() {
         // Arrange
+        let startToday = Calendar(identifier: .gregorian).startOfDay(for: Date())
+        
         let expectation = XCTestExpectation(description: "isFillAllInfo_is_true")
         let testTitle = "testTitle"
-        let testFocusTime = 1300.0
-        let testBreakTime = 300.0
+        let testFocusTime = Date(timeInterval: 3 * 60 * 60, since: startToday)
+        let testBreakTime = Date(timeInterval: 30 * 60, since: startToday)
         var resultValue = false
         
         // Act

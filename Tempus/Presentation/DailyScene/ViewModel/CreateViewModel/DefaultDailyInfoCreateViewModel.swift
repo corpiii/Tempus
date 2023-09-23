@@ -100,9 +100,11 @@ private extension DefaultDailyInfoCreateViewModel {
                       modelTitle.isEmpty == false else {
                           return isFillAllInfo.onNext(false)
                 }
+                
                 self?.coordinator?.pushTimeDurationCreateViewController(modelTitle: modelTitle,
                                                                         focusTime: modelFocusTime,
                                                                         breakTime: modelBreakTime)
+                return isFillAllInfo.onNext(true)
             }).disposed(by: disposeBag)
     }
     
