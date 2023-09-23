@@ -206,6 +206,10 @@
 		ACCE43592ABED99000161947 /* DailyTimeDurationCreateViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385C92A00E0FB00525E20 /* DailyTimeDurationCreateViewModelTest.swift */; };
 		ACCE435B2ABEDDEF00161947 /* DailyInfoEditViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDD32A077D3800616285 /* DailyInfoEditViewModelTest.swift */; };
 		ACCE435C2ABEE1FD00161947 /* DailyTimeDurationEditViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDCF2A077B1C00616285 /* DailyTimeDurationEditViewModelTest.swift */; };
+		ACCE435D2ABEE67000161947 /* TimerViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDDD2A07BD6100616285 /* TimerViewModelTest.swift */; };
+		ACCE43602ABEE7F300161947 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC50B4C32A987B06000410C6 /* TimerViewModel.swift */; };
+		ACCE43612ABEF0D600161947 /* DefaultTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BEDD72A079D6F00616285 /* DefaultTimerViewModel.swift */; };
+		ACCE43652ABEF3D200161947 /* TimerCoordinatorDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE43642ABEF3D200161947 /* TimerCoordinatorDummy.swift */; };
 		ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E029C70CDE004D0A70 /* AppDelegate.swift */; };
 		ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */; };
 		ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EC29C70CDF004D0A70 /* Assets.xcassets */; };
@@ -318,7 +322,7 @@
 		AC4BEDCF2A077B1C00616285 /* DailyTimeDurationEditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationEditViewModelTest.swift; sourceTree = "<group>"; };
 		AC4BEDD32A077D3800616285 /* DailyInfoEditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoEditViewModelTest.swift; sourceTree = "<group>"; };
 		AC4BEDD72A079D6F00616285 /* DefaultTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerViewModel.swift; sourceTree = "<group>"; };
-		AC4BEDDD2A07BD6100616285 /* TimerStartViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartViewModelTest.swift; sourceTree = "<group>"; };
+		AC4BEDDD2A07BD6100616285 /* TimerViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTest.swift; sourceTree = "<group>"; };
 		AC4BEDE22A09D0C600616285 /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		AC4BEDE82A0BAC4200616285 /* BlockCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateViewController.swift; sourceTree = "<group>"; };
 		AC4BEDEA2A0BB48700616285 /* BlockClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockClockView.swift; sourceTree = "<group>"; };
@@ -397,6 +401,7 @@
 		ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoEditViewModel.swift; sourceTree = "<group>"; };
 		ACCE43472AA8CE7B00161947 /* ClockCoordinatorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCoordinatorDummy.swift; sourceTree = "<group>"; };
 		ACCE434E2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCreateCoordinatorDummy.swift; sourceTree = "<group>"; };
+		ACCE43642ABEF3D200161947 /* TimerCoordinatorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCoordinatorDummy.swift; sourceTree = "<group>"; };
 		ACD138E029C70CDE004D0A70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		ACD138EC29C70CDF004D0A70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -758,7 +763,8 @@
 		AC4BEDDC2A07BD4100616285 /* TimerSceneTests */ = {
 			isa = PBXGroup;
 			children = (
-				AC4BEDDD2A07BD6100616285 /* TimerStartViewModelTest.swift */,
+				ACCE43632ABEF3C700161947 /* Dummy */,
+				AC4BEDDD2A07BD6100616285 /* TimerViewModelTest.swift */,
 			);
 			path = TimerSceneTests;
 			sourceTree = "<group>";
@@ -1159,6 +1165,14 @@
 			isa = PBXGroup;
 			children = (
 				ACCE434E2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
+		ACCE43632ABEF3C700161947 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				ACCE43642ABEF3D200161947 /* TimerCoordinatorDummy.swift */,
 			);
 			path = Dummy;
 			sourceTree = "<group>";
@@ -1655,6 +1669,7 @@
 				AC2F7A5229F14A2B0039A671 /* CompleteAlert.swift in Sources */,
 				ACD1398C29D2ABF3004D0A70 /* TimerModel.swift in Sources */,
 				AC50B4642A95FCFD000410C6 /* BlockEditCoordinator.swift in Sources */,
+				ACCE43602ABEE7F300161947 /* TimerViewModel.swift in Sources */,
 				AC34D17129D3F2300083F42C /* DailyEntity+CoreDataProperties.swift in Sources */,
 				AC50B4BC2A987823000410C6 /* DailyInfoEditViewModel.swift in Sources */,
 				ACCE434F2ABEC8FA00161947 /* BlockCreateCoordinatorDummy.swift in Sources */,
@@ -1662,6 +1677,7 @@
 				AC50B4492A95DC0A000410C6 /* Coordinator.swift in Sources */,
 				AC50B4792A963F2E000410C6 /* DailyTimeDurationEditCoordinator.swift in Sources */,
 				ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */,
+				ACCE435D2ABEE67000161947 /* TimerViewModelTest.swift in Sources */,
 				AC34D17729D3F2460083F42C /* TimerEntity+CoreDataProperties.swift in Sources */,
 				AC32815C29D6089B005B4288 /* DataManagerRepositoryFake.swift in Sources */,
 				ACCE434B2ABEC5E700161947 /* DefaultBlockDetailViewModel.swift in Sources */,
@@ -1692,6 +1708,7 @@
 				AC50B4A42A986D24000410C6 /* BlockDetailViewModel.swift in Sources */,
 				AC50B4BF2A98794A000410C6 /* DailyTimeDurationEditViewModel.swift in Sources */,
 				ACCE43502ABEC9CF00161947 /* BlockEditViewModelTest.swift in Sources */,
+				ACCE43652ABEF3D200161947 /* TimerCoordinatorDummy.swift in Sources */,
 				AC1CA1632A99D82C001D33F3 /* ClockViewModel.swift in Sources */,
 				AC50B4752A963EC3000410C6 /* DailyInfoEditCoordinator.swift in Sources */,
 				ACCE43572ABED0B500161947 /* DefaultDailyInfoEditViewModel.swift in Sources */,
@@ -1728,6 +1745,7 @@
 				AC50B4A72A986EDB000410C6 /* BlockEditViewModel.swift in Sources */,
 				AC50B46B2A9614A5000410C6 /* DailyDetailCoordinator.swift in Sources */,
 				AC32815F29D64694005B4288 /* BlockEditUseCase.swift in Sources */,
+				ACCE43612ABEF0D600161947 /* DefaultTimerViewModel.swift in Sources */,
 				AC50B4542A95F3B6000410C6 /* ClockCoordinator.swift in Sources */,
 				ACD1398829D29C12004D0A70 /* ModeType.swift in Sources */,
 				ACCE43482AA8CE7B00161947 /* ClockCoordinatorDummy.swift in Sources */,
