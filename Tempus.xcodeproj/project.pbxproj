@@ -184,11 +184,15 @@
 		AC7C76B029FC6B8200D92ED5 /* DailyDeleteUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32817629D8DAE1005B4288 /* DailyDeleteUseCaseTest.swift */; };
 		AC7C76B929FE9BC600D92ED5 /* DefaultDailyInfoCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C76B829FE9BC600D92ED5 /* DefaultDailyInfoCreateViewModel.swift */; };
 		ACC385C52A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385C42A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift */; };
-		ACC385D72A024A1E00525E20 /* FetchRefreshMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385D62A024A1E00525E20 /* FetchRefreshMock.swift */; };
-		ACC385DA2A024F7200525E20 /* EditReflectMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385D92A024F7200525E20 /* EditReflectMock.swift */; };
+		ACC385D72A024A1E00525E20 /* FetchRefreshDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385D62A024A1E00525E20 /* FetchRefreshDummy.swift */; };
+		ACC385DA2A024F7200525E20 /* EditReflectDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385D92A024F7200525E20 /* EditReflectDummy.swift */; };
 		ACC385DC2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */; };
 		ACC385DF2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */; };
 		ACCE43482AA8CE7B00161947 /* ClockCoordinatorDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE43472AA8CE7B00161947 /* ClockCoordinatorDummy.swift */; };
+		ACCE43492ABEC59A00161947 /* BlockListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A4529EFCF490039A671 /* BlockListViewModelTest.swift */; };
+		ACCE434A2ABEC5DF00161947 /* DefaultBlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F7A3D29EED42C0039A671 /* DefaultBlockListViewModel.swift */; };
+		ACCE434B2ABEC5E700161947 /* DefaultBlockDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA40A29F8059B00E682F1 /* DefaultBlockDetailViewModel.swift */; };
+		ACCE434C2ABEC5EA00161947 /* DefaultBlockEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BA41629F9589800E682F1 /* DefaultBlockEditViewModel.swift */; };
 		ACD138E129C70CDE004D0A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E029C70CDE004D0A70 /* AppDelegate.swift */; };
 		ACD138E329C70CDE004D0A70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD138E229C70CDE004D0A70 /* SceneDelegate.swift */; };
 		ACD138ED29C70CDF004D0A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD138EC29C70CDF004D0A70 /* Assets.xcassets */; };
@@ -374,8 +378,8 @@
 		ACC385C42A00D22F00525E20 /* DefaultDailyTimeDurationCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyTimeDurationCreateViewModel.swift; sourceTree = "<group>"; };
 		ACC385C72A00E0E800525E20 /* DailyInfoCreateViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInfoCreateViewModelTest.swift; sourceTree = "<group>"; };
 		ACC385C92A00E0FB00525E20 /* DailyTimeDurationCreateViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTimeDurationCreateViewModelTest.swift; sourceTree = "<group>"; };
-		ACC385D62A024A1E00525E20 /* FetchRefreshMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRefreshMock.swift; sourceTree = "<group>"; };
-		ACC385D92A024F7200525E20 /* EditReflectMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReflectMock.swift; sourceTree = "<group>"; };
+		ACC385D62A024A1E00525E20 /* FetchRefreshDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRefreshDummy.swift; sourceTree = "<group>"; };
+		ACC385D92A024F7200525E20 /* EditReflectDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReflectDummy.swift; sourceTree = "<group>"; };
 		ACC385DB2A03AEBE00525E20 /* DefaultDailyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyDetailViewModel.swift; sourceTree = "<group>"; };
 		ACC385DE2A044F5100525E20 /* DefaultDailyInfoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyInfoEditViewModel.swift; sourceTree = "<group>"; };
 		ACCE43472AA8CE7B00161947 /* ClockCoordinatorDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCoordinatorDummy.swift; sourceTree = "<group>"; };
@@ -1114,18 +1118,18 @@
 		ACC385D52A024A0E00525E20 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				ACC385D82A024C6B00525E20 /* Mock */,
+				ACC385D82A024C6B00525E20 /* Dummy */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		ACC385D82A024C6B00525E20 /* Mock */ = {
+		ACC385D82A024C6B00525E20 /* Dummy */ = {
 			isa = PBXGroup;
 			children = (
-				ACC385D62A024A1E00525E20 /* FetchRefreshMock.swift */,
-				ACC385D92A024F7200525E20 /* EditReflectMock.swift */,
+				ACC385D62A024A1E00525E20 /* FetchRefreshDummy.swift */,
+				ACC385D92A024F7200525E20 /* EditReflectDummy.swift */,
 			);
-			path = Mock;
+			path = Dummy;
 			sourceTree = "<group>";
 		};
 		ACCE43462AA8CE0800161947 /* Dummy */ = {
@@ -1635,6 +1639,7 @@
 				ACD1398F29D2C269004D0A70 /* BlockModel.swift in Sources */,
 				AC34D17729D3F2460083F42C /* TimerEntity+CoreDataProperties.swift in Sources */,
 				AC32815C29D6089B005B4288 /* DataManagerRepositoryFake.swift in Sources */,
+				ACCE434B2ABEC5E700161947 /* DefaultBlockDetailViewModel.swift in Sources */,
 				AC2F7A1529E3DBB80039A671 /* DailyStartUseCase.swift in Sources */,
 				AC50B4682A961391000410C6 /* DailyListViewCoordinator.swift in Sources */,
 				AC50B44B2A95DC19000410C6 /* CoordinatorType.swift in Sources */,
@@ -1650,8 +1655,9 @@
 				ACD1399D29D382E3004D0A70 /* DataManageError.swift in Sources */,
 				AC34D16B29D3F20D0083F42C /* BlockEntity+CoreDataProperties.swift in Sources */,
 				AC34D17529D3F2460083F42C /* TimerEntity+CoreDataClass.swift in Sources */,
-				ACC385DA2A024F7200525E20 /* EditReflectMock.swift in Sources */,
+				ACC385DA2A024F7200525E20 /* EditReflectDummy.swift in Sources */,
 				AC32815229D6067F005B4288 /* BlockCreateUseCase.swift in Sources */,
+				ACCE434A2ABEC5DF00161947 /* DefaultBlockListViewModel.swift in Sources */,
 				AC50B4B12A987258000410C6 /* DailyDetailViewModel.swift in Sources */,
 				AC3281A029DC15CC005B4288 /* Time.swift in Sources */,
 				AC2F7A3329EE7A8F0039A671 /* DailyFetchUseCase.swift in Sources */,
@@ -1665,10 +1671,11 @@
 				AC50B44A2A95DC11000410C6 /* FinishDelegate.swift in Sources */,
 				AC4BA40F29F80A4600E682F1 /* Model.swift in Sources */,
 				AC7C76A829FC0B9C00D92ED5 /* FetchRefreshDelegate.swift in Sources */,
+				ACCE434C2ABEC5EA00161947 /* DefaultBlockEditViewModel.swift in Sources */,
 				AC50B4AA2A986F22000410C6 /* ViewModel.swift in Sources */,
 				AC50B4442A95DB6B000410C6 /* ModeStartUseCase.swift in Sources */,
 				AC50B4582A95F72D000410C6 /* BlockListViewCoordinator.swift in Sources */,
-				ACC385D72A024A1E00525E20 /* FetchRefreshMock.swift in Sources */,
+				ACC385D72A024A1E00525E20 /* FetchRefreshDummy.swift in Sources */,
 				ACD1399229D2C272004D0A70 /* DailyModel.swift in Sources */,
 				AC50B4812A9642CB000410C6 /* TimerCoordinator.swift in Sources */,
 				AC4BA41329F80A9100E682F1 /* EditReflectDelegate.swift in Sources */,
@@ -1676,6 +1683,7 @@
 				AC7C76B029FC6B8200D92ED5 /* DailyDeleteUseCaseTest.swift in Sources */,
 				AC5CA2942A99D39B00587D51 /* ClockViewModelTest.swift in Sources */,
 				AC2F7A1029E01CAF0039A671 /* BlockStartUseCase.swift in Sources */,
+				ACCE43492ABEC59A00161947 /* BlockListViewModelTest.swift in Sources */,
 				AC5CA0792A99CF4300587D51 /* DefaultClockViewModel.swift in Sources */,
 				ACD1399629D37B58004D0A70 /* DataManagerRepository.swift in Sources */,
 				AC34D16F29D3F2300083F42C /* DailyEntity+CoreDataClass.swift in Sources */,

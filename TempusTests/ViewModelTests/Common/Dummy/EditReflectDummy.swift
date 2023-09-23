@@ -1,11 +1,11 @@
 //
-//  EditReflectMock.swift
+//  EditReflectDummy.swift
 //  TempusTests
 //
 //  Created by 이정민 on 2023/05/03.
 //
 
-final class EditReflectMock: EditReflectDelegate {
+final class EditReflectDummy: EditReflectDelegate {
     func reflect(_ model: Model) {
         #if DEBUG
         print("EditReflectMock: reflect(_ model: Mode) called")

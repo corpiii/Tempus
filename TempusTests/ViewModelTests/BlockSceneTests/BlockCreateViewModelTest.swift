@@ -19,7 +19,7 @@ class BlockCreateCoordinatorMock: BlockCreateCoordinator {
 }
 
 final class BlockCreateViewModelTest: XCTestCase {
-    var repositoryMock: DataManagerRepositoryFake!
+    var repositoryFake: DataManagerRepositoryFake!
     var disposeBag: DisposeBag!
     
     var modelTitle: PublishSubject<String>!
@@ -28,7 +28,7 @@ final class BlockCreateViewModelTest: XCTestCase {
     var cancelButtonTapEvent: PublishSubject<Void>!
     var startButtonTapEvent: PublishSubject<CompleteAlert>!
     
-    var fetchRefreshMock: FetchRefreshMock!
+    var fetchRefreshDummy: FetchRefreshDummy!
     var coordinatorMock: BlockCreateCoordinatorMock!
     
     var blockCreateViewModel: DefaultBlockCreateViewModel!
@@ -36,7 +36,7 @@ final class BlockCreateViewModelTest: XCTestCase {
     var blockCreateViewModelOutput: DefaultBlockCreateViewModel.Output!
     
     override func setUpWithError() throws {
-        repositoryMock = .init()
+        repositoryFake = .init()
         disposeBag = .init()
         
         modelTitle = .init()
@@ -45,10 +45,10 @@ final class BlockCreateViewModelTest: XCTestCase {
         cancelButtonTapEvent = .init()
         startButtonTapEvent = .init()
         
-        fetchRefreshMock = .init()
+        fetchRefreshDummy = .init()
         coordinatorMock = .init()
-        blockCreateViewModel = .init(repository: repositoryMock,
-                                     fetchRefreshDelegate: fetchRefreshMock)
+        blockCreateViewModel = .init(repository: repositoryFake,
+                                     fetchRefreshDelegate: fetchRefreshDummy)
         blockCreateViewModel.coordinator = coordinatorMock
         
         blockCreateViewModelInput = .init(modelTitle: modelTitle,
@@ -80,7 +80,7 @@ final class BlockCreateViewModelTest: XCTestCase {
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(repositoryMock.blockModel?.title, testTitle)
+        XCTAssertEqual(repositoryFake.blockModel?.title, testTitle)
     }
     
     func test_when_given_emptyTitle_then_create_is_failure() {
@@ -103,6 +103,6 @@ final class BlockCreateViewModelTest: XCTestCase {
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(repositoryMock.blockModel?.title, nil)
+        XCTAssertEqual(repositoryFake.blockModel?.title, nil)
     }
 }

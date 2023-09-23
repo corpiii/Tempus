@@ -10,39 +10,42 @@ import XCTest
 import RxSwift
 
 final class BlockListViewModelTest: XCTestCase {
-    var repositoryMock: DataManagerRepositoryMock!
+    var repositoryFake: DataManagerRepositoryFake!
     var disposeBag: DisposeBag!
     
     var addButtonTapEvent: PublishSubject<Void>!
     var modelDeleteEvent: PublishSubject<BlockModel>!
     var modelFetchEvent: PublishSubject<Void>!
+    var modelTapEvent: PublishSubject<BlockModel>!
     
     var blockListViewModel: BlockListViewModel!
-    var blockListViewModelInput: BlockListViewModel.Input!
-    var blockListViewModelOutput: BlockListViewModel.Output!
+    var blockListViewModelInput: DefaultBlockListViewModel.Input!
+    var blockListViewModelOutput: DefaultBlockListViewModel.Output!
     
     override func setUpWithError() throws {
-        repositoryMock = DataManagerRepositoryMock()
+        repositoryFake = DataManagerRepositoryFake()
         disposeBag = DisposeBag()
         
         addButtonTapEvent = .init()
         modelDeleteEvent = .init()
         modelFetchEvent = .init()
+        modelTapEvent = .init()
         
-        blockListViewModel = BlockListViewModel(repository: repositoryMock)
+        blockListViewModel = DefaultBlockListViewModel(repository: repositoryFake)
         blockListViewModelInput = .init(addButtonEvent: addButtonTapEvent,
                                         modelDeleteEvent: modelDeleteEvent,
-                                        modelFetchEvent: modelFetchEvent)
+                                        modelFetchEvent: modelFetchEvent,
+                                        modelTapEvent: modelTapEvent)
         blockListViewModelOutput = blockListViewModel.transform(input: blockListViewModelInput, disposeBag: disposeBag)
     }
     
     func test_fetch_event_emit_then_fetch_success() {
         // Arrange
         let expectation = XCTestExpectation(description: "fetch_event_test_description")
-        let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
+        let testModel = BlockModel(id: UUID(), title: "testTitle", blockTime: 4)
         var resultModel: BlockModel?
 
-        try! repositoryMock.create(testModel)
+        try! repositoryFake.create(testModel)
                 
         // Act
         blockListViewModelOutput.blockModelArray
@@ -68,15 +71,18 @@ final class BlockListViewModelTest: XCTestCase {
         // Arrange
         let fetchExpectation = XCTestExpectation(description: "fetch_is_success")
         let deleteExpectation = XCTestExpectation(description: "delete_is_success")
-        let testModel = BlockModel(id: UUID(), title: "testTitle", divideCount: 4)
+        let testModel = BlockModel(id: UUID(), title: "testTitle", blockTime: 4)
         var resultModel: [BlockModel] = []
         
-        try! repositoryMock.create(testModel)
+        try! repositoryFake.create(testModel)
         
         // Act
         blockListViewModelOutput.isDeleteSuccess
-            .subscribe(onNext: { isSuccess in
-                XCTAssertTrue(isSuccess)
+            .subscribe(onNext: { result in
+                if case .success(let model) = result {
+                    XCTAssertNotNil(model)
+                }
+                
                 deleteExpectation.fulfill()
             }).disposed(by: disposeBag)
         
