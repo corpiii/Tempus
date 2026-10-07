@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Tempus</title>
+</head>
+<body>
+  <h1>타이머</h1>
+  <p id="time">00:00</p>
+  <button id="start">시작</button>
+  <button id="stop">정지</button>
+  <script>
+    let sec = 0;
+    let timer = null;
+    const time = document.getElementById("time");
+    function show() {
+      const m = String(Math.floor(sec / 60)).padStart(2, "0");
+      const s = String(sec % 60).padStart(2, "0");
+      time.textContent = m + ":" + s;
+    }
+    document.getElementById("start").onclick = () => {
+      if (timer) return;
+      timer = setInterval(() => { sec++; show(); }, 1000);
+    };
+    document.getElementById("stop").onclick = () => {
+      clearInterval(timer);
+      timer = null;
+    };
+  </script>
+</body>
+</html>
